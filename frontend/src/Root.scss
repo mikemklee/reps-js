@@ -1,0 +1,17 @@
+$dark-blue: #282c34;
+$light-blue: #239afc;
+
+.Root {
+  text-align: center;
+}
+
+.Root-header {
+  background-color: $dark-blue;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
