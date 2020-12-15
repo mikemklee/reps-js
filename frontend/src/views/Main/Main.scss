@@ -8,13 +8,6 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 12rem auto;
   grid-gap: 1rem;
-  border: 1px dashed $grey;
-
-  .quick-access {
-    @include flexCenterHorizontally;
-    grid-column: 1 / -1;
-    border: 1px solid $grey;
-  }
 
   .weekly-progress,
   .workout-curation {

@@ -1,5 +1,7 @@
 @import-normalize;
 
+@import './styles/common';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Lato', 'Nanum Gothic',
@@ -12,6 +14,10 @@ body {
 
   * {
     font-family: inherit;
+  }
+
+  div {
+    box-sizing: border-box;
   }
 }
 

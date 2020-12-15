@@ -1,13 +1,16 @@
 import React from 'react';
 
 import './Main.scss';
+import QuickActions from './QuickActions/QuickActions';
 
 const Main = () => {
   return (
     <div className='view-container'>
-      <div className='view-header'>Good morning, Mike</div>
+      <div className='view-header'>
+        Good morning, <strong>Mike</strong>
+      </div>
       <div className='view-content'>
-        <div className='quick-access'>TODO: Quick access</div>
+        <QuickActions />
         <div className='weekly-progress'>TODO: Show weekly progress</div>
         <div className='workout-curation'>TODO: Show workout curation</div>
       </div>
