@@ -1,0 +1,11 @@
+@mixin flexCenterHorizontally() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin viewSharedStyles() {
+  .view-container {
+    padding: 1rem;
+  }
+}

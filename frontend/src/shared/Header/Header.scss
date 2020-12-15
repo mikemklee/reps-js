@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.header {
+  background: $dark-blue;
+  color: white;
+  font-weight: 700;
+  height: 2.5rem;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+}
