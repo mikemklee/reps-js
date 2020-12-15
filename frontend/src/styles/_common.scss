@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin flexCenterHorizontally() {
   display: flex;
   justify-content: center;
@@ -6,6 +8,19 @@
 
 @mixin viewSharedStyles() {
   .view-container {
+    width: 100%;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    .view-header {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .view-content {
+      border: 1px solid $grey;
+      flex: 1;
+    }
   }
 }

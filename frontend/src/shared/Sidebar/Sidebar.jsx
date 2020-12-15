@@ -1,10 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import classnames from 'classnames';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import './Sidebar.scss';
 
 const Sidebar = () => {
   const history = useHistory();
+  const { pathname } = useLocation();
 
   const handleClick = (route) => {
     history.push(route);
@@ -12,9 +14,24 @@ const Sidebar = () => {
 
   return (
     <div className='sidebar'>
-      <button onClick={() => handleClick('/')}>Home</button>
-      <button onClick={() => handleClick('/logs')}>Logs</button>
-      <button onClick={() => handleClick('/routines')}>Routines</button>
+      <button
+        className={classnames({ current: pathname === '/' })}
+        onClick={() => handleClick('/')}
+      >
+        Home
+      </button>
+      <button
+        className={classnames({ current: pathname === '/logs' })}
+        onClick={() => handleClick('/logs')}
+      >
+        Logs
+      </button>
+      <button
+        className={classnames({ current: pathname === '/routines' })}
+        onClick={() => handleClick('/routines')}
+      >
+        Routines
+      </button>
     </div>
   );
 };
