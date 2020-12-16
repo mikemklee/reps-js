@@ -3,11 +3,13 @@ import React from 'react';
 import './Main.scss';
 import QuickActions from './QuickActions/QuickActions';
 
+import { InterfaceUtils } from '../../utils';
+
 const Main = () => {
   return (
     <div className='view-container'>
       <div className='view-header'>
-        Good morning, <strong>Mike</strong>
+        {InterfaceUtils.getTimeOfDayGreeting()}, <strong>Mike</strong>
       </div>
       <div className='view-content'>
         <QuickActions />
