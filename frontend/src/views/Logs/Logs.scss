@@ -1,3 +1,7 @@
 @import '../../styles/common';
 
 @include viewSharedStyles;
+
+.logs-view {
+  flex: 1;
+}

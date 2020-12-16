@@ -1619,6 +1619,13 @@
   dependencies:
     "@babel/runtime" "^7.10.2"
 
+"@toast-ui/react-grid@^4.15.3":
+  version "4.15.3"
+  resolved "https://registry.yarnpkg.com/@toast-ui/react-grid/-/react-grid-4.15.3.tgz#5f88270b179aa8e546be0c1dcbb4202252a11569"
+  integrity sha512-JNwHTo1ECwaC+jVs2doYkegxj0rGKL9KqFpKxkcmk6IG2EfbO4OFwMpA1ddoflArPA1SlL+V2+bZd03DAX1jDg==
+  dependencies:
+    tui-grid "^4.15.3"
+
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
@@ -6792,6 +6799,11 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
+jquery@^1.11.0:
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
+  integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
+
 js-base64@^2.1.8:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -11091,6 +11103,48 @@ tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
+
+tui-code-snippet@^1.5.0:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/tui-code-snippet/-/tui-code-snippet-1.5.2.tgz#f4b8f0f1ac996b0b5b621f77c9507af19a0de238"
+  integrity sha512-6UqTlQaaC1KLcmC0HAoq5dtl1G4Fib+R+NC7pmaV7kiIlZ7JqKhUmnOoGRcreAyzd81UTK/vCvhrw9QJskpCFQ==
+
+tui-code-snippet@^2.2.0:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/tui-code-snippet/-/tui-code-snippet-2.3.2.tgz#39eb3ce46ea92043b3244f155797248535880c5d"
+  integrity sha512-6jGbM/m7A2L59lJSripwMVp87awrWgJXezlLV8GuAha3s0k01E4+MndoU5WlXd4dauVRgzHhKguTVslx/jMehw==
+
+tui-date-picker@^3.3.3:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/tui-date-picker/-/tui-date-picker-3.3.4.tgz#e3422ce6e38e6d86579823a3d7153eb83e850109"
+  integrity sha512-tJekUFhVFh6OeHSkKP6zgVjMNacLToDxaNVpVtmEZgmEo7r1xCgqq3RgVOqf7Im+7cHE5BQtJdcX/ZNP3tO9Yg==
+  dependencies:
+    jquery "^1.11.0"
+    tui-code-snippet "^1.5.0"
+    tui-time-picker "^1.3.0"
+
+tui-grid@^4.15.3:
+  version "4.15.3"
+  resolved "https://registry.yarnpkg.com/tui-grid/-/tui-grid-4.15.3.tgz#9ebac13449d9fb3e8c54517ddc06056fad9e9501"
+  integrity sha512-fY0MmZeYl/YUrFdlD7Ogeb/4rHPnOs53Lm8AS9i4kPaFnfdvmuSz94T/6xfcALeXyZkXjjk7n+HfnDyUscT1VA==
+  dependencies:
+    tui-date-picker "^3.3.3"
+    tui-pagination "^3.3.2"
+
+tui-pagination@^3.3.2:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/tui-pagination/-/tui-pagination-3.4.0.tgz#183f4a9563599d96d5f812c294b9e9bb6261d798"
+  integrity sha512-jqIeVsESOFsQfywaM58ex/P3X28lvoUVPeH/5XamfWdDMssIUdHjKy9bsJJEBgeYJPLoNenn0toXJFha2mcsTQ==
+  dependencies:
+    tui-code-snippet "^2.2.0"
+
+tui-time-picker@^1.3.0:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/tui-time-picker/-/tui-time-picker-1.6.1.tgz#9cd0e34262d0c3fac773069701f115a5a4c3666e"
+  integrity sha512-UynhhFjTh+fLMqCm8vbMVQZocKs9WweEZ9N66gHtPCv3JQQ1gg7ZKr8p6rOV9Z8F1aztmKGaSH+nIhwmQqwHQw==
+  dependencies:
+    jquery "^1.11.0"
+    tui-code-snippet "^1.5.0"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
