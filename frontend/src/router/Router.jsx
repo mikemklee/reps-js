@@ -5,7 +5,6 @@ import './Router.scss';
 
 // shared components
 // import Login from '../shared/Login/Login';
-import Header from '../shared/Header/Header';
 import Sidebar from '../shared/Sidebar/Sidebar';
 
 // views
@@ -35,9 +34,8 @@ class RouterApp extends React.Component {
     return (
       <Router>
         <div className='router'>
-          <Header />
+          <Sidebar />
           <div className='route'>
-            <Sidebar />
             <Switch>
               {this.renderProtectedRoute('/routines', Routines)}
               {this.renderProtectedRoute('/logs', Logs)}

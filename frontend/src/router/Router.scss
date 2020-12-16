@@ -1,12 +1,15 @@
+@import '../styles/variables';
+
 .router {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  display: flex;
 
   .route {
-    width: 100%;
-    height: calc(100% - 3rem);
+    flex: 1;
     display: flex;
+    background: $off-white;
   }
 }
