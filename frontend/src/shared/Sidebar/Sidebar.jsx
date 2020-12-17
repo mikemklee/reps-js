@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { useHistory, useLocation } from 'react-router-dom';
 import { HiOutlineHome, HiOutlineClipboardList } from 'react-icons/hi';
-import { BiAnalyse } from 'react-icons/bi';
+import { BiAnalyse, BiDumbbell } from 'react-icons/bi';
 
 import './Sidebar.scss';
 
@@ -48,6 +48,16 @@ const Sidebar = () => {
         >
           <BiAnalyse size='1.5rem' />
           <label>Routines</label>
+        </button>
+        <button
+          className={classnames({
+            'link-button': true,
+            current: pathname === '/exercises',
+          })}
+          onClick={() => handleClick('/exercises')}
+        >
+          <BiDumbbell size='1.5rem' />
+          <label>Exercises</label>
         </button>
       </div>
     </div>

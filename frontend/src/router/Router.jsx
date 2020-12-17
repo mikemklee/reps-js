@@ -11,6 +11,7 @@ import Sidebar from '../shared/Sidebar/Sidebar';
 import Main from '../views/Main/Main';
 import Logs from '../views/Logs/Logs';
 import Routines from '../views/Routines/Routines';
+import Exercises from '../views/Exercises/Exercises';
 import Workout from '../views/Workout/Workout';
 
 class RouterApp extends React.Component {
@@ -38,9 +39,10 @@ class RouterApp extends React.Component {
           <Sidebar />
           <div className='route'>
             <Switch>
-              {this.renderProtectedRoute('/routines', Routines)}
-              {this.renderProtectedRoute('/logs', Logs)}
               {this.renderProtectedRoute('/workout', Workout)}
+              {this.renderProtectedRoute('/logs', Logs)}
+              {this.renderProtectedRoute('/routines', Routines)}
+              {this.renderProtectedRoute('/exercises', Exercises)}
               {this.renderProtectedRoute('/', Main, false)}
             </Switch>
           </div>
