@@ -18,6 +18,7 @@
 
       .exercise-card {
         @include boxShadows;
+        background: $off-black;
         padding: 1rem;
         height: 8rem;
         border-radius: 10px;
@@ -32,6 +33,7 @@
           font-weight: 600;
           cursor: inherit;
           flex: 1;
+          transition: color 0.3s;
         }
 
         &-bodypart,
@@ -40,14 +42,17 @@
           cursor: inherit;
 
           span {
-            margin-right: 0.5rem;
+            margin-right: 1rem;
             font-size: 0.8rem;
-            color: $grey;
           }
         }
 
         &:hover {
-          border-color: $dark-blue;
+          border-color: $off-black;
+
+          .exercise-card-title {
+            color: $off-white;
+          }
         }
       }
     }

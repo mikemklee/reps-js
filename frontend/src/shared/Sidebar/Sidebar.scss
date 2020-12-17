@@ -1,11 +1,11 @@
 @import '../../styles/variables';
 
 .sidebar {
-  background: $dark-blue;
+  background: $dark-grey;
   display: flex;
   flex-direction: column;
   width: 14rem;
-  color: white;
+  color: $off-white;
 
   .site-logo {
     padding: 1.5rem;

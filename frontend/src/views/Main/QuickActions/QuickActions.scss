@@ -17,8 +17,8 @@
     .action-card {
       @include boxShadows;
       position: relative;
-      background: $dark-blue;
-      width: 15rem;
+      background: $off-black;
+      width: 16rem;
       height: 100%;
       border-radius: 10px;
       margin-right: 1rem;
@@ -26,7 +26,6 @@
       cursor: pointer;
 
       &-title {
-        color: $grey;
         font-size: 1.8rem;
         cursor: inherit;
         transition: color 0.3s;
@@ -38,14 +37,13 @@
         right: 0.5rem;
         width: 3rem;
         height: 3rem;
-        color: $grey;
         transition: color 0.3s;
       }
 
       &:hover {
         .action-card-title,
         .action-card-icon {
-          color: white;
+          color: $off-white;
         }
       }
     }

@@ -8,5 +8,9 @@
 
   .view-header {
     @include viewHeaderStyles;
+
+    strong {
+      color: $off-white;
+    }
   }
 }
