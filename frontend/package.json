@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@toast-ui/react-grid": "^4.15.3",
     "classnames": "^2.2.6",
+    "moment": "^2.29.1",
     "node-sass": "4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

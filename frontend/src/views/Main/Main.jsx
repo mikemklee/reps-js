@@ -13,8 +13,8 @@ const Main = () => {
       </div>
       <div className='main-view'>
         <QuickActions />
-        <div className='weekly-progress'>TODO: Show weekly progress</div>
-        <div className='workout-curation'>TODO: Show workout curation</div>
+        {/* <div className='weekly-progress'>TODO: Show weekly progress</div> */}
+        {/* <div className='workout-curation'>TODO: Show workout curation</div> */}
       </div>
     </div>
   );

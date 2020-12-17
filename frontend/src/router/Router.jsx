@@ -11,6 +11,7 @@ import Sidebar from '../shared/Sidebar/Sidebar';
 import Main from '../views/Main/Main';
 import Logs from '../views/Logs/Logs';
 import Routines from '../views/Routines/Routines';
+import Workout from '../views/Workout/Workout';
 
 class RouterApp extends React.Component {
   renderProtectedRoute(path, component, exact = true) {
@@ -39,6 +40,7 @@ class RouterApp extends React.Component {
             <Switch>
               {this.renderProtectedRoute('/routines', Routines)}
               {this.renderProtectedRoute('/logs', Logs)}
+              {this.renderProtectedRoute('/workout', Workout)}
               {this.renderProtectedRoute('/', Main, false)}
             </Switch>
           </div>
