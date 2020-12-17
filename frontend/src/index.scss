@@ -1,10 +1,8 @@
 @import-normalize;
 
-@import './styles/common';
-
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Lato', 'Nanum Gothic',
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', 'Nanum Gothic',
     'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
