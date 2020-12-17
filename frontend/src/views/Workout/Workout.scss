@@ -1,0 +1,14 @@
+@import '../../styles/common';
+
+.workout-view {
+  @include viewContainerStyles;
+  flex: 1;
+
+  .view-header {
+    @include viewHeaderStyles;
+  }
+
+  .view-content {
+    flex: 1;
+  }
+}

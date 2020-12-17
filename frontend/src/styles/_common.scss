@@ -6,19 +6,17 @@
   align-items: center;
 }
 
-@mixin viewSharedStyles() {
-  .view-container {
-    width: 100%;
-    padding: 1rem 2rem;
-    display: flex;
-    flex-direction: column;
+@mixin viewContainerStyles() {
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
 
-    .view-header {
-      font-size: 2.2rem;
-      font-weight: 300;
-      margin: 2rem 0;
-    }
-  }
+@mixin viewHeaderStyles() {
+  font-size: 2.2rem;
+  font-weight: 300;
+  margin: 2rem 0;
 }
 
 @mixin boxShadows() {

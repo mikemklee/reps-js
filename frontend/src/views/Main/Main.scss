@@ -1,19 +1,12 @@
 @import '../../styles/common';
 
-@include viewSharedStyles;
-
 .main-view {
+  @include viewContainerStyles;
   flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 12rem auto;
-  grid-gap: 1rem;
+  display: flex;
+  flex-direction: column;
 
-  .weekly-progress,
-  .workout-curation {
-    @include flexCenterHorizontally;
-    grid-column: span 1;
-    grid-row: 2 / span 1;
-    border: 1px solid $grey;
+  .view-header {
+    @include viewHeaderStyles;
   }
 }

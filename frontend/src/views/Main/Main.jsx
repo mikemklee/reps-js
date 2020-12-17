@@ -7,15 +7,13 @@ import { InterfaceUtils } from '../../utils';
 
 const Main = () => {
   return (
-    <div className='view-container'>
+    <div className='main-view'>
       <div className='view-header'>
         {InterfaceUtils.getTimeOfDayGreeting()}, <strong>Mike</strong>
       </div>
-      <div className='main-view'>
-        <QuickActions />
-        {/* <div className='weekly-progress'>TODO: Show weekly progress</div> */}
-        {/* <div className='workout-curation'>TODO: Show workout curation</div> */}
-      </div>
+      <QuickActions />
+      {/* <div className='weekly-progress'>TODO: Show weekly progress</div> */}
+      {/* <div className='workout-curation'>TODO: Show workout curation</div> */}
     </div>
   );
 };

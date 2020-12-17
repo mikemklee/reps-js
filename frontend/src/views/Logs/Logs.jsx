@@ -17,9 +17,9 @@ const Logs = () => {
   ];
 
   return (
-    <div className='view-container'>
+    <div className='logs-view'>
       <div className='view-header'>Logs</div>
-      <div className='logs-view'>
+      <div className='view-content'>
         <Grid
           data={dummyData}
           columns={columns}

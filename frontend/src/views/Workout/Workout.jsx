@@ -7,12 +7,10 @@ const Workout = () => {
   const [counter, setCounter] = useState(0);
 
   return (
-    <div className='view-container'>
+    <div className='workout-view'>
       <div className='view-header'>Workout</div>
       <div className='view-content'>
-        <div className='workout-view'>
-          <Timer counter={counter} setCounter={setCounter} />
-        </div>
+        <Timer counter={counter} setCounter={setCounter} />
       </div>
     </div>
   );

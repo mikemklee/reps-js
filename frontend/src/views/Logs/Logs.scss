@@ -1,7 +1,14 @@
 @import '../../styles/common';
 
-@include viewSharedStyles;
-
 .logs-view {
+  @include viewContainerStyles;
   flex: 1;
+
+  .view-header {
+    @include viewHeaderStyles;
+  }
+
+  .view-content {
+    flex: 1;
+  }
 }
