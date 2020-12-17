@@ -1,0 +1,55 @@
+@import '../../styles/common';
+
+.exercises-view {
+  @include viewContainerStyles;
+  flex: 1;
+
+  .view-header {
+    @include viewHeaderStyles;
+  }
+
+  .view-content {
+    flex: 1;
+
+    .exercise-card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 1rem;
+
+      .exercise-card {
+        @include boxShadows;
+        padding: 1rem;
+        height: 8rem;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+
+        &-title {
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: inherit;
+          flex: 1;
+        }
+
+        &-bodypart,
+        &-category {
+          margin-top: 0.5rem;
+          cursor: inherit;
+
+          span {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+            color: $grey;
+          }
+        }
+
+        &:hover {
+          border-color: $dark-blue;
+        }
+      }
+    }
+  }
+}
