@@ -1,0 +1,65 @@
+@import '../../styles/common';
+
+.add-exercise {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .exercise-list {
+    flex: 1;
+
+    .exercise {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      grid-template-rows: 5rem;
+      grid-gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba($light-grey, 0.2);
+      transition: all 0.3s;
+      cursor: pointer;
+
+      &-image {
+        grid-column: 1 / 2;
+        grid-row: 1 / -1;
+        background: grey;
+        border-radius: 10px;
+      }
+
+      &-meta {
+        grid-column: 2 / -1;
+        grid-row: 1 / -1;
+        display: flex;
+        flex-direction: column;
+
+        &-title {
+          font-size: 1.2rem;
+          font-weight: 600;
+          flex: 1;
+        }
+
+        &-bodypart,
+        &-category {
+          cursor: inherit;
+
+          span {
+            margin-right: 1rem;
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      &:last-of-type {
+        border: none;
+      }
+
+      &:hover {
+        color: $off-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@import '../../styles/common';
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+
+    :hover {
+      color: white;
+    }
+  }
+
+  &-body {
+    position: relative;
+    margin: 0 auto;
+    background-color: $dark-grey;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 20rem;
+    max-height: 90%;
+    min-width: 30rem;
+    max-width: 90%;
+    padding: 1rem;
+    display: flex;
+    color: $light-grey;
+  }
+}
