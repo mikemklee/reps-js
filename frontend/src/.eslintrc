@@ -20,6 +20,7 @@
     }
   },
   "rules": {
+    "no-unused-vars": "warn",
     "class-methods-use-this": "off",
     "dot-notation": "off",
     "no-mixed-operators": "error",

@@ -5,6 +5,7 @@ import './Workout.scss';
 import Timer from './Timer/TImer';
 import Modal from '../../shared/Modal/Modal';
 import AddExercise from '../../shared/AddExercise/AddExercise';
+import Exercise from './Exercise/Exercise';
 
 const Workout = () => {
   const [counter, setCounter] = useState(0);
@@ -21,10 +22,8 @@ const Workout = () => {
       <div className='view-header'>Workout</div>
       <div className='view-content'>
         <Timer counter={counter} setCounter={setCounter} />
-        {exercises.map((exercise, index) => (
-          <div key={index} className='exercise-section-container'>
-            <div className='exercise-section'>{exercise.name}</div>
-          </div>
+        {exercises.map((exercise) => (
+          <Exercise key={exercise.id} exercise={exercise} />
         ))}
         <button
           className='add-exercise-btn'
