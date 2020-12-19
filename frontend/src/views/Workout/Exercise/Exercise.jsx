@@ -3,66 +3,10 @@ import { useTable } from 'react-table';
 
 import './Exercise.scss';
 
-const NumberInputCell = ({
-  value: initialValue,
-  row: { index },
-  column: { id },
-  onEditCell,
-}) => {
-  // We need to keep and update the state of the cell normally
-  const [value, setValue] = useState(initialValue);
-
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  // We'll only update the external data when the input is blurred
-  const onBlur = () => {
-    onEditCell(index, id, value);
-  };
-
-  // If the initialValue is changed external, sync it up with our state
-  useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
-
-  return <input value={value} onChange={onChange} onBlur={onBlur} />;
-};
-
-const CheckboxCell = ({
-  value: initialValue,
-  row: { index },
-  column: { id },
-  onToggleCell,
-}) => {
-  // We need to keep and update the state of the cell normally
-  const [value, setValue] = useState(initialValue);
-
-  const onChange = () => {
-    setValue(!value);
-    onToggleCell(index, id, !value);
-  };
-
-  // If the initialValue is changed external, sync it up with our state
-  useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
-
-  return <input type='checkbox' checked={value} onChange={onChange} />;
-};
-
-const ButtonCell = ({
-  row: { index },
-  column: { id },
-  onClickCell,
-  children,
-}) => {
-  const onClick = () => {
-    onClickCell(index, id);
-  };
-
-  return <button onClick={onClick}>{children}</button>;
-};
+import Table from '../../../shared/Table/Table';
+import NumberInputCell from '../../../shared/Table/NumberInputCell/NumberInputCell';
+import CheckboxCell from '../../../shared/Table/CheckboxCell/CheckboxCell';
+import ButtonCell from '../../../shared/Table/ButtonCell/ButtonCell';
 
 const Exercise = ({ exercise }) => {
   const iniitalData = React.useMemo(
@@ -179,79 +123,19 @@ const Exercise = ({ exercise }) => {
     setSkipPageReset(false);
   }, [data]);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({
-    columns,
+  const tableInstance = useTable({
     data,
-    // use the skipPageReset option to disable page resetting temporarily
-    autoResetPage: !skipPageReset,
-    onEditCell,
-    onToggleCell,
-    onClickCell,
+    columns,
+    autoResetPage: !skipPageReset, // use `skipPageReset` to disable page reset temporarily
+    onEditCell, // required for NumberInputCell
+    onToggleCell, // required for CheckboxCell
+    onClickCell, // required for ButtonCell
   });
 
   return (
     <div className='exercise-section'>
       <div className='exercise-name'>{exercise.name}</div>
-      {/* Apply the table props */}
-      <table {...getTableProps()}>
-        <thead>
-          {
-            // Loop over the header rows
-            headerGroups.map((headerGroup, headerIndex) => (
-              // Apply the header row props
-              <tr key={headerIndex} {...headerGroup.getHeaderGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map((column, colIndex) => (
-                    // Apply the header cell props
-                    <th key={colIndex} {...column.getHeaderProps()}>
-                      {
-                        // Render the header
-                        column.render('Header')
-                      }
-                    </th>
-                  ))
-                }
-              </tr>
-            ))
-          }
-        </thead>
-        {/* Apply the table body props */}
-        <tbody {...getTableBodyProps()}>
-          {
-            // Loop over the table rows
-            rows.map((row, rowIndex) => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <tr key={rowIndex} {...row.getRowProps()}>
-                  {
-                    // Loop over the rows cells
-                    row.cells.map((cell, cellIndex) => {
-                      // Apply the cell props
-                      return (
-                        <td key={cellIndex} {...cell.getCellProps()}>
-                          {
-                            // Render the cell contents
-                            cell.render('Cell')
-                          }
-                        </td>
-                      );
-                    })
-                  }
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
+      <Table instance={tableInstance} />
     </div>
   );
 };
