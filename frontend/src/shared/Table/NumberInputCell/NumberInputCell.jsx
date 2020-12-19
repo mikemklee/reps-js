@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import './NumberInputCell.scss';
+
 const NumberInputCell = ({
   value: initialValue,
   row: { index },
@@ -24,7 +26,13 @@ const NumberInputCell = ({
   }, [initialValue]);
 
   return (
-    <input type='number' value={value} onChange={onChange} onBlur={onBlur} />
+    <input
+      className='number-input-cell'
+      type='number'
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+    />
   );
 };
 

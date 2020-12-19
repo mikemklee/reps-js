@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './ButtonCell.scss';
+
 const ButtonCell = ({
   row: { index },
   column: { id },
@@ -10,7 +12,11 @@ const ButtonCell = ({
     onClickCell(index, id);
   };
 
-  return <button onClick={onClick}>{children}</button>;
+  return (
+    <button className='button-cell' onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default ButtonCell;

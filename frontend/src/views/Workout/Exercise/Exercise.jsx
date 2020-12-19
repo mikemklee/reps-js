@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useTable } from 'react-table';
+import { useTable, useFlexLayout } from 'react-table';
+import { VscClose } from 'react-icons/vsc';
 
 import './Exercise.scss';
 
@@ -65,9 +66,13 @@ const Exercise = ({ exercise }) => {
         Cell: CheckboxCell,
       },
       {
-        Header: 'Remove',
+        Header: '',
         accessor: 'id',
-        Cell: (props) => <ButtonCell {...props}>Remove</ButtonCell>,
+        Cell: (props) => (
+          <ButtonCell {...props}>
+            <VscClose />
+          </ButtonCell>
+        ),
       },
     ],
     []
@@ -130,12 +135,15 @@ const Exercise = ({ exercise }) => {
     onEditCell, // required for NumberInputCell
     onToggleCell, // required for CheckboxCell
     onClickCell, // required for ButtonCell
+    useFlexLayout,
   });
 
   return (
     <div className='exercise-section'>
       <div className='exercise-name'>{exercise.name}</div>
-      <Table instance={tableInstance} />
+      <div className='exercise-sets'>
+        <Table instance={tableInstance} />
+      </div>
     </div>
   );
 };

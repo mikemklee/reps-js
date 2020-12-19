@@ -1,0 +1,13 @@
+@import '../../../styles/common';
+
+.exercise-section {
+  .exercise-name {
+    font-weight: 600;
+    margin: 0.5rem 0;
+    color: white;
+  }
+
+  .exercise-sets {
+    display: table;
+  }
+}

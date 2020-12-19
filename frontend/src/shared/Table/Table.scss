@@ -1,0 +1,21 @@
+@import '../../styles/common';
+
+table {
+  border-collapse: collapse;
+
+  td,
+  th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+  }
+
+  th {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}

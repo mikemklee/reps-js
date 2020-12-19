@@ -7,9 +7,11 @@ import Modal from '../../shared/Modal/Modal';
 import AddExercise from '../../shared/AddExercise/AddExercise';
 import Exercise from './Exercise/Exercise';
 
+import ExercisePresets from '../../views/Exercises/Exercises.metadata';
+
 const Workout = () => {
   const [counter, setCounter] = useState(0);
-  const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState([ExercisePresets[0]]);
   const addExerciseModalRef = useRef(null);
 
   const onAddExercise = (exercise) => {

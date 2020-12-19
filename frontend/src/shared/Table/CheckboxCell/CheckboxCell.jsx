@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import classnames from 'classnames';
+import { GoCheck } from 'react-icons/go';
+
+import './CheckboxCell.scss';
 
 const CheckboxCell = ({
   value: initialValue,
@@ -9,7 +13,7 @@ const CheckboxCell = ({
   // We need to keep and update the state of the cell normally
   const [value, setValue] = useState(initialValue);
 
-  const onChange = () => {
+  const onToggle = () => {
     setValue(!value);
     onToggleCell(index, id, !value);
   };
@@ -19,7 +23,19 @@ const CheckboxCell = ({
     setValue(initialValue);
   }, [initialValue]);
 
-  return <input type='checkbox' checked={value} onChange={onChange} />;
+  return (
+    <div className='checkbox-cell' onClick={onToggle}>
+      <input type='checkbox' value={value} />
+      <div
+        className={classnames({
+          'toggle-box': true,
+          checked: value === true,
+        })}
+      >
+        <GoCheck />
+      </div>
+    </div>
+  );
 };
 
 export default CheckboxCell;
