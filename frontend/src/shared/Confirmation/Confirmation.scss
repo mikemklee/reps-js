@@ -1,0 +1,41 @@
+@import '../../styles/common';
+
+.confirmation {
+  min-width: 20rem;
+  min-height: 5rem;
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  &-subtitle {
+    margin: 2rem 0;
+    font-size: 0.9rem;
+
+    p {
+      margin: 0.2rem;
+    }
+  }
+
+  &-btn-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+
+    .confirmation-cancel-btn {
+      @include secondaryButtonStyles;
+      margin-right: 0.5rem;
+    }
+
+    .confirmation-confirm-btn {
+      @include primaryButtonStyles;
+
+      &.isWarning {
+        @include warningButtonStyles;
+      }
+    }
+  }
+}
