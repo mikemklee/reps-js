@@ -7,6 +7,7 @@ import './Workout.scss';
 import Timer from './Timer/TImer';
 import Modal from '../../shared/Modal/Modal';
 import AddExercise from '../../shared/AddExercise/AddExercise';
+import Confirmation from '../../shared/Confirmation/Confirmation';
 import Exercise from './Exercise/Exercise';
 
 import ExercisePresets from '../../views/Exercises/Exercises.metadata';
@@ -16,6 +17,7 @@ const Workout = () => {
   const [exercises, setExercises] = useState([ExercisePresets[0]]);
   const [setsByExercise, setExerciseSets] = useState({});
   const addExerciseModalRef = useRef(null);
+  const cancelWorkoutModalRef = useRef(null);
 
   const onAddExercise = (exercise) => {
     setExercises([...exercises, exercise]);
@@ -73,6 +75,10 @@ const Workout = () => {
     });
   };
 
+  const onCompleteWorkout = () => {
+    console.log('what do i have so far?', exercises, setsByExercise);
+  };
+
   return (
     <div className='workout-view'>
       <div className='view-header'>Workout</div>
@@ -83,10 +89,13 @@ const Workout = () => {
             <Timer counter={counter} setCounter={setCounter} />
           </div>
           <div className='workout-controls-actions'>
-            <button className='cancel-workout-btn'>
+            <button
+              className='cancel-workout-btn'
+              onClick={() => cancelWorkoutModalRef.current.open()}
+            >
               <span>Cancel</span>
             </button>
-            <button className='finish-workout-btn'>
+            <button className='finish-workout-btn' onClick={onCompleteWorkout}>
               <span>Complete</span>
             </button>
           </div>
@@ -111,6 +120,20 @@ const Workout = () => {
       </div>
       <Modal ref={addExerciseModalRef}>
         <AddExercise onAddExercise={onAddExercise} />
+      </Modal>
+      <Modal ref={cancelWorkoutModalRef}>
+        <Confirmation
+          isWarning
+          title='Cancel workout'
+          subtitle={
+            <>
+              <p>Are you sure you want to cancel this workout session?</p>
+              <p>Any recorded data for the session will be lost.</p>
+            </>
+          }
+          onCancel={() => cancelWorkoutModalRef.current.close()}
+          onConfirm={() => console.log('confirm')}
+        />
       </Modal>
     </div>
   );
