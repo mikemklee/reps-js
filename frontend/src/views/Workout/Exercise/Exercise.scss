@@ -15,5 +15,6 @@
   .add-set-btn {
     @include secondaryButtonStyles;
     @include flexCenterHorizontally;
+    margin-top: 1rem;
   }
 }

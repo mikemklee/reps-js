@@ -5,7 +5,7 @@ import { FaStopwatch } from 'react-icons/fa';
 
 import './Workout.scss';
 
-import Timer from './Timer/TImer';
+import Timer from './Timer/Timer';
 import Exercise from './Exercise/Exercise';
 import RestTimer from './RestTimer/RestTimer';
 

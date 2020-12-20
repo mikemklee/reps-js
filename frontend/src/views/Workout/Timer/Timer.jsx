@@ -3,6 +3,8 @@ import moment from 'moment';
 
 import './Timer.scss';
 
+import TimeDisplay from '../../../shared/TimeDisplay/TimeDisplay';
+
 const Timer = ({ counter, setCounter }) => {
   useEffect(() => {
     const timerFn = setTimeout(() => {
@@ -18,18 +20,7 @@ const Timer = ({ counter, setCounter }) => {
 
   return (
     <div className='container'>
-      <div className='time'>
-        <span className='minute'>
-          {minutes < 10 && 0}
-          {minutes}
-        </span>
-        <span>:</span>
-        <span className='second'>
-          {seconds < 10 && 0}
-          {seconds}
-        </span>
-        <span></span>
-      </div>
+      <TimeDisplay minutes={minutes} seconds={seconds} />
     </div>
   );
 };
