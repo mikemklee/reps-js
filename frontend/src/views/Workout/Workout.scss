@@ -18,14 +18,22 @@
       align-items: flex-end;
       margin-bottom: 1rem;
 
-      &-timer {
+      &-duration-timer {
         font-size: 1.6rem;
-        flex: 1;
 
         label {
           font-size: 0.8rem;
           display: block;
           margin-bottom: 0.2rem;
+        }
+      }
+
+      &-rest-timer {
+        font-size: 1.6rem;
+        flex: 1;
+
+        button {
+          @include secondaryButtonStyles;
         }
       }
 

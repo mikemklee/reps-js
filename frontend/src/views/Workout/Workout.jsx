@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react';
 import _ from 'lodash';
 import { VscAdd } from 'react-icons/vsc';
+import { FaStopwatch } from 'react-icons/fa';
 
 import './Workout.scss';
 
 import Timer from './Timer/TImer';
+import Exercise from './Exercise/Exercise';
+import RestTimer from './RestTimer/RestTimer';
+
 import Modal from '../../shared/Modal/Modal';
 import AddExercise from '../../shared/AddExercise/AddExercise';
 import Confirmation from '../../shared/Confirmation/Confirmation';
-import Exercise from './Exercise/Exercise';
 
 import ExercisePresets from '../../views/Exercises/Exercises.metadata';
 
@@ -16,8 +19,10 @@ const Workout = () => {
   const [counter, setCounter] = useState(0);
   const [exercises, setExercises] = useState([ExercisePresets[0]]);
   const [setsByExercise, setExerciseSets] = useState({});
+
   const addExerciseModalRef = useRef(null);
   const cancelWorkoutModalRef = useRef(null);
+  const restTimerModalRef = useRef(null);
 
   const onAddExercise = (exercise) => {
     setExercises([...exercises, exercise]);
@@ -84,9 +89,17 @@ const Workout = () => {
       <div className='view-header'>Workout</div>
       <div className='view-content'>
         <div className='workout-controls'>
-          <div className='workout-controls-timer'>
+          <div className='workout-controls-duration-timer'>
             <label>Time elapsed: </label>
             <Timer counter={counter} setCounter={setCounter} />
+          </div>
+          <div
+            className='workout-controls-rest-timer'
+            onClick={() => restTimerModalRef.current.open()}
+          >
+            <button>
+              <FaStopwatch />
+            </button>
           </div>
           <div className='workout-controls-actions'>
             <button
@@ -134,6 +147,9 @@ const Workout = () => {
           onCancel={() => cancelWorkoutModalRef.current.close()}
           onConfirm={() => console.log('confirm')}
         />
+      </Modal>
+      <Modal ref={restTimerModalRef}>
+        <RestTimer onClose={() => restTimerModalRef.current.close()} />
       </Modal>
     </div>
   );
