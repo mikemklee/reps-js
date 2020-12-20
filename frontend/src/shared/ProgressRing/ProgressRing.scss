@@ -1,0 +1,34 @@
+@import '../../styles/common';
+
+.progress-ring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .ring-container {
+    position: absolute;
+    pointer-events: none;
+    transform: rotate(-90deg);
+
+    .empty-ring {
+      stroke: rgba($light-blue, 0.2);
+      fill: transparent;
+    }
+
+    .colored-ring {
+      stroke: $light-blue;
+      fill: transparent;
+
+      &.animated {
+        transition: 1s linear all;
+      }
+    }
+  }
+
+  .time-remaining {
+    font-size: 3.5rem;
+    font-weight: 600;
+  }
+}
