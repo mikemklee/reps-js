@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import _ from 'lodash';
 import { useTable, useFlexLayout } from 'react-table';
 import { VscAdd, VscClose } from 'react-icons/vsc';
 
@@ -10,7 +9,7 @@ import NumberInputCell from '../../../shared/Table/NumberInputCell/NumberInputCe
 import CheckboxCell from '../../../shared/Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../../../shared/Table/ButtonCell/ButtonCell';
 
-const Exercise = ({ exercise }) => {
+const Exercise = ({ exercise, sets, onAddSet, onEditSet, onRemoveSet }) => {
   const columns = React.useMemo(
     () => [
       {
@@ -52,60 +51,23 @@ const Exercise = ({ exercise }) => {
   );
 
   const [skipPageReset, setSkipPageReset] = useState(false);
-  const [data, setData] = useState([]);
 
   const onEditCell = (rowIndex, columnId, value) => {
     // We also turn on the flag to not reset the page
     setSkipPageReset(true);
-    setData((old) =>
-      old.map((row, index) => {
-        if (index === rowIndex) {
-          return {
-            ...old[rowIndex],
-            [columnId]: value,
-          };
-        }
-        return row;
-      })
-    );
+    onEditSet(exercise, rowIndex, columnId, value);
   };
 
   const onToggleCell = (rowIndex, columnId, value) => {
     // We also turn on the flag to not reset the page
     setSkipPageReset(true);
-    setData((old) =>
-      old.map((row, index) => {
-        if (index === rowIndex) {
-          return {
-            ...old[rowIndex],
-            [columnId]: value,
-          };
-        }
-        return row;
-      })
-    );
+    onEditSet(exercise, rowIndex, columnId, value);
   };
 
-  const onRemoveSet = (rowIndex) => {
+  const onClickCell = (rowIndex) => {
     // We also turn on the flag to not reset the page
     setSkipPageReset(true);
-
-    // remove this row
-    setData((old) => _.filter(old, (_item, index) => index !== rowIndex));
-  };
-
-  const onAddSet = () => {
-    setData([
-      ...data,
-      {
-        id: data.length + 1,
-        set: data.length + 1,
-        previous: '',
-        kg: 0,
-        reps: 0,
-        completed: false,
-      },
-    ]);
+    onRemoveSet(exercise, rowIndex);
   };
 
   // After data chagnes, we turn the flag back off
@@ -113,27 +75,27 @@ const Exercise = ({ exercise }) => {
   // editing it, the page is reset
   useEffect(() => {
     setSkipPageReset(false);
-  }, [data]);
+  }, [sets]);
 
   const tableInstance = useTable({
-    data,
+    data: sets,
     columns,
     autoResetPage: !skipPageReset, // use `skipPageReset` to disable page reset temporarily
     onEditCell, // required for NumberInputCell
     onToggleCell, // required for CheckboxCell
-    onClickCell: onRemoveSet, // required for ButtonCell
+    onClickCell, // required for ButtonCell
     useFlexLayout,
   });
 
   return (
     <div className='exercise-section'>
       <div className='exercise-name'>{exercise.name}</div>
-      {data.length ? (
+      {sets.length ? (
         <div className='exercise-sets'>
           <Table instance={tableInstance} />
         </div>
       ) : null}
-      <button className='add-set-btn' onClick={onAddSet}>
+      <button className='add-set-btn' onClick={() => onAddSet(exercise)}>
         <VscAdd />
         <span>Add set</span>
       </button>
