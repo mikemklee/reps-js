@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import _ from 'lodash';
 import { useTable, useFlexLayout } from 'react-table';
 import { VscAdd, VscClose } from 'react-icons/vsc';
 
@@ -10,45 +11,17 @@ import CheckboxCell from '../../../shared/Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../../../shared/Table/ButtonCell/ButtonCell';
 
 const Exercise = ({ exercise }) => {
-  const iniitalData = React.useMemo(
-    () => [
-      {
-        id: 1,
-        set: 1,
-        previous: '15kg x 12',
-        kg: 15,
-        reps: 12,
-        completed: false,
-      },
-      {
-        id: 2,
-        set: 2,
-        previous: '15kg x 12',
-        kg: 15,
-        reps: 12,
-        completed: false,
-      },
-      {
-        id: 3,
-        set: 3,
-        previous: '15kg x 12',
-        kg: 15,
-        reps: 12,
-        completed: false,
-      },
-    ],
-    []
-  );
-
   const columns = React.useMemo(
     () => [
       {
         Header: 'Set',
         accessor: 'set',
+        Cell: ({ row }) => row.index + 1,
       },
       {
         Header: 'Previous',
         accessor: 'previous',
+        Cell: () => 'test', // TODO: query previous record?
       },
       {
         Header: 'kg',
@@ -79,7 +52,7 @@ const Exercise = ({ exercise }) => {
   );
 
   const [skipPageReset, setSkipPageReset] = useState(false);
-  const [data, setData] = useState(iniitalData);
+  const [data, setData] = useState([]);
 
   const onEditCell = (rowIndex, columnId, value) => {
     // We also turn on the flag to not reset the page
@@ -113,12 +86,26 @@ const Exercise = ({ exercise }) => {
     );
   };
 
-  const onClickCell = (rowIndex, columnId, value) => {
+  const onRemoveSet = (rowIndex) => {
     // We also turn on the flag to not reset the page
     setSkipPageReset(true);
 
-    // no need to update data; what do we want to do here?
-    console.log('cell clicked; what do i do?', rowIndex, columnId, value);
+    // remove this row
+    setData((old) => _.filter(old, (_item, index) => index !== rowIndex));
+  };
+
+  const onAddSet = () => {
+    setData([
+      ...data,
+      {
+        id: data.length + 1,
+        set: data.length + 1,
+        previous: '',
+        kg: 0,
+        reps: 0,
+        completed: false,
+      },
+    ]);
   };
 
   // After data chagnes, we turn the flag back off
@@ -134,17 +121,19 @@ const Exercise = ({ exercise }) => {
     autoResetPage: !skipPageReset, // use `skipPageReset` to disable page reset temporarily
     onEditCell, // required for NumberInputCell
     onToggleCell, // required for CheckboxCell
-    onClickCell, // required for ButtonCell
+    onClickCell: onRemoveSet, // required for ButtonCell
     useFlexLayout,
   });
 
   return (
     <div className='exercise-section'>
       <div className='exercise-name'>{exercise.name}</div>
-      <div className='exercise-sets'>
-        <Table instance={tableInstance} />
-      </div>
-      <button className='add-set-btn'>
+      {data.length ? (
+        <div className='exercise-sets'>
+          <Table instance={tableInstance} />
+        </div>
+      ) : null}
+      <button className='add-set-btn' onClick={onAddSet}>
         <VscAdd />
         <span>Add set</span>
       </button>

@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { VscAdd } from 'react-icons/vsc';
-import { RiAddLine } from 'react-icons/ri';
 
 import './Workout.scss';
 
