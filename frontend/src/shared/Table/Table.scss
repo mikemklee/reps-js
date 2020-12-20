@@ -1,16 +1,21 @@
 @import '../../styles/common';
 
 table {
+  width: 100%;
   border-collapse: collapse;
 
   td,
   th {
     text-align: center;
     vertical-align: middle;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
 
     &:first-of-type {
       padding-left: 0;
+    }
+
+    &:last-of-type {
+      padding-right: 0;
     }
   }
 

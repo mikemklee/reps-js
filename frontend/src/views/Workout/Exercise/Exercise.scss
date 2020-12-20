@@ -1,6 +1,8 @@
 @import '../../../styles/common';
 
 .exercise-section {
+  margin: 2rem 0;
+
   .exercise-name {
     font-weight: 600;
     margin: 0.5rem 0;
@@ -8,6 +10,10 @@
   }
 
   .exercise-sets {
-    display: table;
+  }
+
+  .add-set-btn {
+    @include secondaryButtonStyles;
+    @include flexCenterHorizontally;
   }
 }

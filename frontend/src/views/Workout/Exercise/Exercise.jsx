@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTable, useFlexLayout } from 'react-table';
-import { VscClose } from 'react-icons/vsc';
+import { VscAdd, VscClose } from 'react-icons/vsc';
 
 import './Exercise.scss';
 
@@ -144,6 +144,10 @@ const Exercise = ({ exercise }) => {
       <div className='exercise-sets'>
         <Table instance={tableInstance} />
       </div>
+      <button className='add-set-btn'>
+        <VscAdd />
+        <span>Add set</span>
+      </button>
     </div>
   );
 };

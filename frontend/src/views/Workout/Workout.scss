@@ -10,5 +10,52 @@
 
   .view-content {
     flex: 1;
+    max-width: 40rem;
+
+    .workout-controls {
+      color: $light-grey;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+
+      &-timer {
+        font-size: 1.6rem;
+        flex: 1;
+
+        label {
+          font-size: 0.8rem;
+          display: block;
+          margin-bottom: 0.2rem;
+        }
+      }
+
+      &-actions {
+        display: flex;
+
+        .finish-workout-btn {
+          @include primaryButtonStyles;
+          margin-left: 0.5rem;
+        }
+
+        .cancel-workout-btn {
+          @include warningButtonStyles;
+        }
+      }
+    }
+
+    .add-exercise-btn {
+      @include secondaryButtonStyles;
+      @include flexCenterHorizontally;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid rgba($light-grey, 0.2);
+      border-radius: 0;
+      padding: 1rem;
+      width: 100%;
+      transition: all 0.1s;
+      &:hover {
+        color: white;
+      }
+    }
   }
 }

@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import { VscAdd } from 'react-icons/vsc';
+import { RiAddLine } from 'react-icons/ri';
 
 import './Workout.scss';
 
@@ -23,7 +25,20 @@ const Workout = () => {
     <div className='workout-view'>
       <div className='view-header'>Workout</div>
       <div className='view-content'>
-        <Timer counter={counter} setCounter={setCounter} />
+        <div className='workout-controls'>
+          <div className='workout-controls-timer'>
+            <label>Time elapsed: </label>
+            <Timer counter={counter} setCounter={setCounter} />
+          </div>
+          <div className='workout-controls-actions'>
+            <button className='cancel-workout-btn'>
+              <span>Cancel</span>
+            </button>
+            <button className='finish-workout-btn'>
+              <span>Complete</span>
+            </button>
+          </div>
+        </div>
         {exercises.map((exercise) => (
           <Exercise key={exercise.id} exercise={exercise} />
         ))}
@@ -31,10 +46,9 @@ const Workout = () => {
           className='add-exercise-btn'
           onClick={() => addExerciseModalRef.current.open()}
         >
-          Add exercise
+          <VscAdd />
+          <span>Add exercise</span>
         </button>
-        <button className='finish-workout-btn'>Complete workout</button>
-        <button className='cancel-workout-btn'>Cancel workout</button>
       </div>
       <Modal ref={addExerciseModalRef}>
         <AddExercise onAddExercise={onAddExercise} />
