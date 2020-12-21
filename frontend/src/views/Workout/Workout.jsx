@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import _ from 'lodash';
+import { useHistory } from 'react-router-dom';
 import { VscAdd } from 'react-icons/vsc';
 import { FaStopwatch } from 'react-icons/fa';
 
@@ -13,19 +14,20 @@ import Modal from '../../shared/Modal/Modal';
 import AddExercise from '../../shared/AddExercise/AddExercise';
 import Confirmation from '../../shared/Confirmation/Confirmation';
 
-import ExercisePresets from '../../views/Exercises/Exercises.metadata';
-
 const Workout = () => {
   const [counter, setCounter] = useState(0);
-  const [exercises, setExercises] = useState([ExercisePresets[0]]);
+  const [exercises, setExercises] = useState([]);
   const [setsByExercise, setExerciseSets] = useState({});
 
   const addExerciseModalRef = useRef(null);
   const cancelWorkoutModalRef = useRef(null);
   const restTimerModalRef = useRef(null);
 
+  const history = useHistory();
+
   const onAddExercise = (exercise) => {
     setExercises([...exercises, exercise]);
+    onAddSet(exercise);
     addExerciseModalRef.current.close();
   };
 
@@ -132,7 +134,7 @@ const Workout = () => {
         </button>
       </div>
       <Modal ref={addExerciseModalRef}>
-        <AddExercise onAddExercise={onAddExercise} />
+        <AddExercise exercises={exercises} onAddExercise={onAddExercise} />
       </Modal>
       <Modal ref={cancelWorkoutModalRef}>
         <Confirmation
@@ -140,12 +142,12 @@ const Workout = () => {
           title='Cancel workout'
           subtitle={
             <>
-              <p>Are you sure you want to cancel this workout session?</p>
+              <p>Are you sure you would like to cancel this workout session?</p>
               <p>Any recorded data for the session will be lost.</p>
             </>
           }
           onCancel={() => cancelWorkoutModalRef.current.close()}
-          onConfirm={() => console.log('confirm')}
+          onConfirm={() => history.goBack()}
         />
       </Modal>
       <Modal ref={restTimerModalRef}>

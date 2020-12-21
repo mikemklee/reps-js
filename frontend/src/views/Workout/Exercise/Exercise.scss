@@ -15,6 +15,11 @@
   .add-set-btn {
     @include secondaryButtonStyles;
     @include flexCenterHorizontally;
-    margin-top: 1rem;
+    padding-left: 0;
+    border-color: transparent;
+    transition: all 0.1s;
+    &:hover {
+      color: white;
+    }
   }
 }
