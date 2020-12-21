@@ -24,6 +24,7 @@
       padding: 1rem 0;
       border-bottom: 1px solid rgba($light-grey, 0.2);
       transition: all 0.3s;
+      position: relative;
       cursor: pointer;
 
       &-image {
@@ -61,6 +62,22 @@
 
       &:hover {
         color: $off-white;
+      }
+
+      &.selected {
+        color: rgba($light-grey, 0.2);
+        pointer-events: none;
+      }
+      .selected-icon {
+        @include flexCenterHorizontally;
+        background: $light-blue;
+        color: $off-white;
+        position: absolute;
+        border-radius: 50%;
+        width: 1.5rem;
+        height: 1.5rem;
+        right: 1rem;
+        bottom: 1rem;
       }
     }
   }

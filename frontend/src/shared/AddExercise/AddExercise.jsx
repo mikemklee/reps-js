@@ -1,10 +1,13 @@
 import React from 'react';
+import classnames from 'classnames';
+import { FiCheck } from 'react-icons/fi';
 
 import './AddExercise.scss';
 
 import ExercisePresets from '../../views/Exercises/Exercises.metadata';
 
-const AddExercise = ({ onAddExercise }) => {
+const AddExercise = ({ exercises, onAddExercise }) => {
+  const selectedExerciseIds = exercises.map((item) => item.id);
   return (
     <div className='add-exercise'>
       <div className='add-exercise-header'>Add exercise</div>
@@ -12,7 +15,10 @@ const AddExercise = ({ onAddExercise }) => {
         {ExercisePresets.map((item) => (
           <div
             key={item.id}
-            className='exercise'
+            className={classnames({
+              exercise: true,
+              selected: selectedExerciseIds.includes(item.id),
+            })}
             onClick={() => onAddExercise(item)}
           >
             <div className='exercise-image'></div>
@@ -27,6 +33,11 @@ const AddExercise = ({ onAddExercise }) => {
                 {item.category}
               </div>
             </div>
+            {selectedExerciseIds.includes(item.id) ? (
+              <div className='selected-icon'>
+                <FiCheck />
+              </div>
+            ) : null}
           </div>
         ))}
       </div>
