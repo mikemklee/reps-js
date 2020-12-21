@@ -12,14 +12,22 @@
     pointer-events: none;
     transform: rotate(-90deg);
 
-    .empty-ring {
-      stroke: rgba($light-blue, 0.2);
+    .static-ring {
+      stroke: $dark-blue;
       fill: transparent;
+
+      &.reverse {
+        stroke: $light-blue;
+      }
     }
 
-    .colored-ring {
+    .animated-ring {
       stroke: $light-blue;
       fill: transparent;
+
+      &.reverse {
+        stroke: $dark-blue;
+      }
 
       &.animated {
         transition: 1s linear all;
