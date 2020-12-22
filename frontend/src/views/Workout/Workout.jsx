@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import _ from 'lodash';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { VscAdd } from 'react-icons/vsc';
 import { FaStopwatch } from 'react-icons/fa';
 
@@ -14,6 +15,8 @@ import Modal from '../../shared/Modal/Modal';
 import AddExercise from '../../shared/AddExercise/AddExercise';
 import Confirmation from '../../shared/Confirmation/Confirmation';
 
+import WorkoutActions from '../../redux/workout/actions';
+
 const Workout = () => {
   const [counter, setCounter] = useState(0);
   const [exercises, setExercises] = useState([]);
@@ -23,6 +26,7 @@ const Workout = () => {
   const cancelWorkoutModalRef = useRef(null);
   const restTimerModalRef = useRef(null);
 
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const onAddExercise = (exercise) => {
@@ -83,7 +87,13 @@ const Workout = () => {
   };
 
   const onCompleteWorkout = () => {
-    console.log('what do i have so far?', exercises, setsByExercise);
+    const formattedData = Workout.formatWorkoutData({
+      setsByExercise,
+      timeElapsed: counter,
+      completedAt: new Date().toISOString(),
+    });
+
+    dispatch(WorkoutActions.saveWorkoutRequest(formattedData));
   };
 
   return (
@@ -155,6 +165,22 @@ const Workout = () => {
       </Modal>
     </div>
   );
+};
+
+Workout.formatWorkoutData = (rawData) => {
+  const sanitizedSetsData = {};
+  _.forEach(rawData.setsByExercise, (sets, exerciseId) => {
+    sanitizedSetsData[exerciseId] = _.map(sets, (set) =>
+      _.pick(set, ['id', 'kg', 'reps', 'completed'])
+    );
+  });
+
+  const formatted = {
+    ...rawData,
+    setsByExercise: sanitizedSetsData,
+  };
+
+  return formatted;
 };
 
 export default Workout;
