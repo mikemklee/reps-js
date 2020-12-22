@@ -52,10 +52,9 @@
     }
 
     .add-exercise-btn {
-      @include secondaryButtonStyles;
+      @include tertiaryButtonStyles;
       @include flexCenterHorizontally;
       margin: 0 auto;
-      border: none;
       border-top: 1px solid rgba($light-grey, 0.2);
       border-radius: 0;
       padding: 1rem;

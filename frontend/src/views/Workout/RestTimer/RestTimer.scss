@@ -13,14 +13,31 @@
 
   &-footer {
     display: flex;
+    flex-direction: column;
 
-    .rest-timer-reset-btn {
-      @include secondaryButtonStyles;
-      margin-right: auto;
+    .duration-btn-container {
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: space-between;
+
+      .add-duration-btn {
+        @include tertiaryButtonStyles;
+        @include flexCenterHorizontally;
+        padding: 0;
+      }
     }
 
-    .rest-timer-toggle-btn {
-      @include primaryButtonStyles;
+    .control-btn-container {
+      display: flex;
+
+      .reset-btn {
+        @include secondaryButtonStyles;
+        margin-right: auto;
+      }
+
+      .toggle-btn {
+        @include primaryButtonStyles;
+      }
     }
   }
 }

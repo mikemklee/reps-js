@@ -51,6 +51,11 @@
   border-color: $light-grey;
 }
 
+@mixin tertiaryButtonStyles() {
+  @include secondaryButtonStyles;
+  border-color: transparent;
+}
+
 @mixin warningButtonStyles() {
   @include buttonStyles;
   background: transparent;

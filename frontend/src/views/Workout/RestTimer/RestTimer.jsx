@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import moment from 'moment';
+import { VscAdd } from 'react-icons/vsc';
 
 import './RestTimer.scss';
 import TimeDisplay from '../../../shared/TimeDisplay/TimeDisplay';
 import ProgressRing from '../../../shared/ProgressRing/ProgressRing';
+import usePrevious from '../../../hooks/usePrevious';
 
 const calculateProgress = (timeRemaining, duration) => {
   const fractionRemaining = timeRemaining / duration;
@@ -17,10 +19,14 @@ const RestTimer = () => {
   const [secondsRemaining, setSecondsRemaining] = useState(restDuration);
   const [isActive, setIsActive] = useState(false);
 
-  const onToggle = () => setIsActive(!isActive);
   const onReset = () => {
     setSecondsRemaining(restDuration);
     setIsActive(false);
+  };
+
+  const onAddDuration = (addedDuration) => {
+    setRestDuration(restDuration + addedDuration);
+    setSecondsRemaining(secondsRemaining + addedDuration);
   };
 
   useEffect(() => {
@@ -34,6 +40,8 @@ const RestTimer = () => {
       } else {
         // time up; notify user?
         clearInterval(interval);
+        // TODO: investigate why there is a 1s "delay" in animation
+        setTimeout(onReset, 1000);
       }
     } else if (!isActive) {
       // stop counting
@@ -47,27 +55,60 @@ const RestTimer = () => {
   const seconds = duration.seconds() % 60;
   const progress = calculateProgress(secondsRemaining, restDuration);
 
+  const prevDuration = usePrevious(restDuration);
+  const animationDisabled = restDuration !== prevDuration;
+
   return (
     <div className='rest-timer'>
       <div className='rest-timer-header'>Rest timer</div>
-      <ProgressRing radius={140} strokeWidth={10} progress={progress}>
+      <ProgressRing
+        radius={140}
+        strokeWidth={10}
+        progress={progress}
+        animated={!animationDisabled && progress > 0}
+      >
         <div className='time-remaining'>
           <TimeDisplay minutes={minutes} seconds={seconds} />
         </div>
       </ProgressRing>
       <div className='rest-timer-footer'>
-        <button className='rest-timer-reset-btn' onClick={onReset}>
-          <span>Reset</span>
-        </button>
-        <button
-          className={classnames({
-            'rest-timer-toggle-btn': true,
-            isActive,
-          })}
-          onClick={onToggle}
-        >
-          <span>{isActive ? 'Pause' : progress ? 'Resume' : 'Start'}</span>
-        </button>
+        <div className='duration-btn-container'>
+          <button
+            className='add-duration-btn'
+            onClick={() => onAddDuration(10)}
+          >
+            <VscAdd />
+            <span>10 secs</span>
+          </button>
+          <button
+            className='add-duration-btn'
+            onClick={() => onAddDuration(30)}
+          >
+            <VscAdd />
+            <span>30 secs</span>
+          </button>
+          <button
+            className='add-duration-btn'
+            onClick={() => onAddDuration(60)}
+          >
+            <VscAdd />
+            <span>1 min</span>
+          </button>
+        </div>
+        <div className='control-btn-container'>
+          <button className='reset-btn' onClick={onReset}>
+            <span>Reset</span>
+          </button>
+          <button
+            className={classnames({
+              'toggle-btn': true,
+              isActive,
+            })}
+            onClick={() => setIsActive(!isActive)}
+          >
+            <span>{isActive ? 'Pause' : progress ? 'Resume' : 'Start'}</span>
+          </button>
+        </div>
       </div>
     </div>
   );

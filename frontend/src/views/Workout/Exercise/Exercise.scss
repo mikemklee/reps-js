@@ -13,10 +13,9 @@
   }
 
   .add-set-btn {
-    @include secondaryButtonStyles;
+    @include tertiaryButtonStyles;
     @include flexCenterHorizontally;
     padding-left: 0;
-    border-color: transparent;
     transition: all 0.1s;
     &:hover {
       color: white;

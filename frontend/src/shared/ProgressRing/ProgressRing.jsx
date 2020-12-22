@@ -8,6 +8,7 @@ const ProgressRing = ({
   strokeWidth = 2,
   progress = 0,
   reverse = true,
+  animated = false,
   children,
 }) => {
   const strokeThickness = strokeWidth * 2;
@@ -36,7 +37,7 @@ const ProgressRing = ({
         <circle
           className={classnames({
             'animated-ring': true,
-            animated: progress > 0,
+            animated,
             reverse,
           })}
           strokeWidth={strokeWidth * 1.1}
