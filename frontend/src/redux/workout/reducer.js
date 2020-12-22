@@ -1,6 +1,7 @@
 import types from './types';
 
 export const initialState = {
+  workoutLogs: [],
   status: {
     saveWorkoutPending: false,
     saveWorkoutSuccess: false,
@@ -23,6 +24,7 @@ export default (state = initialState, { type, payload }) => {
       const { workout } = payload;
       return {
         ...state,
+        workoutLogs: [...state.workoutLogs, workout],
         status: {
           ...state.status,
           saveWorkoutPending: false,

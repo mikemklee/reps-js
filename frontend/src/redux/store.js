@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 
 import reducers from './reducers';
+import { sagas, runSagas } from './sagas';
 
 const loggerOptions = {
   collapsed: true,
@@ -19,8 +20,10 @@ const logger = createLogger(loggerOptions);
 // } else {
 //   // don't use redux devtools or redux logger for production
 // }
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(sagas, logger);
 
 const store = createStore(reducers, middleware);
+
+runSagas();
 
 export default store;
