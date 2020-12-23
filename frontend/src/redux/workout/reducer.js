@@ -21,10 +21,10 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     case types.SAVE_WORKOUT_SUCCESS: {
-      const { workout } = payload;
+      const { savedWorkout } = payload;
       return {
         ...state,
-        workoutLogs: [...state.workoutLogs, workout],
+        workoutLogs: [...state.workoutLogs, savedWorkout],
         status: {
           ...state.status,
           saveWorkoutPending: false,

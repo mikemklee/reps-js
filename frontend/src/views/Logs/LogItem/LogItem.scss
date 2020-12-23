@@ -1,0 +1,34 @@
+@import '../../../styles/common';
+
+.logs-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid rgba($light-grey, 0.2);
+  border-radius: 4px;
+
+  &-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: $off-white;
+  }
+
+  &-completedAt,
+  &-duration,
+  &-volume {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &-exercises {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+}

@@ -88,6 +88,7 @@ const Workout = () => {
 
   const onCompleteWorkout = () => {
     const formattedData = Workout.formatWorkoutData({
+      name: 'New blank workout',
       setsByExercise,
       timeElapsed: counter,
       completedAt: new Date().toISOString(),

@@ -1,0 +1,17 @@
+.log-item-exercise {
+  margin-top: 0.5rem;
+
+  &-sets {
+    display: flex;
+    flex-direction: column;
+
+    &-item {
+      display: flex;
+      padding: 0.5rem 0;
+      .set-number,
+      .set-reps {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
