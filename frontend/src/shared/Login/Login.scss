@@ -1,0 +1,48 @@
+@import '../../styles/common';
+
+.login-panel {
+  align-self: center;
+  width: 20rem;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background: $off-black;
+  border-radius: 4px;
+  @include boxShadows;
+
+  .site-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: $off-white;
+  }
+
+  div.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      padding: 0 0.5rem;
+      font-size: 1rem;
+      min-height: 2rem;
+      color: $light-grey;
+      background: $medium-grey;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+
+  button.submit {
+    @include primaryButtonStyles;
+  }
+}

@@ -4,7 +4,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import './Router.scss';
 
 // shared components
-// import Login from '../shared/Login/Login';
+import Login from '../shared/Login/Login';
 import Sidebar from '../shared/Sidebar/Sidebar';
 
 // views
@@ -13,6 +13,7 @@ import Logs from '../views/Logs/Logs';
 import Routines from '../views/Routines/Routines';
 import Exercises from '../views/Exercises/Exercises';
 import Workout from '../views/Workout/Workout';
+import { connect } from 'react-redux';
 
 class RouterApp extends React.Component {
   renderProtectedRoute(path, component, exact = true) {
@@ -25,7 +26,7 @@ class RouterApp extends React.Component {
           this.props.isAuthenticated ? (
             <OriginalComponent {...props} />
           ) : (
-            <OriginalComponent {...props} />
+            <Login {...props} />
           )
         }
       />
@@ -36,7 +37,7 @@ class RouterApp extends React.Component {
     return (
       <Router>
         <div className='router'>
-          <Sidebar />
+          {this.props.isAuthenticated ? <Sidebar /> : null}
           <div className='route'>
             <Switch>
               {this.renderProtectedRoute('/workout', Workout)}
@@ -52,4 +53,8 @@ class RouterApp extends React.Component {
   }
 }
 
-export default RouterApp;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, null)(RouterApp);
