@@ -1,5 +1,5 @@
 import { generateToken } from '../utils/auth.js';
-import User from '../../../ecom/backend/models/User.js';
+import User from '../../../reps/backend/models/User.js';
 
 // @desc    Fetch all users
 // @route   GET /api/users
@@ -12,7 +12,7 @@ const getUsers = async (req, res) => {
 // @desc    Authenticate user and get token
 // @route   POST /api/users/login
 const authUser = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
 
