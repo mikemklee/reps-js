@@ -45,6 +45,11 @@
           margin-left: 0.5rem;
         }
 
+        .finish-workout-btn.disabled {
+          @include disabledButtonStyles;
+          margin-left: 0.5rem;
+        }
+
         .cancel-workout-btn {
           @include warningButtonStyles;
         }

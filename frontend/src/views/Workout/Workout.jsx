@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import _ from 'lodash';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { VscAdd } from 'react-icons/vsc';
 import { FaStopwatch } from 'react-icons/fa';
+import classnames from 'classnames';
+import _ from 'lodash';
 
 import './Workout.scss';
 
@@ -110,6 +111,17 @@ const Workout = () => {
     dispatch(WorkoutActions.saveWorkoutRequest(formattedData));
   };
 
+  const anySetCompleted = useCallback(() => {
+    return _.reduce(
+      setsByExercise,
+      (acc, sets) => {
+        acc = _.some(sets, (set) => set.completed);
+        return acc;
+      },
+      false
+    );
+  }, [setsByExercise]);
+
   return (
     <div className='workout-view'>
       <div className='view-header'>Workout</div>
@@ -134,7 +146,13 @@ const Workout = () => {
             >
               <span>Cancel</span>
             </button>
-            <button className='finish-workout-btn' onClick={onCompleteWorkout}>
+            <button
+              className={classnames({
+                'finish-workout-btn': true,
+                disabled: !anySetCompleted(),
+              })}
+              onClick={onCompleteWorkout}
+            >
               <span>Complete</span>
             </button>
           </div>
