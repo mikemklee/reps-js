@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import _ from 'lodash';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { VscAdd } from 'react-icons/vsc';
 import { FaStopwatch } from 'react-icons/fa';
 
@@ -17,6 +17,8 @@ import Confirmation from '../../shared/Confirmation/Confirmation';
 
 import WorkoutActions from '../../redux/workout/actions';
 
+import usePrevious from '../../hooks/usePrevious';
+
 const Workout = () => {
   const [counter, setCounter] = useState(0);
   const [exercises, setExercises] = useState([]);
@@ -26,8 +28,19 @@ const Workout = () => {
   const cancelWorkoutModalRef = useRef(null);
   const restTimerModalRef = useRef(null);
 
+  const { status } = useSelector((state) => state.workout);
+
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const prevStatus = usePrevious(status);
+  useEffect(() => {
+    if (prevStatus && status) {
+      if (!prevStatus.saveWorkoutSuccess && status.saveWorkoutSuccess) {
+        history.push('/logs');
+      }
+    }
+  }, [status, prevStatus]);
 
   const onAddExercise = (exercise) => {
     setExercises([...exercises, exercise]);
