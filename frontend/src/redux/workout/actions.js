@@ -1,6 +1,12 @@
 import types from './types';
 
 const actions = {
+  resetWorkoutProgress: () => {
+    return {
+      type: types.RESET_WORKOUT_PROGRESS,
+      payload: {},
+    };
+  },
   saveWorkoutRequest: (workoutData) => {
     return {
       type: types.SAVE_WORKOUT_REQUEST,

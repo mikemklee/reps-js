@@ -30,11 +30,15 @@ const Workout = () => {
   const restTimerModalRef = useRef(null);
 
   const { status } = useSelector((state) => state.workout);
+  const prevStatus = usePrevious(status);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const prevStatus = usePrevious(status);
+  useEffect(() => {
+    dispatch(WorkoutActions.resetWorkoutProgress());
+  }, []);
+
   useEffect(() => {
     if (prevStatus && status) {
       if (!prevStatus.saveWorkoutSuccess && status.saveWorkoutSuccess) {

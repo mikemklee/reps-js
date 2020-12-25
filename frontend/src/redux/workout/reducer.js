@@ -10,6 +10,16 @@ export const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case types.RESET_WORKOUT_PROGRESS: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          saveWorkoutPending: false,
+          saveWorkoutSuccess: false,
+        },
+      };
+    }
     case types.SAVE_WORKOUT_REQUEST: {
       return {
         ...state,
