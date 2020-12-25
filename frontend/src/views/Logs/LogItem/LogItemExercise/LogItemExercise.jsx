@@ -3,10 +3,14 @@ import _ from 'lodash';
 
 import './LogItemExercise.scss';
 
+import ExercisePresets from '../../../Exercises/Exercises.metadata';
+
 const LogItemExercise = ({ exerciseId, sets }) => {
+  const exerciseData = ExercisePresets.find((item) => item.id === exerciseId);
+
   return (
     <div className='log-item-exercise'>
-      Exercise: {exerciseId}
+      <div className='log-item-exercise-name'>{exerciseData.name}</div>
       <div className='log-item-exercise-sets'>
         {_.map(sets, (set, index) => (
           <div key={index} className='log-item-exercise-sets-item'>

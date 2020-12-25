@@ -1,5 +1,11 @@
+@import '../../../../styles/common';
+
 .log-item-exercise {
   margin-top: 0.5rem;
+
+  &-name {
+    color: $off-white;
+  }
 
   &-sets {
     display: flex;

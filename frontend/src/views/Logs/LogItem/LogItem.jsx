@@ -33,14 +33,16 @@ const LogItem = ({ item }) => {
   return (
     <div className='logs-item'>
       <div className='logs-item-name'>{item.name}</div>
-      <div className='logs-item-completedAt'>{formattedCompletedAt}</div>
-      <div className='logs-item-duration'>
-        <BiTimeFive />
-        <span>{formattedDuration} minutes</span>
-      </div>
-      <div className='logs-item-volume'>
-        <FaWeightHanging />
-        <span>{totalVolume} kg</span>
+      <div className='logs-item-meta'>
+        <div className='logs-item-meta-completedAt'>{formattedCompletedAt}</div>
+        <div className='logs-item-meta-duration'>
+          <BiTimeFive />
+          <span>{formattedDuration} minutes</span>
+        </div>
+        <div className='logs-item-meta-volume'>
+          <FaWeightHanging />
+          <span>{totalVolume} kg</span>
+        </div>
       </div>
       <div className='logs-item-exercises'>
         {_.map(item.setsByExercise, (sets, exerciseId) => (
