@@ -5,6 +5,7 @@ import path from 'path';
 
 import connectDB from './config/db.js';
 import userRoutes from './routes/users.js';
+import workoutRoutes from './routes/workouts.js';
 import { errorHandler, notFound } from './middleware/errors.js';
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/api/users', userRoutes);
+app.use('/api/workouts', workoutRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
