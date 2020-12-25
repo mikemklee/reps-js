@@ -202,9 +202,11 @@ const Workout = () => {
 Workout.formatWorkoutData = (rawData) => {
   const sanitizedSetsData = {};
   _.forEach(rawData.setsByExercise, (sets, exerciseId) => {
-    sanitizedSetsData[exerciseId] = _.map(sets, (set) =>
-      _.pick(set, ['id', 'kg', 'reps', 'completed'])
+    const completedSets = _.filter(sets, (set) => set.completed);
+    const sanitizedSets = _.map(completedSets, (set) =>
+      _.pick(set, ['id', 'kg', 'reps'])
     );
+    sanitizedSetsData[exerciseId] = sanitizedSets;
   });
 
   const formatted = {
