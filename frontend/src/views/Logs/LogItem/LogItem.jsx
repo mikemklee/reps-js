@@ -15,10 +15,10 @@ const LogItem = ({ item }) => {
     .duration(item.timeElapsed, 'seconds')
     .minutes();
   const totalVolume = _.reduce(
-    item.setsByExercise,
-    (exerciseVolume, sets) => {
+    item.exercises,
+    (exerciseVolume, exercise) => {
       exerciseVolume += _.reduce(
-        sets,
+        exercise.sets,
         (setVolume, set) => {
           setVolume += set.kg * set.reps;
           return setVolume;
@@ -45,12 +45,8 @@ const LogItem = ({ item }) => {
         </div>
       </div>
       <div className='logs-item-exercises'>
-        {_.map(item.setsByExercise, (sets, exerciseId) => (
-          <LogItemExercise
-            key={exerciseId}
-            exerciseId={exerciseId}
-            sets={sets}
-          />
+        {_.map(item.exercises, (exercise) => (
+          <LogItemExercise key={exercise.exerciseId} exercise={exercise} />
         ))}
       </div>
     </div>
