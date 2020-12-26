@@ -1,5 +1,5 @@
 const { generateToken } = require('../utils/auth');
-const User = require('../../../reps/backend/models/User');
+const User = require('../models/User');
 
 // @desc    Fetch all users
 // @route   GET /api/users
@@ -31,17 +31,14 @@ const authUser = async (req, res) => {
         },
       });
       return;
-    } else {
-      res.status(401).json({
-        message: 'Password is invalid',
-      });
-      return;
     }
+    res.status(401).json({
+      message: 'Password is invalid',
+    });
   } else {
     res.status(404).json({
       message: 'User with the provided email not found',
     });
-    return;
   }
 };
 
@@ -74,12 +71,10 @@ const registerUser = async (req, res) => {
         token: generateToken(user._id),
       },
     });
-    return;
   } else {
     res.status(400).json({
       message: 'Could not create user. Provided user data is invalid.',
     });
-    return;
   }
 };
 

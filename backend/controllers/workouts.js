@@ -16,7 +16,6 @@ const saveWorkout = async (req, res) => {
   res.status(400).json({
     message: 'Not yet!',
   });
-  return;
 };
 
 module.exports = { getWorkoutLogs, saveWorkout };
