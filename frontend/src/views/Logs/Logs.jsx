@@ -1,12 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './Logs.scss';
 
 import LogItem from './LogItem/LogItem';
 
+import WorkoutActions from '../../redux/workout/actions';
+
 const Logs = () => {
+  const dispatch = useDispatch();
   const { workoutLogs } = useSelector((state) => state.workout);
+
+  useEffect(() => {
+    dispatch(WorkoutActions.getWorkoutLogsRequest());
+  }, []);
 
   return (
     <div className='logs-view'>

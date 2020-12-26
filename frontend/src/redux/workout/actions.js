@@ -31,6 +31,28 @@ const actions = {
       },
     };
   },
+  getWorkoutLogsRequest: () => {
+    return {
+      type: types.GET_WORKOUT_LOGS_REQUEST,
+      payload: {},
+    };
+  },
+  getWorkoutLogsSuccess: (workoutLogs) => {
+    return {
+      type: types.GET_WORKOUT_LOGS_SUCCESS,
+      payload: {
+        workoutLogs,
+      },
+    };
+  },
+  getWorkoutLogsFailure: (error) => {
+    return {
+      type: types.GET_WORKOUT_LOGS_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
 };
 
 export default actions;
