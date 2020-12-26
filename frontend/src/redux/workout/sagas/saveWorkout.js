@@ -1,15 +1,28 @@
 import 'regenerator-runtime/runtime';
-import { put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
+import axios from 'axios';
 
 import actions from '../actions';
 
 export default function* saveWorkout(action) {
   try {
+    const { token } = yield select((state) => state.auth);
     const { workoutData } = action.payload;
 
-    // TODO: persist data in DB
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    };
 
-    yield put(actions.saveWorkoutSuccess(workoutData));
+    const body = {
+      workoutData,
+    };
+
+    const { data } = yield call(axios.put, '/api/workouts', body, config);
+
+    yield put(actions.saveWorkoutSuccess(data));
   } catch (e) {
     const formattedError = new Error('An unexpected error occured.');
     if (e.response) {

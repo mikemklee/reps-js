@@ -105,12 +105,11 @@ const Workout = () => {
   };
 
   const onCompleteWorkout = () => {
-    const formattedData = Workout.formatWorkoutData({
+    const formattedData = {
       name: 'New blank workout',
-      setsByExercise,
-      timeElapsed: counter,
-      completedAt: new Date().toISOString(),
-    });
+      exercises: Workout.formatExercisesData(setsByExercise),
+      duration: counter,
+    };
 
     dispatch(WorkoutActions.saveWorkoutRequest(formattedData));
   };
@@ -203,22 +202,14 @@ const Workout = () => {
   );
 };
 
-Workout.formatWorkoutData = (rawData) => {
-  const sanitizedSetsData = {};
-  _.forEach(rawData.setsByExercise, (sets, exerciseId) => {
-    const completedSets = _.filter(sets, (set) => set.completed);
-    const sanitizedSets = _.map(completedSets, (set) =>
-      _.pick(set, ['id', 'kg', 'reps'])
-    );
-    sanitizedSetsData[exerciseId] = sanitizedSets;
-  });
-
-  const formatted = {
-    ...rawData,
-    setsByExercise: sanitizedSetsData,
-  };
-
-  return formatted;
+Workout.formatExercisesData = (setsByExercise) => {
+  return _.map(setsByExercise, (sets, exerciseId) => ({
+    exerciseId,
+    sets: _.map(sets, (set) => ({
+      kg: parseInt(set.kg, 10),
+      reps: parseInt(set.reps, 10),
+    })),
+  }));
 };
 
 export default Workout;
