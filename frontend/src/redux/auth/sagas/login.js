@@ -21,6 +21,8 @@ export default function* login(action) {
     const { data } = yield call(axios.post, '/api/users/login', body, config);
 
     yield put(actions.loginSuccess(data.user));
+
+    localStorage.setItem('reps_userInfo', JSON.stringify(data.user));
   } catch (e) {
     const formattedError = new Error('An unexpected error occured.');
     if (e.response) {

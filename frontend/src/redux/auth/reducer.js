@@ -6,6 +6,7 @@ export const initialState = {
   userEmail: '',
   isAuthenticated: false,
   isAdmin: false,
+  token: null,
   status: {
     loginPending: false,
     loginSucces: false,
@@ -35,8 +36,9 @@ export default (state = initialState, { type, payload }) => {
         userId: user._id,
         userName: user.name,
         userEmail: user.email,
-        isAuthenticated: true,
+        token: user.token,
         isAdmin: user.isAdmin,
+        isAuthenticated: true,
         status: {
           ...state.status,
           loginPending: false,
@@ -64,6 +66,7 @@ export default (state = initialState, { type, payload }) => {
         userId: '',
         userName: '',
         userEmail: '',
+        token: null,
         isAuthenticated: false,
         isAdmin: false,
         status: {
