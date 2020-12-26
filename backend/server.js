@@ -1,12 +1,12 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import colors from 'colors';
-import path from 'path';
+require('colors');
+const express = require('express');
+const dotenv = require('dotenv');
+const path = require('path');
 
-import connectDB from './config/db.js';
-import userRoutes from './routes/users.js';
-import workoutRoutes from './routes/workouts.js';
-import { errorHandler, notFound } from './middleware/errors.js';
+const connectDB = require('./config/db');
+const userRoutes = require('./routes/users');
+const workoutRoutes = require('./routes/workouts');
+const { errorHandler, notFound } = require('./middleware/errors');
 
 dotenv.config();
 connectDB();

@@ -1,5 +1,5 @@
-import { generateToken } from '../utils/auth.js';
-import User from '../../../reps/backend/models/User.js';
+const { generateToken } = require('../utils/auth');
+const User = require('../../../reps/backend/models/User');
 
 // @desc    Fetch all users
 // @route   GET /api/users
@@ -83,4 +83,4 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { getUsers, authUser, registerUser };
+module.exports = { getUsers, authUser, registerUser };

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const setSchema = mongoose.Schema({
   kg: { type: Number, required: true },
@@ -39,4 +39,4 @@ const workoutSchema = mongoose.Schema(
 
 const Workout = mongoose.model('Workout', workoutSchema);
 
-export default Workout;
+module.exports = Workout;

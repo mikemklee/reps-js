@@ -1,11 +1,11 @@
-import express from 'express';
+const express = require('express');
 
-import { getWorkoutLogs, saveWorkout } from '../controllers/workouts.js';
-import { protect } from '../middleware/auth.js';
+const { getWorkoutLogs, saveWorkout } = require('../controllers/workouts');
+const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 
 router.route('/').put(saveWorkout);
 router.route('/').get(protect, getWorkoutLogs);
 
-export default router;
+module.exports = router;

@@ -1,12 +1,12 @@
-import dotenv from 'dotenv';
-import colors from 'colors';
+require('colors');
+const dotenv = require('dotenv');
 
 // grant access to env vars
 dotenv.config();
 
-import { defineAdminUser } from './users.js';
-import User from '../models/User.js';
-import connectDB from '../config/db.js';
+const { defineAdminUser } = require('./users');
+const User = require('../models/User');
+const connectDB = require('../config/db');
 
 connectDB();
 

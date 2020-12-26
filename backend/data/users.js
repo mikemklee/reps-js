@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+const bcrypt = require('bcryptjs');
 
 const defineAdminUser = () => ({
   email: 'admin',
@@ -7,4 +7,4 @@ const defineAdminUser = () => ({
   isAdmin: true,
 });
 
-export { defineAdminUser };
+module.exports = { defineAdminUser };

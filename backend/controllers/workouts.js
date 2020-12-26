@@ -1,4 +1,4 @@
-import Workout from '../models/Workout.js';
+const Workout = require('../models/Workout');
 
 // @desc    Fetch all workout logs
 // @route   GET /api/workouts
@@ -19,4 +19,4 @@ const saveWorkout = async (req, res) => {
   return;
 };
 
-export { getWorkoutLogs, saveWorkout };
+module.exports = { getWorkoutLogs, saveWorkout };
