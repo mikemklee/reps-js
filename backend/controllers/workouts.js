@@ -11,11 +11,14 @@ const getWorkoutLogs = async (req, res) => {
 // @desc    Save a new workout session
 // @route   PUT /api/workouts/
 const saveWorkout = async (req, res) => {
-  console.log(req.body);
+  const { workoutData } = req.body;
 
-  res.status(400).json({
-    message: 'Not yet!',
-  });
+  // TODO: validate request body
+
+  const workout = new Workout(workoutData);
+  const savedWorkout = await workout.save();
+
+  res.status(201).json(savedWorkout);
 };
 
 module.exports = { getWorkoutLogs, saveWorkout };

@@ -5,7 +5,7 @@ const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.route('/').put(saveWorkout);
+router.route('/').put(protect, saveWorkout);
 router.route('/').get(protect, getWorkoutLogs);
 
 module.exports = router;
