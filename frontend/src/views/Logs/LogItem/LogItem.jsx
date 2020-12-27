@@ -8,7 +8,7 @@ import './LogItem.scss';
 import LogItemExercise from './LogItemExercise/LogItemExercise';
 
 const LogItem = ({ item }) => {
-  const formattedCompletedAt = moment(item.completedAt).format(
+  const formattedCompletedAt = moment(item.createdAt).format(
     'h:mm A dddd, d MMM YYYY'
   );
   const formattedDuration = moment
