@@ -1,8 +1,16 @@
 const mongoose = require('mongoose');
 
 const setSchema = mongoose.Schema({
-  kg: { type: Number, required: true },
-  reps: { type: Number, required: true },
+  kg: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
+  reps: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
 });
 
 const workoutSchema = mongoose.Schema(
