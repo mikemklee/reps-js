@@ -7,12 +7,29 @@
   width: 14rem;
   color: $off-white;
 
-  .site-logo {
-    padding: 1.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-style: italic;
-    cursor: pointer;
+  .siteLogo {
+    margin: 1.5rem;
+    display: flex;
+    align-items: flex-end;
+
+    &__name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-style: italic;
+      cursor: pointer;
+      position: relative;
+    }
+
+    &__badge {
+      margin-left: 0.5rem;
+      margin-bottom: 0.1rem;
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 0.1rem 0.3rem;
+      background-color: $light-blue;
+      display: inline-block;
+      border-radius: 4px;
+    }
   }
 
   .link-button-container {
