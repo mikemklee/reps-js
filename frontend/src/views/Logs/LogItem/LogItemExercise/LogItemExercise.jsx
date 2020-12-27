@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import './LogItemExercise.scss';
 
-import ExercisePresets from '../../../Exercises/Exercises.metadata';
+import ExerciseActions from '../../../../redux/exercise/actions';
 
 const LogItemExercise = ({ exercise }) => {
-  const exerciseData = ExercisePresets.find(
-    (item) => item.id === exercise.exerciseId
-  );
+  const dispatch = useDispatch();
+  const { presets } = useSelector((state) => state.exercise);
+
+  useEffect(() => {
+    dispatch(ExerciseActions.getPresetsRequest());
+  }, []);
+
+  const exerciseData = presets.find((item) => item._id === exercise.presetId);
 
   return (
     <div className='log-item-exercise'>
-      <div className='log-item-exercise-name'>{exerciseData.name}</div>
+      <div className='log-item-exercise-name'>
+        {exerciseData ? exerciseData.name : ''}
+      </div>
       <div className='log-item-exercise-sets'>
         {_.map(exercise.sets, (set, index) => (
           <div key={index} className='log-item-exercise-sets-item'>

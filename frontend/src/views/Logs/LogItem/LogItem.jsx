@@ -46,7 +46,7 @@ const LogItem = ({ item }) => {
       </div>
       <div className='logs-item-exercises'>
         {_.map(item.exercises, (exercise) => (
-          <LogItemExercise key={exercise.exerciseId} exercise={exercise} />
+          <LogItemExercise key={exercise.presetId} exercise={exercise} />
         ))}
       </div>
     </div>

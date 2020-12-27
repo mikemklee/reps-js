@@ -55,10 +55,10 @@ const Workout = () => {
 
   const onAddSet = (exercise) => {
     setExerciseSets((prev) => {
-      const existingSets = prev[exercise.id] || [];
+      const existingSets = prev[exercise._id] || [];
       return {
         ...setsByExercise,
-        [exercise.id]: [
+        [exercise._id]: [
           ...existingSets,
           {
             id: existingSets.length + 1,
@@ -75,10 +75,10 @@ const Workout = () => {
 
   const onEditSet = (exercise, rowIndex, columnId, value) => {
     setExerciseSets((prev) => {
-      const existingSets = prev[exercise.id];
+      const existingSets = prev[exercise._id];
       return {
         ...prev,
-        [exercise.id]: existingSets.map((row, index) => {
+        [exercise._id]: existingSets.map((row, index) => {
           if (index === rowIndex) {
             return {
               ...existingSets[rowIndex],
@@ -93,10 +93,10 @@ const Workout = () => {
 
   const onRemoveSet = (exercise, rowIndex) => {
     setExerciseSets((prev) => {
-      const existingSets = prev[exercise.id];
+      const existingSets = prev[exercise._id];
       return {
         ...prev,
-        [exercise.id]: _.filter(
+        [exercise._id]: _.filter(
           existingSets,
           (_item, index) => index !== rowIndex
         ),
@@ -162,9 +162,9 @@ const Workout = () => {
         </div>
         {exercises.map((exercise) => (
           <Exercise
-            key={exercise.id}
+            key={exercise._id}
             exercise={exercise}
-            sets={setsByExercise[exercise.id] || []}
+            sets={setsByExercise[exercise._id] || []}
             onAddSet={onAddSet}
             onEditSet={onEditSet}
             onRemoveSet={onRemoveSet}
@@ -203,8 +203,8 @@ const Workout = () => {
 };
 
 Workout.formatExercisesData = (setsByExercise) => {
-  return _.map(setsByExercise, (sets, exerciseId) => ({
-    exerciseId,
+  return _.map(setsByExercise, (sets, presetId) => ({
+    presetId,
     sets: _.map(sets, (set) => ({
       kg: parseInt(set.kg, 10),
       reps: parseInt(set.reps, 10),

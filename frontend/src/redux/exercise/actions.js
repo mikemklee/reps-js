@@ -1,20 +1,17 @@
 import types from './types';
 
 const actions = {
-  getPresetsRequest: (email, password) => {
+  getPresetsRequest: () => {
     return {
       type: types.GET_PRESETS_REQUEST,
-      payload: {
-        email,
-        password,
-      },
+      payload: {},
     };
   },
-  getPresetsSuccess: (user) => {
+  getPresetsSuccess: (presets) => {
     return {
       type: types.GET_PRESETS_SUCCESS,
       payload: {
-        user,
+        presets,
       },
     };
   },
