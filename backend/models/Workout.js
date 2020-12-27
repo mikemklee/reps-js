@@ -23,14 +23,10 @@ const workoutSchema = mongoose.Schema(
     },
     exercises: [
       {
-        // exerciseId: {
-        //   type: mongoose.Schema.Types.ObjectId,
-        //   required: true,
-        //   ref: 'Exercise',
-        // },
-        exerciseId: {
-          type: String,
+        presetId: {
+          type: mongoose.Schema.Types.ObjectId,
           required: true,
+          ref: 'ExercisePreset',
         },
         sets: [setSchema],
       },
