@@ -5,7 +5,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const { defineAdminUser } = require('./users');
+const { defineExercisePresets } = require('./exercisePresets');
 const User = require('../models/User');
+const ExercisePreset = require('../models/ExercisePreset');
 const connectDB = require('../config/db');
 
 connectDB();
@@ -23,10 +25,23 @@ const importData = async () => {
     // insert all users in DB
     const createdUsers = await User.insertMany(allUsers);
 
+    // create exercise presets
+    const exercisePresets = defineExercisePresets();
+    // insert all exercise presets in DB
+    const createdExercisePresets = await ExercisePreset.insertMany(
+      exercisePresets
+    );
+
     console.log('Data imported!'.green.inverse);
     console.log(
       `Created ${createdUsers.length} new user(s) in the DB`.green.inverse
     );
+
+    console.log(
+      `Created ${createdExercisePresets.length} new exercise preset(s) in the DB`
+        .green.inverse
+    );
+
     process.exit();
   } catch (err) {
     console.error(`${err}`.red.inverse);
@@ -37,8 +52,12 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     await User.deleteMany();
+    await ExercisePreset.deleteMany();
     console.log('Data destroyed!'.red.inverse);
     console.log('All user data have been deleted from the DB'.red.inverse);
+    console.log(
+      'All exercise preset data have been deleted from the DB'.red.inverse
+    );
     process.exit();
   } catch (err) {
     console.error(`${err}`.red.inverse);
