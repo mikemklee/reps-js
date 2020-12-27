@@ -16,7 +16,9 @@ const Sidebar = () => {
 
   return (
     <div className='sidebar'>
-      <div className='site-logo'>REPS</div>
+      <div className='site-logo' onClick={() => handleClick('/')}>
+        REPS
+      </div>
 
       <div className='link-button-container'>
         <button
