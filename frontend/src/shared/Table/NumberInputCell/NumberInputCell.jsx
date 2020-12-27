@@ -12,7 +12,12 @@ const NumberInputCell = ({
   const [value, setValue] = useState(initialValue);
 
   const onChange = (e) => {
-    setValue(e.target.value);
+    const regex = /^[0-9\b]+$/;
+    const value = e.target.value;
+    if (value === '' || regex.test(value)) {
+      const formatted = value ? parseInt(value, 10) : 0;
+      setValue(formatted);
+    }
   };
 
   // We'll only update the external data when the input is blurred
@@ -28,7 +33,6 @@ const NumberInputCell = ({
   return (
     <input
       className='number-input-cell'
-      type='number'
       value={value}
       onChange={onChange}
       onBlur={onBlur}
