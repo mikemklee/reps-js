@@ -13,45 +13,8 @@
 
     .routines {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       grid-gap: 1rem;
-
-      .card {
-        @include boxShadows;
-        background: $off-black;
-        padding: 1rem;
-        height: 8rem;
-        border-radius: 10px;
-        cursor: pointer;
-        border: 1px solid transparent;
-        transition: all 0.3s;
-        display: flex;
-        flex-direction: column;
-
-        &__title {
-          font-size: 1.1rem;
-          font-weight: 600;
-          cursor: inherit;
-          flex: 1;
-          transition: color 0.3s;
-        }
-
-        &__exerciseList {
-        }
-
-        &__exerciseItem {
-          margin-top: 0.2rem;
-          font-size: 0.9rem;
-        }
-
-        &:hover {
-          border-color: $off-black;
-
-          .card__title {
-            color: $off-white;
-          }
-        }
-      }
     }
   }
 }

@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './Routines.scss';
 
+import RoutineCard from './RoutineCard/RoutineCard';
+
+import LoadingSpinner from '../../shared/LoadingSpinner/LoadingSpinner';
+
 import ExerciseActions from '../../redux/exercise/actions';
 import RoutineActions from '../../redux/routine/actions';
 
@@ -28,28 +32,15 @@ const Routines = () => {
       <div className='view-header'>Routines</div>
       <div className='view-content'>
         {loading ? (
-          'loading'
+          <LoadingSpinner />
         ) : (
           <div className='routines'>
             {routinePresets.map((item) => (
-              <div key={item._id} className='card'>
-                <div className='card__title'>{item.name}</div>
-                <div className='card__exerciseList'>
-                  {item.exercises.map((exercise) => {
-                    const exerciseData = exercisePresets.find(
-                      (item) => item._id === exercise.presetId
-                    );
-                    return (
-                      <div
-                        key={exercise.presetId}
-                        className='card__exerciseItem'
-                      >
-                        {exerciseData.name}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              <RoutineCard
+                key={item._id}
+                routine={item}
+                exercisePresets={exercisePresets}
+              />
             ))}
           </div>
         )}
