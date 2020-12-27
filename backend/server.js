@@ -6,6 +6,7 @@ const path = require('path');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/users');
 const workoutRoutes = require('./routes/workouts');
+const exerciseRoutes = require('./routes/exercises');
 const { errorHandler, notFound } = require('./middleware/errors');
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use(express.json());
 
 app.use('/api/users', userRoutes);
 app.use('/api/workouts', workoutRoutes);
+app.use('/api/exercises', exerciseRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
