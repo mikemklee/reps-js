@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import classnames from 'classnames';
-import { FiCheck } from 'react-icons/fi';
 
 import './AddExercise.scss';
+
+import ExerciseCardList from '../ExerciseCardList/ExerciseCardList';
 
 import ExerciseActions from '../../redux/exercise/actions';
 
@@ -19,36 +19,11 @@ const AddExercise = ({ exercises, onAddExercise }) => {
   return (
     <div className='add-exercise'>
       <div className='add-exercise-header'>Add exercise</div>
-      <div className='exercise-list'>
-        {presets.map((item) => (
-          <div
-            key={item._id}
-            className={classnames({
-              exercise: true,
-              selected: selectedExerciseIds.includes(item._id),
-            })}
-            onClick={() => onAddExercise(item)}
-          >
-            <div className='exercise-image'></div>
-            <div className='exercise-meta'>
-              <div className='exercise-meta-title'>{item.name}</div>
-              <div className='exercise-meta-bodypart'>
-                <span>Targets</span>
-                {item.bodyPart}
-              </div>
-              <div className='exercise-meta-category'>
-                <span>Category</span>
-                {item.category}
-              </div>
-            </div>
-            {selectedExerciseIds.includes(item._id) ? (
-              <div className='selected-icon'>
-                <FiCheck />
-              </div>
-            ) : null}
-          </div>
-        ))}
-      </div>
+      <ExerciseCardList
+        presets={presets}
+        selectedIds={selectedExerciseIds}
+        onSelectItem={onAddExercise}
+      />
     </div>
   );
 };
