@@ -13,7 +13,10 @@ const QuickActions = () => {
     <div className='quick-actions'>
       <label className='section-title'>Quick actions</label>
       <div className='action-card-container'>
-        <div className='action-card' onClick={() => history.push('/workout')}>
+        <div
+          className='action-card'
+          onClick={() => history.push('/workout/new')}
+        >
           <label className='action-card-title'>Start a blank workout</label>
           <GiWeightLiftingUp className='action-card-icon' />
         </div>

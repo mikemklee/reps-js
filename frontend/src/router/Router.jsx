@@ -47,10 +47,10 @@ class RouterApp extends React.Component {
           {this.props.isAuthenticated ? <Sidebar /> : null}
           <div className='route'>
             <Switch>
-              {this.renderProtectedRoute('/workout', Workout)}
-              {this.renderProtectedRoute('/logs', Logs)}
+              {this.renderProtectedRoute('/workout/:routineId', Workout)}
               {this.renderProtectedRoute('/routines', Routines)}
               {this.renderProtectedRoute('/exercises', Exercises)}
+              {this.renderProtectedRoute('/logs', Logs)}
               {this.renderProtectedRoute('/', Main, false)}
             </Switch>
           </div>
