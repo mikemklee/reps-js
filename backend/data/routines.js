@@ -8,6 +8,9 @@ const defineRoutinePresets = (createdExercisePresets) => {
   const DEADLIFT_DUMBBELL_ID = createdExercisePresets.find(
     (item) => item.name === 'Deadlift (Dumbbell)'
   )._id;
+  const SQUAT_DUMBBELL_ID = createdExercisePresets.find(
+    (item) => item.name === 'Squat (Dumbbell)'
+  )._id;
 
   return [
     {
@@ -28,6 +31,15 @@ const defineRoutinePresets = (createdExercisePresets) => {
       exercises: [
         {
           presetId: DEADLIFT_DUMBBELL_ID,
+          numSets: 5,
+        },
+      ],
+    },
+    {
+      name: 'Leg day',
+      exercises: [
+        {
+          presetId: SQUAT_DUMBBELL_ID,
           numSets: 5,
         },
       ],
