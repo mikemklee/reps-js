@@ -2,9 +2,12 @@ import types from './types';
 
 export const initialState = {
   presets: [],
+  names: {},
   status: {
     getPresetsPending: false,
     getPresetsSuccess: false,
+    getNamesPending: false,
+    getNamesSuccess: false,
   },
 };
 
@@ -39,6 +42,38 @@ export default (state = initialState, { type, payload }) => {
           ...state.status,
           getPresetsPending: false,
           getPresetsSuccess: false,
+        },
+      };
+    }
+    case types.GET_NAMES_REQUEST: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          getNamesPending: true,
+          getNamesSuccess: false,
+        },
+      };
+    }
+    case types.GET_NAMES_SUCCESS: {
+      const { names } = payload;
+      return {
+        ...state,
+        names,
+        status: {
+          ...state.status,
+          getNamesPending: false,
+          getNamesSuccess: true,
+        },
+      };
+    }
+    case types.GET_NAMES_FAILURE: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          getNamesPending: false,
+          getNamesSuccess: false,
         },
       };
     }

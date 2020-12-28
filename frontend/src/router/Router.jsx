@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './Router.scss';
 
@@ -13,9 +14,15 @@ import Logs from '../views/Logs/Logs';
 import Routines from '../views/Routines/Routines';
 import Exercises from '../views/Exercises/Exercises';
 import Workout from '../views/Workout/Workout';
-import { connect } from 'react-redux';
 
+import ExerciseActions from '../redux/exercise/actions';
 class RouterApp extends React.Component {
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.getExerciseNames();
+    }
+  }
+
   renderProtectedRoute(path, component, exact = true) {
     const OriginalComponent = component;
     return (
@@ -57,4 +64,8 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, null)(RouterApp);
+const mapDispatchToProps = (dispatch) => ({
+  getExerciseNames: () => dispatch(ExerciseActions.getNamesRequest()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RouterApp);

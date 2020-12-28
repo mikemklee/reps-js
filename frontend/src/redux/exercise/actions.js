@@ -23,6 +23,28 @@ const actions = {
       },
     };
   },
+  getNamesRequest: () => {
+    return {
+      type: types.GET_NAMES_REQUEST,
+      payload: {},
+    };
+  },
+  getNamesSuccess: (names) => {
+    return {
+      type: types.GET_NAMES_SUCCESS,
+      payload: {
+        names,
+      },
+    };
+  },
+  getNamesFailure: (error) => {
+    return {
+      type: types.GET_NAMES_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
 };
 
 export default actions;
