@@ -1,26 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
 import './AddExercise.scss';
 
 import ExerciseCardList from '../ExerciseCardList/ExerciseCardList';
 
-import ExerciseActions from '../../redux/exercise/actions';
-
-const AddExercise = ({ exercises, onAddExercise }) => {
-  const dispatch = useDispatch();
-  const { presets } = useSelector((state) => state.exercise);
-
-  useEffect(() => {
-    dispatch(ExerciseActions.getPresetsRequest());
-  }, []);
-
-  const selectedExerciseIds = exercises.map((item) => item._id);
+const AddExercise = ({ exercisePresets, selectedExercises, onAddExercise }) => {
+  const selectedExerciseIds = selectedExercises.map((item) => item._id);
   return (
     <div className='add-exercise'>
       <div className='add-exercise-header'>Add exercise</div>
       <ExerciseCardList
-        presets={presets}
+        presets={exercisePresets}
         selectedIds={selectedExerciseIds}
         onSelectItem={onAddExercise}
       />

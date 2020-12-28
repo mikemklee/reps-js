@@ -70,8 +70,7 @@ const Workout = () => {
   const populateExerciseSections = () => {
     if (routineId) {
       if (routineId === 'new') {
-        // blank workout; no-op
-        // update workout title
+        // blank workout; just update workout title
         setTitle('New blank workout');
       } else {
         // routine workout; populate exercises with routine data
@@ -232,7 +231,11 @@ const Workout = () => {
         </button>
       </div>
       <Modal ref={addExerciseModalRef}>
-        <AddExercise exercises={exercises} onAddExercise={onAddExercise} />
+        <AddExercise
+          exercisePresets={exercisePresets}
+          selectedExercises={exercises}
+          onAddExercise={onAddExercise}
+        />
       </Modal>
       <Modal ref={cancelWorkoutModalRef}>
         <Confirmation
