@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { VscAdd } from 'react-icons/vsc';
 import { FaStopwatch } from 'react-icons/fa';
 import classnames from 'classnames';
@@ -17,10 +17,12 @@ import AddExercise from '../../shared/AddExercise/AddExercise';
 import Confirmation from '../../shared/Confirmation/Confirmation';
 
 import WorkoutActions from '../../redux/workout/actions';
+import ExerciseActions from '../../redux/exercise/actions';
 
 import usePrevious from '../../hooks/usePrevious';
 
 const Workout = () => {
+  const [title, setTitle] = useState('');
   const [counter, setCounter] = useState(0);
   const [exercises, setExercises] = useState([]);
   const [setsByExercise, setExerciseSets] = useState({});
@@ -29,27 +31,78 @@ const Workout = () => {
   const cancelWorkoutModalRef = useRef(null);
   const restTimerModalRef = useRef(null);
 
-  const { status } = useSelector((state) => state.workout);
-  const prevStatus = usePrevious(status);
+  const { status: workoutStatus } = useSelector((state) => state.workout);
+  const { presets: routinePresets } = useSelector((state) => state.routine);
+  const { presets: exercisePresets, status: exerciseStatus } = useSelector(
+    (state) => state.exercise
+  );
+  const prevWorkoutStatus = usePrevious(workoutStatus);
+  const prevExerciseStatus = usePrevious(exerciseStatus);
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const { routineId } = useParams();
 
   useEffect(() => {
     dispatch(WorkoutActions.resetWorkoutProgress());
+    dispatch(ExerciseActions.getPresetsRequest());
   }, []);
 
   useEffect(() => {
-    if (prevStatus && status) {
-      if (!prevStatus.saveWorkoutSuccess && status.saveWorkoutSuccess) {
+    if (prevWorkoutStatus && workoutStatus) {
+      if (
+        !prevWorkoutStatus.saveWorkoutSuccess &&
+        workoutStatus.saveWorkoutSuccess
+      ) {
         history.push('/logs');
+        return;
+      }
+
+      if (
+        !prevExerciseStatus.getPresetsSuccess &&
+        exerciseStatus.getPresetsSuccess
+      ) {
+        populateExerciseSections();
       }
     }
-  }, [status, prevStatus]);
+  }, [workoutStatus, prevWorkoutStatus, exerciseStatus, prevExerciseStatus]);
 
-  const onAddExercise = (exercise) => {
-    setExercises([...exercises, exercise]);
-    onAddSet(exercise);
+  const populateExerciseSections = () => {
+    if (routineId) {
+      if (routineId === 'new') {
+        // blank workout; no-op
+        // update workout title
+        setTitle('New blank workout');
+      } else {
+        // routine workout; populate exercises with routine data
+        if (_.isEmpty(routinePresets)) {
+          // no routine data available; redirect to home page
+          history.push('/');
+        } else {
+          const currentRoutine = routinePresets.find(
+            (preset) => preset._id === routineId
+          );
+
+          // update workout title
+          setTitle(currentRoutine.name);
+
+          // add exercises
+          _.forEach(currentRoutine.exercises, (item) => {
+            const exercisePreset = exercisePresets.find(
+              (preset) => preset._id === item.presetId
+            );
+            onAddExercise(exercisePreset, item.numSets);
+          });
+        }
+      }
+    }
+  };
+
+  const onAddExercise = (exercise, numSets = 1) => {
+    setExercises((prev) => [...prev, exercise]);
+    for (let i = 0; i < numSets; i++) {
+      onAddSet(exercise);
+    }
     addExerciseModalRef.current.close();
   };
 
@@ -57,7 +110,7 @@ const Workout = () => {
     setExerciseSets((prev) => {
       const existingSets = prev[exercise._id] || [];
       return {
-        ...setsByExercise,
+        ...prev,
         [exercise._id]: [
           ...existingSets,
           {
@@ -106,7 +159,7 @@ const Workout = () => {
 
   const onCompleteWorkout = () => {
     const formattedData = {
-      name: 'New blank workout',
+      name: title,
       exercises: Workout.formatExercisesData(setsByExercise),
       duration: counter,
     };
@@ -127,7 +180,7 @@ const Workout = () => {
 
   return (
     <div className='workout-view'>
-      <div className='view-header'>Workout</div>
+      <div className='view-header'>{title}</div>
       <div className='view-content'>
         <div className='workout-controls'>
           <div className='workout-controls-duration-timer'>

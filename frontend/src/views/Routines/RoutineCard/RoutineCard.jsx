@@ -8,7 +8,11 @@ const RoutineCard = ({ routine, exerciseNames }) => {
   const history = useHistory();
 
   return (
-    <div className='routineCard'>
+    <div
+      className='routineCard'
+      title='Start new workout from this routine'
+      onClick={() => history.push({ pathname: `/workout/${routine._id}` })}
+    >
       <div className='routineCard__title'>{routine.name}</div>
       <div className='routineCard__exerciseList'>
         {routine.exercises.map((exercise) => (
@@ -17,10 +21,7 @@ const RoutineCard = ({ routine, exerciseNames }) => {
           </div>
         ))}
       </div>
-      <div
-        className='routineCard__button'
-        onClick={() => history.push({ pathname: `/workout/${routine._id}` })}
-      >
+      <div className='routineCard__button'>
         <CgArrowTopRight />
       </div>
     </div>
