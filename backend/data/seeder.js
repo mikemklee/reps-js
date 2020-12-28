@@ -10,6 +10,7 @@ const { defineRoutinePresets } = require('./routines');
 const User = require('../models/User');
 const ExercisePreset = require('../models/ExercisePreset');
 const Routine = require('../models/Routine');
+const Workout = require('../models/Workout');
 const connectDB = require('../config/db');
 
 connectDB();
@@ -60,11 +61,17 @@ const destroyData = async () => {
   try {
     await User.deleteMany();
     await ExercisePreset.deleteMany();
+    await Routine.deleteMany();
+    await Workout.deleteMany();
     console.log('Data destroyed!'.red.inverse);
     console.log('All user data have been deleted from the DB'.red.inverse);
     console.log(
       'All exercise preset data have been deleted from the DB'.red.inverse
     );
+    console.log(
+      'All routine preset data have been deleted from the DB'.red.inverse
+    );
+    console.log('All workout logs have been deleted from the DB'.red.inverse);
     process.exit();
   } catch (err) {
     console.error(`${err}`.red.inverse);
