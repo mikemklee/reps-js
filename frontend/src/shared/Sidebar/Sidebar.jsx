@@ -35,16 +35,6 @@ const Sidebar = () => {
         <button
           className={classnames({
             'link-button': true,
-            current: pathname === '/logs',
-          })}
-          onClick={() => handleClick('/logs')}
-        >
-          <HiOutlineClipboardList size='1.5rem' />
-          <label>Logs</label>
-        </button>
-        <button
-          className={classnames({
-            'link-button': true,
             current: pathname === '/routines',
           })}
           onClick={() => handleClick('/routines')}
@@ -61,6 +51,16 @@ const Sidebar = () => {
         >
           <BiDumbbell size='1.5rem' />
           <label>Exercises</label>
+        </button>
+        <button
+          className={classnames({
+            'link-button': true,
+            current: pathname === '/logs',
+          })}
+          onClick={() => handleClick('/logs')}
+        >
+          <HiOutlineClipboardList size='1.5rem' />
+          <label>Logs</label>
         </button>
       </div>
     </div>

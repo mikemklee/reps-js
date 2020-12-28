@@ -11,7 +11,9 @@ const Main = () => {
       <div className='view-header'>
         {InterfaceUtils.getTimeOfDayGreeting()}, <strong>Mike</strong>
       </div>
-      <QuickActions />
+      <div className='view-content'>
+        <QuickActions />
+      </div>
       {/* <div className='weekly-progress'>TODO: Show weekly progress</div> */}
       {/* <div className='workout-curation'>TODO: Show workout curation</div> */}
     </div>

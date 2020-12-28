@@ -9,7 +9,7 @@ import LogItemExercise from './LogItemExercise/LogItemExercise';
 
 const LogItem = ({ item }) => {
   const formattedCompletedAt = moment(item.createdAt).format(
-    'h:mm A dddd, d MMM YYYY'
+    'h:mm A dddd, Do MMM YYYY'
   );
   const formattedDuration = moment
     .duration(item.timeElapsed, 'seconds')
