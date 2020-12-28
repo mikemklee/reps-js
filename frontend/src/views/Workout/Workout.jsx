@@ -87,6 +87,8 @@ const Workout = () => {
 
           // add exercises
           _.forEach(currentRoutine.exercises, (item) => {
+            // DX: skip exercises that are already included
+            if (setsByExercise[item.presetId]) return;
             const exercisePreset = exercisePresets.find(
               (preset) => preset._id === item.presetId
             );
@@ -167,14 +169,8 @@ const Workout = () => {
   };
 
   const anySetCompleted = useCallback(() => {
-    return _.reduce(
-      setsByExercise,
-      (acc, sets) => {
-        acc = _.some(sets, (set) => set.completed);
-        return acc;
-      },
-      false
-    );
+    const allSets = _.flatMap(setsByExercise);
+    return _.some(allSets, (set) => set.completed);
   }, [setsByExercise]);
 
   return (
