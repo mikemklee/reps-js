@@ -1,56 +1,52 @@
-const CHEST = 'chest';
-const SHOULDER = 'shoulder';
-const BACK = 'back';
-const LEG = 'leg';
-
-const DUMBBELL = 'dumbbell';
-const BARBELL = 'barbell';
+const NAME = require('../constants/exerciseName');
+const CATEGORY = require('../constants/exerciseCategory');
+const BODY_PART = require('../constants/bodyPart');
 
 const defineExercisePresets = () => [
   {
-    name: 'Bench Press (Dumbbell)',
-    bodyPart: CHEST,
-    category: DUMBBELL,
+    name: NAME.BENCH_PRESS_DUMBBELL,
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.CHEST,
   },
   {
-    name: 'Bench Press (Barbell)',
-    bodyPart: CHEST,
-    category: BARBELL,
+    name: NAME.BENCH_PRESS_BARBELL,
+    category: CATEGORY.BARBELL,
+    bodyPart: BODY_PART.CHEST,
   },
   {
-    name: 'Shoulder Press (Dumbbell)',
-    bodyPart: SHOULDER,
-    category: DUMBBELL,
+    name: NAME.SHOULDER_PRESS_DUMBBELL,
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.SHOULDER,
   },
   {
-    name: 'Shoulder Press (Barbell)',
-    bodyPart: SHOULDER,
-    category: BARBELL,
+    name: NAME.SHOULDER_PRESS_BARBELL,
+    category: CATEGORY.BARBELL,
+    bodyPart: BODY_PART.SHOULDER,
   },
   {
-    name: 'Side Lateral Raise (Dumbbell)',
-    bodyPart: SHOULDER,
-    category: DUMBBELL,
+    name: NAME.SIDE_LATERAL_RAISE_DUMBBELL,
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.SHOULDER,
   },
   {
-    name: 'Deadlift (Dumbbell)',
-    bodyPart: BACK,
-    category: DUMBBELL,
+    name: NAME.DEADLIFT_DUMBBELL,
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.BACK,
   },
   {
-    name: 'Deadlift (Barbell)',
-    bodyPart: BACK,
-    category: BARBELL,
+    name: NAME.DEADLIFT_BARBELL,
+    category: CATEGORY.BARBELL,
+    bodyPart: BODY_PART.BACK,
   },
   {
-    name: 'Squat (Dumbbell)',
-    bodyPart: LEG,
-    category: DUMBBELL,
+    name: NAME.SQUAT_DUMBBELL,
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.LEGS,
   },
   {
-    name: 'Lunge (Dumbbell)',
-    bodyPart: LEG,
-    category: DUMBBELL,
+    name: NAME.LUNGE_DUMBBELL,
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.LEGS,
   },
 ];
 
