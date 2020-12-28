@@ -7,12 +7,11 @@ import RoutineCard from './RoutineCard/RoutineCard';
 
 import LoadingSpinner from '../../shared/LoadingSpinner/LoadingSpinner';
 
-import ExerciseActions from '../../redux/exercise/actions';
 import RoutineActions from '../../redux/routine/actions';
 
 const Routines = () => {
   const dispatch = useDispatch();
-  const { presets: exercisePresets, status: exerciseStatus } = useSelector(
+  const { names: exerciseNames, status: exerciseStatus } = useSelector(
     (state) => state.exercise
   );
   const { presets: routinePresets, status: routineStatus } = useSelector(
@@ -20,7 +19,6 @@ const Routines = () => {
   );
 
   useEffect(() => {
-    dispatch(ExerciseActions.getPresetsRequest());
     dispatch(RoutineActions.getPresetsRequest());
   }, []);
 
@@ -39,7 +37,7 @@ const Routines = () => {
               <RoutineCard
                 key={item._id}
                 routine={item}
-                exercisePresets={exercisePresets}
+                exerciseNames={exerciseNames}
               />
             ))}
           </div>
