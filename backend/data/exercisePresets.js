@@ -6,47 +6,47 @@ const defineExercisePresets = () => [
   {
     name: NAME.BENCH_PRESS_DUMBBELL,
     category: CATEGORY.DUMBBELL,
-    bodyPart: BODY_PART.CHEST,
+    bodyParts: [BODY_PART.CHEST],
   },
   {
     name: NAME.BENCH_PRESS_BARBELL,
     category: CATEGORY.BARBELL,
-    bodyPart: BODY_PART.CHEST,
+    bodyParts: [BODY_PART.CHEST],
   },
   {
     name: NAME.SHOULDER_PRESS_DUMBBELL,
     category: CATEGORY.DUMBBELL,
-    bodyPart: BODY_PART.SHOULDER,
+    bodyParts: [BODY_PART.SHOULDER],
   },
   {
     name: NAME.SHOULDER_PRESS_BARBELL,
     category: CATEGORY.BARBELL,
-    bodyPart: BODY_PART.SHOULDER,
+    bodyParts: [BODY_PART.SHOULDER],
   },
   {
     name: NAME.SIDE_LATERAL_RAISE_DUMBBELL,
     category: CATEGORY.DUMBBELL,
-    bodyPart: BODY_PART.SHOULDER,
+    bodyParts: [BODY_PART.SHOULDER],
   },
   {
     name: NAME.DEADLIFT_DUMBBELL,
     category: CATEGORY.DUMBBELL,
-    bodyPart: BODY_PART.BACK,
+    bodyParts: [BODY_PART.BACK],
   },
   {
     name: NAME.DEADLIFT_BARBELL,
     category: CATEGORY.BARBELL,
-    bodyPart: BODY_PART.BACK,
+    bodyParts: [BODY_PART.BACK],
   },
   {
     name: NAME.SQUAT_DUMBBELL,
     category: CATEGORY.DUMBBELL,
-    bodyPart: BODY_PART.LEGS,
+    bodyParts: [BODY_PART.LEGS],
   },
   {
     name: NAME.LUNGE_DUMBBELL,
     category: CATEGORY.DUMBBELL,
-    bodyPart: BODY_PART.LEGS,
+    bodyParts: [BODY_PART.LEGS],
   },
 ];
 

@@ -8,10 +8,12 @@ const exercisePresetSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    bodyPart: {
-      type: String,
-      required: true,
-    },
+    bodyParts: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     category: {
       type: String,
       required: true,
