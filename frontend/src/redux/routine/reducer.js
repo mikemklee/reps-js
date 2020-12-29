@@ -1,7 +1,9 @@
 import types from './types';
 
+import ReducerUtils from '../../utils/reducer';
+
 export const initialState = {
-  presets: [],
+  presets: {},
   status: {
     getPresetsPending: false,
     getPresetsSuccess: false,
@@ -24,7 +26,7 @@ export default (state = initialState, { type, payload }) => {
       const { presets } = payload;
       return {
         ...state,
-        presets,
+        presets: ReducerUtils.composeObjsMap(presets),
         status: {
           ...state.status,
           getPresetsPending: false,

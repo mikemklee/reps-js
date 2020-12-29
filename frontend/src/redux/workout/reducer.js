@@ -1,7 +1,9 @@
 import types from './types';
 
+import ReducerUtils from '../../utils/reducer';
+
 export const initialState = {
-  workoutLogs: [],
+  workoutLogs: {},
   status: {
     saveWorkoutPending: false,
     saveWorkoutSuccess: false,
@@ -38,7 +40,10 @@ export default (state = initialState, { type, payload }) => {
       const { savedWorkout } = payload;
       return {
         ...state,
-        workoutLogs: [...state.workoutLogs, savedWorkout],
+        workoutLogs: ReducerUtils.updateObjInMap(
+          state.workoutLogs,
+          savedWorkout
+        ),
         status: {
           ...state.status,
           saveWorkoutPending: false,
@@ -70,7 +75,10 @@ export default (state = initialState, { type, payload }) => {
       const { editedWorkout } = payload;
       return {
         ...state,
-        workoutLogs: [...state.workoutLogs, editedWorkout],
+        workoutLogs: ReducerUtils.updateObjInMap(
+          state.workoutLogs,
+          editedWorkout
+        ),
         status: {
           ...state.status,
           editWorkoutPending: false,
@@ -102,7 +110,7 @@ export default (state = initialState, { type, payload }) => {
       const { workoutLogs } = payload;
       return {
         ...state,
-        workoutLogs,
+        workoutLogs: ReducerUtils.composeObjsMap(workoutLogs),
         status: {
           ...state.status,
           getWorkoutLogsPending: false,
