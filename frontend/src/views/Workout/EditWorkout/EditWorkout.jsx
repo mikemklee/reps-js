@@ -18,10 +18,12 @@ import ExerciseActions from '../../../redux/exercise/actions';
 
 import usePrevious from '../../../hooks/usePrevious';
 import useExercises from '../../../hooks/useExercises';
+import LogItemMeta from '../../Logs/LogItem/LogItemMeta/LogItemMeta';
 
 const EditWorkout = () => {
   const [title, setTitle] = useState('');
   const [duration, setDuration] = useState(0);
+  const [workout, setWorkout] = useState(null);
   const [
     exercises,
     setsByExercise,
@@ -83,11 +85,10 @@ const EditWorkout = () => {
       } else {
         const currentWorkout = workoutLogs[workoutId];
 
-        // set workout title
+        // set workout
         setTitle(currentWorkout.name);
-
-        // set workout duration
         setDuration(currentWorkout.duration);
+        setWorkout(currentWorkout);
 
         // add exercises
         _.forEach(currentWorkout.exercises, (item) => {
@@ -115,7 +116,7 @@ const EditWorkout = () => {
       <div className='view-header'>Edit {title}</div>
       <div className='view-content'>
         <div className='workout-controls'>
-          {/* TODO: show/edit duration */}
+          {workout ? <LogItemMeta vertical item={workout} /> : null}
           <div className='workout-controls-actions'>
             <button
               className='cancel-workout-btn'

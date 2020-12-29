@@ -1,0 +1,29 @@
+.logs-item-meta {
+  $self: &;
+  display: flex;
+
+  &-completedAt {
+    flex: 1;
+  }
+
+  &-duration,
+  &-volume {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+
+    span {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &.vertical {
+    flex-direction: column;
+
+    #{$self}-duration,
+    #{$self}-volume {
+      margin-left: 0;
+      margin-top: 0.5rem;
+    }
+  }
+}

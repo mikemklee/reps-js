@@ -17,26 +17,6 @@
     color: $off-white;
   }
 
-  &-meta {
-    display: flex;
-    margin-top: 0.5rem;
-
-    &-completedAt {
-      flex: 1;
-    }
-
-    &-duration,
-    &-volume {
-      display: flex;
-      align-items: center;
-      margin-left: 1rem;
-
-      span {
-        margin-left: 0.5rem;
-      }
-    }
-  }
-
   &-exercises {
     display: flex;
     flex-direction: column;
