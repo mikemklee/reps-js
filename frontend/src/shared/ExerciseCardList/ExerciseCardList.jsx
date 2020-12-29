@@ -38,7 +38,7 @@ const ExerciseCardList = ({
             </span>
           </div>
           {selectedIds.includes(item._id) ? (
-            <div className='selected-icon'>
+            <div className='selectedIcon'>
               <FiCheck />
             </div>
           ) : null}
