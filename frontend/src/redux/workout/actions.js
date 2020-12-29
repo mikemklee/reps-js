@@ -31,6 +31,30 @@ const actions = {
       },
     };
   },
+  editWorkoutRequest: (workoutData) => {
+    return {
+      type: types.EDIT_WORKOUT_REQUEST,
+      payload: {
+        workoutData,
+      },
+    };
+  },
+  editWorkoutSuccess: (editedWorkout) => {
+    return {
+      type: types.EDIT_WORKOUT_SUCCESS,
+      payload: {
+        editedWorkout,
+      },
+    };
+  },
+  editWorkoutFailure: (error) => {
+    return {
+      type: types.EDIT_WORKOUT_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
   getWorkoutLogsRequest: () => {
     return {
       type: types.GET_WORKOUT_LOGS_REQUEST,

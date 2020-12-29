@@ -5,6 +5,8 @@ export const initialState = {
   status: {
     saveWorkoutPending: false,
     saveWorkoutSuccess: false,
+    editWorkoutPending: false,
+    editWorkoutSuccess: false,
     getWorkoutLogsPending: false,
     getWorkoutLogsSuccess: false,
   },
@@ -51,6 +53,38 @@ export default (state = initialState, { type, payload }) => {
           ...state.status,
           saveWorkoutPending: false,
           saveWorkoutSuccess: false,
+        },
+      };
+    }
+    case types.EDIT_WORKOUT_REQUEST: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          editWorkoutPending: true,
+          editWorkoutSuccess: false,
+        },
+      };
+    }
+    case types.EDIT_WORKOUT_SUCCESS: {
+      const { editedWorkout } = payload;
+      return {
+        ...state,
+        workoutLogs: [...state.workoutLogs, editedWorkout],
+        status: {
+          ...state.status,
+          editWorkoutPending: false,
+          editWorkoutSuccess: true,
+        },
+      };
+    }
+    case types.EDIT_WORKOUT_FAILURE: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          editWorkoutPending: false,
+          editWorkoutSuccess: false,
         },
       };
     }
