@@ -1,11 +1,20 @@
-import React, { useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 import moment from 'moment';
 
 import './Timer.scss';
 
 import TimeDisplay from '../../../shared/TimeDisplay/TimeDisplay';
 
-const Timer = ({ counter, setCounter }) => {
+const Timer = (props, ref) => {
+  const [counter, setCounter] = useState(0);
+
+  useImperativeHandle(ref, () => counter, [counter]);
+
   useEffect(() => {
     const timerFn = setTimeout(() => {
       setCounter(counter + 1);
@@ -25,4 +34,4 @@ const Timer = ({ counter, setCounter }) => {
   );
 };
 
-export default Timer;
+export default React.memo(forwardRef(Timer));

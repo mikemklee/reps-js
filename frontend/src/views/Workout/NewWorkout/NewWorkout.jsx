@@ -24,7 +24,6 @@ import useExercises from '../../../hooks/useExercises';
 
 const NewWorkout = () => {
   const [title, setTitle] = useState('');
-  const [counter, setCounter] = useState(0);
   const [
     exercises,
     setsByExercise,
@@ -35,6 +34,7 @@ const NewWorkout = () => {
     onRemoveSet,
   ] = useExercises();
 
+  const counterRef = useRef(null);
   const addExerciseModalRef = useRef(null);
   const cancelWorkoutModalRef = useRef(null);
   const saveWorkoutModalRef = useRef(null);
@@ -112,7 +112,7 @@ const NewWorkout = () => {
     const formattedData = {
       name: title,
       exercises: NewWorkout.formatExercisesData(setsByExercise),
-      duration: counter,
+      duration: counterRef.current,
     };
 
     dispatch(WorkoutActions.saveWorkoutRequest(formattedData));
@@ -125,7 +125,7 @@ const NewWorkout = () => {
         <div className='workout-controls'>
           <div className='workout-controls-duration-timer'>
             <label>Time elapsed: </label>
-            <Timer counter={counter} setCounter={setCounter} />
+            <Timer ref={counterRef} />
           </div>
           <div
             className='workout-controls-rest-timer'
