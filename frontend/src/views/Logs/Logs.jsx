@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 
 import './Logs.scss';
 
@@ -20,7 +21,7 @@ const Logs = () => {
       <div className='view-header'>Logs</div>
       <div className='view-content'>
         <div className='logs'>
-          {workoutLogs.map((item, index) => (
+          {_.map(workoutLogs, (item, index) => (
             <LogItem key={index} item={item} />
           ))}
         </div>

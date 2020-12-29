@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 
 import './Routines.scss';
 
@@ -33,7 +34,7 @@ const Routines = () => {
           <LoadingSpinner />
         ) : (
           <div className='routines'>
-            {routinePresets.map((item) => (
+            {_.map(routinePresets, (item) => (
               <RoutineCard
                 key={item._id}
                 routine={item}

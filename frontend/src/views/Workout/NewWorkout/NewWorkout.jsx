@@ -87,9 +87,7 @@ const NewWorkout = () => {
           // no routine data available; redirect to home page
           history.push('/');
         } else {
-          const currentRoutine = routinePresets.find(
-            (preset) => preset._id === routineId
-          );
+          const currentRoutine = routinePresets[routineId];
 
           // update workout title
           setTitle(currentRoutine.name);
@@ -98,10 +96,7 @@ const NewWorkout = () => {
           _.forEach(currentRoutine.exercises, (item) => {
             // DX: skip exercises that are already included
             if (setsByExercise[item.presetId]) return;
-            const exercisePreset = exercisePresets.find(
-              (preset) => preset._id === item.presetId
-            );
-            onAddExercise(exercisePreset, item.numSets);
+            onAddExercise(exercisePresets[item.presetId], item.numSets);
           });
         }
       }

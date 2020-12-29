@@ -80,9 +80,7 @@ const EditWorkout = () => {
         // no workout data available; redirect to home page
         history.push('/');
       } else {
-        const currentWorkout = workoutLogs.find(
-          (item) => item._id === workoutId
-        );
+        const currentWorkout = workoutLogs[workoutId];
 
         // set workout title
         setTitle(currentWorkout.name);
@@ -94,9 +92,7 @@ const EditWorkout = () => {
         _.forEach(currentWorkout.exercises, (item) => {
           // DX: skip exercises that are already included
           if (setsByExercise[item.presetId]) return;
-          const exercisePreset = exercisePresets.find(
-            (preset) => preset._id === item.presetId
-          );
+          const exercisePreset = exercisePresets[item.presetId];
           const SETS_COMPLETED = true;
           onAddExercise(exercisePreset, item.numSets, SETS_COMPLETED);
         });
@@ -110,9 +106,8 @@ const EditWorkout = () => {
       exercises: EditWorkout.formatExercisesData(setsByExercise),
       duration,
     };
-    console.log('save', formattedData);
 
-    // dispatch(WorkoutActions.editWorkoutRequest(formattedData));
+    dispatch(WorkoutActions.editWorkoutRequest(formattedData));
   };
 
   return (

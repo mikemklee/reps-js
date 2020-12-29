@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { FiCheck } from 'react-icons/fi';
+import _ from 'lodash';
 
 import './ExerciseCardList.scss';
 
@@ -11,7 +12,7 @@ const ExerciseCardList = ({
 }) => {
   return (
     <div className='exerciseCardList'>
-      {presets.map((item) => (
+      {_.map(presets, (item) => (
         <div
           key={item._id}
           className={classnames('exerciseCard', {
