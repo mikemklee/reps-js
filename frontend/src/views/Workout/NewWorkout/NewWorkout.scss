@@ -17,6 +17,7 @@
       display: flex;
       align-items: flex-end;
       margin-bottom: 1rem;
+      font-size: 0.9rem;
 
       &-duration-timer {
         font-size: 1.6rem;
@@ -39,6 +40,7 @@
 
       &-actions {
         display: flex;
+        margin-left: auto;
 
         .finish-workout-btn {
           @include primaryButtonStyles;
