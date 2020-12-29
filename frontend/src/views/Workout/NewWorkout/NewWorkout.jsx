@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { VscAdd } from 'react-icons/vsc';
@@ -6,26 +6,34 @@ import { FaStopwatch } from 'react-icons/fa';
 import classnames from 'classnames';
 import _ from 'lodash';
 
-import './Workout.scss';
+import './NewWorkout.scss';
 
-import Timer from './Timer/Timer';
-import Exercise from './Exercise/Exercise';
-import RestTimer from './RestTimer/RestTimer';
+import Timer from '../Timer/Timer';
+import Exercise from '../Exercise/Exercise';
+import RestTimer from '../RestTimer/RestTimer';
 
-import Modal from '../../shared/Modal/Modal';
-import AddExercise from '../../shared/AddExercise/AddExercise';
-import Confirmation from '../../shared/Confirmation/Confirmation';
+import Modal from '../../../shared/Modal/Modal';
+import AddExercise from '../../../shared/AddExercise/AddExercise';
+import Confirmation from '../../../shared/Confirmation/Confirmation';
 
-import WorkoutActions from '../../redux/workout/actions';
-import ExerciseActions from '../../redux/exercise/actions';
+import WorkoutActions from '../../../redux/workout/actions';
+import ExerciseActions from '../../../redux/exercise/actions';
 
-import usePrevious from '../../hooks/usePrevious';
+import usePrevious from '../../../hooks/usePrevious';
+import useExercises from '../../../hooks/useExercises';
 
-const Workout = () => {
+const NewWorkout = () => {
   const [title, setTitle] = useState('');
   const [counter, setCounter] = useState(0);
-  const [exercises, setExercises] = useState([]);
-  const [setsByExercise, setExerciseSets] = useState({});
+  const [
+    exercises,
+    setsByExercise,
+    anySetCompleted,
+    onAddExercise,
+    onAddSet,
+    onEditSet,
+    onRemoveSet,
+  ] = useExercises();
 
   const addExerciseModalRef = useRef(null);
   const cancelWorkoutModalRef = useRef(null);
@@ -100,79 +108,15 @@ const Workout = () => {
     }
   };
 
-  const onAddExercise = (exercise, numSets = 1) => {
-    setExercises((prev) => [...prev, exercise]);
-    for (let i = 0; i < numSets; i++) {
-      onAddSet(exercise);
-    }
-    addExerciseModalRef.current.close();
-  };
-
-  const onAddSet = (exercise) => {
-    setExerciseSets((prev) => {
-      const existingSets = prev[exercise._id] || [];
-      return {
-        ...prev,
-        [exercise._id]: [
-          ...existingSets,
-          {
-            id: existingSets.length + 1,
-            set: existingSets.length + 1,
-            previous: '',
-            kg: 0,
-            reps: 0,
-            completed: false,
-          },
-        ],
-      };
-    });
-  };
-
-  const onEditSet = (exercise, rowIndex, columnId, value) => {
-    setExerciseSets((prev) => {
-      const existingSets = prev[exercise._id];
-      return {
-        ...prev,
-        [exercise._id]: existingSets.map((row, index) => {
-          if (index === rowIndex) {
-            return {
-              ...existingSets[rowIndex],
-              [columnId]: value,
-            };
-          }
-          return row;
-        }),
-      };
-    });
-  };
-
-  const onRemoveSet = (exercise, rowIndex) => {
-    setExerciseSets((prev) => {
-      const existingSets = prev[exercise._id];
-      return {
-        ...prev,
-        [exercise._id]: _.filter(
-          existingSets,
-          (_item, index) => index !== rowIndex
-        ),
-      };
-    });
-  };
-
   const onCompleteWorkout = () => {
     const formattedData = {
       name: title,
-      exercises: Workout.formatExercisesData(setsByExercise),
+      exercises: NewWorkout.formatExercisesData(setsByExercise),
       duration: counter,
     };
 
     dispatch(WorkoutActions.saveWorkoutRequest(formattedData));
   };
-
-  const anySetCompleted = useCallback(() => {
-    const allSets = _.flatMap(setsByExercise);
-    return _.some(allSets, (set) => set.completed);
-  }, [setsByExercise]);
 
   return (
     <div className='workout-view'>
@@ -201,7 +145,7 @@ const Workout = () => {
             <button
               className={classnames({
                 'finish-workout-btn': true,
-                disabled: !anySetCompleted(),
+                disabled: !anySetCompleted,
               })}
               onClick={() => saveWorkoutModalRef.current.open()}
             >
@@ -231,7 +175,10 @@ const Workout = () => {
         <AddExercise
           exercisePresets={exercisePresets}
           selectedExercises={exercises}
-          onAddExercise={onAddExercise}
+          onAddExercise={(item) => {
+            onAddExercise(item);
+            addExerciseModalRef.current.close();
+          }}
         />
       </Modal>
       <Modal ref={cancelWorkoutModalRef}>
@@ -268,7 +215,7 @@ const Workout = () => {
   );
 };
 
-Workout.formatExercisesData = (setsByExercise) => {
+NewWorkout.formatExercisesData = (setsByExercise) => {
   return _.map(setsByExercise, (sets, presetId) => ({
     presetId,
     sets: _.map(sets, (set) => ({
@@ -278,4 +225,4 @@ Workout.formatExercisesData = (setsByExercise) => {
   }));
 };
 
-export default Workout;
+export default NewWorkout;
