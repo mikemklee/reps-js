@@ -14,6 +14,8 @@ import Logs from '../views/Logs/Logs';
 import Routines from '../views/Routines/Routines';
 import Exercises from '../views/Exercises/Exercises';
 import Workout from '../views/Workout/Workout';
+import NewBlankWorkout from '../views/Workout/NewBlankWorkout/NewBlankWorkout';
+import NewRoutineWorkout from '../views/Workout/NewRoutineWorkout/NewRoutineWorkout';
 
 import ExerciseActions from '../redux/exercise/actions';
 class RouterApp extends React.Component {
@@ -47,7 +49,15 @@ class RouterApp extends React.Component {
           {this.props.isAuthenticated ? <Sidebar /> : null}
           <div className='route'>
             <Switch>
-              {this.renderProtectedRoute('/workout/:routineId', Workout)}
+              {this.renderProtectedRoute('/workout/new', NewBlankWorkout)}
+              {this.renderProtectedRoute(
+                '/workout/:routineId',
+                NewRoutineWorkout
+              )}
+              {/* {this.renderProtectedRoute(
+                '/workout/:workoutId/edit',
+                EditWorkout
+              )} */}
               {this.renderProtectedRoute('/routines', Routines)}
               {this.renderProtectedRoute('/exercises', Exercises)}
               {this.renderProtectedRoute('/logs', Logs)}

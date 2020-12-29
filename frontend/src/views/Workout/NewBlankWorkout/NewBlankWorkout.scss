@@ -1,0 +1,73 @@
+@import '../../../styles/common';
+
+.workout-view {
+  @include viewContainerStyles;
+  flex: 1;
+
+  .view-header {
+    @include viewHeaderStyles;
+  }
+
+  .view-content {
+    flex: 1;
+    max-width: 40rem;
+
+    .workout-controls {
+      color: $light-grey;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+
+      &-duration-timer {
+        font-size: 1.6rem;
+
+        label {
+          font-size: 0.8rem;
+          display: block;
+          margin-bottom: 0.2rem;
+        }
+      }
+
+      &-rest-timer {
+        font-size: 1.6rem;
+        flex: 1;
+
+        button {
+          @include secondaryButtonStyles;
+        }
+      }
+
+      &-actions {
+        display: flex;
+
+        .finish-workout-btn {
+          @include primaryButtonStyles;
+          margin-left: 0.5rem;
+        }
+
+        .finish-workout-btn.disabled {
+          @include disabledButtonStyles;
+          margin-left: 0.5rem;
+        }
+
+        .cancel-workout-btn {
+          @include warningButtonStyles;
+        }
+      }
+    }
+
+    .add-exercise-btn {
+      @include tertiaryButtonStyles;
+      @include flexCenterHorizontally;
+      margin: 0 auto;
+      border-top: 1px solid rgba($light-grey, 0.2);
+      border-radius: 0;
+      padding: 1rem;
+      width: 100%;
+      transition: all 0.1s;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
