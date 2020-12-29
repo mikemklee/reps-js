@@ -8,6 +8,7 @@
   border: 1px solid rgba($light-grey, 0.2);
   border-radius: 4px;
   font-size: 0.9rem;
+  position: relative;
 
   &-name {
     font-size: 1.1rem;
@@ -40,5 +41,22 @@
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
+  }
+
+  &-buttons {
+    position: absolute;
+    display: flex;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  &__button {
+    @include actionIconStyles;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }

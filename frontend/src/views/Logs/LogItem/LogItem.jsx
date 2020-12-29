@@ -1,13 +1,16 @@
 import React from 'react';
 import moment from 'moment';
-import _ from 'lodash';
-import { BiTimeFive } from 'react-icons/bi';
+import { useHistory } from 'react-router-dom';
+import { BiTimeFive, BiEditAlt } from 'react-icons/bi';
 import { FaWeightHanging } from 'react-icons/fa';
+import _ from 'lodash';
 
 import './LogItem.scss';
 import LogItemExercise from './LogItemExercise/LogItemExercise';
 
 const LogItem = ({ item }) => {
+  const history = useHistory();
+
   const formattedCompletedAt = moment(item.createdAt).format(
     'h:mm A dddd, Do MMM YYYY'
   );
@@ -48,6 +51,14 @@ const LogItem = ({ item }) => {
         {_.map(item.exercises, (exercise) => (
           <LogItemExercise key={exercise.presetId} exercise={exercise} />
         ))}
+      </div>
+      <div className='logs-item-buttons'>
+        <div
+          className='logs-item__button'
+          onClick={() => history.push(`/workout/${item._id}/edit`)}
+        >
+          <BiEditAlt />
+        </div>
       </div>
     </div>
   );
