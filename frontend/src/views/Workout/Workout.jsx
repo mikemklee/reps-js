@@ -29,6 +29,7 @@ const Workout = () => {
 
   const addExerciseModalRef = useRef(null);
   const cancelWorkoutModalRef = useRef(null);
+  const saveWorkoutModalRef = useRef(null);
   const restTimerModalRef = useRef(null);
 
   const { status: workoutStatus } = useSelector((state) => state.workout);
@@ -202,9 +203,9 @@ const Workout = () => {
                 'finish-workout-btn': true,
                 disabled: !anySetCompleted(),
               })}
-              onClick={onCompleteWorkout}
+              onClick={() => saveWorkoutModalRef.current.open()}
             >
-              <span>Complete</span>
+              <span>Finish</span>
             </button>
           </div>
         </div>
@@ -245,6 +246,19 @@ const Workout = () => {
           }
           onCancel={() => cancelWorkoutModalRef.current.close()}
           onConfirm={() => history.goBack()}
+        />
+      </Modal>
+      <Modal ref={saveWorkoutModalRef}>
+        <Confirmation
+          title='Finish workout'
+          subtitle={
+            <>
+              <p>Are you sure you would like to finish this workout session?</p>
+              <p>Any invalid or empty sets will not be saved.</p>
+            </>
+          }
+          onCancel={() => saveWorkoutModalRef.current.close()}
+          onConfirm={onCompleteWorkout}
         />
       </Modal>
       <Modal ref={restTimerModalRef}>
