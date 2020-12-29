@@ -31,10 +31,11 @@ const actions = {
       },
     };
   },
-  editWorkoutRequest: (workoutData) => {
+  editWorkoutRequest: (workoutId, workoutData) => {
     return {
       type: types.EDIT_WORKOUT_REQUEST,
       payload: {
+        workoutId,
         workoutData,
       },
     };

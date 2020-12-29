@@ -94,7 +94,7 @@ const EditWorkout = () => {
           if (setsByExercise[item.presetId]) return;
           const exercisePreset = exercisePresets[item.presetId];
           const SETS_COMPLETED = true;
-          onAddExercise(exercisePreset, item.numSets, SETS_COMPLETED);
+          onAddExercise(exercisePreset, item.sets.length, SETS_COMPLETED);
         });
       }
     }
@@ -107,7 +107,7 @@ const EditWorkout = () => {
       duration,
     };
 
-    dispatch(WorkoutActions.editWorkoutRequest(formattedData));
+    dispatch(WorkoutActions.editWorkoutRequest(workoutId, formattedData));
   };
 
   return (

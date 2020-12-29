@@ -7,7 +7,7 @@ import actions from '../actions';
 export default function* editWorkout(action) {
   try {
     const { token } = yield select((state) => state.auth);
-    const { workoutData } = action.payload;
+    const { workoutId, workoutData } = action.payload;
 
     const config = {
       headers: {
@@ -20,7 +20,12 @@ export default function* editWorkout(action) {
       workoutData,
     };
 
-    const { data } = yield call(axios.post, '/api/workouts', body, config);
+    const { data } = yield call(
+      axios.post,
+      `/api/workouts/${workoutId}`,
+      body,
+      config
+    );
 
     yield put(actions.editWorkoutSuccess(data));
   } catch (e) {
