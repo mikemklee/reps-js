@@ -12,14 +12,22 @@ function useExercises() {
     setAnySetCompleted(_.some(allSets, (set) => set.completed));
   }, [setsByExercise]);
 
-  const onAddExercise = (exercise, numSets = 1, setsCompleted = false) => {
+  const onAddExercise = (exercise, numSets = 1) => {
     setExercises((prev) => [...prev, exercise]);
     for (let i = 0; i < numSets; i++) {
-      onAddSet(exercise, setsCompleted);
+      onAddSet(exercise);
     }
   };
 
-  const onAddSet = (exercise, setCompleted = false) => {
+  const onAddSavedExercise = (savedExercise, exercisePreset) => {
+    setExercises((prev) => [...prev, exercisePreset]);
+    for (let i = 0; i < savedExercise.sets.length; i++) {
+      const currentSet = savedExercise.sets[i];
+      onAddSet(exercisePreset, currentSet.kg, currentSet.reps, true);
+    }
+  };
+
+  const onAddSet = (exercise, kg = 0, reps = 0, completed = false) => {
     setExerciseSets((prev) => {
       const existingSets = prev[exercise._id] || [];
       return {
@@ -30,9 +38,9 @@ function useExercises() {
             id: existingSets.length + 1,
             set: existingSets.length + 1,
             previous: '',
-            kg: 0,
-            reps: 0,
-            completed: setCompleted,
+            kg,
+            reps,
+            completed,
           },
         ],
       };
@@ -75,6 +83,7 @@ function useExercises() {
     setsByExercise,
     anySetCompleted,
     onAddExercise,
+    onAddSavedExercise,
     onAddSet,
     onEditSet,
     onRemoveSet,

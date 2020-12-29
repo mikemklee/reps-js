@@ -27,6 +27,7 @@ const EditWorkout = () => {
     setsByExercise,
     anySetCompleted,
     onAddExercise,
+    onAddSavedExercise,
     onAddSet,
     onEditSet,
     onRemoveSet,
@@ -93,8 +94,7 @@ const EditWorkout = () => {
           // DX: skip exercises that are already included
           if (setsByExercise[item.presetId]) return;
           const exercisePreset = exercisePresets[item.presetId];
-          const SETS_COMPLETED = true;
-          onAddExercise(exercisePreset, item.sets.length, SETS_COMPLETED);
+          onAddSavedExercise(item, exercisePreset);
         });
       }
     }
