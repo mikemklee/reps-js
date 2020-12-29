@@ -21,4 +21,30 @@ const saveWorkout = async (req, res) => {
   res.status(201).json(savedWorkout);
 };
 
-module.exports = { getWorkoutLogs, saveWorkout };
+// @desc    Update an existing workout session
+// @route   POST /api/workouts/:workoutId
+const editWorkout = async (req, res) => {
+  const workoutId = req.params.id;
+  const { workoutData } = req.body;
+
+  // TODO: validate request body
+
+  const workout = await Workout.findById(workoutId);
+
+  if (!workout) {
+    res.status(404).json({
+      message: `Workout with id "${workoutId}" does not exist`,
+    });
+    return;
+  }
+
+  workout.name = workoutData.name;
+  workout.exercises = workoutData.exercises;
+  workout.duration = workoutData.duration;
+
+  const editedWorkout = await workout.save();
+
+  res.status(200).json(editedWorkout);
+};
+
+module.exports = { getWorkoutLogs, saveWorkout, editWorkout };
