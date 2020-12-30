@@ -136,6 +136,7 @@ const EditWorkout = () => {
         </div>
         {exercises.map((exercise) => (
           <Exercise
+            allowComplete
             key={exercise._id}
             exercise={exercise}
             sets={setsByExercise[exercise._id] || []}

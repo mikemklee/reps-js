@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { VscAdd } from 'react-icons/vsc';
 import classnames from 'classnames';
+import _ from 'lodash';
 
 import './NewRoutine.scss';
 
@@ -21,7 +22,6 @@ const NewRoutine = () => {
   const {
     exercises,
     setsByExercise,
-    anySetCompleted,
     onAddExercise,
     onAddSet,
     onEditSet,
@@ -116,7 +116,7 @@ const NewRoutine = () => {
             <button
               className={classnames({
                 'finish-workout-btn': true,
-                disabled: !anySetCompleted, // TODO: only disable if no sets included
+                disabled: _.isEmpty(setsByExercise),
               })}
               onClick={() => saveRoutineModalRef.current.open()}
             >

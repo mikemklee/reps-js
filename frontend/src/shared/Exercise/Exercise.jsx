@@ -9,9 +9,18 @@ import NumberInputCell from '../Table/NumberInputCell/NumberInputCell';
 import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
-const Exercise = ({ exercise, sets, onAddSet, onEditSet, onRemoveSet }) => {
-  const columns = React.useMemo(
-    () => [
+const Exercise = ({
+  exercise,
+  sets,
+  onAddSet,
+  onEditSet,
+  onRemoveSet,
+  allowComplete = false,
+}) => {
+  const [columns, setColumns] = useState([]);
+
+  useEffect(() => {
+    const displayedColumns = [
       {
         Header: 'Set',
         accessor: 'set',
@@ -32,23 +41,30 @@ const Exercise = ({ exercise, sets, onAddSet, onEditSet, onRemoveSet }) => {
         accessor: 'reps',
         Cell: NumberInputCell,
       },
-      {
+    ];
+
+    // include column for set complete button, if allowed
+    if (allowComplete) {
+      displayedColumns.push({
         Header: 'Completed',
         accessor: 'completed',
         Cell: CheckboxCell,
-      },
-      {
-        Header: '',
-        accessor: 'id',
-        Cell: (props) => (
-          <ButtonCell {...props}>
-            <VscClose />
-          </ButtonCell>
-        ),
-      },
-    ],
-    []
-  );
+      });
+    }
+
+    // finally, include a column for set remove button
+    displayedColumns.push({
+      Header: '',
+      accessor: 'id',
+      Cell: (props) => (
+        <ButtonCell {...props}>
+          <VscClose />
+        </ButtonCell>
+      ),
+    });
+
+    setColumns(displayedColumns);
+  }, []);
 
   const [skipPageReset, setSkipPageReset] = useState(false);
 
