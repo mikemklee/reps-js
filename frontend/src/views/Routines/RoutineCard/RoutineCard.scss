@@ -3,18 +3,14 @@
 .routineCard {
   @include cardStyles;
   height: 12rem;
-  cursor: pointer;
 
   &__title {
     font-size: 1.1rem;
     font-weight: 600;
     cursor: inherit;
-    flex: 1;
+    margin-bottom: 0.5rem;
     transition: color 0.2s;
-  }
-
-  &:hover &__title {
-    color: $white;
+    color: $off-white;
   }
 
   &__exerciseList {
@@ -25,13 +21,29 @@
     font-size: 0.9rem;
   }
 
-  &__button {
-    @include primaryActionIconStyles;
+  &__buttonContainer {
+    position: absolute;
+    display: flex;
+    bottom: 1rem;
     right: 1rem;
-    top: 1rem;
   }
 
-  &:hover &__button {
-    opacity: 1;
+  &__button {
+    margin-left: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &--primary {
+      @include primaryActionIconStyles;
+      position: relative;
+    }
+
+    &--secondary {
+      @include secondaryActionIconStyles;
+      position: relative;
+    }
   }
 }

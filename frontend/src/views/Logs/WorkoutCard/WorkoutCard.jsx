@@ -21,16 +21,18 @@ const WorkoutCard = ({ workout, onClickDelete }) => {
       </div>
       <div className='workoutCard__buttonContainer'>
         <div
-          className='workoutCard__button workoutCard__button--primary'
-          onClick={() => history.push(`/workout/${workout._id}/edit`)}
-        >
-          <BiEditAlt />
-        </div>
-        <div
           className='workoutCard__button workoutCard__button--secondary'
+          title='Delete this workout'
           onClick={() => onClickDelete(workout._id)}
         >
           <BiTrash />
+        </div>
+        <div
+          className='workoutCard__button workoutCard__button--primary'
+          title='Edit this workout'
+          onClick={() => history.push(`/workout/${workout._id}/edit`)}
+        >
+          <BiEditAlt />
         </div>
       </div>
     </div>
