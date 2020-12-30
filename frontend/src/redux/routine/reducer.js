@@ -10,6 +10,8 @@ export const initialState = {
     getPresetRoutinesSuccess: false,
     getCustomRoutinesPending: false,
     getCustomRoutinesSuccess: false,
+    editCustomRoutinePending: false,
+    editCustomRoutineSuccess: false,
     deleteCustomRoutinePending: false,
     deleteCustomRoutineSuccess: false,
     saveRoutinePending: false,
@@ -112,6 +114,41 @@ export default (state = initialState, { type, payload }) => {
           ...state.status,
           saveRoutinePending: false,
           saveRoutineSuccess: false,
+        },
+      };
+    }
+    case types.EDIT_CUSTOM_ROUTINE_REQUEST: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          editCustomRoutinePending: true,
+          editCustomRoutineSuccess: false,
+        },
+      };
+    }
+    case types.EDIT_CUSTOM_ROUTINE_SUCCESS: {
+      const { editedRoutine } = payload;
+      return {
+        ...state,
+        workoutLogs: ReducerUtils.updateObjInMap(
+          state.customRoutines,
+          editedRoutine
+        ),
+        status: {
+          ...state.status,
+          editCustomRoutinePending: false,
+          editCustomRoutineSuccess: true,
+        },
+      };
+    }
+    case types.EDIT_CUSTOM_ROUTINE_FAILURE: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          editCustomRoutinePending: false,
+          editCustomRoutineSuccess: false,
         },
       };
     }

@@ -69,6 +69,30 @@ const actions = {
       },
     };
   },
+  editCustomRoutineRequest: (routineId) => {
+    return {
+      type: types.EDIT_CUSTOM_ROUTINE_REQUEST,
+      payload: {
+        routineId,
+      },
+    };
+  },
+  editCustomRoutineSuccess: (editedRoutine) => {
+    return {
+      type: types.EDIT_CUSTOM_ROUTINE_SUCCESS,
+      payload: {
+        editedRoutine,
+      },
+    };
+  },
+  editCustomRoutineFailure: (error) => {
+    return {
+      type: types.EDIT_CUSTOM_ROUTINE_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
   deleteCustomRoutineRequest: (routineId) => {
     return {
       type: types.DELETE_CUSTOM_ROUTINE_REQUEST,
