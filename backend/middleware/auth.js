@@ -13,6 +13,8 @@ const protect = async (req, res, next) => {
 
       req.user = await User.findById(decoded.id).select('-password');
 
+      // TODO: error out if no user is found
+
       next();
       return;
     } catch (err) {

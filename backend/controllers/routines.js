@@ -11,12 +11,31 @@ const getRoutinePresets = async (req, res) => {
 // @desc    Create a new routine
 // @route   PUT /api/routines
 const createRoutine = async (req, res) => {
-  const { routineData } = req.body;
+  const { user, body } = req;
+  const { routineData } = body;
 
   // TODO: validate request body
 
-  const routine = new Routine(routineData);
-  const savedRoutine = await routine.save();
+  // save new routine in DB
+  let savedRoutine;
+  try {
+    const routine = new Routine(routineData);
+    savedRoutine = await routine.save();
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not save routine in DB',
+    });
+  }
+
+  // store routine id on user
+  try {
+    user.routineIds = [...user.routineIds, savedRoutine._id];
+    await user.save();
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not update user',
+    });
+  }
 
   res.status(201).json(savedRoutine);
 };
