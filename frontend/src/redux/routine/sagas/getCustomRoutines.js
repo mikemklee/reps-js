@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import actions from '../actions';
 
-export default function* getPresets() {
+export default function* getCustomRoutines() {
   try {
     const { token } = yield select((state) => state.auth);
 
@@ -14,14 +14,14 @@ export default function* getPresets() {
       },
     };
 
-    const { data } = yield call(axios.get, '/api/routines/presets', config);
-    yield put(actions.getPresetsSuccess(data));
+    const { data } = yield call(axios.get, '/api/routines', config);
+    yield put(actions.getCustomRoutinesSuccess(data));
   } catch (e) {
     const formattedError = new Error('An unexpected error occured.');
     if (e.response) {
       formattedError.message = e.response.data.message;
     }
     alert(formattedError.message);
-    yield put(actions.getPresetsFailure(formattedError));
+    yield put(actions.getCustomRoutinesFailure(formattedError));
   }
 }

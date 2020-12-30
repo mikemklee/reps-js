@@ -1,23 +1,45 @@
 import types from './types';
 
 const actions = {
-  getPresetsRequest: () => {
+  getPresetRoutinesRequest: () => {
     return {
-      type: types.GET_PRESETS_REQUEST,
+      type: types.GET_PRESET_ROUTINES_REQUEST,
       payload: {},
     };
   },
-  getPresetsSuccess: (presets) => {
+  getPresetRoutinesSuccess: (presetRoutines) => {
     return {
-      type: types.GET_PRESETS_SUCCESS,
+      type: types.GET_PRESET_ROUTINES_SUCCESS,
       payload: {
-        presets,
+        presetRoutines,
       },
     };
   },
-  getPresetsFailure: (error) => {
+  getPresetRoutinesFailure: (error) => {
     return {
-      type: types.GET_PRESETS_FAILURE,
+      type: types.GET_PRESET_ROUTINES_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
+  getCustomRoutinesRequest: () => {
+    return {
+      type: types.GET_CUSTOM_ROUTINES_REQUEST,
+      payload: {},
+    };
+  },
+  getCustomRoutinesSuccess: (customRoutines) => {
+    return {
+      type: types.GET_CUSTOM_ROUTINES_SUCCESS,
+      payload: {
+        customRoutines,
+      },
+    };
+  },
+  getCustomRoutinesFailure: (error) => {
+    return {
+      type: types.GET_CUSTOM_ROUTINES_FAILURE,
       payload: {
         error,
       },
