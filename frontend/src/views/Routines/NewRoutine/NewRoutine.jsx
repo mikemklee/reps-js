@@ -18,7 +18,7 @@ import WorkoutUtils from '../../../utils/workout';
 
 const NewRoutine = () => {
   const [title, setTitle] = useState('');
-  const [
+  const {
     exercises,
     setsByExercise,
     anySetCompleted,
@@ -26,7 +26,7 @@ const NewRoutine = () => {
     onAddSet,
     onEditSet,
     onRemoveSet,
-  ] = useExercises();
+  } = useExercises();
 
   const addExerciseModalRef = useRef(null);
   const saveRoutineModalRef = useRef(null);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { CgArrowTopRight } from 'react-icons/cg';
+import _ from 'lodash';
 
 import './RoutineCard.scss';
 
@@ -15,9 +16,9 @@ const RoutineCard = ({ routine, exerciseNames }) => {
     >
       <div className='routineCard__title'>{routine.name}</div>
       <div className='routineCard__exerciseList'>
-        {routine.exercises.map((exercise) => (
-          <div key={exercise.presetId} className='routineCard__exerciseItem'>
-            {exerciseNames[exercise.presetId]}
+        {_.map(routine.exercises, (item) => (
+          <div key={item.exerciseId} className='routineCard__exerciseItem'>
+            {exerciseNames[item.exerciseId]}
           </div>
         ))}
       </div>

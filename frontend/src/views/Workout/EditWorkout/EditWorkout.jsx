@@ -23,7 +23,7 @@ const EditWorkout = () => {
   const [title, setTitle] = useState('');
   const [duration, setDuration] = useState(0);
   const [workout, setWorkout] = useState(null);
-  const [
+  const {
     exercises,
     setsByExercise,
     anySetCompleted,
@@ -32,7 +32,7 @@ const EditWorkout = () => {
     onAddSet,
     onEditSet,
     onRemoveSet,
-  ] = useExercises();
+  } = useExercises();
 
   const addExerciseModalRef = useRef(null);
   const saveWorkoutModalRef = useRef(null);
@@ -92,9 +92,9 @@ const EditWorkout = () => {
         // add exercises
         _.forEach(currentWorkout.exercises, (item) => {
           // DX: skip exercises that are already included
-          if (setsByExercise[item.presetId]) return;
-          const exercisePreset = exercisePresets[item.presetId];
-          onAddSavedExercise(item, exercisePreset);
+          if (setsByExercise[item.exerciseId]) return;
+          const exercisePreset = exercisePresets[item.exerciseId];
+          onAddSavedExercise(item, exercisePreset, true);
         });
       }
     }

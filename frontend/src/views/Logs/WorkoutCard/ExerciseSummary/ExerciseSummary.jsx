@@ -10,7 +10,7 @@ const ExerciseSummary = ({ exercise }) => {
   return (
     <div className='exerciseSummary'>
       <div className='exerciseSummary__name'>
-        {exerciseNames[exercise.presetId]}
+        {exerciseNames[exercise.exerciseId]}
       </div>
       <div className='exerciseSummary__setList'>
         {_.map(exercise.sets, (set, index) => (

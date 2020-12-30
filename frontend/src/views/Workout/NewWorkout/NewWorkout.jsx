@@ -27,15 +27,16 @@ import WorkoutUtils from '../../../utils/workout';
 
 const NewWorkout = () => {
   const [title, setTitle] = useState('');
-  const [
+  const {
     exercises,
     setsByExercise,
     anySetCompleted,
     onAddExercise,
+    onAddSavedExercise,
     onAddSet,
     onEditSet,
     onRemoveSet,
-  ] = useExercises();
+  } = useExercises();
 
   const counterRef = useRef(null);
   const addExerciseModalRef = useRef(null);
@@ -100,8 +101,9 @@ const NewWorkout = () => {
           // add exercises
           _.forEach(currentRoutine.exercises, (item) => {
             // DX: skip exercises that are already included
-            if (setsByExercise[item.presetId]) return;
-            onAddExercise(exercisePresets[item.presetId], item.numSets);
+            if (setsByExercise[item.exerciseId]) return;
+            const exercisePreset = exercisePresets[item.exerciseId];
+            onAddSavedExercise(item, exercisePreset, false);
           });
         }
       }

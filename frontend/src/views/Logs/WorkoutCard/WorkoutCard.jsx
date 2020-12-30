@@ -15,8 +15,8 @@ const WorkoutCard = ({ workout, onClickDelete }) => {
       <div className='workoutCard__name'>{workout.name}</div>
       <WorkoutMeta showVolume item={workout} />
       <div className='workoutCard__exercises'>
-        {_.map(workout.exercises, (exercise) => (
-          <ExerciseSummary key={exercise.presetId} exercise={exercise} />
+        {_.map(workout.exercises, (item) => (
+          <ExerciseSummary key={item.exerciseId} exercise={item} />
         ))}
       </div>
       <div className='workoutCard__buttonContainer'>
