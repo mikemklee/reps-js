@@ -56,6 +56,30 @@ const actions = {
       },
     };
   },
+  deleteWorkoutRequest: (workoutId) => {
+    return {
+      type: types.DELETE_WORKOUT_REQUEST,
+      payload: {
+        workoutId,
+      },
+    };
+  },
+  deleteWorkoutSuccess: (deletedWorkoutId) => {
+    return {
+      type: types.DELETE_WORKOUT_SUCCESS,
+      payload: {
+        deletedWorkoutId,
+      },
+    };
+  },
+  deleteWorkoutFailure: (error) => {
+    return {
+      type: types.DELETE_WORKOUT_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
   getWorkoutLogsRequest: () => {
     return {
       type: types.GET_WORKOUT_LOGS_REQUEST,

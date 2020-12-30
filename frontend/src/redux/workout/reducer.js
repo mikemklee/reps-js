@@ -9,6 +9,8 @@ export const initialState = {
     saveWorkoutSuccess: false,
     editWorkoutPending: false,
     editWorkoutSuccess: false,
+    deleteWorkoutPending: false,
+    deleteWorkoutSuccess: false,
     getWorkoutLogsPending: false,
     getWorkoutLogsSuccess: false,
   },
@@ -93,6 +95,40 @@ export default (state = initialState, { type, payload }) => {
           ...state.status,
           editWorkoutPending: false,
           editWorkoutSuccess: false,
+        },
+      };
+    }
+    case types.DELETE_WORKOUT_REQUEST: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleteWorkoutPending: true,
+          deleteWorkoutSuccess: false,
+        },
+      };
+    }
+    case types.DELETE_WORKOUT_SUCCESS: {
+      const { deletedWorkoutId } = payload;
+      return {
+        ...state,
+        workoutLogs: ReducerUtils.deleteObjsFromMap(state.workoutLogs, [
+          deletedWorkoutId,
+        ]),
+        status: {
+          ...state.status,
+          deleteWorkoutPending: false,
+          deleteWorkoutSuccess: true,
+        },
+      };
+    }
+    case types.DELETE_WORKOUT_FAILURE: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleteWorkoutPending: false,
+          deleteWorkoutSuccess: false,
         },
       };
     }
