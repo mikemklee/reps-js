@@ -50,6 +50,39 @@ const createRoutine = async (req, res) => {
   res.status(201).json(savedRoutine);
 };
 
+// @desc    Update an existing user routine
+// @route   POST /api/routines/:id
+const editUserRoutine = async (req, res) => {
+  const routineId = req.params.id;
+  const { routineData } = req.body;
+
+  // check if user owns this routine
+  const userRoutineIds = req.user.routineIds;
+  if (!userRoutineIds.includes(routineId)) {
+    res.status(403).json({
+      message: `Routine with id "${routineId}" does not belong to user`,
+    });
+  }
+
+  // TODO: validate request body
+
+  const routine = await Routine.findById(routineId);
+
+  if (!routine) {
+    res.status(404).json({
+      message: `Routine with id "${routineId}" does not exist`,
+    });
+    return;
+  }
+
+  routine.name = routineData.name;
+  routine.exercises = routineData.exercises;
+
+  const editedRoutine = await routine.save();
+
+  res.status(200).json(editedRoutine);
+};
+
 // @desc    Delete an existing user routine
 // @route   DELETE /api/routines/:id
 const deleteUserRoutine = async (req, res) => {
@@ -81,5 +114,6 @@ module.exports = {
   getUserRoutines,
   getRoutinePresets,
   createRoutine,
+  editUserRoutine,
   deleteUserRoutine,
 };
