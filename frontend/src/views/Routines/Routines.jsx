@@ -18,16 +18,19 @@ const Routines = () => {
   const { names: exerciseNames, status: exerciseStatus } = useSelector(
     (state) => state.exercise
   );
-  const { presets: routinePresets, status: routineStatus } = useSelector(
+  const { presetRoutines, customRoutines, status: routineStatus } = useSelector(
     (state) => state.routine
   );
 
   useEffect(() => {
-    dispatch(RoutineActions.getPresetsRequest());
+    dispatch(RoutineActions.getPresetRoutinesRequest());
+    dispatch(RoutineActions.getCustomRoutinesRequest());
   }, []);
 
   const loading =
-    exerciseStatus.getPresetsPending || routineStatus.getPresetsPending;
+    exerciseStatus.getPresetsPending ||
+    routineStatus.getPresetRoutinesPending ||
+    routineStatus.getCustomRoutinesPending;
 
   return (
     <div className='routines-view'>
@@ -39,21 +42,29 @@ const Routines = () => {
           <>
             <div className='customRoutines'>
               <div className='customRoutines__title'>Custom routines</div>
-              <div
-                className='customRoutines__addNew'
-                onClick={() => history.push('/routines/new')}
-              >
-                Add new custom routine
-                <div className='customRoutines__addNew__icon'>
-                  <VscAdd />
+              <div className='customRoutines__routines'>
+                <div
+                  className='customRoutines__addNew'
+                  onClick={() => history.push('/routines/new')}
+                >
+                  Add new custom routine
+                  <div className='customRoutines__addNew__icon'>
+                    <VscAdd />
+                  </div>
                 </div>
+                {_.map(customRoutines, (item) => (
+                  <RoutineCard
+                    key={item._id}
+                    routine={item}
+                    exerciseNames={exerciseNames}
+                  />
+                ))}
               </div>
-              <div className='customRoutines__routines'></div>
             </div>
             <div className='presetRoutines'>
               <div className='presetRoutines__title'>Preset routines</div>
               <div className='presetRoutines__routines'>
-                {_.map(routinePresets, (item) => (
+                {_.map(presetRoutines, (item) => (
                   <RoutineCard
                     key={item._id}
                     routine={item}

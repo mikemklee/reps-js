@@ -45,7 +45,9 @@ const NewWorkout = () => {
   const restTimerModalRef = useRef(null);
 
   const { status: workoutStatus } = useSelector((state) => state.workout);
-  const { presets: routinePresets } = useSelector((state) => state.routine);
+  const { presetRoutines, customRoutines } = useSelector(
+    (state) => state.routine
+  );
   const { presets: exercisePresets, status: exerciseStatus } = useSelector(
     (state) => state.exercise
   );
@@ -89,12 +91,16 @@ const NewWorkout = () => {
         setTitle('New blank workout');
       } else {
         // routine workout; populate exercises with routine data
-        if (_.isEmpty(routinePresets)) {
+        const allRoutines = {
+          ...presetRoutines,
+          ...customRoutines,
+        };
+
+        const currentRoutine = allRoutines[routineId];
+        if (!currentRoutine) {
           // no routine data available; redirect to home page
           history.push('/');
         } else {
-          const currentRoutine = routinePresets[routineId];
-
           // update workout title
           setTitle(currentRoutine.name);
 
