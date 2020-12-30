@@ -10,6 +10,8 @@ export const initialState = {
     getPresetRoutinesSuccess: false,
     getCustomRoutinesPending: false,
     getCustomRoutinesSuccess: false,
+    deleteCustomRoutinePending: false,
+    deleteCustomRoutineSuccess: false,
     saveRoutinePending: false,
     saveRoutineSuccess: false,
   },
@@ -110,6 +112,40 @@ export default (state = initialState, { type, payload }) => {
           ...state.status,
           saveRoutinePending: false,
           saveRoutineSuccess: false,
+        },
+      };
+    }
+    case types.DELETE_CUSTOM_ROUTINE_REQUEST: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleteCustomRoutinePending: true,
+          deleteCustomRoutineSuccess: false,
+        },
+      };
+    }
+    case types.DELETE_CUSTOM_ROUTINE_SUCCESS: {
+      const { deletedRoutineId } = payload;
+      return {
+        ...state,
+        customRoutines: ReducerUtils.deleteObjsFromMap(state.customRoutines, [
+          deletedRoutineId,
+        ]),
+        status: {
+          ...state.status,
+          deleteCustomRoutinePending: false,
+          deleteCustomRoutineSuccess: true,
+        },
+      };
+    }
+    case types.DELETE_CUSTOM_ROUTINE_FAILURE: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleteCustomRoutinePending: false,
+          deleteCustomRoutineSuccess: false,
         },
       };
     }

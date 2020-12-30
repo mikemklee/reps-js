@@ -69,6 +69,30 @@ const actions = {
       },
     };
   },
+  deleteCustomRoutineRequest: (routineId) => {
+    return {
+      type: types.DELETE_CUSTOM_ROUTINE_REQUEST,
+      payload: {
+        routineId,
+      },
+    };
+  },
+  deleteCustomRoutineSuccess: (deletedRoutineId) => {
+    return {
+      type: types.DELETE_CUSTOM_ROUTINE_SUCCESS,
+      payload: {
+        deletedRoutineId,
+      },
+    };
+  },
+  deleteCustomRoutineFailure: (error) => {
+    return {
+      type: types.DELETE_CUSTOM_ROUTINE_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
 };
 
 export default actions;
