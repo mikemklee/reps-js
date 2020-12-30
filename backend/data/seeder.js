@@ -8,7 +8,7 @@ const { defineAdminUser } = require('./users');
 const { defineExercisePresets } = require('./exercisePresets');
 const { defineRoutinePresets } = require('./routines');
 const User = require('../models/User');
-const ExercisePreset = require('../models/ExercisePreset');
+const Exercise = require('../models/Exercise');
 const Routine = require('../models/Routine');
 const Workout = require('../models/Workout');
 const connectDB = require('../config/db');
@@ -29,9 +29,7 @@ const importData = async () => {
     // define exercise presets
     const exercisePresets = defineExercisePresets();
     // insert all exercise presets in DB
-    const createdExercisePresets = await ExercisePreset.insertMany(
-      exercisePresets
-    );
+    const createdExercisePresets = await Exercise.insertMany(exercisePresets);
 
     // define routine presets
     const routinePresets = defineRoutinePresets(createdExercisePresets);
@@ -60,17 +58,13 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     await User.deleteMany();
-    await ExercisePreset.deleteMany();
+    await Exercise.deleteMany();
     await Routine.deleteMany();
     await Workout.deleteMany();
     console.log('Data destroyed!'.red.inverse);
     console.log('All user data have been deleted from the DB'.red.inverse);
-    console.log(
-      'All exercise preset data have been deleted from the DB'.red.inverse
-    );
-    console.log(
-      'All routine preset data have been deleted from the DB'.red.inverse
-    );
+    console.log('All exercise data have been deleted from the DB'.red.inverse);
+    console.log('All routine data have been deleted from the DB'.red.inverse);
     console.log('All workout logs have been deleted from the DB'.red.inverse);
     process.exit();
   } catch (err) {

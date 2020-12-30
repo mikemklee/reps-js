@@ -17,32 +17,55 @@ const defineRoutinePresets = (createdExercisePresets) => {
       name: 'Push day',
       exercises: [
         {
-          presetId: BENCH_PRESS_DUMBBELL_ID,
-          numSets: 3,
+          exerciseId: BENCH_PRESS_DUMBBELL_ID,
+          sets: [
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+          ],
         },
         {
-          presetId: SHOULDER_PRESS_DUMBBELL_ID,
-          numSets: 3,
+          exerciseId: SHOULDER_PRESS_DUMBBELL_ID,
+          sets: [
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+          ],
         },
       ],
+      isPreset: true,
     },
     {
       name: 'Pull day',
       exercises: [
         {
-          presetId: DEADLIFT_DUMBBELL_ID,
-          numSets: 5,
+          exerciseId: DEADLIFT_DUMBBELL_ID,
+          sets: [
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+          ],
         },
       ],
+      isPreset: true,
     },
     {
       name: 'Leg day',
       exercises: [
         {
-          presetId: SQUAT_DUMBBELL_ID,
-          numSets: 5,
+          exerciseId: SQUAT_DUMBBELL_ID,
+          sets: [
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+            { kg: 12, reps: 12 },
+          ],
         },
       ],
+      isPreset: true,
     },
   ];
 };

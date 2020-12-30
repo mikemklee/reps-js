@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { setSchema } = require('./Set');
+
 const routineSchema = mongoose.Schema({
   name: {
     type: String,
@@ -8,18 +10,19 @@ const routineSchema = mongoose.Schema({
   },
   exercises: [
     {
-      presetId: {
+      exerciseId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'ExercisePreset',
+        ref: 'Exercise',
       },
-      numSets: {
-        type: Number,
-        required: true,
-        default: 1,
-      },
+      sets: [setSchema],
     },
   ],
+  isPreset: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 const Routine = mongoose.model('Routine', routineSchema);

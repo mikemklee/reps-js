@@ -1,11 +1,10 @@
 const Routine = require('../models/Routine');
 
 // @desc    Fetch all routine presets
-// @route   GET /api/routines
+// @route   GET /api/routines/presets
 // @access  Private
 const getRoutinePresets = async (req, res) => {
-  // TODO: distinguish between user routines and presets
-  const routines = await Routine.find({});
+  const routines = await Routine.find({ isPreset: true });
   res.json(routines);
 };
 

@@ -22,6 +22,27 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    exerciseIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Exercise',
+      },
+    ],
+    routineIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Routine',
+      },
+    ],
+    workoutIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Workout',
+      },
+    ],
   },
   {
     timestamps: true,

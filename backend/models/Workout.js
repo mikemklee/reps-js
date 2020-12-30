@@ -1,17 +1,6 @@
 const mongoose = require('mongoose');
 
-const setSchema = mongoose.Schema({
-  kg: {
-    type: Number,
-    default: 0,
-    required: true,
-  },
-  reps: {
-    type: Number,
-    default: 0,
-    required: true,
-  },
-});
+const { setSchema } = require('./Set');
 
 const workoutSchema = mongoose.Schema(
   {
@@ -31,10 +20,10 @@ const workoutSchema = mongoose.Schema(
     },
     exercises: [
       {
-        presetId: {
+        exerciseId: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
-          ref: 'ExercisePreset',
+          ref: 'Exercise',
         },
         sets: [setSchema],
       },

@@ -1,7 +1,7 @@
 require('colors');
 const mongoose = require('mongoose');
 
-const exercisePresetSchema = mongoose.Schema(
+const exerciseSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -18,12 +18,17 @@ const exercisePresetSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    isPreset: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const ExercisePreset = mongoose.model('ExercisePreset', exercisePresetSchema);
+const Exercise = mongoose.model('Exercise', exerciseSchema);
 
-module.exports = ExercisePreset;
+module.exports = Exercise;
