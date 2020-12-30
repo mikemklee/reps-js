@@ -20,17 +20,19 @@ const Exercise = ({
   const [columns, setColumns] = useState([]);
 
   useEffect(() => {
+    // TODO: define different set of columns for different exercise category
+    // TODO: query previous record and show as separate column
     const displayedColumns = [
       {
         Header: 'Set',
         accessor: 'set',
         Cell: ({ row }) => row.index + 1,
       },
-      {
-        Header: 'Previous',
-        accessor: 'previous',
-        Cell: () => 'test', // TODO: query previous record?
-      },
+      // {
+      //   Header: 'Previous',
+      //   accessor: 'previous',
+      //   Cell: () => 'test', // TODO: query previous record?
+      // },
       {
         Header: 'kg',
         accessor: 'kg',
