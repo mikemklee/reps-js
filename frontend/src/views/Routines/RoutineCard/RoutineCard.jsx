@@ -41,7 +41,7 @@ const RoutineCard = ({ routine, exerciseNames, onClickDelete }) => {
         <div
           className='routineCard__button routineCard__button--primary'
           title='Start new workout from this routine'
-          onClick={() => history.push(`/routines/${routine._id}`)}
+          onClick={() => history.push(`/workout/${routine._id}`)}
         >
           <CgArrowTopRight />
         </div>
