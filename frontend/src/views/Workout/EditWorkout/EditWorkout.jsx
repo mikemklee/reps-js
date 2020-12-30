@@ -8,6 +8,7 @@ import _ from 'lodash';
 import './EditWorkout.scss';
 
 import Exercise from '../Exercise/Exercise';
+import WorkoutMeta from '../../Logs/WorkoutCard/WorkoutMeta/WorkoutMeta';
 
 import Modal from '../../../shared/Modal/Modal';
 import AddExercise from '../../../shared/AddExercise/AddExercise';
@@ -18,7 +19,8 @@ import ExerciseActions from '../../../redux/exercise/actions';
 
 import usePrevious from '../../../hooks/usePrevious';
 import useExercises from '../../../hooks/useExercises';
-import WorkoutMeta from '../../Logs/WorkoutCard/WorkoutMeta/WorkoutMeta';
+
+import WorkoutUtils from '../../../utils/workout';
 
 const EditWorkout = () => {
   const [title, setTitle] = useState('');
@@ -104,7 +106,7 @@ const EditWorkout = () => {
   const onSaveWorkout = () => {
     const formattedData = {
       name: title,
-      exercises: EditWorkout.formatExercisesData(setsByExercise),
+      exercises: WorkoutUtils.formatExercisesData(setsByExercise),
       duration,
     };
 
@@ -178,16 +180,6 @@ const EditWorkout = () => {
       </Modal>
     </div>
   );
-};
-
-EditWorkout.formatExercisesData = (setsByExercise) => {
-  return _.map(setsByExercise, (sets, presetId) => ({
-    presetId,
-    sets: _.map(sets, (set) => ({
-      kg: parseInt(set.kg, 10),
-      reps: parseInt(set.reps, 10),
-    })),
-  }));
 };
 
 export default EditWorkout;

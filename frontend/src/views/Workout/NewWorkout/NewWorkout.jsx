@@ -22,6 +22,8 @@ import ExerciseActions from '../../../redux/exercise/actions';
 import usePrevious from '../../../hooks/usePrevious';
 import useExercises from '../../../hooks/useExercises';
 
+import WorkoutUtils from '../../../utils/workout';
+
 const NewWorkout = () => {
   const [title, setTitle] = useState('');
   const [
@@ -66,7 +68,9 @@ const NewWorkout = () => {
         history.push('/logs');
         return;
       }
+    }
 
+    if (prevExerciseStatus && exerciseStatus) {
       if (
         !prevExerciseStatus.getPresetsSuccess &&
         exerciseStatus.getPresetsSuccess
@@ -106,7 +110,7 @@ const NewWorkout = () => {
   const onCompleteWorkout = () => {
     const formattedData = {
       name: title,
-      exercises: NewWorkout.formatExercisesData(setsByExercise),
+      exercises: WorkoutUtils.formatExercisesData(setsByExercise),
       duration: counterRef.current,
     };
 
@@ -208,16 +212,6 @@ const NewWorkout = () => {
       </Modal>
     </div>
   );
-};
-
-NewWorkout.formatExercisesData = (setsByExercise) => {
-  return _.map(setsByExercise, (sets, presetId) => ({
-    presetId,
-    sets: _.map(sets, (set) => ({
-      kg: parseInt(set.kg, 10),
-      reps: parseInt(set.reps, 10),
-    })),
-  }));
 };
 
 export default NewWorkout;
