@@ -20,8 +20,8 @@
   &.vertical {
     flex-direction: column;
 
-    #{$self}-duration,
-    #{$self}-volume {
+    #{$self}__duration,
+    #{$self}__volume {
       margin-left: 0;
       margin-top: 0.5rem;
     }

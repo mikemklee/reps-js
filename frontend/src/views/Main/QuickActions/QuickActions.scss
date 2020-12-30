@@ -33,7 +33,7 @@
   }
 
   &__button {
-    @include actionIconStyles;
+    @include primaryActionIconStyles;
     right: 1rem;
     bottom: 1rem;
   }

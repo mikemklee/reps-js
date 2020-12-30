@@ -26,12 +26,21 @@
   }
 
   &__button {
-    @include actionIconStyles;
-    position: relative;
+    margin-left: 1rem;
     cursor: pointer;
 
     &:hover {
       opacity: 1;
+    }
+
+    &--primary {
+      @include primaryActionIconStyles;
+      position: relative;
+    }
+
+    &--secondary {
+      @include secondaryActionIconStyles;
+      position: relative;
     }
   }
 }
