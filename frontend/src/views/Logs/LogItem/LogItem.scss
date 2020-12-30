@@ -1,14 +1,9 @@
 @import '../../../styles/common';
 
 .logs-item {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid rgba($light-grey, 0.2);
-  border-radius: 4px;
+  @include cardStyles;
   font-size: 0.9rem;
-  position: relative;
+  margin-bottom: 1rem;
 
   &-name {
     font-size: 1.1rem;

@@ -18,12 +18,8 @@
 }
 
 .actionCard {
-  @include boxShadows;
-  position: relative;
-  background: $off-black;
+  @include cardStyles;
   height: 10rem;
-  border-radius: 10px;
-  padding: 1rem;
   cursor: pointer;
 
   &__title {

@@ -9,16 +9,9 @@
 
 .exerciseCard {
   $self: &;
-  @include boxShadows;
-  background: $off-black;
-  padding: 1rem;
-  border-radius: 10px;
+  @include cardStyles;
   cursor: pointer;
-  border: 1px solid transparent;
   transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 
   &__title {
     font-weight: 600;

@@ -87,3 +87,14 @@
   opacity: 0.5;
   transition: opacity 0.2s;
 }
+
+@mixin cardStyles() {
+  @include boxShadows;
+  background: $off-black;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}

@@ -1,15 +1,8 @@
 @import '../../../styles/common';
 
 .routineCard {
-  @include boxShadows;
-  background: $off-black;
-  padding: 1rem;
+  @include cardStyles;
   height: 12rem;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  display: flex;
-  flex-direction: column;
-  position: relative;
   cursor: pointer;
 
   &__title {
