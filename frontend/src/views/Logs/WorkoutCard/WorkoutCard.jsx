@@ -1,13 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { BiEditAlt } from 'react-icons/bi';
+import { BiEditAlt, BiTrash } from 'react-icons/bi';
 import _ from 'lodash';
 
 import './WorkoutCard.scss';
 import ExerciseSummary from './ExerciseSummary/ExerciseSummary';
 import WorkoutMeta from './WorkoutMeta/WorkoutMeta';
 
-const WorkoutCard = ({ workout }) => {
+const WorkoutCard = ({ workout, onClickDelete }) => {
   const history = useHistory();
 
   return (
@@ -21,10 +21,16 @@ const WorkoutCard = ({ workout }) => {
       </div>
       <div className='workoutCard__buttonContainer'>
         <div
-          className='workoutCard__button'
+          className='workoutCard__button workoutCard__button--primary'
           onClick={() => history.push(`/workout/${workout._id}/edit`)}
         >
           <BiEditAlt />
+        </div>
+        <div
+          className='workoutCard__button workoutCard__button--secondary'
+          onClick={() => onClickDelete(workout._id)}
+        >
+          <BiTrash />
         </div>
       </div>
     </div>
