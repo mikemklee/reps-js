@@ -8,6 +8,7 @@ import getPresetRoutines from './getPresetRoutines';
 import getCustomRoutines from './getCustomRoutines';
 import saveRoutine from './saveRoutine';
 import deleteCustomRoutine from './deleteCustomRoutine';
+import editCustomRoutine from './editCustomRoutine';
 
 export default function* authSaga() {
   yield all([takeLatest(types.GET_PRESET_ROUTINES_REQUEST, getPresetRoutines)]);
@@ -16,4 +17,5 @@ export default function* authSaga() {
   yield all([
     takeLatest(types.DELETE_CUSTOM_ROUTINE_REQUEST, deleteCustomRoutine),
   ]);
+  yield all([takeLatest(types.EDIT_CUSTOM_ROUTINE_REQUEST, editCustomRoutine)]);
 }

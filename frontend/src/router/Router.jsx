@@ -15,6 +15,7 @@ import Exercises from '../views/Exercises/Exercises';
 import NewWorkout from '../views/Workout/NewWorkout/NewWorkout';
 import EditWorkout from '../views/Workout/EditWorkout/EditWorkout';
 import NewRoutine from '../views/Routines/NewRoutine/NewRoutine';
+import EditRoutine from '../views/Routines/EditRoutine/EditRoutine';
 
 import ExerciseActions from '../redux/exercise/actions';
 class RouterApp extends React.Component {
@@ -55,6 +56,10 @@ class RouterApp extends React.Component {
               )}
               {this.renderProtectedRoute('/routines', Routines)}
               {this.renderProtectedRoute('/routines/:workoutId', NewRoutine)}
+              {this.renderProtectedRoute(
+                '/routines/:routineId/edit',
+                EditRoutine
+              )}
               {this.renderProtectedRoute('/exercises', Exercises)}
               {this.renderProtectedRoute('/logs', Logs)}
               {this.renderProtectedRoute('/', Main, false)}

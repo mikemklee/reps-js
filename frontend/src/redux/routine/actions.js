@@ -69,11 +69,12 @@ const actions = {
       },
     };
   },
-  editCustomRoutineRequest: (routineId) => {
+  editCustomRoutineRequest: (routineId, routineData) => {
     return {
       type: types.EDIT_CUSTOM_ROUTINE_REQUEST,
       payload: {
         routineId,
+        routineData,
       },
     };
   },
