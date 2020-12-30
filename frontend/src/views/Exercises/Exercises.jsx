@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Exercises.scss';
 
 import ExerciseActions from '../../redux/exercise/actions';
-import ExerciseCardList from '../../shared/ExerciseCardList/ExerciseCardList';
+import { ExerciseCardList } from '../../shared';
 
 const Exercises = () => {
   const dispatch = useDispatch();

@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import './Router.scss';
 
 // shared components
-import Login from '../shared/Login/Login';
-import Sidebar from '../shared/Sidebar/Sidebar';
+import { Login, Sidebar } from '../shared';
 
 // views
 import Main from '../views/Main/Main';

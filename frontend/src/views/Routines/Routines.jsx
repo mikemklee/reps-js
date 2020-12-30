@@ -7,7 +7,7 @@ import './Routines.scss';
 
 import RoutineCard from './RoutineCard/RoutineCard';
 
-import LoadingSpinner from '../../shared/LoadingSpinner/LoadingSpinner';
+import { LoadingSpinner } from '../../shared';
 
 import RoutineActions from '../../redux/routine/actions';
 

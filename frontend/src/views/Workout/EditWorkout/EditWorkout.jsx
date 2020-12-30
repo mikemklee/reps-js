@@ -9,10 +9,7 @@ import './EditWorkout.scss';
 
 import WorkoutMeta from '../../Logs/WorkoutCard/WorkoutMeta/WorkoutMeta';
 
-import Exercise from '../../../shared/Exercise/Exercise';
-import Modal from '../../../shared/Modal/Modal';
-import AddExercise from '../../../shared/AddExercise/AddExercise';
-import Confirmation from '../../../shared/Confirmation/Confirmation';
+import { Exercise, Modal, AddExercise, Confirmation } from '../../../shared';
 
 import WorkoutActions from '../../../redux/workout/actions';
 import ExerciseActions from '../../../redux/exercise/actions';

@@ -6,8 +6,7 @@ import './Logs.scss';
 
 import WorkoutCard from './WorkoutCard/WorkoutCard';
 
-import Modal from '../../shared/Modal/Modal';
-import Confirmation from '../../shared/Confirmation/Confirmation';
+import { Modal, Confirmation } from '../../shared';
 
 import WorkoutActions from '../../redux/workout/actions';
 
