@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 import './NewWorkout.scss';
 
-import Timer from '../Timer/Timer';
+import DurationTimer from '../DurationTimer/DurationTimer';
 import Exercise from '../Exercise/Exercise';
 import RestTimer from '../RestTimer/RestTimer';
 
@@ -124,7 +124,7 @@ const NewWorkout = () => {
         <div className='workout-controls'>
           <div className='workout-controls-duration-timer'>
             <label>Time elapsed: </label>
-            <Timer ref={counterRef} />
+            <DurationTimer ref={counterRef} />
           </div>
           <div
             className='workout-controls-rest-timer'

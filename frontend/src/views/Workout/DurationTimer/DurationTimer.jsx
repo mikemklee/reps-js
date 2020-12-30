@@ -6,11 +6,11 @@ import React, {
 } from 'react';
 import moment from 'moment';
 
-import './Timer.scss';
+import './DurationTimer.scss';
 
 import TimeDisplay from '../../../shared/TimeDisplay/TimeDisplay';
 
-const Timer = (props, ref) => {
+const DurationTimer = (props, ref) => {
   const [counter, setCounter] = useState(0);
 
   useImperativeHandle(ref, () => counter, [counter]);
@@ -34,4 +34,4 @@ const Timer = (props, ref) => {
   );
 };
 
-export default React.memo(forwardRef(Timer));
+export default React.memo(forwardRef(DurationTimer));
