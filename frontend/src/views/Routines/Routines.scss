@@ -1,46 +1,32 @@
 @import '../../styles/common';
 
-.routines-view {
+.routinesView {
   @include viewContainerStyles;
   flex: 1;
 
-  .view-header {
+  &__header {
     @include viewHeaderStyles;
   }
 
-  .view-content {
+  &__content {
     flex: 1;
   }
 }
 
-.customRoutines {
+.routineControlBar {
+  display: flex;
+
   &__addNew {
-    @include cardStyles;
-    font-size: 1.2rem;
-    background: transparent;
-    border: 2px dashed $light-grey;
-    width: 12rem;
-    height: 12rem;
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity 0.2s;
-
-    &:hover {
-      opacity: 1;
-    }
-
-    &__icon {
-      @include secondaryActionIconStyles;
-      right: 1rem;
-      bottom: 1rem;
-      background: $light-grey;
-      color: $medium-grey;
-    }
+    @include primaryButtonStyles;
+    @include flexCenterHorizontally;
+    margin-left: auto;
   }
+}
 
+.customRoutines {
   &__routines {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     grid-gap: 1rem;
   }
 }
@@ -48,7 +34,7 @@
 .presetRoutines {
   &__routines {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     grid-gap: 1rem;
   }
 }

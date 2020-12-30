@@ -46,25 +46,25 @@ const Routines = () => {
     routineStatus.getCustomRoutinesPending;
 
   return (
-    <div className='routines-view'>
-      <div className='view-header'>Routines</div>
-      <div className='view-content'>
+    <div className='routinesView'>
+      <div className='routinesView__header'>Routines</div>
+      <div className='routinesView__content'>
         {loading ? (
           <LoadingSpinner />
         ) : (
           <>
+            <div className='routineControlBar'>
+              <button
+                className='routineControlBar__addNew'
+                onClick={() => history.push('/routines/new')}
+              >
+                <VscAdd />
+                <span>Add new routine</span>
+              </button>
+            </div>
             <div className='customRoutines'>
               <div className='customRoutines__title'>Custom routines</div>
               <div className='customRoutines__routines'>
-                <div
-                  className='customRoutines__addNew'
-                  onClick={() => history.push('/routines/new')}
-                >
-                  Add new custom routine
-                  <div className='customRoutines__addNew__icon'>
-                    <VscAdd />
-                  </div>
-                </div>
                 {_.map(customRoutines, (item) => (
                   <RoutineCard
                     key={item._id}

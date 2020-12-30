@@ -31,10 +31,11 @@
 
       &-rest-timer {
         font-size: 1.6rem;
-        flex: 1;
+        margin-left: 1rem;
 
         button {
           @include secondaryButtonStyles;
+          padding: 0.6rem 1rem;
         }
       }
 
@@ -53,7 +54,7 @@
         }
 
         .cancel-workout-btn {
-          @include warningButtonStyles;
+          @include secondaryButtonStyles;
         }
       }
     }
