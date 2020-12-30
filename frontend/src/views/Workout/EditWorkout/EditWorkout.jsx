@@ -111,9 +111,16 @@ const EditWorkout = () => {
   };
 
   return (
-    <div className='workout-view'>
-      <div className='view-header'>Edit {title}</div>
-      <div className='view-content'>
+    <div className='workoutView'>
+      <div className='workoutView__header'>
+        <input
+          className='workoutView__title'
+          type='text'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className='workoutView__content'>
         <div className='workout-controls'>
           {workout ? <WorkoutMeta vertical item={workout} /> : null}
           <div className='workout-controls-actions'>

@@ -102,9 +102,16 @@ const NewRoutine = () => {
   };
 
   return (
-    <div className='workout-view'>
-      <div className='view-header'>{title}</div>
-      <div className='view-content'>
+    <div className='workoutView'>
+      <div className='workoutView__header'>
+        <input
+          className='workoutView__title workoutView__title--editable'
+          type='text'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className='workoutView__content'>
         <div className='workout-controls'>
           <div className='workout-controls-actions'>
             <button

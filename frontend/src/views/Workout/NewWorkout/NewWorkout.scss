@@ -1,14 +1,28 @@
 @import '../../../styles/common';
 
-.workout-view {
+.workoutView {
   @include viewContainerStyles;
   flex: 1;
 
-  .view-header {
+  &__header {
     @include viewHeaderStyles;
   }
 
-  .view-content {
+  &__title {
+    outline: none;
+    border: none;
+    font-size: 2.2rem;
+    color: inherit;
+    background: transparent;
+    pointer-events: none;
+
+    &--editable {
+      background: $dark-grey;
+      pointer-events: auto;
+    }
+  }
+
+  &__content {
     flex: 1;
     max-width: 40rem;
 
