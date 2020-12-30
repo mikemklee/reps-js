@@ -8,7 +8,7 @@ import moment from 'moment';
 
 import './DurationTimer.scss';
 
-import TimeDisplay from '../../../shared/TimeDisplay/TimeDisplay';
+import TimeDisplay from '../TimeDisplay/TimeDisplay';
 
 const DurationTimer = (props, ref) => {
   const [counter, setCounter] = useState(0);

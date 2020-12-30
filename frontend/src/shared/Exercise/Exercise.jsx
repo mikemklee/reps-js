@@ -4,10 +4,10 @@ import { VscAdd, VscClose } from 'react-icons/vsc';
 
 import './Exercise.scss';
 
-import Table from '../../../shared/Table/Table';
-import NumberInputCell from '../../../shared/Table/NumberInputCell/NumberInputCell';
-import CheckboxCell from '../../../shared/Table/CheckboxCell/CheckboxCell';
-import ButtonCell from '../../../shared/Table/ButtonCell/ButtonCell';
+import Table from '../Table/Table';
+import NumberInputCell from '../Table/NumberInputCell/NumberInputCell';
+import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
+import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
 const Exercise = ({ exercise, sets, onAddSet, onEditSet, onRemoveSet }) => {
   const columns = React.useMemo(

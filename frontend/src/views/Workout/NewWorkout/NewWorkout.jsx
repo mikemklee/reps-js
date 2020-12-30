@@ -8,10 +8,9 @@ import _ from 'lodash';
 
 import './NewWorkout.scss';
 
-import DurationTimer from '../DurationTimer/DurationTimer';
-import Exercise from '../Exercise/Exercise';
-import RestTimer from '../RestTimer/RestTimer';
-
+import DurationTimer from '../../../shared/DurationTimer/DurationTimer';
+import Exercise from '../../../shared/Exercise/Exercise';
+import RestTimer from '../../../shared/RestTimer/RestTimer';
 import Modal from '../../../shared/Modal/Modal';
 import AddExercise from '../../../shared/AddExercise/AddExercise';
 import Confirmation from '../../../shared/Confirmation/Confirmation';

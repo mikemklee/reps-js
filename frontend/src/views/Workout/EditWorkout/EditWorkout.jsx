@@ -7,9 +7,9 @@ import _ from 'lodash';
 
 import './EditWorkout.scss';
 
-import Exercise from '../Exercise/Exercise';
 import WorkoutMeta from '../../Logs/WorkoutCard/WorkoutMeta/WorkoutMeta';
 
+import Exercise from '../../../shared/Exercise/Exercise';
 import Modal from '../../../shared/Modal/Modal';
 import AddExercise from '../../../shared/AddExercise/AddExercise';
 import Confirmation from '../../../shared/Confirmation/Confirmation';

@@ -4,9 +4,9 @@ import moment from 'moment';
 import { VscAdd } from 'react-icons/vsc';
 
 import './RestTimer.scss';
-import TimeDisplay from '../../../shared/TimeDisplay/TimeDisplay';
-import ProgressRing from '../../../shared/ProgressRing/ProgressRing';
-import usePrevious from '../../../hooks/usePrevious';
+import TimeDisplay from '../TimeDisplay/TimeDisplay';
+import ProgressRing from '../ProgressRing/ProgressRing';
+import usePrevious from '../../hooks/usePrevious';
 
 const calculateProgress = (timeRemaining, duration) => {
   const fractionRemaining = timeRemaining / duration;
