@@ -1,5 +1,15 @@
 const Routine = require('../models/Routine');
 
+// @desc    Fetch all user routines
+// @route   GET /api/routines
+// @access  Private
+const getUserRoutines = async (req, res) => {
+  const userRoutines = await Routine.find()
+    .where('_id')
+    .in(req.user.routineIds);
+  res.json(userRoutines);
+};
+
 // @desc    Fetch all routine presets
 // @route   GET /api/routines/presets
 // @access  Private
@@ -40,4 +50,4 @@ const createRoutine = async (req, res) => {
   res.status(201).json(savedRoutine);
 };
 
-module.exports = { getRoutinePresets, createRoutine };
+module.exports = { getUserRoutines, getRoutinePresets, createRoutine };
