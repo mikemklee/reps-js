@@ -47,4 +47,30 @@ const editWorkout = async (req, res) => {
   res.status(200).json(editedWorkout);
 };
 
-module.exports = { getWorkoutLogs, saveWorkout, editWorkout };
+// @desc    Delete an existing workout session
+// @route   DELETE /api/workouts/:workoutId
+const deleteWorkout = async (req, res) => {
+  const workoutId = req.params.id;
+
+  // TODO: validate request body
+
+  const workout = await Workout.findById(workoutId);
+
+  if (!workout) {
+    res.status(404).json({
+      message: `Workout with id "${workoutId}" does not exist`,
+    });
+    return;
+  }
+
+  await workout.remove();
+
+  res.status(200).json({});
+};
+
+module.exports = {
+  getWorkoutLogs,
+  saveWorkout,
+  editWorkout,
+  deleteWorkout,
+};
