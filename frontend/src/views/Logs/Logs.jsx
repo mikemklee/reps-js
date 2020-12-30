@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import './Logs.scss';
 
-import LogItem from './LogItem/LogItem';
+import WorkoutCard from './WorkoutCard/WorkoutCard';
 
 import WorkoutActions from '../../redux/workout/actions';
 
@@ -21,8 +21,8 @@ const Logs = () => {
       <div className='view-header'>Logs</div>
       <div className='view-content'>
         <div className='logs'>
-          {_.map(workoutLogs, (item, index) => (
-            <LogItem key={index} item={item} />
+          {_.map(workoutLogs, (workout, index) => (
+            <WorkoutCard key={index} workout={workout} />
           ))}
         </div>
       </div>

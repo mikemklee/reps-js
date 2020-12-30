@@ -1,24 +1,24 @@
 @import '../../../styles/common';
 
-.logs-item {
+.workoutCard {
   @include cardStyles;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 
-  &-name {
+  &__name {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: $off-white;
   }
 
-  &-exercises {
+  &__exercises {
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
   }
 
-  &-buttons {
+  &__buttonContainer {
     position: absolute;
     display: flex;
     bottom: 1rem;

@@ -18,7 +18,7 @@ import ExerciseActions from '../../../redux/exercise/actions';
 
 import usePrevious from '../../../hooks/usePrevious';
 import useExercises from '../../../hooks/useExercises';
-import LogItemMeta from '../../Logs/LogItem/LogItemMeta/LogItemMeta';
+import WorkoutMeta from '../../Logs/WorkoutCard/WorkoutMeta/WorkoutMeta';
 
 const EditWorkout = () => {
   const [title, setTitle] = useState('');
@@ -116,7 +116,7 @@ const EditWorkout = () => {
       <div className='view-header'>Edit {title}</div>
       <div className='view-content'>
         <div className='workout-controls'>
-          {workout ? <LogItemMeta vertical item={workout} /> : null}
+          {workout ? <WorkoutMeta vertical item={workout} /> : null}
           <div className='workout-controls-actions'>
             <button
               className='cancel-workout-btn'

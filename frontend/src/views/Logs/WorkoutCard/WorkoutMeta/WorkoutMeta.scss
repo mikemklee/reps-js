@@ -1,13 +1,13 @@
-.logs-item-meta {
+.workoutMeta {
   $self: &;
   display: flex;
 
-  &-completedAt {
+  &__completedAt {
     flex: 1;
   }
 
-  &-duration,
-  &-volume {
+  &__duration,
+  &__volume {
     display: flex;
     align-items: center;
     margin-left: 1rem;

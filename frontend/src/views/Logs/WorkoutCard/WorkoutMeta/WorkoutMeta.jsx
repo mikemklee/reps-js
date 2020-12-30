@@ -5,9 +5,9 @@ import { FaWeightHanging } from 'react-icons/fa';
 import classnames from 'classnames';
 import _ from 'lodash';
 
-import './LogItemMeta.scss';
+import './WorkoutMeta.scss';
 
-const LogItemMeta = ({ item, vertical = false, showVolume = false }) => {
+const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
   const formattedCompletedAt = moment(item.createdAt).format(
     'h:mm A dddd, Do MMM YYYY'
   );
@@ -31,14 +31,14 @@ const LogItemMeta = ({ item, vertical = false, showVolume = false }) => {
   );
 
   return (
-    <div className={classnames('logs-item-meta', { vertical })}>
-      <div className='logs-item-meta-completedAt'>{formattedCompletedAt}</div>
-      <div className='logs-item-meta-duration'>
+    <div className={classnames('workoutMeta', { vertical })}>
+      <div className='workoutMeta__completedAt'>{formattedCompletedAt}</div>
+      <div className='workoutMeta__duration'>
         <BiTimeFive />
         <span>{formattedDuration} minutes</span>
       </div>
       {showVolume ? (
-        <div className='logs-item-meta-volume'>
+        <div className='workoutMeta__volume'>
           <FaWeightHanging />
           <span>{totalVolume} kg</span>
         </div>
@@ -47,4 +47,4 @@ const LogItemMeta = ({ item, vertical = false, showVolume = false }) => {
   );
 };
 
-export default React.memo(LogItemMeta);
+export default React.memo(WorkoutMeta);
