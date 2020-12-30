@@ -50,7 +50,7 @@ const Logs = () => {
         <Modal ref={deleteWorkoutModalRef}>
           <Confirmation
             isWarning
-            title='Cancel workout'
+            title='Delete workout'
             subtitle={
               <>
                 <p>

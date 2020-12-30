@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import './RoutineCard.scss';
 
-const RoutineCard = ({ routine, exerciseNames }) => {
+const RoutineCard = ({ routine, exerciseNames, onClickDelete }) => {
   const history = useHistory();
 
   return (
@@ -20,22 +20,28 @@ const RoutineCard = ({ routine, exerciseNames }) => {
         ))}
       </div>
       <div className='routineCard__buttonContainer'>
-        <div
-          className='routineCard__button routineCard__button--secondary'
-          title='Delete this routine'
-        >
-          <BiTrash />
-        </div>
-        <div
-          className='routineCard__button routineCard__button--secondary'
-          title='Edit this routine'
-        >
-          <BiEditAlt />
-        </div>
+        {routine.isPreset ? null : (
+          <>
+            <div
+              className='routineCard__button routineCard__button--secondary'
+              title='Delete this routine'
+              onClick={() => onClickDelete(routine._id)}
+            >
+              <BiTrash />
+            </div>
+            <div
+              className='routineCard__button routineCard__button--secondary'
+              title='Edit this routine'
+              onClick={() => history.push(`/routines/${routine._id}/edit`)}
+            >
+              <BiEditAlt />
+            </div>
+          </>
+        )}
         <div
           className='routineCard__button routineCard__button--primary'
           title='Start new workout from this routine'
-          onClick={() => history.push({ pathname: `/workout/${routine._id}` })}
+          onClick={() => history.push(`/routines/${routine._id}`)}
         >
           <CgArrowTopRight />
         </div>
