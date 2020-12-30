@@ -50,4 +50,36 @@ const createRoutine = async (req, res) => {
   res.status(201).json(savedRoutine);
 };
 
-module.exports = { getUserRoutines, getRoutinePresets, createRoutine };
+// @desc    Delete an existing user routine
+// @route   DELETE /api/routines/:id
+const deleteUserRoutine = async (req, res) => {
+  const routineId = req.params.id;
+
+  // check if user owns this routine
+  const userRoutineIds = req.user.routineIds;
+  if (!userRoutineIds.includes(routineId)) {
+    res.status(403).json({
+      message: `Routine with id "${routineId}" does not belong to user`,
+    });
+  }
+
+  const routine = await Routine.findById(routineId);
+
+  if (!routine) {
+    res.status(404).json({
+      message: `Routine with id "${routineId}" does not exist`,
+    });
+    return;
+  }
+
+  await routine.remove();
+
+  res.status(200).json({});
+};
+
+module.exports = {
+  getUserRoutines,
+  getRoutinePresets,
+  createRoutine,
+  deleteUserRoutine,
+};

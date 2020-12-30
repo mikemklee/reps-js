@@ -48,7 +48,7 @@ const editWorkout = async (req, res) => {
 };
 
 // @desc    Delete an existing workout session
-// @route   DELETE /api/workouts/:workoutId
+// @route   DELETE /api/workouts/:id
 const deleteWorkout = async (req, res) => {
   const workoutId = req.params.id;
 
