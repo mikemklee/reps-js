@@ -52,7 +52,7 @@ const NewRoutine = () => {
         !prevRoutineStatus.saveRoutineSuccess &&
         routineStatus.saveRoutineSuccess
       ) {
-        history.push('/logs');
+        history.push('/routines');
         return;
       }
     }
