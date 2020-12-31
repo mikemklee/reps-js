@@ -1,6 +1,7 @@
 import AddExercise from './AddExercise/AddExercise';
 import Confirmation from './Confirmation/Confirmation';
 import DurationTimer from './DurationTimer/DurationTimer';
+import DualButton from './DualButton/DualButton';
 import Exercise from './Exercise/Exercise';
 import ExerciseCardList from './ExerciseCardList/ExerciseCardList';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
@@ -16,6 +17,7 @@ export {
   AddExercise,
   Confirmation,
   DurationTimer,
+  DualButton,
   Exercise,
   ExerciseCardList,
   LoadingSpinner,
