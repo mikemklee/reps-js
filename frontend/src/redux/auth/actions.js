@@ -26,6 +26,28 @@ const actions = {
       },
     };
   },
+  getUserDataRequest: () => {
+    return {
+      type: types.GET_USER_DATA_REQUEST,
+      payload: {},
+    };
+  },
+  getUserDataSuccess: (user) => {
+    return {
+      type: types.GET_USER_DATA_SUCCESS,
+      payload: {
+        user,
+      },
+    };
+  },
+  getUserDataFailure: (error) => {
+    return {
+      type: types.GET_USER_DATA_FAILURE,
+      payload: {
+        error,
+      },
+    };
+  },
   logout: () => {
     return {
       type: types.LOGOUT,

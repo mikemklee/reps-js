@@ -2,15 +2,17 @@ import types from './types';
 
 export const initialState = {
   userId: '',
-  userName: '',
-  userEmail: '',
+  userGoogleId: '',
   isAuthenticated: false,
-  isAdmin: false,
   token: null,
+  userProfileImage: '',
+  userDisplayName: '',
   displayedWeightUnit: 'kg',
   status: {
     loginPending: false,
     loginSucces: false,
+    getUserDataPending: false,
+    getUserDataSuccess: false,
   },
 };
 
@@ -58,6 +60,51 @@ export default (state = initialState, { type, payload }) => {
           ...state.status,
           loginPending: false,
           loginSuccess: false,
+        },
+      };
+    }
+    case types.GET_USER_DATA_REQUEST: {
+      return {
+        ...state,
+        userId: '',
+        userName: '',
+        userEmail: '',
+        isAuthenticated: false,
+        status: {
+          ...state.status,
+          getUserDataPending: true,
+          getUserDataSuccess: false,
+        },
+      };
+    }
+    case types.GET_USER_DATA_SUCCESS: {
+      const { user } = payload;
+      return {
+        ...state,
+        userId: user._id,
+        userGoogleId: user.googleId,
+        userProfileImage: user.profileImage,
+        userDisplayName: user.displayName,
+        isAuthenticated: true,
+        status: {
+          ...state.status,
+          getUserDataPending: false,
+          getUserDataSuccess: true,
+        },
+      };
+    }
+    case types.GET_USER_DATA_FAILURE: {
+      return {
+        ...state,
+        userId: '',
+        userGoogleId: '',
+        userProfileImage: '',
+        userDisplayName: '',
+        isAuthenticated: false,
+        status: {
+          ...state.status,
+          getUserDataPending: false,
+          getUserDataSuccess: false,
         },
       };
     }

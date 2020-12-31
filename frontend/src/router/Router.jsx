@@ -17,40 +17,10 @@ import EditWorkout from '../views/Workout/EditWorkout/EditWorkout';
 import NewRoutine from '../views/Routines/NewRoutine/NewRoutine';
 import EditRoutine from '../views/Routines/EditRoutine/EditRoutine';
 
-import ExerciseActions from '../redux/exercise/actions';
+import AuthActions from '../redux/auth/actions';
 class RouterApp extends React.Component {
   componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.props.getExerciseNames();
-    }
-
-    fetch('http://localhost:5000/api/auth/login/success', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true,
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) return response.json();
-        throw new Error('failed to authenticate user');
-      })
-      .then((responseJson) => {
-        console.log('what do?', responseJson);
-        // this.setState({
-        //   authenticated: true,
-        //   user: responseJson.user,
-        // });
-      })
-      .catch((error) => {
-        console.log('error!', error);
-        // this.setState({
-        //   authenticated: false,
-        //   error: 'Failed to authenticate user',
-        // });
-      });
+    this.props.getUserData();
   }
 
   renderProtectedRoute(path, component, exact = true) {
@@ -104,7 +74,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getExerciseNames: () => dispatch(ExerciseActions.getNamesRequest()),
+  getUserData: () => dispatch(AuthActions.getUserDataRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RouterApp);
