@@ -82,7 +82,7 @@ const EditRoutine = () => {
         // add exercises
         _.forEach(currentRoutine.exercises, (item) => {
           // DX: skip exercises that are already included
-          if (setsByExercise[item.presetId]) return;
+          if (setsByExercise[item.exerciseId]) return;
           const exercisePreset = exercisePresets[item.exerciseId];
           onAddSavedExercise(item, exercisePreset, true);
         });
