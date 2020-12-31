@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import './NumberInputCell.scss';
+import NumberInput from '../../NumberInput/NumberInput';
 
-const NumberInputCell = ({
+const DecimalInputCell = ({
   value: initialValue,
   row: { index },
   column: { id },
@@ -31,15 +31,7 @@ const NumberInputCell = ({
     setValue(num.toFixed(2));
   }, [initialValue]);
 
-  return (
-    <input
-      className='number-input-cell'
-      type='text'
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-    />
-  );
+  return <NumberInput value={value} onChange={onChange} onBlur={onBlur} />;
 };
 
-export default NumberInputCell;
+export default DecimalInputCell;

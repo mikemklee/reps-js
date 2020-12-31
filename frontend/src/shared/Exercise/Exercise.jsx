@@ -5,7 +5,8 @@ import { VscAdd, VscClose } from 'react-icons/vsc';
 import './Exercise.scss';
 
 import Table from '../Table/Table';
-import NumberInputCell from '../Table/NumberInputCell/NumberInputCell';
+import IntegerInputCell from '../Table/IntegerInputCell/IntegerInputCell';
+import DecimalInputCell from '../Table/DecimalInputCell/DecimalInputCell';
 import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
@@ -40,12 +41,12 @@ const Exercise = ({
       {
         Header: currentUnit === 'kg' ? 'KG' : 'LB',
         accessor: 'kg',
-        Cell: NumberInputCell,
+        Cell: DecimalInputCell,
       },
       {
         Header: 'Reps',
         accessor: 'reps',
-        Cell: NumberInputCell,
+        Cell: IntegerInputCell,
       },
     ];
 
