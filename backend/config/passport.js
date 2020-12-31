@@ -8,10 +8,25 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURLL: '/auth/google/redirect',
+      callbackURL: '/api/auth/google/redirect',
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log('my profile here?', profile);
+      // check if user with given profile ID already exists in DB
+      const currentUser = await User.findOne({ googleId: profile.id });
+
+      if (currentUser) {
+        console.log('found user!');
+        done(null, currentUser);
+      } else {
+        // create new user if user with given profile ID is not stored in DB
+        const newUser = await User.create({
+          googleId: profile.id,
+          displayName: profile._json.name,
+          profileImage: profile._json.picture,
+        });
+        console.log('created new user!');
+        done(null, newUser);
+      }
     }
   )
 );
@@ -22,7 +37,6 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
-    console.log('deserialized user?', user);
     done(err, user);
   });
 });

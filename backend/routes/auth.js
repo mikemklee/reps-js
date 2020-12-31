@@ -32,7 +32,9 @@ router.route('/logout').get((req, res) => {
 });
 
 // auth with google
-router.route('/google').get(passport.authenticate('google'));
+router
+  .route('/google')
+  .get(passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // redirect to home page after successfully login via google
 router.route('/google/redirect').get(

@@ -7,6 +7,8 @@ const path = require('path');
 const passport = require('passport');
 const cors = require('cors');
 
+dotenv.config();
+
 const authRoutes = require('./routes/auth');
 const workoutRoutes = require('./routes/workouts');
 const exerciseRoutes = require('./routes/exercises');
@@ -16,7 +18,6 @@ const connectDB = require('./config/db');
 const passportConfig = require('./config/passport');
 const { errorHandler, notFound } = require('./middleware/errors');
 
-dotenv.config();
 connectDB();
 
 const app = express();
