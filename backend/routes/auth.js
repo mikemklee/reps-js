@@ -14,6 +14,11 @@ router.route('/login/success').get((req, res) => {
       user: req.user,
       cookies: req.cookies,
     });
+  } else {
+    res.status(401).json({
+      success: false,
+      message: 'failed to authenticate user',
+    });
   }
 });
 
