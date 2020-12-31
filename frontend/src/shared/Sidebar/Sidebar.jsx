@@ -24,6 +24,12 @@ const Sidebar = () => {
     history.push(route);
   };
 
+  const handleLogoutClick = () => {
+    // Logout using Google passport api
+    // Set authenticated state to false in the reducer
+    window.open('http://localhost:5000/api/auth/logout', '_self');
+  };
+
   return (
     <div className='sidebar'>
       <div className='siteLogo' onClick={() => handleClick('/')}>
@@ -88,6 +94,9 @@ const Sidebar = () => {
             value: 'lb',
           }}
         />
+        <button className='logout' onClick={handleLogoutClick}>
+          <span>Logout</span>
+        </button>
       </div>
     </div>
   );

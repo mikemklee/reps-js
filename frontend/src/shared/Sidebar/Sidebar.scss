@@ -81,6 +81,12 @@
 
   .userSettings {
     @include flexCenterHorizontally;
+    flex-direction: column;
     height: 8rem;
+
+    .logout {
+      @include primaryButtonStyles;
+      margin-top: 1rem;
+    }
   }
 }

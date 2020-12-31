@@ -1,17 +1,27 @@
 @import '../../styles/common';
 
-.login-panel {
+.login {
   @include cardStyles;
   align-self: center;
   width: 20rem;
   margin: 0 auto;
 
-  .site-logo {
+  &__logo {
     font-size: 1.5rem;
     font-weight: 700;
     font-style: italic;
     margin-bottom: 1rem;
     color: $white;
+  }
+
+  &__title {
+    font-size: 1.1rem;
+  }
+
+  &__subtitle {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    margin-bottom: 2rem;
   }
 
   div.field {
@@ -37,7 +47,8 @@
     }
   }
 
-  button.submit {
+  &__signIn--google {
     @include primaryButtonStyles;
+    @include flexCenterHorizontally;
   }
 }
