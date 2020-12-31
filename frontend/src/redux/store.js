@@ -15,19 +15,19 @@ const persistedState = {
   },
 };
 
-if (userInfoFromStorage) {
-  persistedState.auth.userId = userInfoFromStorage._id;
-  persistedState.auth.userName = userInfoFromStorage.name;
-  persistedState.auth.userEmail = userInfoFromStorage.email;
-  persistedState.auth.isAdmin = userInfoFromStorage.isAdmin;
-  persistedState.auth.token = userInfoFromStorage.token;
-  persistedState.auth.isAuthenticated = true;
-  persistedState.auth.status = {
-    ...persistedState.auth.status,
-    loginPending: false,
-    loginSuccess: true,
-  };
-}
+// if (userInfoFromStorage) {
+//   persistedState.auth.userId = userInfoFromStorage._id;
+//   persistedState.auth.userName = userInfoFromStorage.name;
+//   persistedState.auth.userEmail = userInfoFromStorage.email;
+//   persistedState.auth.isAdmin = userInfoFromStorage.isAdmin;
+//   persistedState.auth.token = userInfoFromStorage.token;
+//   persistedState.auth.isAuthenticated = true;
+//   persistedState.auth.status = {
+//     ...persistedState.auth.status,
+//     loginPending: false,
+//     loginSuccess: true,
+//   };
+// }
 
 const loggerOptions = {
   collapsed: true,

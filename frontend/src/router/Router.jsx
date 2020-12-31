@@ -23,6 +23,34 @@ class RouterApp extends React.Component {
     if (this.props.isAuthenticated) {
       this.props.getExerciseNames();
     }
+
+    fetch('http://localhost:5000/api/auth/login/success', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': true,
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) return response.json();
+        throw new Error('failed to authenticate user');
+      })
+      .then((responseJson) => {
+        console.log('what do?', responseJson);
+        // this.setState({
+        //   authenticated: true,
+        //   user: responseJson.user,
+        // });
+      })
+      .catch((error) => {
+        console.log('error!', error);
+        // this.setState({
+        //   authenticated: false,
+        //   error: 'Failed to authenticate user',
+        // });
+      });
   }
 
   renderProtectedRoute(path, component, exact = true) {

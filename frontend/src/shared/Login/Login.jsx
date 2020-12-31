@@ -15,6 +15,12 @@ function Login() {
     dispatch(AuthActions.loginRequest(email, password));
   };
 
+  const handleLoginClick = () => {
+    // Authenticate using via passport api in the backend
+    // Open Google login page
+    window.open('http://localhost:5000/api/auth/google', '_self');
+  };
+
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       onSubmit();
@@ -43,6 +49,7 @@ function Login() {
       <button className='submit' onClick={onSubmit}>
         Login
       </button>
+      <button onClick={handleLoginClick}>Login with Google</button>
     </div>
   );
 }
