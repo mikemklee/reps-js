@@ -76,16 +76,34 @@ function useExercises() {
   };
 
   const onRemoveSet = (exercise, rowIndex) => {
+    let deleteExercise = false;
+
     setExerciseSets((prev) => {
       const existingSets = prev[exercise._id];
-      return {
-        ...prev,
-        [exercise._id]: _.filter(
-          existingSets,
-          (_item, index) => index !== rowIndex
-        ),
-      };
+      const updatedSets = _.filter(
+        existingSets,
+        (_item, index) => index !== rowIndex
+      );
+
+      if (_.isEmpty(updatedSets)) {
+        // that was the last set; remove this exercise from sets map
+        deleteExercise = true;
+        return _.omit(prev, exercise._id);
+      } else {
+        // otherwise, just update the sets
+        return {
+          ...prev,
+          [exercise._id]: updatedSets,
+        };
+      }
     });
+
+    if (deleteExercise) {
+      // remove this exercise from exercises array as well
+      setExercises((prev) => {
+        return _.filter(prev, (item) => item._id !== exercise._id);
+      });
+    }
   };
 
   const onConvertUnit = (conversionFactor) => {
