@@ -4,8 +4,12 @@ import _ from 'lodash';
 
 import './ExerciseSummary.scss';
 
+import useWeightConverter from '../../../../hooks/useWeightConverter';
+
 const ExerciseSummary = ({ exercise }) => {
   const { names: exerciseNames } = useSelector((state) => state.exercise);
+
+  const { currentUnit, computeDisplayedWeight } = useWeightConverter();
 
   return (
     <div className='exerciseSummary'>
@@ -17,7 +21,8 @@ const ExerciseSummary = ({ exercise }) => {
           <div key={index} className='exerciseSummary__set'>
             <div className='exerciseSummary__setNumber'>{index + 1}</div>
             <div className='exerciseSummary__setReps'>
-              {set.kg} kg x {set.reps}
+              {Number(computeDisplayedWeight(set.kg).toFixed(2))} {currentUnit}{' '}
+              x {set.reps}
             </div>
           </div>
         ))}

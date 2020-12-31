@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import '../../styles/common';
 
 .sidebar {
   background: $dark-grey;
@@ -77,5 +77,10 @@
         margin-left: 1rem;
       }
     }
+  }
+
+  .userSettings {
+    @include flexCenterHorizontally;
+    height: 8rem;
   }
 }

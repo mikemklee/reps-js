@@ -7,14 +7,18 @@ import _ from 'lodash';
 
 import './WorkoutMeta.scss';
 
+import useWeightConverter from '../../../../hooks/useWeightConverter';
+
 const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
+  const { currentUnit, computeDisplayedWeight } = useWeightConverter();
+
   const formattedCompletedAt = moment(item.createdAt).format(
     'h:mm A dddd, Do MMM YYYY'
   );
   const formattedDuration = moment
     .duration(item.timeElapsed, 'seconds')
     .minutes();
-  const totalVolume = _.reduce(
+  const totalVolumeInKG = _.reduce(
     item.exercises,
     (exerciseVolume, exercise) => {
       exerciseVolume += _.reduce(
@@ -40,7 +44,10 @@ const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
       {showVolume ? (
         <div className='workoutMeta__volume'>
           <FaWeightHanging />
-          <span>{totalVolume} kg</span>
+          <span>
+            {Number(computeDisplayedWeight(totalVolumeInKG).toFixed(2))}{' '}
+            {currentUnit}
+          </span>
         </div>
       ) : null}
     </div>

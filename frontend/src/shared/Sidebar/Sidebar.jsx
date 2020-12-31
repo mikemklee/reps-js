@@ -1,12 +1,22 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { HiOutlineHome, HiOutlineClipboardList } from 'react-icons/hi';
 import { BiAnalyse, BiDumbbell } from 'react-icons/bi';
 
 import './Sidebar.scss';
 
+import { DualButton } from '../../shared';
+
+import AuthActions from '../../redux/auth/actions';
+
+import useWeightConverter from '../../hooks/useWeightConverter';
+
 const Sidebar = () => {
+  const { currentUnit } = useWeightConverter();
+
+  const dispatch = useDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
 
@@ -62,6 +72,22 @@ const Sidebar = () => {
           <HiOutlineClipboardList size='1.5rem' />
           <label>Logs</label>
         </button>
+      </div>
+      <div className='userSettings'>
+        <DualButton
+          currentValue={currentUnit}
+          onClickOption={(value) =>
+            dispatch(AuthActions.setDisplayedWeightUnit(value))
+          }
+          firstOption={{
+            label: 'KG',
+            value: 'kg',
+          }}
+          secondOption={{
+            label: 'LB',
+            value: 'lb',
+          }}
+        />
       </div>
     </div>
   );

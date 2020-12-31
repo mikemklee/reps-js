@@ -9,6 +9,8 @@ import NumberInputCell from '../Table/NumberInputCell/NumberInputCell';
 import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
+import useWeightConverter from '../../hooks/useWeightConverter';
+
 const Exercise = ({
   exercise,
   sets,
@@ -18,6 +20,8 @@ const Exercise = ({
   allowComplete = false,
 }) => {
   const [columns, setColumns] = useState([]);
+
+  const { currentUnit, computeDisplayedWeight } = useWeightConverter();
 
   useEffect(() => {
     // TODO: define different set of columns for different exercise category
@@ -34,7 +38,7 @@ const Exercise = ({
       //   Cell: () => 'test', // TODO: query previous record?
       // },
       {
-        Header: 'kg',
+        Header: currentUnit === 'kg' ? 'KG' : 'LB',
         accessor: 'kg',
         Cell: NumberInputCell,
       },
@@ -66,7 +70,7 @@ const Exercise = ({
     });
 
     setColumns(displayedColumns);
-  }, []);
+  }, [currentUnit]);
 
   const [skipPageReset, setSkipPageReset] = useState(false);
 
