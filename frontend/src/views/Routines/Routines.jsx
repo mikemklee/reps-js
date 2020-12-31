@@ -2,11 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { VscAdd } from 'react-icons/vsc';
-import _ from 'lodash';
 
 import './Routines.scss';
 
-import RoutineCard from './RoutineCard/RoutineCard';
+import RoutineCardList from './RoutineCardList/RoutineCardList';
 
 import { Modal, Confirmation, LoadingSpinner } from '../../shared';
 
@@ -62,34 +61,21 @@ const Routines = () => {
                 <span>Add new routine</span>
               </button>
             </div>
-            <div className='customRoutines'>
-              <div className='customRoutines__title'>Custom routines</div>
-              <div className='customRoutines__routines'>
-                {_.map(customRoutines, (item) => (
-                  <RoutineCard
-                    key={item._id}
-                    routine={item}
-                    exerciseNames={exerciseNames}
-                    onClickDelete={(routineId) => {
-                      setDeleteId(routineId);
-                      deleteRoutineModalRef.current.open();
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className='presetRoutines'>
-              <div className='presetRoutines__title'>Preset routines</div>
-              <div className='presetRoutines__routines'>
-                {_.map(presetRoutines, (item) => (
-                  <RoutineCard
-                    key={item._id}
-                    routine={item}
-                    exerciseNames={exerciseNames}
-                  />
-                ))}
-              </div>
-            </div>
+            <RoutineCardList
+              title='Custom routines'
+              placeholder='You do not have any custom routines yet.'
+              routines={customRoutines}
+              exerciseNames={exerciseNames}
+              onDeleteRoutine={(routineId) => {
+                setDeleteId(routineId);
+                deleteRoutineModalRef.current.open();
+              }}
+            />
+            <RoutineCardList
+              title='Preset routines'
+              routines={presetRoutines}
+              exerciseNames={exerciseNames}
+            />
           </>
         )}
         <Modal ref={deleteRoutineModalRef}>

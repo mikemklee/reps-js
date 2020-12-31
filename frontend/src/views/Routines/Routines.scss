@@ -22,25 +22,3 @@
     margin-left: auto;
   }
 }
-
-.customRoutines {
-  &__routines {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    grid-gap: 1rem;
-  }
-}
-
-.presetRoutines {
-  &__routines {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    grid-gap: 1rem;
-  }
-}
-
-.customRoutines__title,
-.presetRoutines__title {
-  font-size: 1.2rem;
-  margin: 1rem 0;
-}
