@@ -27,7 +27,8 @@ const NumberInputCell = ({
 
   // If the initialValue is changed external, sync it up with our state
   useEffect(() => {
-    setValue(initialValue);
+    const num = parseFloat(initialValue) || 0;
+    setValue(num.toFixed(2));
   }, [initialValue]);
 
   return (

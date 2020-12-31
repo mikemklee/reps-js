@@ -22,6 +22,7 @@ import ExerciseActions from '../../../redux/exercise/actions';
 
 import usePrevious from '../../../hooks/usePrevious';
 import useExercises from '../../../hooks/useExercises';
+import useWeightConverter from '../../../hooks/useWeightConverter';
 
 import WorkoutUtils from '../../../utils/workout';
 
@@ -36,7 +37,10 @@ const NewWorkout = () => {
     onAddSet,
     onEditSet,
     onRemoveSet,
+    onConvertUnit,
   } = useExercises();
+
+  const { currentUnit, getConversionFactor } = useWeightConverter();
 
   const counterRef = useRef(null);
   const addExerciseModalRef = useRef(null);
@@ -53,6 +57,7 @@ const NewWorkout = () => {
   );
   const prevWorkoutStatus = usePrevious(workoutStatus);
   const prevExerciseStatus = usePrevious(exerciseStatus);
+  const prevUnit = usePrevious(currentUnit);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -83,6 +88,13 @@ const NewWorkout = () => {
       }
     }
   }, [workoutStatus, prevWorkoutStatus, exerciseStatus, prevExerciseStatus]);
+
+  useEffect(() => {
+    if (!_.isEqual(prevUnit, currentUnit)) {
+      const conversionFactor = getConversionFactor(prevUnit, currentUnit);
+      onConvertUnit(conversionFactor);
+    }
+  }, [prevUnit, currentUnit]);
 
   const populateExerciseSections = () => {
     if (routineId) {

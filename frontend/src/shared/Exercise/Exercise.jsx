@@ -21,7 +21,7 @@ const Exercise = ({
 }) => {
   const [columns, setColumns] = useState([]);
 
-  const { currentUnit, computeDisplayedWeight } = useWeightConverter();
+  const { currentUnit } = useWeightConverter();
 
   useEffect(() => {
     // TODO: define different set of columns for different exercise category
