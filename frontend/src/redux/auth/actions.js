@@ -32,6 +32,12 @@ const actions = {
       payload: {},
     };
   },
+  setDisplayedWeightUnit: (weightUnit) => {
+    return {
+      type: types.SET_DISPLAYED_WEIGHT_UNIT,
+      payload: { weightUnit },
+    };
+  },
 };
 
 export default actions;

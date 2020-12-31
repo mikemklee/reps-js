@@ -7,6 +7,7 @@ export const initialState = {
   isAuthenticated: false,
   isAdmin: false,
   token: null,
+  displayedWeightUnit: 'kg',
   status: {
     loginPending: false,
     loginSucces: false,
@@ -74,6 +75,12 @@ export default (state = initialState, { type, payload }) => {
           loginPending: false,
           loginSuccess: false,
         },
+      };
+    }
+    case types.SET_DISPLAYED_WEIGHT_UNIT: {
+      return {
+        ...state,
+        displayedWeightUnit: payload.weightUnit,
       };
     }
     default: {
