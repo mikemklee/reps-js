@@ -82,6 +82,23 @@ function useExercises() {
     });
   };
 
+  const onConvertUnit = (conversionFactor) => {
+    setExerciseSets((prev) => {
+      const updatedSetsByExercise = {};
+
+      _.forEach(prev, (sets, exerciseId) => {
+        updatedSetsByExercise[exerciseId] = sets.map((row) => {
+          return {
+            ...row,
+            kg: row.kg * conversionFactor,
+          };
+        });
+      });
+
+      return updatedSetsByExercise;
+    });
+  };
+
   return {
     exercises,
     setsByExercise,
@@ -91,6 +108,7 @@ function useExercises() {
     onAddSet,
     onEditSet,
     onRemoveSet,
+    onConvertUnit,
   };
 }
 
