@@ -17,6 +17,8 @@ import {
   Confirmation,
 } from '../../../shared';
 
+import { InterfaceUtils } from '../../../utils';
+
 import WorkoutActions from '../../../redux/workout/actions';
 import ExerciseActions from '../../../redux/exercise/actions';
 
@@ -99,7 +101,7 @@ const NewWorkout = () => {
     if (routineId) {
       if (routineId === 'new') {
         // blank workout; just update workout title
-        setTitle('New blank workout');
+        setTitle(`New ${InterfaceUtils.getTimeOfDay()} workout`);
       } else {
         // routine workout; populate exercises with routine data
         const allRoutines = {

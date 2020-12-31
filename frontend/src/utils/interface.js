@@ -1,14 +1,14 @@
 const Utils = {
-  getTimeOfDayGreeting: () => {
-    var today = new Date();
-    var curHr = today.getHours();
+  getTimeOfDay: () => {
+    const today = new Date();
+    const hours = today.getHours();
 
-    if (curHr < 12) {
-      return 'Good morning';
-    } else if (curHr < 18) {
-      return 'Good afternoon';
+    if (hours < 12) {
+      return 'morning';
+    } else if (hours < 18) {
+      return 'afternoon';
     } else {
-      return 'Good evening';
+      return 'evening';
     }
   },
 };

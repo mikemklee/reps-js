@@ -9,7 +9,7 @@ const Main = () => {
   return (
     <div className='main-view'>
       <div className='view-header'>
-        {InterfaceUtils.getTimeOfDayGreeting()}, <strong>Mike</strong>
+        Good {InterfaceUtils.getTimeOfDay()}, <strong>Mike</strong>
       </div>
       <div className='view-content'>
         <QuickActions />

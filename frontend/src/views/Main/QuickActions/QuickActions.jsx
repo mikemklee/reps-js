@@ -16,12 +16,12 @@ const QuickActions = () => {
       route: '/workout/new',
     },
     {
-      title: 'View routines',
+      title: 'Manage routines',
       icon: <BiAnalyse />,
       route: '/routines',
     },
     {
-      title: 'View exercises',
+      title: 'Browse exercises',
       icon: <BiDumbbell />,
       route: '/exercises',
     },

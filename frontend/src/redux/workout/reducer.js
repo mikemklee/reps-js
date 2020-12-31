@@ -1,6 +1,6 @@
 import types from './types';
 
-import ReducerUtils from '../../utils/reducer';
+import { ReducerUtils } from '../../utils';
 
 export const initialState = {
   workoutLogs: {},
