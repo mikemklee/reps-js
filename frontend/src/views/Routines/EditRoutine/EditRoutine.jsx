@@ -16,8 +16,6 @@ import usePrevious from '../../../hooks/usePrevious';
 import useExercises from '../../../hooks/useExercises';
 import useWeightConverter from '../../../hooks/useWeightConverter';
 
-import WorkoutUtils from '../../../utils/workout';
-
 const EditRoutine = () => {
   const [title, setTitle] = useState('');
   const {
@@ -29,6 +27,7 @@ const EditRoutine = () => {
     onEditSet,
     onRemoveSet,
     onConvertUnit,
+    onFormatExercisesData,
   } = useExercises();
 
   const { currentUnit, getConversionFactor } = useWeightConverter();
@@ -89,6 +88,14 @@ const EditRoutine = () => {
         history.push('/');
       } else {
         const currentRoutine = customRoutines[routineId];
+
+        let conversionFactor = 1;
+        if (currentUnit === 'lb') {
+          // values are stored as KG in the DB
+          // need to convert KG weights to LB before we use them
+          conversionFactor = getConversionFactor('kg', 'lb');
+        }
+
         // update routine title
         setTitle(currentRoutine.name);
         // add exercises
@@ -96,16 +103,23 @@ const EditRoutine = () => {
           // DX: skip exercises that are already included
           if (setsByExercise[item.exerciseId]) return;
           const exercisePreset = exercisePresets[item.exerciseId];
-          onAddSavedExercise(item, exercisePreset, true);
+          onAddSavedExercise(item, exercisePreset, conversionFactor, true);
         });
       }
     }
   };
 
   const onSaveRoutine = () => {
+    let conversionFactor = 1;
+    if (currentUnit === 'lb') {
+      // values are stored as KG in the DB
+      // need to convert LB weights to KG before we save them
+      conversionFactor = getConversionFactor('lb', 'kg');
+    }
+
     const formattedData = {
       name: title,
-      exercises: WorkoutUtils.formatExercisesData(setsByExercise),
+      exercises: onFormatExercisesData(conversionFactor),
     };
 
     dispatch(RoutineActions.editCustomRoutineRequest(routineId, formattedData));

@@ -22,12 +22,18 @@ function useExercises() {
   const onAddSavedExercise = (
     savedExercise,
     exercisePreset,
+    conversionFactor = 1,
     markAsCoplete = false
   ) => {
     setExercises((prev) => [...prev, exercisePreset]);
     for (let i = 0; i < savedExercise.sets.length; i++) {
       const currentSet = savedExercise.sets[i];
-      onAddSet(exercisePreset, currentSet.kg, currentSet.reps, markAsCoplete);
+      onAddSet(
+        exercisePreset,
+        currentSet.kg * conversionFactor,
+        currentSet.reps,
+        markAsCoplete
+      );
     }
   };
 
@@ -99,6 +105,16 @@ function useExercises() {
     });
   };
 
+  const onFormatExercisesData = (conversionFactor) => {
+    return _.map(setsByExercise, (sets, exerciseId) => ({
+      exerciseId,
+      sets: _.map(sets, (set) => ({
+        kg: set.kg * conversionFactor,
+        reps: set.reps,
+      })),
+    }));
+  };
+
   return {
     exercises,
     setsByExercise,
@@ -109,6 +125,7 @@ function useExercises() {
     onEditSet,
     onRemoveSet,
     onConvertUnit,
+    onFormatExercisesData,
   };
 }
 

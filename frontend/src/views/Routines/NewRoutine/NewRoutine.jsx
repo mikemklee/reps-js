@@ -16,8 +16,6 @@ import usePrevious from '../../../hooks/usePrevious';
 import useExercises from '../../../hooks/useExercises';
 import useWeightConverter from '../../../hooks/useWeightConverter';
 
-import WorkoutUtils from '../../../utils/workout';
-
 const NewRoutine = () => {
   const [title, setTitle] = useState('');
   const {
@@ -28,6 +26,7 @@ const NewRoutine = () => {
     onEditSet,
     onRemoveSet,
     onConvertUnit,
+    onFormatExercisesData,
   } = useExercises();
 
   const { currentUnit, getConversionFactor } = useWeightConverter();
@@ -85,29 +84,23 @@ const NewRoutine = () => {
         // creating routine from scratch; just update routine title
         setTitle('New routine');
       } else {
-        // creating routine from saved workout; populate exercises with workout data
-        // if (_.isEmpty(routinePresets)) {
-        //   // no routine data available; redirect to home page
-        //   history.push('/');
-        // } else {
-        //   const currentRoutine = routinePresets[workoutId];
-        //   // update routine title
-        //   setTitle(currentRoutine.name);
-        //   // add exercises
-        //   _.forEach(currentRoutine.exercises, (item) => {
-        //     // DX: skip exercises that are already included
-        //     if (setsByExercise[item.presetId]) return;
-        //     onAddExercise(exercisePresets[item.presetId], item.numSets);
-        //   });
-        // }
+        // creating routine from saved workout
+        // TODO: populate exercises with workout data
       }
     }
   };
 
   const onSaveRoutine = () => {
+    let conversionFactor = 1;
+    if (currentUnit === 'lb') {
+      // values are stored as KG in the DB
+      // need to convert LB weights to KG before we save them
+      conversionFactor = getConversionFactor('lb', 'kg');
+    }
+
     const formattedData = {
       name: title,
-      exercises: WorkoutUtils.formatExercisesData(setsByExercise),
+      exercises: onFormatExercisesData(conversionFactor),
     };
 
     dispatch(RoutineActions.saveRoutineRequest(formattedData));
