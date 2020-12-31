@@ -106,13 +106,16 @@ function useExercises() {
   };
 
   const onFormatExercisesData = (conversionFactor) => {
-    return _.map(setsByExercise, (sets, exerciseId) => ({
-      exerciseId,
-      sets: _.map(sets, (set) => ({
-        kg: set.kg * conversionFactor,
-        reps: set.reps,
-      })),
-    }));
+    return _.map(setsByExercise, (sets, exerciseId) => {
+      const completedSets = _.filter(sets, (set) => set.completed);
+      return {
+        exerciseId,
+        sets: _.map(completedSets, (set) => ({
+          kg: set.kg * conversionFactor,
+          reps: set.reps,
+        })),
+      };
+    });
   };
 
   return {
