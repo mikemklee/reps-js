@@ -6,9 +6,9 @@ import './RoutineCardList.scss';
 import RoutineCard from '../RoutineCard/RoutineCard';
 
 const RoutineCardList = ({
+  title,
   routines,
   exerciseNames,
-  title,
   placeholder,
   onDeleteRoutine = () => {},
 }) => {

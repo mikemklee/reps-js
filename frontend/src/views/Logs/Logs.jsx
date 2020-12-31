@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 
 import './Logs.scss';
 
-import WorkoutCard from './WorkoutCard/WorkoutCard';
+import WorkoutCardList from './WorkoutCardList/WorkoutCardList';
 
 import { Modal, Confirmation } from '../../shared';
 
@@ -35,18 +34,15 @@ const Logs = () => {
     <div className='logs-view'>
       <div className='view-header'>Logs</div>
       <div className='view-content'>
-        <div className='logs'>
-          {_.map(workoutLogs, (workout, index) => (
-            <WorkoutCard
-              key={index}
-              workout={workout}
-              onClickDelete={(workoutId) => {
-                setDeleteId(workoutId);
-                deleteWorkoutModalRef.current.open();
-              }}
-            />
-          ))}
-        </div>
+        <WorkoutCardList
+          title='Workout history'
+          placeholder='You do not have any workout sessions saved yet.'
+          workoutLogs={workoutLogs}
+          onDeleteWorkout={(workoutId) => {
+            setDeleteId(workoutId);
+            deleteWorkoutModalRef.current.open();
+          }}
+        />
         <Modal ref={deleteWorkoutModalRef}>
           <Confirmation
             isWarning
