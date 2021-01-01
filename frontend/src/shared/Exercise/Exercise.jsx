@@ -7,6 +7,7 @@ import './Exercise.scss';
 import Table from '../Table/Table';
 import IntegerInputCell from '../Table/IntegerInputCell/IntegerInputCell';
 import DecimalInputCell from '../Table/DecimalInputCell/DecimalInputCell';
+import DurationInputCell from '../Table/DurationInputCell/DurationInputCell';
 import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
@@ -71,7 +72,7 @@ const Exercise = ({
           {
             Header: 'Time',
             accessor: 'duration',
-            Cell: () => 'show time',
+            Cell: DurationInputCell,
           },
         ];
       }
@@ -79,13 +80,13 @@ const Exercise = ({
         return [
           {
             Header: 'km',
-            accessor: 'km', // convert between miles and km
+            accessor: 'km', // TODO: convert between miles and km
             Cell: DecimalInputCell,
           },
           {
             Header: 'Time',
             accessor: 'duration',
-            Cell: () => 'show time',
+            Cell: DurationInputCell,
           },
         ];
       }

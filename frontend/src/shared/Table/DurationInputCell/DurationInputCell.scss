@@ -1,0 +1,11 @@
+@import '../../../styles/common';
+
+.durationInputCell {
+  display: flex;
+  align-items: center;
+  background: $dark-grey;
+
+  .numberInput {
+    min-width: 3rem;
+  }
+}
