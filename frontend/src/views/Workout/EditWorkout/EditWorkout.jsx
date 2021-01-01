@@ -126,9 +126,10 @@ const EditWorkout = () => {
       conversionFactor = getConversionFactor('lb', 'kg');
     }
 
+    const FILTER_COMPLETED = true;
     const formattedData = {
       name: title,
-      exercises: onFormatExercisesData(conversionFactor),
+      exercises: onFormatExercisesData(conversionFactor, FILTER_COMPLETED),
       duration,
     };
 

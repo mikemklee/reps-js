@@ -123,12 +123,17 @@ function useExercises() {
     });
   };
 
-  const onFormatExercisesData = (conversionFactor) => {
+  const onFormatExercisesData = (conversionFactor, filterCompleted = false) => {
     return _.map(setsByExercise, (sets, exerciseId) => {
-      const completedSets = _.filter(sets, (set) => set.completed);
+      let setsToInclude = sets;
+
+      if (filterCompleted) {
+        setsToInclude = _.filter(sets, (set) => set.completed);
+      }
+
       return {
         exerciseId,
-        sets: _.map(completedSets, (set) => ({
+        sets: _.map(setsToInclude, (set) => ({
           kg: set.kg * conversionFactor,
           reps: set.reps,
         })),
