@@ -1,16 +1,21 @@
 import React from 'react';
-import moment from 'moment';
+import { useSelector } from 'react-redux';
 import { BiTimeFive } from 'react-icons/bi';
 import { FaWeightHanging } from 'react-icons/fa';
 import classnames from 'classnames';
+import moment from 'moment';
 import _ from 'lodash';
 
 import './WorkoutMeta.scss';
 
 import useWeightConverter from '../../../../hooks/useWeightConverter';
+import useExercises from '../../../../hooks/useExercises';
 
 const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
   const { currentUnit, computeDisplayedWeight } = useWeightConverter();
+  const { categoryNames } = useExercises();
+
+  const { presets: exercisePresets } = useSelector((state) => state.exercise);
 
   const formattedCompletedAt = moment(item.createdAt).format(
     'h:mm A dddd, Do MMM YYYY'
@@ -21,6 +26,15 @@ const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
   const totalVolumeInKG = _.reduce(
     item.exercises,
     (exerciseVolume, exercise) => {
+      const exercisePreset = exercisePresets[exercise.exerciseId];
+
+      // don't calculate towards total volumne if exercise category was assisted bodyweight
+      if (
+        exercisePreset &&
+        exercisePreset.category === categoryNames.ASSISTED_BODYWEIGHT
+      )
+        return exerciseVolume;
+
       exerciseVolume += _.reduce(
         exercise.sets,
         (setVolume, set) => {

@@ -7,6 +7,7 @@ import WorkoutCardList from './WorkoutCardList/WorkoutCardList';
 
 import { Modal, Confirmation } from '../../shared';
 
+import ExerciseActions from '../../redux/exercise/actions';
 import WorkoutActions from '../../redux/workout/actions';
 
 const Logs = () => {
@@ -17,6 +18,7 @@ const Logs = () => {
 
   useEffect(() => {
     dispatch(WorkoutActions.getWorkoutLogsRequest());
+    dispatch(ExerciseActions.getPresetsRequest());
   }, []);
 
   const onCancelDelete = () => {
