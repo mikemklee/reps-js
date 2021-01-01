@@ -57,6 +57,48 @@ const defineExercisePresets = () => [
     bodyParts: [BODY_PART.LEGS],
     isPreset: true,
   },
+  {
+    name: NAME.CABLE_CROSSOVER,
+    category: CATEGORY.MACHINE,
+    bodyParts: [BODY_PART.CHEST],
+    isPreset: true,
+  },
+  {
+    name: NAME.FRONT_RAISE_PLATE,
+    category: CATEGORY.OTHER,
+    bodyParts: [BODY_PART.SHOULDERS],
+    isPreset: true,
+  },
+  {
+    name: NAME.PULL_UP,
+    category: CATEGORY.WEIGHTED_BODYWEIGHT,
+    bodyParts: [BODY_PART.BACK],
+    isPreset: true,
+  },
+  {
+    name: NAME.PULL_UP_ASSISTED,
+    category: CATEGORY.ASSISTED_BODYWEIGHT,
+    bodyParts: [BODY_PART.BACK],
+    isPreset: true,
+  },
+  {
+    name: NAME.JUMPING_JACK,
+    category: CATEGORY.REPS,
+    bodyParts: [BODY_PART.FULL_BODY],
+    isPreset: true,
+  },
+  {
+    name: NAME.RUNNING,
+    category: CATEGORY.CARDIO,
+    bodyParts: [BODY_PART.CARDIO],
+    isPreset: true,
+  },
+  {
+    name: NAME.PLANK,
+    category: CATEGORY.DURATION,
+    bodyParts: [BODY_PART.CORE],
+    isPreset: true,
+  },
 ];
 
 module.exports = { defineExercisePresets };

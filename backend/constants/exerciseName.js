@@ -8,6 +8,13 @@ const exerciseNames = {
   DEADLIFT_BARBELL: 'Deadlift (Barbell)',
   SQUAT_DUMBBELL: 'Squat (Dumbbell)',
   LUNGE_DUMBBELL: 'Lunge (Dumbbell)',
+  CABLE_CROSSOVER: 'Cable Crossover',
+  FRONT_RAISE_PLATE: 'Front Raise (Plate)',
+  PULL_UP: 'Pull Up',
+  PULL_UP_ASSISTED: 'Pull Up (Assisted)',
+  JUMPING_JACK: 'Jumping Jack',
+  RUNNING: 'Running',
+  PLANK: 'Plank',
 };
 
 module.exports = exerciseNames;

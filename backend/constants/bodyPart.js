@@ -1,11 +1,14 @@
 const bodyParts = {
-  CHEST: 'Chest',
-  SHOULDER: 'Shoulder',
-  BACK: 'Back',
+  CORE: 'Core',
+  ARMS: 'Arms',
   LEGS: 'Legs',
-  TRICEPS: 'Triceps',
-  BICEPS: 'Biceps',
-  ABS: 'Abs',
+  BACK: 'Back',
+  CHEST: 'Chest',
+  SHOULDERS: 'Shoulders',
+  FULL_BODY: 'Full body',
+  CARDIO: 'Cardio',
+  OLYMPIC: 'Olympic',
+  OTHER: 'Other',
 };
 
 module.exports = bodyParts;
