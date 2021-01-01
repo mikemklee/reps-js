@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import './Main.scss';
 import QuickActions from './QuickActions/QuickActions';
@@ -6,10 +7,11 @@ import QuickActions from './QuickActions/QuickActions';
 import { InterfaceUtils } from '../../utils';
 
 const Main = () => {
+  const { userDisplayName } = useSelector((state) => state.auth);
   return (
     <div className='main-view'>
       <div className='view-header'>
-        Good {InterfaceUtils.getTimeOfDay()}, <strong>Mike</strong>
+        Good {InterfaceUtils.getTimeOfDay()}, <strong>{userDisplayName}</strong>
       </div>
       <div className='view-content'>
         <QuickActions />

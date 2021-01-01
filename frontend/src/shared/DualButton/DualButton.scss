@@ -9,6 +9,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  flex: 1;
 
   &.current {
     border-color: transparent;
@@ -18,6 +19,8 @@
 }
 
 .dualButton {
+  display: flex;
+
   &__firstOption {
     @include optionStyles;
     border-top-left-radius: 4px;

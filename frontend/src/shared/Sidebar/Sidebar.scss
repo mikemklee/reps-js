@@ -47,7 +47,7 @@
       background: transparent;
       border: none;
       transition: all 0.3s;
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: inherit;
       opacity: 0.5;
       position: relative;
@@ -76,17 +76,6 @@
         cursor: inherit;
         margin-left: 1rem;
       }
-    }
-  }
-
-  .userSettings {
-    @include flexCenterHorizontally;
-    flex-direction: column;
-    height: 8rem;
-
-    .logout {
-      @include primaryButtonStyles;
-      margin-top: 1rem;
     }
   }
 }

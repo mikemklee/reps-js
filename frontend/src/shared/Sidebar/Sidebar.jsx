@@ -1,33 +1,23 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { HiOutlineHome, HiOutlineClipboardList } from 'react-icons/hi';
 import { BiAnalyse, BiDumbbell } from 'react-icons/bi';
 
 import './Sidebar.scss';
 
-import { DualButton } from '../../shared';
+import UserMenu from './UserMenu/UserMenu';
 
-import AuthActions from '../../redux/auth/actions';
-
-import useWeightConverter from '../../hooks/useWeightConverter';
+import useDropdown from '../../hooks/useDropdown';
 
 const Sidebar = () => {
-  const { currentUnit } = useWeightConverter();
+  const [dropdownRef, isOpen, setIsOpen] = useDropdown();
 
-  const dispatch = useDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
 
   const handleClick = (route) => {
     history.push(route);
-  };
-
-  const handleLogoutClick = () => {
-    // Logout using Google passport api
-    // Set authenticated state to false in the reducer
-    window.open('http://localhost:5000/api/auth/logout', '_self');
   };
 
   return (
@@ -36,7 +26,11 @@ const Sidebar = () => {
         <span className='siteLogo__name'>REPS</span>
         <span className='siteLogo__badge'>Alpha</span>
       </div>
-
+      <UserMenu
+        menuRef={dropdownRef}
+        isOpen={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+      />
       <div className='link-button-container'>
         <button
           className={classnames({
@@ -77,25 +71,6 @@ const Sidebar = () => {
         >
           <HiOutlineClipboardList size='1.5rem' />
           <label>Logs</label>
-        </button>
-      </div>
-      <div className='userSettings'>
-        <DualButton
-          currentValue={currentUnit}
-          onClickOption={(value) =>
-            dispatch(AuthActions.setDisplayedWeightUnit(value))
-          }
-          firstOption={{
-            label: 'KG',
-            value: 'kg',
-          }}
-          secondOption={{
-            label: 'LB',
-            value: 'lb',
-          }}
-        />
-        <button className='logout' onClick={handleLogoutClick}>
-          <span>Logout</span>
         </button>
       </div>
     </div>

@@ -1,0 +1,66 @@
+@import '../../../styles/common';
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background 0.1s;
+  position: relative;
+  overflow: visible;
+  user-select: none;
+
+  &__profileImage {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 1rem;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__profileMeta {
+    &--name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: $light-grey;
+    }
+  }
+
+  &__actions {
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+      rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
+
+    width: 14rem;
+    position: absolute;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    background: $medium-grey;
+    display: flex;
+    flex-direction: column;
+    left: 1rem;
+    top: 100%;
+    z-index: 1;
+    overflow: hidden;
+
+    > div {
+      height: 2rem;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: stretch;
+      align-items: center;
+      color: $light-grey;
+      font-size: 0.9rem;
+      &:hover {
+        background: lighten($medium-grey, 5%);
+      }
+    }
+  }
+
+  &:hover {
+    background: lighten($dark-grey, 5%);
+  }
+}
