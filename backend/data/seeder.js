@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 // grant access to env vars
 dotenv.config();
 
-const { defineAdminUser } = require('./users');
+// const { defineAdminUser } = require('./users');
 const { defineExercisePresets } = require('./exercisePresets');
 const { defineRoutinePresets } = require('./routines');
 const User = require('../models/User');
@@ -19,12 +19,12 @@ const importData = async () => {
   try {
     await User.deleteMany();
 
-    // define admin user
-    const adminUser = defineAdminUser();
-    // collect all users
-    const allUsers = [adminUser];
-    // insert all users in DB
-    const createdUsers = await User.insertMany(allUsers);
+    // // define admin user
+    // const adminUser = defineAdminUser();
+    // // collect all users
+    // const allUsers = [adminUser];
+    // // insert all users in DB
+    // const createdUsers = await User.insertMany(allUsers);
 
     // define exercise presets
     const exercisePresets = defineExercisePresets();
@@ -36,9 +36,9 @@ const importData = async () => {
     const createdRoutinePresets = await Routine.insertMany(routinePresets);
 
     console.log('Data imported!'.green.inverse);
-    console.log(
-      `Created ${createdUsers.length} new user(s) in the DB`.green.inverse
-    );
+    // console.log(
+    //   `Created ${createdUsers.length} new user(s) in the DB`.green.inverse
+    // );
     console.log(
       `Created ${createdExercisePresets.length} new exercise preset(s) in the DB`
         .green.inverse
