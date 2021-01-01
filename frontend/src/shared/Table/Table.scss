@@ -14,6 +14,10 @@ table {
       padding-left: 0;
     }
 
+    &:nth-of-type(2) {
+      width: 100%;
+    }
+
     &:last-of-type {
       padding-right: 0;
     }

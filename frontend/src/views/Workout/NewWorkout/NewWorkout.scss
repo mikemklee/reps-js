@@ -14,6 +14,8 @@
     color: inherit;
     background: transparent;
     pointer-events: none;
+    max-width: 30rem;
+    width: 100%;
 
     &--editable {
       background: $dark-grey;
@@ -23,7 +25,7 @@
 
   &__content {
     flex: 1;
-    max-width: 40rem;
+    max-width: 30rem;
 
     .workout-controls {
       color: $light-grey;
