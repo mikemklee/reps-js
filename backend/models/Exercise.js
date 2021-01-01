@@ -8,12 +8,10 @@ const exerciseSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    bodyParts: [
-      {
-        type: String,
-        required: true,
-      },
-    ],
+    bodyPart: {
+      type: String,
+      required: true,
+    },
     category: {
       type: String,
       required: true,
