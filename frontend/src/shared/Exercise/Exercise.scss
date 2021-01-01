@@ -1,7 +1,13 @@
 @import '../../styles/common';
 
 .exercise-section {
-  margin: 2rem 0;
+  margin: 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba($light-grey, 0.2);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 
   .exercise-name {
     font-weight: 600;

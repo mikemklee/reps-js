@@ -17,7 +17,7 @@ function useExercises() {
     CARDIO: 'Cardio',
     REPS: 'Reps only',
     MACHINE: 'Machine',
-    OTHERS: 'Others',
+    OTHER: 'Other',
   }));
 
   useEffect(() => {
@@ -155,7 +155,7 @@ function useExercises() {
         case categoryNames.BARBELL:
         case categoryNames.DUMBBELL:
         case categoryNames.MACHINE:
-        case categoryNames.OTHERS:
+        case categoryNames.OTHER:
         case categoryNames.WEIGHTED_BODYWEIGHT:
         case categoryNames.ASSISTED_BODYWEIGHT: {
           setsData = _.map(setsToInclude, (set) => ({

@@ -32,7 +32,7 @@ const Exercise = ({
       case categoryNames.BARBELL:
       case categoryNames.DUMBBELL:
       case categoryNames.MACHINE:
-      case categoryNames.OTHERS:
+      case categoryNames.OTHER:
       case categoryNames.WEIGHTED_BODYWEIGHT:
       case categoryNames.ASSISTED_BODYWEIGHT: {
         let sign;
