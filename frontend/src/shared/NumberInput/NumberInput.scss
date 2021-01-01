@@ -1,16 +1,5 @@
 @import '../../styles/common';
 
 .numberInput {
-  min-width: 0;
-  width: 100%;
-  min-width: 4rem;
-  max-width: 6rem;
-  height: 2rem;
-  background: $dark-grey;
-  border: none;
-  color: $light-grey;
-  font-size: 1rem;
-  text-align: center;
-  padding: 0;
-  margin: 0;
+  @include inputStyles;
 }

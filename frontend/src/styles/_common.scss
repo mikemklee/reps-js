@@ -113,3 +113,17 @@
   flex-direction: column;
   position: relative;
 }
+
+@mixin inputStyles() {
+  min-width: 0;
+  width: 100%;
+  min-width: 4rem;
+  max-width: 6rem;
+  height: 2rem;
+  background: $dark-grey;
+  border: none;
+  color: $light-grey;
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
