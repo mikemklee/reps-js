@@ -12,18 +12,7 @@ import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
 import useWeightConverter from '../../hooks/useWeightConverter';
-
-const CATEGORIES = {
-  BARBELL: 'Barbell',
-  DUMBBELL: 'Dumbbell',
-  MACHINE: 'Machine',
-  OTHERS: 'Others',
-  WEIGHTED_BODYWEIGHT: 'Weighted Bodyweight',
-  ASSISTED_BODYWEIGHT: 'Assisted Bodyweight',
-  DURATION: 'Duration',
-  CARDIO: 'Cardio',
-  REPS: 'Reps only',
-};
+import useExercises from '../../hooks/useExercises';
 
 const Exercise = ({
   exercise,
@@ -36,19 +25,20 @@ const Exercise = ({
   const [columns, setColumns] = useState([]);
 
   const { currentUnit } = useWeightConverter();
+  const { categoryNames } = useExercises();
 
   const getExerciseFields = useCallback(() => {
     switch (exercise.category) {
-      case CATEGORIES.BARBELL:
-      case CATEGORIES.DUMBBELL:
-      case CATEGORIES.MACHINE:
-      case CATEGORIES.OTHERS:
-      case CATEGORIES.WEIGHTED_BODYWEIGHT:
-      case CATEGORIES.ASSISTED_BODYWEIGHT: {
+      case categoryNames.BARBELL:
+      case categoryNames.DUMBBELL:
+      case categoryNames.MACHINE:
+      case categoryNames.OTHERS:
+      case categoryNames.WEIGHTED_BODYWEIGHT:
+      case categoryNames.ASSISTED_BODYWEIGHT: {
         let sign;
-        if (exercise.category === CATEGORIES.WEIGHTED_BODYWEIGHT) {
+        if (exercise.category === categoryNames.WEIGHTED_BODYWEIGHT) {
           sign = '+';
-        } else if (exercise.category === CATEGORIES.ASSISTED_BODYWEIGHT) {
+        } else if (exercise.category === categoryNames.ASSISTED_BODYWEIGHT) {
           sign = '-';
         } else {
           sign = '';
@@ -56,7 +46,7 @@ const Exercise = ({
 
         return [
           {
-            Header: `${sign}${currentUnit === 'kg' ? 'KG' : 'LB'}`,
+            Header: `${sign}${currentUnit === 'kg' ? 'kg' : 'lb'}`,
             accessor: 'kg',
             Cell: DecimalInputCell,
           },
@@ -67,7 +57,7 @@ const Exercise = ({
           },
         ];
       }
-      case CATEGORIES.DURATION: {
+      case categoryNames.DURATION: {
         return [
           {
             Header: 'Time',
@@ -76,7 +66,7 @@ const Exercise = ({
           },
         ];
       }
-      case CATEGORIES.CARDIO: {
+      case categoryNames.CARDIO: {
         return [
           {
             Header: 'km',
@@ -90,7 +80,7 @@ const Exercise = ({
           },
         ];
       }
-      case CATEGORIES.REPS: {
+      case categoryNames.REPS: {
         return [
           {
             Header: 'Reps',

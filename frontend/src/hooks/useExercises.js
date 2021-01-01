@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+
 import _ from 'lodash';
 
 // custom hook for managing workout exercises and sets data
@@ -6,6 +7,18 @@ function useExercises() {
   const [exercises, setExercises] = useState([]);
   const [setsByExercise, setExerciseSets] = useState({});
   const [anySetCompleted, setAnySetCompleted] = useState(false);
+
+  const categoryNames = useMemo(() => ({
+    BARBELL: 'Barbell',
+    DUMBBELL: 'Dumbbell',
+    WEIGHTED_BODYWEIGHT: 'Weighted Bodyweight',
+    ASSISTED_BODYWEIGHT: 'Assisted Bodyweight',
+    DURATION: 'Duration',
+    CARDIO: 'Cardio',
+    REPS: 'Reps only',
+    MACHINE: 'Machine',
+    OTHERS: 'Others',
+  }));
 
   useEffect(() => {
     const allSets = _.flatMap(setsByExercise);
@@ -131,18 +144,61 @@ function useExercises() {
         setsToInclude = _.filter(sets, (set) => set.completed);
       }
 
+      const currentExercise = _.find(
+        exercises,
+        (item) => item._id === exerciseId
+      );
+
+      // each exercise category has different set fields
+      let setsData;
+      switch (currentExercise.category) {
+        case categoryNames.BARBELL:
+        case categoryNames.DUMBBELL:
+        case categoryNames.MACHINE:
+        case categoryNames.OTHERS:
+        case categoryNames.WEIGHTED_BODYWEIGHT:
+        case categoryNames.ASSISTED_BODYWEIGHT: {
+          setsData = _.map(setsToInclude, (set) => ({
+            kg: set.kg * conversionFactor,
+            reps: set.reps,
+          }));
+          break;
+        }
+        case categoryNames.DURATION: {
+          setsData = _.map(setsToInclude, (set) => ({
+            duration: set.duration,
+            reps: set.reps,
+          }));
+          break;
+        }
+        case categoryNames.CARDIO: {
+          setsData = _.map(setsToInclude, (set) => ({
+            km: set.km, // TODO: convert between miles and km
+            duration: set.duration,
+          }));
+          break;
+        }
+        case categoryNames.REPS: {
+          setsData = _.map(setsToInclude, (set) => ({
+            reps: set.reps,
+          }));
+          break;
+        }
+        default: {
+          setsData = [];
+        }
+      }
+
       return {
         exerciseId,
-        sets: _.map(setsToInclude, (set) => ({
-          kg: set.kg * conversionFactor,
-          reps: set.reps,
-        })),
+        sets: setsData,
       };
     });
   };
 
   return {
     exercises,
+    categoryNames,
     setsByExercise,
     anySetCompleted,
     onAddExercise,
