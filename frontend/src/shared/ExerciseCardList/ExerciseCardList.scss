@@ -1,10 +1,27 @@
 @import '../../styles/common';
 
 .exerciseCardList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  grid-gap: 1rem;
-  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-gap: 1rem;
+  }
+
+  &__placeholder {
+    height: 4rem;
+    font-size: 0.9rem;
+    color: $light-grey;
+    opacity: 0.8;
+  }
 }
 
 .exerciseCard {
@@ -12,17 +29,19 @@
   @include cardStyles;
   cursor: pointer;
   transition: all 0.3s;
+  height: 10rem;
 
   &__title {
     font-weight: 600;
     cursor: inherit;
     transition: color 0.3s;
     margin-bottom: 0.5rem;
+    flex: 1;
   }
 
   &__details {
     margin-top: 0.5rem;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
   }
@@ -35,11 +54,11 @@
 
   &__detailValue {
     border-radius: 3px;
-    padding: 0.15rem 0.3rem;
-    color: $off-white;
+    padding: 0.15rem 0.4rem;
+    color: rgba($off-white, 0.9);
 
-    &--bodypart {
-      background: $faded-purple;
+    &--bodyPart {
+      background: $faded-pink;
     }
 
     &--category {
@@ -65,7 +84,7 @@
     width: 1.5rem;
     height: 1.5rem;
     right: 1rem;
-    bottom: 1rem;
+    top: 1rem;
     font-size: 1rem;
     opacity: 1;
   }
