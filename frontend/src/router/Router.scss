@@ -5,6 +5,10 @@
   height: 100%;
   display: flex;
 
+  @media (max-width: $medium-screen-width) {
+    flex-direction: column;
+  }
+
   .route {
     flex: 1;
     display: flex;

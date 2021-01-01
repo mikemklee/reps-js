@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { useHistory, useLocation } from 'react-router-dom';
 import { HiOutlineHome, HiOutlineClipboardList } from 'react-icons/hi';
 import { BiAnalyse, BiDumbbell } from 'react-icons/bi';
+import { useMediaQuery } from 'react-responsive';
 
 import './Sidebar.scss';
 
@@ -11,7 +12,8 @@ import UserMenu from './UserMenu/UserMenu';
 import useDropdown from '../../hooks/useDropdown';
 
 const Sidebar = () => {
-  const [dropdownRef, isOpen, setIsOpen] = useDropdown();
+  const isMobile = useMediaQuery({ query: '(max-width: 960px)' });
+  const [userMenuRef, isUserMenuOpen, setIsUserMenuOpen] = useDropdown();
 
   const history = useHistory();
   const { pathname } = useLocation();
@@ -21,15 +23,15 @@ const Sidebar = () => {
   };
 
   return (
-    <div className='sidebar'>
+    <div className='sideBar'>
       <div className='siteLogo' onClick={() => handleClick('/')}>
         <span className='siteLogo__name'>REPS</span>
         <span className='siteLogo__badge'>Alpha</span>
       </div>
       <UserMenu
-        menuRef={dropdownRef}
-        isOpen={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
+        menuRef={userMenuRef}
+        isOpen={isUserMenuOpen}
+        onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
       />
       <div className='link-button-container'>
         <button
@@ -39,8 +41,8 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/')}
         >
-          <HiOutlineHome size='1.5rem' />
-          <label>Home</label>
+          {isMobile ? null : <HiOutlineHome size='1.5rem' />}
+          <span>Home</span>
         </button>
         <button
           className={classnames({
@@ -49,8 +51,8 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/routines')}
         >
-          <BiAnalyse size='1.5rem' />
-          <label>Routines</label>
+          {isMobile ? null : <BiAnalyse size='1.5rem' />}
+          <span>Routines</span>
         </button>
         <button
           className={classnames({
@@ -59,8 +61,8 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/exercises')}
         >
-          <BiDumbbell size='1.5rem' />
-          <label>Exercises</label>
+          {isMobile ? null : <BiDumbbell size='1.5rem' />}
+          <span>Exercises</span>
         </button>
         <button
           className={classnames({
@@ -69,8 +71,8 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/logs')}
         >
-          <HiOutlineClipboardList size='1.5rem' />
-          <label>Logs</label>
+          {isMobile ? null : <HiOutlineClipboardList size='1.5rem' />}
+          <span>Logs</span>
         </button>
       </div>
     </div>

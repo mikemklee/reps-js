@@ -4,12 +4,60 @@
   display: flex;
   align-items: center;
   padding: 0.6rem 1.2rem;
-  margin-bottom: 1rem;
   cursor: pointer;
   transition: background 0.1s;
   position: relative;
   overflow: visible;
   user-select: none;
+  margin-left: auto;
+
+  &__actions {
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+      rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
+
+    width: 14rem;
+    position: absolute;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    background: $medium-grey;
+    display: flex;
+    flex-direction: column;
+    left: 1rem;
+    top: 100%;
+    z-index: 1;
+    overflow: hidden;
+
+    @media (max-width: $medium-screen-width) {
+      left: auto;
+      right: 1rem;
+      top: calc(100% + 1rem);
+    }
+  }
+
+  &__action {
+    height: 2rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    color: $light-grey;
+    font-size: 0.9rem;
+    &:hover {
+      background: lighten($medium-grey, 5%);
+    }
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $medium-screen-width) {
+      border-bottom: 1px solid rgba($light-grey, 0.1);
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      cursor: default;
+    }
+  }
 
   &__profileImage {
     border-radius: 50%;
@@ -30,37 +78,11 @@
     }
   }
 
-  &__actions {
-    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
-      rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
+  @media (min-width: $medium-screen-width) {
+    margin-left: 0;
 
-    width: 14rem;
-    position: absolute;
-    border-radius: 4px;
-    padding: 0.5rem 0;
-    background: $medium-grey;
-    display: flex;
-    flex-direction: column;
-    left: 1rem;
-    top: 100%;
-    z-index: 1;
-    overflow: hidden;
-
-    > div {
-      height: 2rem;
-      padding: 0 1rem;
-      display: flex;
-      justify-content: stretch;
-      align-items: center;
-      color: $light-grey;
-      font-size: 0.9rem;
-      &:hover {
-        background: lighten($medium-grey, 5%);
-      }
+    &:hover {
+      background: lighten($dark-grey, 5%);
     }
-  }
-
-  &:hover {
-    background: lighten($dark-grey, 5%);
   }
 }
