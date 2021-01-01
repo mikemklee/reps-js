@@ -15,7 +15,7 @@ const RoutineCardList = ({
   return (
     <div className='routineCardList'>
       <div className='routineCardList__title'>{title}</div>
-      <div className='routineCardList__routines'>
+      <div className='routineCardList__cards'>
         {_.isEmpty(routines) ? (
           <div className='routineCardList__placeholder'>{placeholder}</div>
         ) : (
