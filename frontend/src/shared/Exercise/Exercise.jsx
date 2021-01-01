@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTable, useFlexLayout } from 'react-table';
 import { VscAdd, VscClose } from 'react-icons/vsc';
 
@@ -12,6 +12,18 @@ import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
 import useWeightConverter from '../../hooks/useWeightConverter';
 
+const CATEGORIES = {
+  BARBELL: 'Barbell',
+  DUMBBELL: 'Dumbbell',
+  MACHINE: 'Machine',
+  OTHERS: 'Others',
+  WEIGHTED_BODYWEIGHT: 'Weighted Bodyweight',
+  ASSISTED_BODYWEIGHT: 'Assisted Bodyweight',
+  DURATION: 'Duration',
+  CARDIO: 'Cardio',
+  REPS: 'Reps only',
+};
+
 const Exercise = ({
   exercise,
   sets,
@@ -24,30 +36,92 @@ const Exercise = ({
 
   const { currentUnit } = useWeightConverter();
 
+  const getExerciseFields = useCallback(() => {
+    switch (exercise.category) {
+      case CATEGORIES.BARBELL:
+      case CATEGORIES.DUMBBELL:
+      case CATEGORIES.MACHINE:
+      case CATEGORIES.OTHERS:
+      case CATEGORIES.WEIGHTED_BODYWEIGHT:
+      case CATEGORIES.ASSISTED_BODYWEIGHT: {
+        let sign;
+        if (exercise.category === CATEGORIES.WEIGHTED_BODYWEIGHT) {
+          sign = '+';
+        } else if (exercise.category === CATEGORIES.ASSISTED_BODYWEIGHT) {
+          sign = '-';
+        } else {
+          sign = '';
+        }
+
+        return [
+          {
+            Header: `${sign}${currentUnit === 'kg' ? 'KG' : 'LB'}`,
+            accessor: 'kg',
+            Cell: DecimalInputCell,
+          },
+          {
+            Header: 'Reps',
+            accessor: 'reps',
+            Cell: IntegerInputCell,
+          },
+        ];
+      }
+      case CATEGORIES.DURATION: {
+        return [
+          {
+            Header: 'Time',
+            accessor: 'duration',
+            Cell: () => 'show time',
+          },
+        ];
+      }
+      case CATEGORIES.CARDIO: {
+        return [
+          {
+            Header: 'km',
+            accessor: 'km', // convert between miles and km
+            Cell: DecimalInputCell,
+          },
+          {
+            Header: 'Time',
+            accessor: 'duration',
+            Cell: () => 'show time',
+          },
+        ];
+      }
+      case CATEGORIES.REPS: {
+        return [
+          {
+            Header: 'Reps',
+            accessor: 'reps',
+            Cell: IntegerInputCell,
+          },
+        ];
+      }
+      default: {
+        return [];
+      }
+    }
+  }, [exercise, currentUnit]);
+
   useEffect(() => {
-    // TODO: define different set of columns for different exercise category
     // TODO: query previous record and show as separate column
+
+    // TODO: define different set of columns for different exercise category
+    const exerciseFields = getExerciseFields();
+
     const displayedColumns = [
       {
         Header: 'Set',
         accessor: 'set',
         Cell: ({ row }) => row.index + 1,
       },
-      // {
-      //   Header: 'Previous',
-      //   accessor: 'previous',
-      //   Cell: () => 'test', // TODO: query previous record?
-      // },
       {
-        Header: currentUnit === 'kg' ? 'KG' : 'LB',
-        accessor: 'kg',
-        Cell: DecimalInputCell,
+        Header: '',
+        accessor: 'previous',
+        Cell: () => <div style={{ background: 'red' }}></div>, // TODO: query previous record?
       },
-      {
-        Header: 'Reps',
-        accessor: 'reps',
-        Cell: IntegerInputCell,
-      },
+      ...exerciseFields,
     ];
 
     // include column for set complete button, if allowed
@@ -71,7 +145,7 @@ const Exercise = ({
     });
 
     setColumns(displayedColumns);
-  }, [currentUnit]);
+  }, [currentUnit, exercise]);
 
   const [skipPageReset, setSkipPageReset] = useState(false);
 
