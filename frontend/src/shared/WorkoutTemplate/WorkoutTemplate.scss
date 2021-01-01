@@ -8,9 +8,16 @@
     @include viewHeaderStyles;
   }
 
+  &__name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    opacity: 0.8;
+  }
+
   &__title {
     border: none;
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: inherit;
     background: transparent;
     pointer-events: none;

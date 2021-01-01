@@ -30,6 +30,7 @@ import useExercises from '../../hooks/useExercises';
 import useWeightConverter from '../../hooks/useWeightConverter';
 
 const WorkoutTemplate = ({ useFor }) => {
+  const [templateName, setTemplateName] = useState('');
   const [title, setTitle] = useState('');
   const [duration, setDuration] = useState(0);
   const [workout, setWorkout] = useState(null);
@@ -186,6 +187,7 @@ const WorkoutTemplate = ({ useFor }) => {
 
   const populateExerciseSections = () => {
     if (useFor === 'NEW_WORKOUT') {
+      setTemplateName('New workout');
       if (routineId) {
         if (routineId === 'new') {
           // blank workout; just update workout title
@@ -225,6 +227,7 @@ const WorkoutTemplate = ({ useFor }) => {
       return;
     }
     if (useFor === 'EDIT_WORKOUT') {
+      setTemplateName('Edit workout');
       if (workoutId) {
         if (_.isEmpty(workoutLogs)) {
           // no workout data available; redirect to home page
@@ -256,6 +259,7 @@ const WorkoutTemplate = ({ useFor }) => {
       return;
     }
     if (useFor === 'NEW_ROUTINE') {
+      setTemplateName('New routine');
       if (workoutId) {
         if (workoutId === 'new') {
           // creating routine from scratch; just update routine title
@@ -268,6 +272,7 @@ const WorkoutTemplate = ({ useFor }) => {
       return;
     }
     if (useFor === 'EDIT_ROUTINE') {
+      setTemplateName('Edit routine');
       if (routineId) {
         if (_.isEmpty(customRoutines)) {
           // no routine data available; redirect to home page
@@ -294,16 +299,6 @@ const WorkoutTemplate = ({ useFor }) => {
         }
       }
       return;
-    }
-
-    if (workoutId) {
-      if (workoutId === 'new') {
-        // creating routine from scratch; just update routine title
-        setTitle('New routine');
-      } else {
-        // creating routine from saved workout
-        // TODO: populate exercises with workout data
-      }
     }
   };
 
@@ -352,6 +347,7 @@ const WorkoutTemplate = ({ useFor }) => {
   return (
     <div className='workoutTemplate'>
       <div className='workoutTemplate__header'>
+        <div className='workoutTemplate__name'>{templateName}</div>
         <input
           className='workoutTemplate__title workoutTemplate__title--editable'
           type='text'
