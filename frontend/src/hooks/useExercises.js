@@ -45,12 +45,21 @@ function useExercises() {
         exercisePreset,
         currentSet.kg * conversionFactor,
         currentSet.reps,
+        currentSet.km, // TODO: apply different conversion factor for distance
+        currentSet.duration,
         markAsCoplete
       );
     }
   };
 
-  const onAddSet = (exercise, kg = 0, reps = 0, completed = false) => {
+  const onAddSet = (
+    exercise,
+    kg = 0,
+    reps = 0,
+    km = 0,
+    duration = 0,
+    completed = false
+  ) => {
     setExerciseSets((prev) => {
       const existingSets = prev[exercise._id] || [];
       return {
@@ -63,6 +72,8 @@ function useExercises() {
             previous: '',
             kg,
             reps,
+            km,
+            duration,
             completed,
           },
         ],
