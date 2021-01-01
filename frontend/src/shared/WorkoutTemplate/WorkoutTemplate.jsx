@@ -302,6 +302,14 @@ const WorkoutTemplate = ({ useFor }) => {
     }
   };
 
+  const onClickCancel = () => {
+    if (useFor === 'NEW_WORKOUT') {
+      cancelModalRef.current.open();
+    } else {
+      history.goBack();
+    }
+  };
+
   const onConfirmSave = () => {
     let conversionFactor = 1;
     if (currentUnit === 'lb') {
@@ -377,10 +385,7 @@ const WorkoutTemplate = ({ useFor }) => {
             <WorkoutMeta vertical item={workout} />
           )}
           <div className='workout-controls-actions'>
-            <button
-              className='cancel-workout-btn'
-              onClick={() => cancelModalRef.current.open()}
-            >
+            <button className='cancel-workout-btn' onClick={onClickCancel}>
               <span>Cancel</span>
             </button>
             <button
