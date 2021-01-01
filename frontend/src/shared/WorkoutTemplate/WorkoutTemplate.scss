@@ -1,6 +1,6 @@
-@import '../../../styles/common';
+@import '../../styles/common';
 
-.workoutView {
+.workoutTemplate {
   @include viewContainerStyles;
   flex: 1;
 

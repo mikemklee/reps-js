@@ -12,6 +12,7 @@ import RestTimer from './RestTimer/RestTimer';
 import Sidebar from './Sidebar/Sidebar';
 import Table from './Table/Table';
 import TimeDisplay from './TimeDisplay/TimeDisplay';
+import WorkoutTemplate from './WorkoutTemplate/WorkoutTemplate';
 
 export {
   AddExercise,
@@ -28,4 +29,5 @@ export {
   Sidebar,
   Table,
   TimeDisplay,
+  WorkoutTemplate,
 };
