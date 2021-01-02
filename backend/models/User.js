@@ -37,6 +37,10 @@ const userSchema = mongoose.Schema(
         ref: 'Workout',
       },
     ],
+    preferences: {
+      type: Map,
+      of: String,
+    },
   },
   {
     timestamps: true,

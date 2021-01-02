@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const _ = require('lodash');
 
 const router = express.Router();
 
@@ -20,6 +21,32 @@ router.route('/login/success').get((req, res) => {
       message: 'failed to authenticate user',
     });
   }
+});
+
+// route to update user preferences
+router.route('/:id/preferences').post(async (req, res) => {
+  const { user, body } = req;
+
+  // TODO: validate request body
+
+  // add or update requested preference settings
+  const updatedPreferences = user.preferences;
+  _.forEach(body.preferencesData, (value, key) => {
+    updatedPreferences.set(key, value);
+  });
+  user.preferences = updatedPreferences;
+
+  // update user in DB
+  try {
+    await user.save();
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not update user',
+    });
+    return;
+  }
+
+  res.status(200).json(updatedPreferences);
 });
 
 // when login failed, send failed msg
