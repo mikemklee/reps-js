@@ -54,6 +54,24 @@ const actions = {
       payload: {},
     };
   },
+  updatePreferencesRequest: (preferencesData) => {
+    return {
+      type: types.UPDATE_PREFERENCES_REQUEST,
+      payload: { preferencesData },
+    };
+  },
+  updatePreferencesSuccess: (updatedPreferences) => {
+    return {
+      type: types.UPDATE_PREFERENCES_SUCCESS,
+      payload: { updatedPreferences },
+    };
+  },
+  updatePreferencesFailure: (error) => {
+    return {
+      type: types.UPDATE_PREFERENCES_FAILURE,
+      payload: { error },
+    };
+  },
   setDisplayedWeightUnit: (weightUnit) => {
     return {
       type: types.SET_DISPLAYED_WEIGHT_UNIT,

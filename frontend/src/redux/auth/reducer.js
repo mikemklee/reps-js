@@ -7,6 +7,7 @@ export const initialState = {
   token: null,
   userProfileImage: '',
   userDisplayName: '',
+  userPreferences: {},
   displayedWeightUnit: 'kg',
   displayedDistanceUnit: 'km',
   status: {
@@ -14,6 +15,8 @@ export const initialState = {
     loginSucces: false,
     getUserDataPending: false,
     getUserDataSuccess: false,
+    updatePreferencesPending: false,
+    updatePreferencesSuccess: false,
   },
 };
 
@@ -86,6 +89,7 @@ export default (state = initialState, { type, payload }) => {
         userGoogleId: user.googleId,
         userProfileImage: user.profileImage,
         userDisplayName: user.displayName,
+        userPreferences: user.preferences,
         isAuthenticated: true,
         status: {
           ...state.status,
@@ -122,6 +126,37 @@ export default (state = initialState, { type, payload }) => {
           ...state.status,
           loginPending: false,
           loginSuccess: false,
+        },
+      };
+    }
+    case types.UPDATE_PREFERENCES_REQUEST: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          updatePreferencesPending: true,
+          updatePreferencesSuccess: false,
+        },
+      };
+    }
+    case types.UPDATE_PREFERENCES_SUCCESS: {
+      return {
+        ...state,
+        userPreferences: payload.updatedPreferences,
+        status: {
+          ...state.status,
+          updatePreferencesPending: false,
+          updatePreferencesSuccess: true,
+        },
+      };
+    }
+    case types.UPDATE_PREFERENCES_FAILURE: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          updatePreferencesPending: false,
+          updatePreferencesSuccess: false,
         },
       };
     }
