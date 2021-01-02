@@ -7,7 +7,7 @@ import './Routines.scss';
 
 import RoutineCardList from './RoutineCardList/RoutineCardList';
 
-import { Modal, Confirmation, LoadingSpinner } from '../../shared';
+import { Modal, Confirmation, ContentPlaceholder } from '../../shared';
 
 import RoutineActions from '../../redux/routine/actions';
 
@@ -49,7 +49,13 @@ const Routines = () => {
       <div className='routinesView__header'>Routines</div>
       <div className='routinesView__content'>
         {loading ? (
-          <LoadingSpinner />
+          <div className='routinesView__placeholders'>
+            {Array(10)
+              .fill()
+              .map((val, index) => (
+                <ContentPlaceholder key={index} />
+              ))}
+          </div>
         ) : (
           <>
             <div className='routineControlBar'>

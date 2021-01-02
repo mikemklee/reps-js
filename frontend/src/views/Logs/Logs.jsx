@@ -5,7 +5,7 @@ import './Logs.scss';
 
 import WorkoutCardList from './WorkoutCardList/WorkoutCardList';
 
-import { Modal, Confirmation } from '../../shared';
+import { Modal, Confirmation, ContentPlaceholder } from '../../shared';
 
 import ExerciseActions from '../../redux/exercise/actions';
 import WorkoutActions from '../../redux/workout/actions';
@@ -13,8 +13,12 @@ import WorkoutActions from '../../redux/workout/actions';
 const Logs = () => {
   const [deleteId, setDeleteId] = useState(null);
   const deleteWorkoutModalRef = useRef(null);
+
   const dispatch = useDispatch();
-  const { workoutLogs } = useSelector((state) => state.workout);
+  const { status: exerciseStatus } = useSelector((state) => state.exercise);
+  const { workoutLogs, status: workoutStatus } = useSelector(
+    (state) => state.workout
+  );
 
   useEffect(() => {
     dispatch(WorkoutActions.getWorkoutLogsRequest());
@@ -32,19 +36,32 @@ const Logs = () => {
     deleteWorkoutModalRef.current.close();
   };
 
+  const loading =
+    exerciseStatus.getPresetsPending || workoutStatus.getWorkoutLogsPending;
+
   return (
-    <div className='logs-view'>
-      <div className='view-header'>Logs</div>
-      <div className='view-content'>
-        <WorkoutCardList
-          title='Workout history'
-          placeholder='You do not have any workout sessions saved yet.'
-          workoutLogs={workoutLogs}
-          onDeleteWorkout={(workoutId) => {
-            setDeleteId(workoutId);
-            deleteWorkoutModalRef.current.open();
-          }}
-        />
+    <div className='logsView'>
+      <div className='logsView__header'>Logs</div>
+      <div className='logsView__content'>
+        {loading ? (
+          <div className='logsView__placeholders'>
+            {Array(10)
+              .fill()
+              .map((val, index) => (
+                <ContentPlaceholder key={index} />
+              ))}
+          </div>
+        ) : (
+          <WorkoutCardList
+            title='Workout history'
+            placeholder='You do not have any workout sessions saved yet.'
+            workoutLogs={workoutLogs}
+            onDeleteWorkout={(workoutId) => {
+              setDeleteId(workoutId);
+              deleteWorkoutModalRef.current.open();
+            }}
+          />
+        )}
         <Modal ref={deleteWorkoutModalRef}>
           <Confirmation
             isWarning

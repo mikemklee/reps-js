@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import './Exercises.scss';
 
-import { ExerciseCardList } from '../../shared';
+import { ExerciseCardList, ContentPlaceholder } from '../../shared';
 
 import ExerciseActions from '../../redux/exercise/actions';
 
@@ -46,24 +46,38 @@ const Exercises = () => {
     }
   }, [exerciseStatus, prevExerciseStatus]);
 
+  const loading = exerciseStatus.getPresetsPending;
+
   return (
     <div className='exercisesView'>
-      <div className='view-header'>Exercises</div>
-      <div className='view-content'>
-        <div className='exercisesView__searchBar'>
-          <input
-            type='text'
-            placeholder='Search'
-            value={searchTerm}
-            onChange={onChange}
-          />
-          <FiSearch className='exercisesView__searchBar__icon' />
-        </div>
-        <ExerciseCardList
-          presets={searchResults}
-          title='Preset exercises'
-          placeholder='No matching exercises found.'
-        />
+      <div className='exercisesView__header'>Exercises</div>
+      <div className='exercisesView__content'>
+        {loading ? (
+          <div className='exercisesView__placeholders'>
+            {Array(10)
+              .fill()
+              .map((val, index) => (
+                <ContentPlaceholder key={index} />
+              ))}
+          </div>
+        ) : (
+          <>
+            <div className='exercisesView__searchBar'>
+              <input
+                type='text'
+                placeholder='Search'
+                value={searchTerm}
+                onChange={onChange}
+              />
+              <FiSearch className='exercisesView__searchBar__icon' />
+            </div>
+            <ExerciseCardList
+              presets={searchResults}
+              title='Preset exercises'
+              placeholder='No matching exercises found.'
+            />
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,14 +1,21 @@
 @import '../../styles/common';
 
-.logs-view {
+.logsView {
   @include viewContainerStyles;
   flex: 1;
 
-  .view-header {
+  &__header {
     @include viewHeaderStyles;
   }
 
-  .view-content {
+  &__content {
     flex: 1;
+  }
+
+  &__placeholders {
+    width: 35rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    grid-gap: 2rem;
   }
 }
