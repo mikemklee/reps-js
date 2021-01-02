@@ -17,10 +17,13 @@ const routineRoutes = require('./routes/routines');
 const connectDB = require('./config/db');
 const passportConfig = require('./config/passport');
 const { errorHandler, notFound } = require('./middleware/errors');
+const middlewareLog = require('./middleware/logs');
 
 connectDB();
 
 const app = express();
+
+app.use(middlewareLog);
 
 // configure cookie
 app.use(
