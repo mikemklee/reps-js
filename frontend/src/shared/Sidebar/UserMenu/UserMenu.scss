@@ -89,6 +89,14 @@
 
 .preferences {
   padding: 1rem;
+  position: relative;
+
+  &__loading {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
   &__section {
     > div:not(:last-of-type) {
       border-bottom: 1px solid rgba($light-grey, 0.1);

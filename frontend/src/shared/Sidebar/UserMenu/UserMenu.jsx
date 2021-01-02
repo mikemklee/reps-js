@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import './UserMenu.scss';
 
-import { DualButton, Modal } from '../../../shared';
+import { DualButton, LoadingSpinner, Modal } from '../../../shared';
 
 import AuthActions from '../../../redux/auth/actions';
 
@@ -19,7 +19,7 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
 
   const preferencesModalRef = useRef(null);
 
-  const { userDisplayName, userProfileImage } = useSelector(
+  const { userDisplayName, userProfileImage, status } = useSelector(
     (state) => state.auth
   );
 
@@ -36,6 +36,8 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
     preferencesModalRef.current.open();
     onForceClose();
   };
+
+  const upadtingPreferences = status.updatePreferencesPending;
 
   return (
     <div className='userMenu' ref={menuRef} onClick={onClick}>
@@ -105,6 +107,11 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
       )}
       <Modal ref={preferencesModalRef} hideCloseButton>
         <div className='preferences'>
+          {upadtingPreferences ? (
+            <div className='preferences__loading'>
+              <LoadingSpinner />
+            </div>
+          ) : null}
           <div className='preferences__section'>
             <div className='preferences__sectionName'>Displayed units</div>
             <div className='userSetting'>
