@@ -3,6 +3,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const User = require('../models/User');
 
+const { getDefaultPreferences } = require('../utils/auth');
+
 passport.use(
   new GoogleStrategy(
     {
@@ -23,6 +25,7 @@ passport.use(
           googleId: profile.id,
           displayName: profile._json.name,
           profileImage: profile._json.picture,
+          preferences: getDefaultPreferences(),
         });
         console.log('created new user!');
         done(null, newUser);

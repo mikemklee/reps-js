@@ -27,4 +27,8 @@ const upgradeUserPreferences = (existingPreferences) => {
   return existingPreferences;
 };
 
-module.exports = { generateToken, upgradeUserPreferences };
+module.exports = {
+  generateToken,
+  getDefaultPreferences,
+  upgradeUserPreferences,
+};

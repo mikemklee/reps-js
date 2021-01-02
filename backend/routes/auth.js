@@ -2,7 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const _ = require('lodash');
 
-const { upgradeUserPreferences } = require('../utils/auth');
+const {
+  upgradeUserPreferences,
+  getDefaultPreferences,
+} = require('../utils/auth');
 
 const router = express.Router();
 
@@ -34,8 +37,10 @@ router.route('/:id/preferences').post(async (req, res) => {
 
   // TODO: validate request body
 
+  // get existing preference settings (get defaults if none found)
+  const updatedPreferences = user.preferences || getDefaultPreferences();
+
   // add or update requested preference settings
-  const updatedPreferences = user.preferences;
   _.forEach(body.preferencesData, (value, key) => {
     updatedPreferences.set(key, value);
   });
