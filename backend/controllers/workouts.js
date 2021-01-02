@@ -1,22 +1,45 @@
 const Workout = require('../models/Workout');
 
-// @desc    Fetch all workout logs
+// @desc    Fetch all user workout logs
 // @route   GET /api/workouts
 // @access  Private
 const getWorkoutLogs = async (req, res) => {
-  const workoutLogs = await Workout.find({});
-  res.json(workoutLogs);
+  const userWorkouts = await Workout.find()
+    .where('_id')
+    .in(req.user.workoutIds);
+  res.json(userWorkouts);
 };
 
 // @desc    Save a new workout session
 // @route   PUT /api/workouts/
 const saveWorkout = async (req, res) => {
-  const { workoutData } = req.body;
+  const { user, body } = req;
+  const { workoutData } = body;
 
   // TODO: validate request body
 
-  const workout = new Workout(workoutData);
-  const savedWorkout = await workout.save();
+  // save new workout in DB
+  let savedWorkout;
+  try {
+    const workout = new Workout(workoutData);
+    savedWorkout = await workout.save();
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not save workout in DB',
+    });
+    return;
+  }
+
+  // store workout id on user
+  try {
+    user.workoutIds = [...user.workoutIds, savedWorkout._id];
+    await user.save();
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not update user',
+    });
+    return;
+  }
 
   res.status(201).json(savedWorkout);
 };
@@ -26,6 +49,15 @@ const saveWorkout = async (req, res) => {
 const editWorkout = async (req, res) => {
   const workoutId = req.params.id;
   const { workoutData } = req.body;
+
+  // check if user owns this workout
+  const userWorkoutIds = req.user.workoutIds;
+  if (!userWorkoutIds.includes(workoutId)) {
+    res.status(403).json({
+      message: `Workout with id "${workoutId}" does not belong to user`,
+    });
+    return;
+  }
 
   // TODO: validate request body
 
@@ -52,7 +84,14 @@ const editWorkout = async (req, res) => {
 const deleteWorkout = async (req, res) => {
   const workoutId = req.params.id;
 
-  // TODO: validate request body
+  // check if user owns this workout
+  const userWorkoutIds = req.user.workoutIds;
+  if (!userWorkoutIds.includes(workoutId)) {
+    res.status(403).json({
+      message: `Workout with id "${workoutId}" does not belong to user`,
+    });
+    return;
+  }
 
   const workout = await Workout.findById(workoutId);
 
