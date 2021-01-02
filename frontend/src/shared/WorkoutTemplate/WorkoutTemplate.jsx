@@ -28,6 +28,7 @@ import ExerciseActions from '../../redux/exercise/actions';
 import usePrevious from '../../hooks/usePrevious';
 import useExercises from '../../hooks/useExercises';
 import useWeightConverter from '../../hooks/useWeightConverter';
+import useDistanceConverter from '../../hooks/useDistanceConverter';
 
 const WorkoutTemplate = ({ useFor }) => {
   const [templateName, setTemplateName] = useState('');
@@ -44,11 +45,16 @@ const WorkoutTemplate = ({ useFor }) => {
     onAddSet,
     onEditSet,
     onRemoveSet,
-    onConvertUnit,
+    onConvertWeightUnit,
+    onConvertDistanceUnit,
     onFormatExercisesData,
   } = useExercises();
 
   const { currentWeightUnit, getWeightConversionFactor } = useWeightConverter();
+  const {
+    currentDistanceUnit,
+    getDistanceConversionFactor,
+  } = useDistanceConverter();
 
   const counterRef = useRef(null);
   const restTimerModalRef = useRef(null);
@@ -70,6 +76,7 @@ const WorkoutTemplate = ({ useFor }) => {
   const prevRoutineStatus = usePrevious(routineStatus);
   const prevExerciseStatus = usePrevious(exerciseStatus);
   const prevWeightUnit = usePrevious(currentWeightUnit);
+  const prevDistanceUnit = usePrevious(currentDistanceUnit);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -180,13 +187,23 @@ const WorkoutTemplate = ({ useFor }) => {
 
   useEffect(() => {
     if (!_.isEqual(prevWeightUnit, currentWeightUnit)) {
-      const conversionFactor = getWeightConversionFactor(
+      const weightConversionFactor = getWeightConversionFactor(
         prevWeightUnit,
         currentWeightUnit
       );
-      onConvertUnit(conversionFactor);
+      onConvertWeightUnit(weightConversionFactor);
     }
   }, [prevWeightUnit, currentWeightUnit]);
+
+  useEffect(() => {
+    if (!_.isEqual(prevDistanceUnit, currentDistanceUnit)) {
+      const distanceConversionFactor = getDistanceConversionFactor(
+        prevDistanceUnit,
+        currentDistanceUnit
+      );
+      onConvertDistanceUnit(distanceConversionFactor);
+    }
+  }, [prevDistanceUnit, currentDistanceUnit]);
 
   const populateExerciseSections = () => {
     if (useFor === 'NEW_WORKOUT') {
@@ -207,11 +224,21 @@ const WorkoutTemplate = ({ useFor }) => {
             // no routine data available; redirect to home page
             history.push('/');
           } else {
-            let conversionFactor = 1;
+            let weightConversionFactor = 1;
             if (currentWeightUnit === 'lb') {
               // values are stored as KG in the DB
               // need to convert KG weights to LB before we use them
-              conversionFactor = getWeightConversionFactor('kg', 'lb');
+              weightConversionFactor = getWeightConversionFactor('kg', 'lb');
+            }
+
+            let distanceConversionFactor = 1;
+            if (currentDistanceUnit === 'mi') {
+              // values are stored as KM in the DB
+              // need to convert KM distances to MI before we use them
+              distanceConversionFactor = getDistanceConversionFactor(
+                'km',
+                'mi'
+              );
             }
 
             // update workout title
@@ -222,7 +249,13 @@ const WorkoutTemplate = ({ useFor }) => {
               // DX: skip exercises that are already included
               if (setsByExercise[item.exerciseId]) return;
               const exercisePreset = exercisePresets[item.exerciseId];
-              onAddSavedExercise(item, exercisePreset, conversionFactor, false);
+              onAddSavedExercise(
+                item,
+                exercisePreset,
+                weightConversionFactor,
+                distanceConversionFactor,
+                false
+              );
             });
           }
         }
@@ -238,11 +271,18 @@ const WorkoutTemplate = ({ useFor }) => {
         } else {
           const currentWorkout = workoutLogs[workoutId];
 
-          let conversionFactor = 1;
+          let weightConversionFactor = 1;
           if (currentWeightUnit === 'lb') {
             // values are stored as KG in the DB
             // need to convert KG weights to LB before we use them
-            conversionFactor = getWeightConversionFactor('kg', 'lb');
+            weightConversionFactor = getWeightConversionFactor('kg', 'lb');
+          }
+
+          let distanceConversionFactor = 1;
+          if (currentDistanceUnit === 'mi') {
+            // values are stored as KM in the DB
+            // need to convert KM distances to MI before we use them
+            distanceConversionFactor = getDistanceConversionFactor('km', 'mi');
           }
 
           // set workout
@@ -255,7 +295,13 @@ const WorkoutTemplate = ({ useFor }) => {
             // DX: skip exercises that are already included
             if (setsByExercise[item.exerciseId]) return;
             const exercisePreset = exercisePresets[item.exerciseId];
-            onAddSavedExercise(item, exercisePreset, conversionFactor, true);
+            onAddSavedExercise(
+              item,
+              exercisePreset,
+              weightConversionFactor,
+              distanceConversionFactor,
+              true
+            );
           });
         }
       }
@@ -283,11 +329,18 @@ const WorkoutTemplate = ({ useFor }) => {
         } else {
           const currentRoutine = customRoutines[routineId];
 
-          let conversionFactor = 1;
+          let weightConversionFactor = 1;
           if (currentWeightUnit === 'lb') {
             // values are stored as KG in the DB
             // need to convert KG weights to LB before we use them
-            conversionFactor = getWeightConversionFactor('kg', 'lb');
+            weightConversionFactor = getWeightConversionFactor('kg', 'lb');
+          }
+
+          let distanceConversionFactor = 1;
+          if (currentDistanceUnit === 'mi') {
+            // values are stored as KM in the DB
+            // need to convert KM distances to MI before we use them
+            distanceConversionFactor = getDistanceConversionFactor('km', 'mi');
           }
 
           // update routine title
@@ -297,7 +350,13 @@ const WorkoutTemplate = ({ useFor }) => {
             // DX: skip exercises that are already included
             if (setsByExercise[item.exerciseId]) return;
             const exercisePreset = exercisePresets[item.exerciseId];
-            onAddSavedExercise(item, exercisePreset, conversionFactor, true);
+            onAddSavedExercise(
+              item,
+              exercisePreset,
+              weightConversionFactor,
+              distanceConversionFactor,
+              true
+            );
           });
         }
       }
@@ -314,11 +373,18 @@ const WorkoutTemplate = ({ useFor }) => {
   };
 
   const onConfirmSave = () => {
-    let conversionFactor = 1;
+    let weightConversionFactor = 1;
     if (currentWeightUnit === 'lb') {
       // values are stored as KG in the DB
       // need to convert LB weights to KG before we save them
-      conversionFactor = getWeightConversionFactor('lb', 'kg');
+      weightConversionFactor = getWeightConversionFactor('lb', 'kg');
+    }
+
+    let distanceConversionFactor = 1;
+    if (currentDistanceUnit === 'mi') {
+      // values are stored as KM in the DB
+      // need to convert MI distances to KM before we save them
+      distanceConversionFactor = getDistanceConversionFactor('mi', 'km');
     }
 
     let filterCompleted = false;
@@ -330,7 +396,11 @@ const WorkoutTemplate = ({ useFor }) => {
     }
     const formattedData = {
       name: title,
-      exercises: onFormatExercisesData(conversionFactor, filterCompleted),
+      exercises: onFormatExercisesData(
+        weightConversionFactor,
+        distanceConversionFactor,
+        filterCompleted
+      ),
       duration: exerciseDuration,
     };
 

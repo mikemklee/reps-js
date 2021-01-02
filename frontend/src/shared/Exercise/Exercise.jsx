@@ -12,6 +12,7 @@ import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
 import useWeightConverter from '../../hooks/useWeightConverter';
+import useDistanceConverter from '../../hooks/useDistanceConverter';
 import useExercises from '../../hooks/useExercises';
 
 const Exercise = ({
@@ -25,6 +26,7 @@ const Exercise = ({
   const [columns, setColumns] = useState([]);
 
   const { currentWeightUnit } = useWeightConverter();
+  const { currentDistanceUnit } = useDistanceConverter();
   const { categoryNames } = useExercises();
 
   const getExerciseFields = useCallback(() => {
@@ -69,8 +71,8 @@ const Exercise = ({
       case categoryNames.CARDIO: {
         return [
           {
-            Header: 'km',
-            accessor: 'km', // TODO: convert between miles and km
+            Header: `${currentDistanceUnit === 'km' ? 'km' : 'miles'}`,
+            accessor: 'km',
             Cell: DecimalInputCell,
           },
           {
@@ -93,7 +95,7 @@ const Exercise = ({
         return [];
       }
     }
-  }, [exercise, currentWeightUnit]);
+  }, [exercise, currentWeightUnit, currentDistanceUnit]);
 
   useEffect(() => {
     // TODO: query previous record and show as separate column
@@ -136,7 +138,7 @@ const Exercise = ({
     });
 
     setColumns(displayedColumns);
-  }, [currentWeightUnit, exercise]);
+  }, [currentWeightUnit, currentDistanceUnit, exercise]);
 
   const [skipPageReset, setSkipPageReset] = useState(false);
 

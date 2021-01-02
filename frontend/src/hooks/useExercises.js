@@ -35,7 +35,8 @@ function useExercises() {
   const onAddSavedExercise = (
     savedExercise,
     exercisePreset,
-    conversionFactor = 1,
+    weightConversionFactor = 1,
+    distanceConversionFactor = 1,
     markAsCoplete = false
   ) => {
     setExercises((prev) => [...prev, exercisePreset]);
@@ -43,9 +44,9 @@ function useExercises() {
       const currentSet = savedExercise.sets[i];
       onAddSet(
         exercisePreset,
-        currentSet.kg * conversionFactor,
+        currentSet.kg * weightConversionFactor,
         currentSet.reps,
-        currentSet.km, // TODO: apply different conversion factor for distance
+        currentSet.km * distanceConversionFactor,
         currentSet.duration,
         markAsCoplete
       );
@@ -130,7 +131,7 @@ function useExercises() {
     }
   };
 
-  const onConvertUnit = (conversionFactor) => {
+  const onConvertWeightUnit = (weightConversionFactor) => {
     setExerciseSets((prev) => {
       const updatedSetsByExercise = {};
 
@@ -138,7 +139,7 @@ function useExercises() {
         updatedSetsByExercise[exerciseId] = sets.map((row) => {
           return {
             ...row,
-            kg: row.kg * conversionFactor,
+            kg: row.kg * weightConversionFactor,
           };
         });
       });
@@ -147,7 +148,28 @@ function useExercises() {
     });
   };
 
-  const onFormatExercisesData = (conversionFactor, filterCompleted = false) => {
+  const onConvertDistanceUnit = (distanceConversionFactor) => {
+    setExerciseSets((prev) => {
+      const updatedSetsByExercise = {};
+
+      _.forEach(prev, (sets, exerciseId) => {
+        updatedSetsByExercise[exerciseId] = sets.map((row) => {
+          return {
+            ...row,
+            kg: row.kg * distanceConversionFactor,
+          };
+        });
+      });
+
+      return updatedSetsByExercise;
+    });
+  };
+
+  const onFormatExercisesData = (
+    weightConversionFactor = 1,
+    distanceConversionFactor = 1,
+    filterCompleted = false
+  ) => {
     return _.map(setsByExercise, (sets, exerciseId) => {
       let setsToInclude = sets;
 
@@ -170,7 +192,7 @@ function useExercises() {
         case categoryNames.WEIGHTED_BODYWEIGHT:
         case categoryNames.ASSISTED_BODYWEIGHT: {
           setsData = _.map(setsToInclude, (set) => ({
-            kg: set.kg * conversionFactor,
+            kg: set.kg * weightConversionFactor,
             reps: set.reps,
           }));
           break;
@@ -184,7 +206,7 @@ function useExercises() {
         }
         case categoryNames.CARDIO: {
           setsData = _.map(setsToInclude, (set) => ({
-            km: set.km, // TODO: convert between miles and km
+            km: set.km * distanceConversionFactor,
             duration: set.duration,
           }));
           break;
@@ -217,7 +239,8 @@ function useExercises() {
     onAddSet,
     onEditSet,
     onRemoveSet,
-    onConvertUnit,
+    onConvertWeightUnit,
+    onConvertDistanceUnit,
     onFormatExercisesData,
   };
 }
