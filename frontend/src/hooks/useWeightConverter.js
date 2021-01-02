@@ -5,7 +5,9 @@ const CONVERSION_MUTLIPLER = 2.20462262185;
 
 // custom hook for managing weight units (e.g., displayed values, conversions)
 function useWeightConverter() {
-  const { displayedWeightUnit } = useSelector((state) => state.auth);
+  const { displayedWeightUnit } = useSelector(
+    (state) => state.auth.userPreferences
+  );
   const [currentWeightUnit, setCurrentWeightUnit] = useState(
     displayedWeightUnit
   );

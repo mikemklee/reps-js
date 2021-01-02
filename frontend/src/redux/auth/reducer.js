@@ -8,8 +8,6 @@ export const initialState = {
   userProfileImage: '',
   userDisplayName: '',
   userPreferences: {},
-  displayedWeightUnit: 'kg',
-  displayedDistanceUnit: 'km',
   status: {
     loginPending: false,
     loginSucces: false,
@@ -158,18 +156,6 @@ export default (state = initialState, { type, payload }) => {
           updatePreferencesPending: false,
           updatePreferencesSuccess: false,
         },
-      };
-    }
-    case types.SET_DISPLAYED_WEIGHT_UNIT: {
-      return {
-        ...state,
-        displayedWeightUnit: payload.weightUnit,
-      };
-    }
-    case types.SET_DISPLAYED_DISTANCE_UNIT: {
-      return {
-        ...state,
-        displayedDistanceUnit: payload.distanceUnit,
       };
     }
     default: {

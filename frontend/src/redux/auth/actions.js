@@ -72,18 +72,6 @@ const actions = {
       payload: { error },
     };
   },
-  setDisplayedWeightUnit: (weightUnit) => {
-    return {
-      type: types.SET_DISPLAYED_WEIGHT_UNIT,
-      payload: { weightUnit },
-    };
-  },
-  setDisplayedDistanceUnit: (distanceUnit) => {
-    return {
-      type: types.SET_DISPLAYED_DISTANCE_UNIT,
-      payload: { distanceUnit },
-    };
-  },
 };
 
 export default actions;

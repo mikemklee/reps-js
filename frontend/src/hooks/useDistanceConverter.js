@@ -5,7 +5,9 @@ const CONVERSION_MUTLIPLER = 0.62137119;
 
 // custom hook for managing distance units (e.g., displayed values, conversions)
 function useDistanceConverter() {
-  const { displayedDistanceUnit } = useSelector((state) => state.auth);
+  const { displayedDistanceUnit } = useSelector(
+    (state) => state.auth.userPreferences
+  );
   const [currentDistanceUnit, setCurrentDistanceUnit] = useState(
     displayedDistanceUnit
   );

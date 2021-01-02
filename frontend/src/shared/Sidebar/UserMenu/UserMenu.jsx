@@ -115,9 +115,13 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
               <div className='userSetting__control'>
                 <DualButton
                   currentValue={currentWeightUnit}
-                  onClickOption={(value) =>
-                    dispatch(AuthActions.setDisplayedWeightUnit(value))
-                  }
+                  onClickOption={(value) => {
+                    dispatch(
+                      AuthActions.updatePreferencesRequest({
+                        displayedWeightUnit: value,
+                      })
+                    );
+                  }}
                   firstOption={{
                     label: 'KG',
                     value: 'kg',
@@ -137,9 +141,13 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
               <div className='userSetting__control'>
                 <DualButton
                   currentValue={currentDistanceUnit}
-                  onClickOption={(value) =>
-                    dispatch(AuthActions.setDisplayedDistanceUnit(value))
-                  }
+                  onClickOption={(value) => {
+                    dispatch(
+                      AuthActions.updatePreferencesRequest({
+                        displayedDistanceUnit: value,
+                      })
+                    );
+                  }}
                   firstOption={{
                     label: 'KM',
                     value: 'km',
