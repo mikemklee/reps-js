@@ -185,6 +185,7 @@ const WorkoutTemplate = ({ useFor }) => {
     prevExerciseStatus,
   ]);
 
+  // convert weight values if unit changes
   useEffect(() => {
     if (!_.isEqual(prevWeightUnit, currentWeightUnit)) {
       const weightConversionFactor = getWeightConversionFactor(
@@ -195,6 +196,7 @@ const WorkoutTemplate = ({ useFor }) => {
     }
   }, [prevWeightUnit, currentWeightUnit]);
 
+  // convert distance values if unit changes
   useEffect(() => {
     if (!_.isEqual(prevDistanceUnit, currentDistanceUnit)) {
       const distanceConversionFactor = getDistanceConversionFactor(
@@ -224,23 +226,6 @@ const WorkoutTemplate = ({ useFor }) => {
             // no routine data available; redirect to home page
             history.push('/');
           } else {
-            let weightConversionFactor = 1;
-            if (currentWeightUnit === 'lb') {
-              // values are stored as KG in the DB
-              // need to convert KG weights to LB before we use them
-              weightConversionFactor = getWeightConversionFactor('kg', 'lb');
-            }
-
-            let distanceConversionFactor = 1;
-            if (currentDistanceUnit === 'mi') {
-              // values are stored as KM in the DB
-              // need to convert KM distances to MI before we use them
-              distanceConversionFactor = getDistanceConversionFactor(
-                'km',
-                'mi'
-              );
-            }
-
             // update workout title
             setTitle(currentRoutine.name);
 
@@ -249,13 +234,7 @@ const WorkoutTemplate = ({ useFor }) => {
               // DX: skip exercises that are already included
               if (setsByExercise[item.exerciseId]) return;
               const exercisePreset = exercisePresets[item.exerciseId];
-              onAddSavedExercise(
-                item,
-                exercisePreset,
-                weightConversionFactor,
-                distanceConversionFactor,
-                false
-              );
+              onAddSavedExercise(item, exercisePreset, false);
             });
           }
         }
@@ -271,20 +250,6 @@ const WorkoutTemplate = ({ useFor }) => {
         } else {
           const currentWorkout = workoutLogs[workoutId];
 
-          let weightConversionFactor = 1;
-          if (currentWeightUnit === 'lb') {
-            // values are stored as KG in the DB
-            // need to convert KG weights to LB before we use them
-            weightConversionFactor = getWeightConversionFactor('kg', 'lb');
-          }
-
-          let distanceConversionFactor = 1;
-          if (currentDistanceUnit === 'mi') {
-            // values are stored as KM in the DB
-            // need to convert KM distances to MI before we use them
-            distanceConversionFactor = getDistanceConversionFactor('km', 'mi');
-          }
-
           // set workout
           setTitle(currentWorkout.name);
           setDuration(currentWorkout.duration);
@@ -295,13 +260,7 @@ const WorkoutTemplate = ({ useFor }) => {
             // DX: skip exercises that are already included
             if (setsByExercise[item.exerciseId]) return;
             const exercisePreset = exercisePresets[item.exerciseId];
-            onAddSavedExercise(
-              item,
-              exercisePreset,
-              weightConversionFactor,
-              distanceConversionFactor,
-              true
-            );
+            onAddSavedExercise(item, exercisePreset, true);
           });
         }
       }
@@ -329,20 +288,6 @@ const WorkoutTemplate = ({ useFor }) => {
         } else {
           const currentRoutine = customRoutines[routineId];
 
-          let weightConversionFactor = 1;
-          if (currentWeightUnit === 'lb') {
-            // values are stored as KG in the DB
-            // need to convert KG weights to LB before we use them
-            weightConversionFactor = getWeightConversionFactor('kg', 'lb');
-          }
-
-          let distanceConversionFactor = 1;
-          if (currentDistanceUnit === 'mi') {
-            // values are stored as KM in the DB
-            // need to convert KM distances to MI before we use them
-            distanceConversionFactor = getDistanceConversionFactor('km', 'mi');
-          }
-
           // update routine title
           setTitle(currentRoutine.name);
           // add exercises
@@ -350,13 +295,7 @@ const WorkoutTemplate = ({ useFor }) => {
             // DX: skip exercises that are already included
             if (setsByExercise[item.exerciseId]) return;
             const exercisePreset = exercisePresets[item.exerciseId];
-            onAddSavedExercise(
-              item,
-              exercisePreset,
-              weightConversionFactor,
-              distanceConversionFactor,
-              true
-            );
+            onAddSavedExercise(item, exercisePreset, true);
           });
         }
       }
@@ -373,20 +312,6 @@ const WorkoutTemplate = ({ useFor }) => {
   };
 
   const onConfirmSave = () => {
-    let weightConversionFactor = 1;
-    if (currentWeightUnit === 'lb') {
-      // values are stored as KG in the DB
-      // need to convert LB weights to KG before we save them
-      weightConversionFactor = getWeightConversionFactor('lb', 'kg');
-    }
-
-    let distanceConversionFactor = 1;
-    if (currentDistanceUnit === 'mi') {
-      // values are stored as KM in the DB
-      // need to convert MI distances to KM before we save them
-      distanceConversionFactor = getDistanceConversionFactor('mi', 'km');
-    }
-
     let filterCompleted = false;
     let exerciseDuration;
     if (useFor === 'NEW_WORKOUT' || useFor === 'EDIT_WORKOUT') {
@@ -396,32 +321,20 @@ const WorkoutTemplate = ({ useFor }) => {
     }
     const formattedData = {
       name: title,
-      exercises: onFormatExercisesData(
-        weightConversionFactor,
-        distanceConversionFactor,
-        filterCompleted
-      ),
+      exercises: onFormatExercisesData(filterCompleted),
       duration: exerciseDuration,
     };
 
     if (useFor === 'NEW_WORKOUT') {
       dispatch(WorkoutActions.saveWorkoutRequest(formattedData));
-      return;
-    }
-    if (useFor === 'EDIT_WORKOUT') {
+    } else if (useFor === 'EDIT_WORKOUT') {
       dispatch(WorkoutActions.editWorkoutRequest(workoutId, formattedData));
-      return;
-    }
-
-    if (useFor === 'NEW_ROUTINE') {
+    } else if (useFor === 'NEW_ROUTINE') {
       dispatch(RoutineActions.saveRoutineRequest(formattedData));
-      return;
-    }
-    if (useFor === 'EDIT_ROUTINE') {
+    } else if (useFor === 'EDIT_ROUTINE') {
       dispatch(
         RoutineActions.editCustomRoutineRequest(routineId, formattedData)
       );
-      return;
     }
   };
 

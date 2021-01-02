@@ -1,16 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-
 import _ from 'lodash';
+
+import useWeightConverter from './useWeightConverter';
+import useDistanceConverter from './useDistanceConverter';
 
 // custom hook for managing workout exercises and sets data
 function useExercises() {
-  const [exercises, setExercises] = useState([]);
-  const [setsByExercise, setExerciseSets] = useState({});
-  const [anySetCompleted, setAnySetCompleted] = useState(false);
-
-  const { presets: exercisePresets } = useSelector((state) => state.exercise);
-
   const categoryNames = useMemo(() => ({
     BARBELL: 'Barbell',
     DUMBBELL: 'Dumbbell',
@@ -22,6 +18,18 @@ function useExercises() {
     MACHINE: 'Machine',
     OTHER: 'Other',
   }));
+
+  const [exercises, setExercises] = useState([]);
+  const [setsByExercise, setExerciseSets] = useState({});
+  const [anySetCompleted, setAnySetCompleted] = useState(false);
+
+  const { currentWeightUnit, getWeightConversionFactor } = useWeightConverter();
+  const {
+    currentDistanceUnit,
+    getDistanceConversionFactor,
+  } = useDistanceConverter();
+
+  const { presets: exercisePresets } = useSelector((state) => state.exercise);
 
   useEffect(() => {
     const allSets = _.flatMap(setsByExercise);
@@ -38,10 +46,22 @@ function useExercises() {
   const onAddSavedExercise = (
     savedExercise,
     exercisePreset,
-    weightConversionFactor = 1,
-    distanceConversionFactor = 1,
     markAsCoplete = false
   ) => {
+    let weightConversionFactor = 1;
+    if (currentWeightUnit === 'lb') {
+      // values are stored as KG in the DB
+      // need to convert KG weights to LB before we use them
+      weightConversionFactor = getWeightConversionFactor('kg', 'lb');
+    }
+
+    let distanceConversionFactor = 1;
+    if (currentDistanceUnit === 'mi') {
+      // values are stored as KM in the DB
+      // need to convert KM distances to MI before we use them
+      distanceConversionFactor = getDistanceConversionFactor('km', 'mi');
+    }
+
     setExercises((prev) => [...prev, exercisePreset]);
     for (let i = 0; i < savedExercise.sets.length; i++) {
       const currentSet = savedExercise.sets[i];
@@ -191,11 +211,21 @@ function useExercises() {
     });
   };
 
-  const onFormatExercisesData = (
-    weightConversionFactor = 1,
-    distanceConversionFactor = 1,
-    filterCompleted = false
-  ) => {
+  const onFormatExercisesData = (filterCompleted = false) => {
+    let weightConversionFactor = 1;
+    if (currentWeightUnit === 'lb') {
+      // values are stored as KG in the DB
+      // need to convert LB weights to KG before we save them
+      weightConversionFactor = getWeightConversionFactor('lb', 'kg');
+    }
+
+    let distanceConversionFactor = 1;
+    if (currentDistanceUnit === 'mi') {
+      // values are stored as KM in the DB
+      // need to convert MI distances to KM before we save them
+      distanceConversionFactor = getDistanceConversionFactor('mi', 'km');
+    }
+
     return _.map(setsByExercise, (sets, exerciseId) => {
       let setsToInclude = sets;
 
