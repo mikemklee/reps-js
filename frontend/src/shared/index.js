@@ -1,5 +1,6 @@
 import AddExercise from './AddExercise/AddExercise';
 import Confirmation from './Confirmation/Confirmation';
+import ContentPlaceholder from './ContentPlaceholder/ContentPlaceholder';
 import DurationTimer from './DurationTimer/DurationTimer';
 import DualButton from './DualButton/DualButton';
 import Exercise from './Exercise/Exercise';
@@ -17,6 +18,7 @@ import WorkoutTemplate from './WorkoutTemplate/WorkoutTemplate';
 export {
   AddExercise,
   Confirmation,
+  ContentPlaceholder,
   DurationTimer,
   DualButton,
   Exercise,

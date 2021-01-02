@@ -1,0 +1,64 @@
+@import '../../styles/common';
+
+.contentPlaceholder {
+  width: 100%;
+  height: 100%;
+}
+
+.faux-image-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+  padding-bottom: 50%;
+}
+
+.faux-image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: $dark-grey;
+  border-radius: 4px;
+}
+
+.faux-text-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+
+  &.short {
+    margin-right: 5rem;
+  }
+}
+
+.faux-text {
+  height: 20px;
+  background: $dark-grey;
+  border-radius: 4px;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba($medium-grey, 0) 0%,
+    rgba($medium-grey, 0.3) 50%,
+    rgba($medium-grey, 0) 100%
+  );
+  z-index: 1;
+  animation: shimmer 1s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
