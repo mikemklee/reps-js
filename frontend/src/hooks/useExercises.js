@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import _ from 'lodash';
 
@@ -7,6 +8,8 @@ function useExercises() {
   const [exercises, setExercises] = useState([]);
   const [setsByExercise, setExerciseSets] = useState({});
   const [anySetCompleted, setAnySetCompleted] = useState(false);
+
+  const { presets: exercisePresets } = useSelector((state) => state.exercise);
 
   const categoryNames = useMemo(() => ({
     BARBELL: 'Barbell',
@@ -136,12 +139,28 @@ function useExercises() {
       const updatedSetsByExercise = {};
 
       _.forEach(prev, (sets, exerciseId) => {
-        updatedSetsByExercise[exerciseId] = sets.map((row) => {
-          return {
-            ...row,
-            kg: row.kg * weightConversionFactor,
-          };
-        });
+        const exercisePreset = exercisePresets[exerciseId];
+
+        // only convert units for the following exercises
+        switch (exercisePreset.category) {
+          case categoryNames.BARBELL:
+          case categoryNames.DUMBBELL:
+          case categoryNames.MACHINE:
+          case categoryNames.OTHER:
+          case categoryNames.WEIGHTED_BODYWEIGHT:
+          case categoryNames.ASSISTED_BODYWEIGHT: {
+            updatedSetsByExercise[exerciseId] = sets.map((row) => {
+              return {
+                ...row,
+                kg: row.kg * weightConversionFactor,
+              };
+            });
+            break;
+          }
+          default: {
+            updatedSetsByExercise[exerciseId] = sets;
+          }
+        }
       });
 
       return updatedSetsByExercise;
@@ -153,12 +172,19 @@ function useExercises() {
       const updatedSetsByExercise = {};
 
       _.forEach(prev, (sets, exerciseId) => {
-        updatedSetsByExercise[exerciseId] = sets.map((row) => {
-          return {
-            ...row,
-            kg: row.kg * distanceConversionFactor,
-          };
-        });
+        const exercisePreset = exercisePresets[exerciseId];
+
+        // only convert units for cardio exercises
+        if (exercisePreset.category === categoryNames.CARDIO) {
+          updatedSetsByExercise[exerciseId] = sets.map((row) => {
+            return {
+              ...row,
+              km: row.km * distanceConversionFactor,
+            };
+          });
+        } else {
+          updatedSetsByExercise[exerciseId] = sets;
+        }
       });
 
       return updatedSetsByExercise;
