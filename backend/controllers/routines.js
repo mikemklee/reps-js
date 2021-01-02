@@ -35,6 +35,7 @@ const createRoutine = async (req, res) => {
     res.status(400).json({
       message: 'could not save routine in DB',
     });
+    return;
   }
 
   // store routine id on user
@@ -45,6 +46,7 @@ const createRoutine = async (req, res) => {
     res.status(400).json({
       message: 'could not update user',
     });
+    return;
   }
 
   res.status(201).json(savedRoutine);
@@ -62,6 +64,7 @@ const editUserRoutine = async (req, res) => {
     res.status(403).json({
       message: `Routine with id "${routineId}" does not belong to user`,
     });
+    return;
   }
 
   // TODO: validate request body
@@ -94,6 +97,7 @@ const deleteUserRoutine = async (req, res) => {
     res.status(403).json({
       message: `Routine with id "${routineId}" does not belong to user`,
     });
+    return;
   }
 
   const routine = await Routine.findById(routineId);
