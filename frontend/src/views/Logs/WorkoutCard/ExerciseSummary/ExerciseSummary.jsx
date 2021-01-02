@@ -9,7 +9,7 @@ import useWeightConverter from '../../../../hooks/useWeightConverter';
 const ExerciseSummary = ({ exercise }) => {
   const { names: exerciseNames } = useSelector((state) => state.exercise);
 
-  const { currentUnit, computeDisplayedWeight } = useWeightConverter();
+  const { currentWeightUnit, computeDisplayedWeight } = useWeightConverter();
 
   return (
     <div className='exerciseSummary'>
@@ -21,8 +21,8 @@ const ExerciseSummary = ({ exercise }) => {
           <div key={index} className='exerciseSummary__set'>
             <div className='exerciseSummary__setNumber'>{index + 1}</div>
             <div className='exerciseSummary__setReps'>
-              {Number(computeDisplayedWeight(set.kg).toFixed(2))} {currentUnit}{' '}
-              x {set.reps}
+              {Number(computeDisplayedWeight(set.kg).toFixed(2))}{' '}
+              {currentWeightUnit} x {set.reps}
             </div>
           </div>
         ))}

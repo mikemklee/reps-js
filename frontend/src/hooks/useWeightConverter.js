@@ -6,17 +6,19 @@ const CONVERSION_MUTLIPLER = 2.20462262185;
 // custom hook for managing weight units (e.g., displayed values, conversions)
 function useWeightConverter() {
   const { displayedWeightUnit } = useSelector((state) => state.auth);
-  const [currentUnit, setCurrentUnit] = useState(displayedWeightUnit);
+  const [currentWeightUnit, setCurrentWeightUnit] = useState(
+    displayedWeightUnit
+  );
 
   const computeDisplayedWeight = (kg) => {
-    if (currentUnit === 'kg') {
+    if (currentWeightUnit === 'kg') {
       return kg;
     } else {
       return kg * CONVERSION_MUTLIPLER;
     }
   };
 
-  const getConversionFactor = (prevUnit, nextUnit) => {
+  const getWeightConversionFactor = (prevUnit, nextUnit) => {
     if (prevUnit === 'lb' && nextUnit === 'kg') {
       // convert LB to KG
       return 1 / CONVERSION_MUTLIPLER;
@@ -29,9 +31,13 @@ function useWeightConverter() {
   };
 
   useEffect(() => {
-    setCurrentUnit(displayedWeightUnit);
+    setCurrentWeightUnit(displayedWeightUnit);
   }, [displayedWeightUnit]);
-  return { currentUnit, computeDisplayedWeight, getConversionFactor };
+  return {
+    currentWeightUnit,
+    computeDisplayedWeight,
+    getWeightConversionFactor,
+  };
 }
 
 export default useWeightConverter;

@@ -48,7 +48,7 @@ const WorkoutTemplate = ({ useFor }) => {
     onFormatExercisesData,
   } = useExercises();
 
-  const { currentUnit, getConversionFactor } = useWeightConverter();
+  const { currentWeightUnit, getWeightConversionFactor } = useWeightConverter();
 
   const counterRef = useRef(null);
   const restTimerModalRef = useRef(null);
@@ -69,7 +69,7 @@ const WorkoutTemplate = ({ useFor }) => {
   const prevWorkoutStatus = usePrevious(workoutStatus);
   const prevRoutineStatus = usePrevious(routineStatus);
   const prevExerciseStatus = usePrevious(exerciseStatus);
-  const prevUnit = usePrevious(currentUnit);
+  const prevWeightUnit = usePrevious(currentWeightUnit);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -179,11 +179,14 @@ const WorkoutTemplate = ({ useFor }) => {
   ]);
 
   useEffect(() => {
-    if (!_.isEqual(prevUnit, currentUnit)) {
-      const conversionFactor = getConversionFactor(prevUnit, currentUnit);
+    if (!_.isEqual(prevWeightUnit, currentWeightUnit)) {
+      const conversionFactor = getWeightConversionFactor(
+        prevWeightUnit,
+        currentWeightUnit
+      );
       onConvertUnit(conversionFactor);
     }
-  }, [prevUnit, currentUnit]);
+  }, [prevWeightUnit, currentWeightUnit]);
 
   const populateExerciseSections = () => {
     if (useFor === 'NEW_WORKOUT') {
@@ -205,10 +208,10 @@ const WorkoutTemplate = ({ useFor }) => {
             history.push('/');
           } else {
             let conversionFactor = 1;
-            if (currentUnit === 'lb') {
+            if (currentWeightUnit === 'lb') {
               // values are stored as KG in the DB
               // need to convert KG weights to LB before we use them
-              conversionFactor = getConversionFactor('kg', 'lb');
+              conversionFactor = getWeightConversionFactor('kg', 'lb');
             }
 
             // update workout title
@@ -236,10 +239,10 @@ const WorkoutTemplate = ({ useFor }) => {
           const currentWorkout = workoutLogs[workoutId];
 
           let conversionFactor = 1;
-          if (currentUnit === 'lb') {
+          if (currentWeightUnit === 'lb') {
             // values are stored as KG in the DB
             // need to convert KG weights to LB before we use them
-            conversionFactor = getConversionFactor('kg', 'lb');
+            conversionFactor = getWeightConversionFactor('kg', 'lb');
           }
 
           // set workout
@@ -281,10 +284,10 @@ const WorkoutTemplate = ({ useFor }) => {
           const currentRoutine = customRoutines[routineId];
 
           let conversionFactor = 1;
-          if (currentUnit === 'lb') {
+          if (currentWeightUnit === 'lb') {
             // values are stored as KG in the DB
             // need to convert KG weights to LB before we use them
-            conversionFactor = getConversionFactor('kg', 'lb');
+            conversionFactor = getWeightConversionFactor('kg', 'lb');
           }
 
           // update routine title
@@ -312,10 +315,10 @@ const WorkoutTemplate = ({ useFor }) => {
 
   const onConfirmSave = () => {
     let conversionFactor = 1;
-    if (currentUnit === 'lb') {
+    if (currentWeightUnit === 'lb') {
       // values are stored as KG in the DB
       // need to convert LB weights to KG before we save them
-      conversionFactor = getConversionFactor('lb', 'kg');
+      conversionFactor = getWeightConversionFactor('lb', 'kg');
     }
 
     let filterCompleted = false;

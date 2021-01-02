@@ -12,7 +12,7 @@ import useWeightConverter from '../../../../hooks/useWeightConverter';
 import useExercises from '../../../../hooks/useExercises';
 
 const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
-  const { currentUnit, computeDisplayedWeight } = useWeightConverter();
+  const { currentWeightUnit, computeDisplayedWeight } = useWeightConverter();
   const { categoryNames } = useExercises();
 
   const { presets: exercisePresets } = useSelector((state) => state.exercise);
@@ -60,7 +60,7 @@ const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
           <FaWeightHanging />
           <span>
             {Number(computeDisplayedWeight(totalVolumeInKG).toFixed(2))}{' '}
-            {currentUnit}
+            {currentWeightUnit}
           </span>
         </div>
       ) : null}

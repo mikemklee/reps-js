@@ -24,7 +24,7 @@ const Exercise = ({
 }) => {
   const [columns, setColumns] = useState([]);
 
-  const { currentUnit } = useWeightConverter();
+  const { currentWeightUnit } = useWeightConverter();
   const { categoryNames } = useExercises();
 
   const getExerciseFields = useCallback(() => {
@@ -46,7 +46,7 @@ const Exercise = ({
 
         return [
           {
-            Header: `${sign}${currentUnit === 'kg' ? 'kg' : 'lb'}`,
+            Header: `${sign}${currentWeightUnit === 'kg' ? 'kg' : 'lb'}`,
             accessor: 'kg',
             Cell: DecimalInputCell,
           },
@@ -93,7 +93,7 @@ const Exercise = ({
         return [];
       }
     }
-  }, [exercise, currentUnit]);
+  }, [exercise, currentWeightUnit]);
 
   useEffect(() => {
     // TODO: query previous record and show as separate column
@@ -136,7 +136,7 @@ const Exercise = ({
     });
 
     setColumns(displayedColumns);
-  }, [currentUnit, exercise]);
+  }, [currentWeightUnit, exercise]);
 
   const [skipPageReset, setSkipPageReset] = useState(false);
 
