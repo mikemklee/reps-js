@@ -2,6 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const _ = require('lodash');
 
+const { upgradeUserPreferences } = require('../utils/auth');
+
 const router = express.Router();
 
 const CLIENT_HOME_PAGE_URL = 'http://localhost:3000';
@@ -9,10 +11,13 @@ const CLIENT_HOME_PAGE_URL = 'http://localhost:3000';
 // when login is successful, retrieve user info
 router.route('/login/success').get((req, res) => {
   if (req.user) {
+    const userData = req.user;
+    userData.preferences = upgradeUserPreferences(userData.preferences);
+
     res.json({
       success: true,
       message: 'user has successfully authenticated',
-      user: req.user,
+      user: userData,
       cookies: req.cookies,
     });
   } else {
