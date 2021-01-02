@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { HiOutlineHome, HiOutlineClipboardList } from 'react-icons/hi';
 import { BiAnalyse, BiDumbbell } from 'react-icons/bi';
@@ -11,18 +10,8 @@ import './Sidebar.scss';
 import UserMenu from './UserMenu/UserMenu';
 
 import useDropdown from '../../hooks/useDropdown';
-import useWeightConverter from '../../hooks/useWeightConverter';
-import useDistanceConverter from '../../hooks/useDistanceConverter';
-
-import { DualButton } from '../../shared';
-
-import AuthActions from '../../redux/auth/actions';
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
-  const { currentWeightUnit } = useWeightConverter();
-  const { currentDistanceUnit } = useDistanceConverter();
-
   const isMobile = useMediaQuery({ query: '(max-width: 960px)' });
   const [userMenuRef, isUserMenuOpen, setIsUserMenuOpen] = useDropdown();
 
@@ -43,36 +32,8 @@ const Sidebar = () => {
         menuRef={userMenuRef}
         isOpen={isUserMenuOpen}
         onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+        onForceClose={() => setIsUserMenuOpen(false)}
       />
-      <DualButton
-        currentValue={currentWeightUnit}
-        onClickOption={(value) =>
-          dispatch(AuthActions.setDisplayedWeightUnit(value))
-        }
-        firstOption={{
-          label: 'KG',
-          value: 'kg',
-        }}
-        secondOption={{
-          label: 'LB',
-          value: 'lb',
-        }}
-      />
-      <DualButton
-        currentValue={currentDistanceUnit}
-        onClickOption={(value) =>
-          dispatch(AuthActions.setDisplayedDistanceUnit(value))
-        }
-        firstOption={{
-          label: 'KM',
-          value: 'km',
-        }}
-        secondOption={{
-          label: 'MILES',
-          value: 'mi',
-        }}
-      />
-
       <div className='link-button-container'>
         <button
           className={classnames({

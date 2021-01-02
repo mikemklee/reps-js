@@ -12,7 +12,10 @@ import './Modal.scss';
 
 const modalElement = document.getElementById('modal-root');
 
-const Modal = ({ children, defaultOpened = false }, ref) => {
+const Modal = (
+  { children, defaultOpened = false, hideCloseButton = false },
+  ref
+) => {
   const [isOpen, setIsOpen] = useState(defaultOpened);
 
   const open = useCallback(() => setIsOpen(true), []);
@@ -39,9 +42,11 @@ const Modal = ({ children, defaultOpened = false }, ref) => {
       <div className='modal'>
         <div className='modal-overlay' onClick={close} />
         <div className='modal-body'>
-          <div className='modal-close' onClick={close}>
-            <VscClose />
-          </div>
+          {hideCloseButton ? null : (
+            <div className='modal-close' onClick={close}>
+              <VscClose />
+            </div>
+          )}
           {children}
         </div>
       </div>

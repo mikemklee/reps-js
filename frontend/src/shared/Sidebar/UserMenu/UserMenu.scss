@@ -86,3 +86,44 @@
     }
   }
 }
+
+.preferences {
+  padding: 1rem;
+  &__section {
+    > div:not(:last-of-type) {
+      border-bottom: 1px solid rgba($light-grey, 0.1);
+    }
+  }
+  &__sectionName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $off-white;
+    padding-bottom: 1rem;
+  }
+
+  .userSetting {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: repeat(2, auto);
+    color: $off-white;
+    padding: 1rem 0;
+
+    &__title {
+      grid-column: 1 / span 1;
+      grid-row: 1 / span 1;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    &__subtitle {
+      grid-column: 1 / span 1;
+      grid-row: span 1 / -1;
+      font-size: 0.8rem;
+      color: $light-grey;
+    }
+    &__control {
+      grid-column: span 1 / -1;
+      grid-row: 1 / -1;
+      align-self: center;
+    }
+  }
+}
