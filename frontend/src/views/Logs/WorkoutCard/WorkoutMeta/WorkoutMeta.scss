@@ -4,6 +4,9 @@
 
   &__completedAt {
     flex: 1;
+    span {
+      margin-left: 0.5rem;
+    }
   }
 
   &__duration,

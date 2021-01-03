@@ -323,6 +323,7 @@ const WorkoutTemplate = ({ useFor }) => {
       name: title,
       exercises: onFormatExercisesData(filterCompleted),
       duration: exerciseDuration,
+      completedAt: new Date().toISOString(),
     };
 
     if (useFor === 'NEW_WORKOUT') {

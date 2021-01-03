@@ -18,6 +18,10 @@ const workoutSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    completedAt: {
+      type: Date,
+      required: true,
+    },
     exercises: [
       {
         exerciseId: {
