@@ -10,14 +10,14 @@ import { Calendar } from '../../shared';
 import { InterfaceUtils } from '../../utils';
 
 const Main = () => {
-  const { userDisplayName } = useSelector((state) => state.auth);
+  const { userGivenName } = useSelector((state) => state.auth);
 
   // TODO: get saved workout dates for each month from DB
 
   return (
     <div className='mainView'>
       <div className='mainView__header'>
-        Good {InterfaceUtils.getTimeOfDay()}, <strong>{userDisplayName}</strong>
+        Good {InterfaceUtils.getTimeOfDay()}, <strong>{userGivenName}</strong>
       </div>
       <div className='mainView__content'>
         <div className='mainView__calendar'>

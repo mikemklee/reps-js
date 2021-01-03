@@ -19,9 +19,12 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
 
   const preferencesModalRef = useRef(null);
 
-  const { userDisplayName, userProfileImage, status } = useSelector(
-    (state) => state.auth
-  );
+  const {
+    userGivenName,
+    userFamilyName,
+    userProfileImage,
+    status,
+  } = useSelector((state) => state.auth);
 
   const { currentWeightUnit } = useWeightConverter();
   const { currentDistanceUnit } = useDistanceConverter();
@@ -57,7 +60,7 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
                 </div>
                 <div className='userMenu__profileMeta'>
                   <span className='userMenu__profileMeta--name'>
-                    {userDisplayName}
+                    {userGivenName} {userFamilyName}
                   </span>
                 </div>
               </div>
@@ -81,7 +84,7 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
             </div>
             <div className='userMenu__profileMeta'>
               <span className='userMenu__profileMeta--name'>
-                {userDisplayName}
+                {userGivenName} {userFamilyName}
               </span>
             </div>
           </div>

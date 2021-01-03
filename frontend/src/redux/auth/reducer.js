@@ -1,12 +1,14 @@
 import types from './types';
 
 export const initialState = {
+  token: null,
   userId: '',
   userGoogleId: '',
-  isAuthenticated: false,
-  token: null,
+  userEmail: '',
+  userGivenName: '',
+  userFamilyName: '',
   userProfileImage: '',
-  userDisplayName: '',
+  isAuthenticated: false,
   userPreferences: {},
   status: {
     loginPending: false,
@@ -21,6 +23,7 @@ export const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case types.LOGIN_REQUEST: {
+      // TODO: implement
       return {
         ...state,
         userId: '',
@@ -35,6 +38,7 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     case types.LOGIN_SUCCESS: {
+      // TODO: implement
       const { user } = payload;
       return {
         ...state,
@@ -52,6 +56,7 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     case types.LOGIN_FAILURE: {
+      // TODO: implement
       return {
         ...state,
         userId: '',
@@ -69,8 +74,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         userId: '',
-        userName: '',
+        userGoogleId: '',
         userEmail: '',
+        userGivenName: '',
+        userFamilyName: '',
+        userProfileImage: '',
         isAuthenticated: false,
         status: {
           ...state.status,
@@ -85,8 +93,10 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         userId: user._id,
         userGoogleId: user.googleId,
+        userEmail: user.email,
+        userGivenName: user.givenName,
+        userFamilyName: user.familyName,
         userProfileImage: user.profileImage,
-        userDisplayName: user.displayName,
         userPreferences: user.preferences,
         isAuthenticated: true,
         status: {
@@ -99,10 +109,6 @@ export default (state = initialState, { type, payload }) => {
     case types.GET_USER_DATA_FAILURE: {
       return {
         ...state,
-        userId: '',
-        userGoogleId: '',
-        userProfileImage: '',
-        userDisplayName: '',
         isAuthenticated: false,
         status: {
           ...state.status,
@@ -113,18 +119,7 @@ export default (state = initialState, { type, payload }) => {
     }
     case types.LOGOUT: {
       return {
-        ...state,
-        userId: '',
-        userName: '',
-        userEmail: '',
-        token: null,
-        isAuthenticated: false,
-        isAdmin: false,
-        status: {
-          ...state.status,
-          loginPending: false,
-          loginSuccess: false,
-        },
+        ...initialState,
       };
     }
     case types.UPDATE_PREFERENCES_REQUEST: {
@@ -170,18 +165,7 @@ export default (state = initialState, { type, payload }) => {
     }
     case types.DELETE_USER_SUCCESS: {
       return {
-        ...state,
-        userId: '',
-        userName: '',
-        userEmail: '',
-        token: null,
-        isAuthenticated: false,
-        isAdmin: false,
-        status: {
-          ...state.status,
-          deleteUserPending: false,
-          deleteUserSuccess: true,
-        },
+        ...initialState,
       };
     }
     case types.DELETE_USER_FAILURE: {
