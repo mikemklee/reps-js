@@ -1,12 +1,13 @@
 const express = require('express');
 
 const {
-  getUserData,
-  updateUserPreferences,
   loginFail,
   logout,
   googleLogin,
   googleLoginRedirect,
+  getUserData,
+  updateUserPreferences,
+  deleteUser,
 } = require('../controllers/auth');
 const { protect } = require('../middleware/auth');
 
@@ -18,5 +19,6 @@ router.route('/logout').get(logout);
 router.route('/google').get(googleLogin);
 router.route('/google/redirect').get(googleLoginRedirect);
 router.route('/:id/preferences').post(protect, updateUserPreferences);
+router.route('/:id').delete(protect, deleteUser);
 
 module.exports = router;

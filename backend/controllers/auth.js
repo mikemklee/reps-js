@@ -10,6 +10,9 @@ const CLIENT_HOME_PAGE_URL = 'http://localhost:3000';
 
 const { generateToken } = require('../utils/auth');
 const User = require('../models/User');
+const Exercise = require('../models/Exercise');
+const Routine = require('../models/Routine');
+const Workout = require('../models/Workout');
 
 // TODO: implement
 // @desc    Authenticate user and get token
@@ -163,13 +166,83 @@ const googleLoginRedirect = passport.authenticate('google', {
   failureRedirect: '/auth/login/failed',
 });
 
+// @desc    Delete an existing user profile
+// @route   DELETE /api/auth/:id
+const deleteUser = async (req, res) => {
+  const { user } = req;
+
+  const userId = req.params.id;
+  // check if provided user id matches user stored in session
+  if (userId !== user._id) {
+    res.status(403).json({
+      message: `Provided user id "${userId}" does not match current user id`,
+    });
+    return;
+  }
+
+  // delete all user routines
+  try {
+    await Routine.deleteMany({
+      _id: {
+        $in: user.routineIds,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not delete user routines from DB',
+    });
+    return;
+  }
+
+  // delete all user exercises
+  try {
+    await Exercise.deleteMany({
+      _id: {
+        $in: user.exerciseIds,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not delete user exercises from DB',
+    });
+    return;
+  }
+
+  // delete all user workouts
+  try {
+    await Workout.deleteMany({
+      _id: {
+        $in: user.workoutIds,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not delete user workouts from DB',
+    });
+    return;
+  }
+
+  // delete user from DB
+  try {
+    await user.remove();
+  } catch (err) {
+    res.status(400).json({
+      message: 'could not delete user from DB',
+    });
+    return;
+  }
+
+  res.status(200).json({});
+};
+
 module.exports = {
   authUser,
   registerUser,
-  getUserData,
-  updateUserPreferences,
   loginFail,
   logout,
   googleLogin,
   googleLoginRedirect,
+  getUserData,
+  updateUserPreferences,
+  deleteUser,
 };
