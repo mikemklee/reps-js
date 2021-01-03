@@ -1,4 +1,5 @@
 import AddExercise from './AddExercise/AddExercise';
+import Calendar from './Calendar/Calendar';
 import Confirmation from './Confirmation/Confirmation';
 import ContentPlaceholder from './ContentPlaceholder/ContentPlaceholder';
 import DurationTimer from './DurationTimer/DurationTimer';
@@ -17,6 +18,7 @@ import WorkoutTemplate from './WorkoutTemplate/WorkoutTemplate';
 
 export {
   AddExercise,
+  Calendar,
   Confirmation,
   ContentPlaceholder,
   DurationTimer,
