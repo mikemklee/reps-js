@@ -13,13 +13,13 @@
 
 .actionCardList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   grid-gap: 1rem;
 }
 
 .actionCard {
   @include cardStyles;
-  height: 8rem;
+  height: 10rem;
   cursor: pointer;
 
   &__title {

@@ -64,13 +64,27 @@
     overflow: hidden;
     width: 2.4rem;
     height: 2.4rem;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     img {
       max-width: 100%;
     }
   }
 
   &__profileMeta {
+    display: flex;
+    flex-direction: column;
+
+    &--email {
+      font-size: 0.7rem;
+      color: $light-grey;
+      margin-bottom: 0.2rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 9rem;
+      display: inline-block;
+    }
+
     &--name {
       font-size: 0.9rem;
       font-weight: 600;

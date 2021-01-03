@@ -21,6 +21,7 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
   const {
     userGivenName,
     userFamilyName,
+    userEmail,
     userProfileImage,
     status,
   } = useSelector((state) => state.auth);
@@ -82,6 +83,7 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
               <img src={userProfileImage} alt='profile' />
             </div>
             <div className='userMenu__profileMeta'>
+              <span className='userMenu__profileMeta--email'>{userEmail}</span>
               <span className='userMenu__profileMeta--name'>
                 {userGivenName} {userFamilyName}
               </span>
