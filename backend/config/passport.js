@@ -23,7 +23,9 @@ passport.use(
         // create new user if user with given profile ID is not stored in DB
         const newUser = await User.create({
           googleId: profile.id,
-          displayName: profile._json.name,
+          givenName: profile._json.given_name,
+          familyName: profile._json.family_name,
+          email: profile._json.email,
           profileImage: profile._json.picture,
           preferences: getDefaultPreferences(),
         });
