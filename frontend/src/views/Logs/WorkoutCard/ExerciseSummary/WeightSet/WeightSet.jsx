@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useWeightConverter from '../../../../../hooks/useWeightConverter';
+import { useWeightConverter } from '../../../../../hooks';
 
 const WeightSet = ({ set, sign, index }) => {
   const { currentWeightUnit, computeDisplayedWeight } = useWeightConverter();

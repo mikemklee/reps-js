@@ -25,10 +25,12 @@ import WorkoutActions from '../../redux/workout/actions';
 import RoutineActions from '../../redux/routine/actions';
 import ExerciseActions from '../../redux/exercise/actions';
 
-import usePrevious from '../../hooks/usePrevious';
-import useExercises from '../../hooks/useExercises';
-import useWeightConverter from '../../hooks/useWeightConverter';
-import useDistanceConverter from '../../hooks/useDistanceConverter';
+import {
+  useWeightConverter,
+  useDistanceConverter,
+  useExercises,
+  usePrevious,
+} from '../../hooks';
 
 const WorkoutTemplate = ({ useFor }) => {
   const [templateName, setTemplateName] = useState('');

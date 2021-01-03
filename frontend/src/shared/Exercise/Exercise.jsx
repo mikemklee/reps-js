@@ -11,9 +11,11 @@ import DurationInputCell from '../Table/DurationInputCell/DurationInputCell';
 import CheckboxCell from '../Table/CheckboxCell/CheckboxCell';
 import ButtonCell from '../Table/ButtonCell/ButtonCell';
 
-import useWeightConverter from '../../hooks/useWeightConverter';
-import useDistanceConverter from '../../hooks/useDistanceConverter';
-import useExercises from '../../hooks/useExercises';
+import {
+  useDistanceConverter,
+  useExercises,
+  useWeightConverter,
+} from '../../hooks';
 
 const Exercise = ({
   exercise,

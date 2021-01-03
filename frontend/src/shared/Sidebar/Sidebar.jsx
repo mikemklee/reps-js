@@ -9,7 +9,7 @@ import './Sidebar.scss';
 
 import UserMenu from './UserMenu/UserMenu';
 
-import useDropdown from '../../hooks/useDropdown';
+import { useDropdown } from '../../hooks';
 
 const Sidebar = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 960px)' });

@@ -9,7 +9,7 @@ import { ExerciseCardList, ContentPlaceholder } from '../../shared';
 
 import ExerciseActions from '../../redux/exercise/actions';
 
-import usePrevious from '../../hooks/usePrevious';
+import { usePrevious } from '../../hooks';
 
 const Exercises = () => {
   const [searchTerm, setSearchTerm] = useState('');

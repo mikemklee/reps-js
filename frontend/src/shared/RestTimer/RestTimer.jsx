@@ -6,7 +6,8 @@ import { VscAdd } from 'react-icons/vsc';
 import './RestTimer.scss';
 import TimeDisplay from '../TimeDisplay/TimeDisplay';
 import ProgressRing from '../ProgressRing/ProgressRing';
-import usePrevious from '../../hooks/usePrevious';
+
+import { usePrevious } from '../../hooks';
 
 const calculateProgress = (timeRemaining, duration) => {
   const fractionRemaining = timeRemaining / duration;

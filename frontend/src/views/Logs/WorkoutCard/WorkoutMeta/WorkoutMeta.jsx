@@ -8,8 +8,7 @@ import _ from 'lodash';
 
 import './WorkoutMeta.scss';
 
-import useWeightConverter from '../../../../hooks/useWeightConverter';
-import useExercises from '../../../../hooks/useExercises';
+import { useExercises, useWeightConverter } from '../../../../hooks';
 
 const WorkoutMeta = ({ item, vertical = false, showVolume = false }) => {
   const { currentWeightUnit, computeDisplayedWeight } = useWeightConverter();

@@ -9,7 +9,7 @@ import DurationSet from './DurationSet/DurationSet';
 import CardioSet from './CardioSet/CardioSet';
 import RepsSet from './RepsSet/RepsSet';
 
-import useExercises from '../../../../hooks/useExercises';
+import { useExercises } from '../../../../hooks';
 
 const ExerciseSummary = ({ exercise }) => {
   const { presets } = useSelector((state) => state.exercise);

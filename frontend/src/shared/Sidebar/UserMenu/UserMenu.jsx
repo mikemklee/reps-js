@@ -9,8 +9,7 @@ import { DualButton, LoadingSpinner, Modal } from '../../../shared';
 
 import AuthActions from '../../../redux/auth/actions';
 
-import useWeightConverter from '../../../hooks/useWeightConverter';
-import useDistanceConverter from '../../../hooks/useDistanceConverter';
+import { useDistanceConverter, useWeightConverter } from '../../../hooks';
 
 const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
   const dispatch = useDispatch();

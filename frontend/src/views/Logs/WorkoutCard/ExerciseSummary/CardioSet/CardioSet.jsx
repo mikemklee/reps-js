@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import useDistanceConverter from '../../../../../hooks/useDistanceConverter';
+import { useDistanceConverter } from '../../../../../hooks';
 
 const CardioSet = ({ set, index }) => {
   const {
