@@ -80,7 +80,7 @@ const ExerciseBrowser = ({
         onSearchChange={onSearchChange}
         onFilterSelect={onFilterSelect}
       />
-      <ExerciseCardList
+      {/* <ExerciseCardList
         exercises={resultsCustom}
         title='Custom exercises'
         placeholder={
@@ -90,7 +90,7 @@ const ExerciseBrowser = ({
         }
         selectedIds={selectedIds}
         onSelectItem={onSelectItem}
-      />
+      /> */}
       <ExerciseCardList
         exercises={resultsPreset}
         title='Preset exercises'
