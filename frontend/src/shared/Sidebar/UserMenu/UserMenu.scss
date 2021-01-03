@@ -101,6 +101,10 @@
     > div:not(:last-of-type) {
       border-bottom: 1px solid rgba($light-grey, 0.1);
     }
+
+    &:not(:last-of-type) {
+      margin-bottom: 2rem;
+    }
   }
   &__sectionName {
     font-size: 1.1rem;
@@ -124,7 +128,7 @@
     }
     &__subtitle {
       grid-column: 1 / span 1;
-      grid-row: span 1 / -1;
+      grid-row: span 1;
       font-size: 0.8rem;
       color: $light-grey;
     }
@@ -132,6 +136,10 @@
       grid-column: span 1 / -1;
       grid-row: 1 / -1;
       align-self: center;
+
+      button.warning {
+        @include warningButtonStyles;
+      }
     }
   }
 }

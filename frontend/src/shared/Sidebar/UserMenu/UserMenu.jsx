@@ -96,7 +96,7 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
                 className='userMenu__action'
                 onClick={handlePreferencesClick}
               >
-                Preferences
+                Settings
               </div>
               <div className='userMenu__action' onClick={handleLogoutClick}>
                 Logout
@@ -164,6 +164,23 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
                     value: 'mi',
                   }}
                 />
+              </div>
+            </div>
+          </div>
+          <div className='preferences__section'>
+            <div className='preferences__sectionName'>Account</div>
+            <div className='userSetting'>
+              <div className='userSetting__title'>Danger zone</div>
+              <div className='userSetting__subtitle'>
+                Permanently delete all of your data. This cannot be undone!
+              </div>
+              <div className='userSetting__control'>
+                <button
+                  className='warning'
+                  onClick={() => dispatch(AuthActions.deleteUserRequest())}
+                >
+                  <span>Delete account</span>
+                </button>
               </div>
             </div>
           </div>

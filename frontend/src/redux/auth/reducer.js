@@ -158,6 +158,42 @@ export default (state = initialState, { type, payload }) => {
         },
       };
     }
+    case types.DELETE_USER_REQUEST: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleteUserPending: true,
+          deleteUserSuccess: false,
+        },
+      };
+    }
+    case types.DELETE_USER_SUCCESS: {
+      return {
+        ...state,
+        userId: '',
+        userName: '',
+        userEmail: '',
+        token: null,
+        isAuthenticated: false,
+        isAdmin: false,
+        status: {
+          ...state.status,
+          deleteUserPending: false,
+          deleteUserSuccess: true,
+        },
+      };
+    }
+    case types.DELETE_USER_FAILURE: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleteUserPending: false,
+          deleteUserSuccess: false,
+        },
+      };
+    }
     default: {
       return state;
     }

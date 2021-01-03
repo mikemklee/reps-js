@@ -72,6 +72,24 @@ const actions = {
       payload: { error },
     };
   },
+  deleteUserRequest: () => {
+    return {
+      type: types.DELETE_USER_REQUEST,
+      payload: {},
+    };
+  },
+  deleteUserSuccess: () => {
+    return {
+      type: types.DELETE_USER_SUCCESS,
+      payload: {},
+    };
+  },
+  deleteUserFailure: (error) => {
+    return {
+      type: types.DELETE_USER_FAILURE,
+      payload: { error },
+    };
+  },
 };
 
 export default actions;
