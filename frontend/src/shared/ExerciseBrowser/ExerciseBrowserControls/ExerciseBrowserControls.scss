@@ -1,0 +1,76 @@
+@import '../../../styles/common';
+
+.exerciseBrowserControls {
+  display: flex;
+
+  &__filters {
+    @include flexCenterHorizontally;
+  }
+
+  &__filter {
+    @include secondaryButtonStyles;
+    @include flexCenterHorizontally;
+    position: relative;
+    margin-left: 0.5rem;
+
+    .filterSelection {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+        rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
+      border-radius: 4px;
+      padding: 0.5rem;
+      padding-bottom: 0;
+      padding-right: 0;
+      background: $medium-grey;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 1;
+      width: 20rem;
+
+      &__item {
+        font-size: 0.8rem;
+        text-align: left;
+        border-radius: 3px;
+        padding: 0.15rem 0.4rem;
+        border: 1px solid $faded-green;
+        color: $faded-green;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        flex-shrink: 0;
+        user-select: none;
+      }
+      &__item.selected {
+        background: $faded-green;
+        color: rgba($off-white, 0.9);
+      }
+    }
+  }
+
+  &__searchBar {
+    align-self: flex-start;
+    position: relative;
+    display: flex;
+    max-width: 14rem;
+
+    input {
+      @include inputStyles;
+      height: 2.2rem;
+      max-width: 12rem;
+      text-align: left;
+      padding-left: 0.5rem;
+      padding-right: 2.5rem;
+    }
+
+    &__icon {
+      position: absolute;
+      right: 0.5rem;
+      top: 0;
+      width: 1.2rem;
+      height: 2.5rem;
+      opacity: 0.5;
+    }
+  }
+}

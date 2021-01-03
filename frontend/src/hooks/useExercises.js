@@ -18,6 +18,18 @@ function useExercises() {
     MACHINE: 'Machine',
     OTHER: 'Other',
   }));
+  const bodyPartNames = useMemo(() => ({
+    CORE: 'Core',
+    ARMS: 'Arms',
+    LEGS: 'Legs',
+    BACK: 'Back',
+    CHEST: 'Chest',
+    SHOULDERS: 'Shoulders',
+    FULL_BODY: 'Full body',
+    CARDIO: 'Cardio',
+    OLYMPIC: 'Olympic',
+    OTHER: 'Other',
+  }));
 
   const [exercises, setExercises] = useState([]);
   const [setsByExercise, setExerciseSets] = useState({});
@@ -288,6 +300,7 @@ function useExercises() {
   return {
     exercises,
     categoryNames,
+    bodyPartNames,
     setsByExercise,
     anySetCompleted,
     onAddExercise,

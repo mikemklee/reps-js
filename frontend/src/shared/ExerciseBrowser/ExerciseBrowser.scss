@@ -21,29 +21,4 @@
     grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
     grid-gap: 2rem;
   }
-
-  &__searchBar {
-    align-self: flex-start;
-    position: relative;
-    display: flex;
-    max-width: 14rem;
-
-    input {
-      @include inputStyles;
-      height: 2.5rem;
-      max-width: 12rem;
-      text-align: left;
-      padding-left: 0.5rem;
-      padding-right: 2.5rem;
-    }
-
-    &__icon {
-      position: absolute;
-      right: 0.5rem;
-      top: 0;
-      width: 1.2rem;
-      height: 2.5rem;
-      opacity: 0.5;
-    }
-  }
 }
