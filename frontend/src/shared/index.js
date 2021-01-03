@@ -5,6 +5,7 @@ import ContentPlaceholder from './ContentPlaceholder/ContentPlaceholder';
 import DurationTimer from './DurationTimer/DurationTimer';
 import DualButton from './DualButton/DualButton';
 import Exercise from './Exercise/Exercise';
+import ExerciseBrowser from './ExerciseBrowser/ExerciseBrowser';
 import ExerciseCardList from './ExerciseCardList/ExerciseCardList';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import Login from './Login/Login';
@@ -24,6 +25,7 @@ export {
   DurationTimer,
   DualButton,
   Exercise,
+  ExerciseBrowser,
   ExerciseCardList,
   LoadingSpinner,
   Login,

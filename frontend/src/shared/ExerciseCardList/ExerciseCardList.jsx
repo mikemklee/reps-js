@@ -5,7 +5,7 @@ import _ from 'lodash';
 import './ExerciseCardList.scss';
 
 const ExerciseCardList = ({
-  presets,
+  exercises,
   title,
   placeholder,
   selectedIds = [],
@@ -15,10 +15,10 @@ const ExerciseCardList = ({
     <div className='exerciseCardList'>
       <div className='exerciseCardList__title'>{title}</div>
       <div className='exerciseCardList__cards'>
-        {_.isEmpty(presets) ? (
+        {_.isEmpty(exercises) ? (
           <div className='exerciseCardList__placeholder'>{placeholder}</div>
         ) : (
-          _.map(presets, (item) => (
+          _.map(exercises, (item) => (
             <div
               key={item._id}
               className={classnames('exerciseCard', {
