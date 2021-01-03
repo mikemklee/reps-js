@@ -44,25 +44,32 @@ class RouterApp extends React.Component {
     return (
       <Router>
         <div className='router'>
-          {this.props.isAuthenticated ? <Sidebar /> : null}
-          <div className='route'>
-            <Switch>
-              {this.renderProtectedRoute('/workout/:routineId', NewWorkout)}
-              {this.renderProtectedRoute(
-                '/workout/:workoutId/edit',
-                EditWorkout
-              )}
-              {this.renderProtectedRoute('/routines', Routines)}
-              {this.renderProtectedRoute('/routines/:workoutId', NewRoutine)}
-              {this.renderProtectedRoute(
-                '/routines/:routineId/edit',
-                EditRoutine
-              )}
-              {this.renderProtectedRoute('/exercises', Exercises)}
-              {this.renderProtectedRoute('/logs', Logs)}
-              {this.renderProtectedRoute('/', Main, false)}
-            </Switch>
-          </div>
+          {this.props.getUserDataPending ? null : (
+            <>
+              {this.props.isAuthenticated ? <Sidebar /> : null}
+              <div className='route'>
+                <Switch>
+                  {this.renderProtectedRoute('/workout/:routineId', NewWorkout)}
+                  {this.renderProtectedRoute(
+                    '/workout/:workoutId/edit',
+                    EditWorkout
+                  )}
+                  {this.renderProtectedRoute('/routines', Routines)}
+                  {this.renderProtectedRoute(
+                    '/routines/:workoutId',
+                    NewRoutine
+                  )}
+                  {this.renderProtectedRoute(
+                    '/routines/:routineId/edit',
+                    EditRoutine
+                  )}
+                  {this.renderProtectedRoute('/exercises', Exercises)}
+                  {this.renderProtectedRoute('/logs', Logs)}
+                  {this.renderProtectedRoute('/', Main, false)}
+                </Switch>
+              </div>
+            </>
+          )}
         </div>
       </Router>
     );
@@ -71,6 +78,7 @@ class RouterApp extends React.Component {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  getUserDataPending: state.auth.status.getUserDataPending,
 });
 
 const mapDispatchToProps = (dispatch) => ({
