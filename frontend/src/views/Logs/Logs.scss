@@ -10,6 +10,22 @@
 
   &__content {
     flex: 1;
+    padding-bottom: 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(calc(4rem * 7), 1fr));
+    grid-gap: 2rem;
+  }
+
+  &__calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+
+    &__title {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
   }
 
   &__placeholders {

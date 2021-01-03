@@ -5,8 +5,6 @@ import './Main.scss';
 
 import QuickActions from './QuickActions/QuickActions';
 
-import { Calendar } from '../../shared';
-
 import { InterfaceUtils } from '../../utils';
 
 const Main = () => {
@@ -20,10 +18,6 @@ const Main = () => {
         Good {InterfaceUtils.getTimeOfDay()}, <strong>{userGivenName}</strong>
       </div>
       <div className='mainView__content'>
-        <div className='mainView__calendar'>
-          <label className='mainView__calendar__title'>Monthly progress</label>
-          <Calendar markedDates={['2021-01-03T01:06:46.907Z']} />
-        </div>
         <div className='mainView__quickActions'>
           <QuickActions />
         </div>
