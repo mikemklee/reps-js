@@ -418,7 +418,6 @@ const WorkoutTemplate = ({ useFor }) => {
           selectedExercises={exercises}
           onAddExercise={(item) => {
             onAddExercise(item);
-            addExerciseModalRef.current.close();
           }}
         />
       </Modal>

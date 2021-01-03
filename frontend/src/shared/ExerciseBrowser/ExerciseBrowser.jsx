@@ -6,7 +6,12 @@ import './ExerciseBrowser.scss';
 
 import ExerciseCardList from '../ExerciseCardList/ExerciseCardList';
 
-const ExerciseBrowser = ({ customExercises, presetExercises }) => {
+const ExerciseBrowser = ({
+  customExercises,
+  presetExercises,
+  selectedIds,
+  onSelectItem,
+}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResultsCustom, setSearchResultsCustom] = useState([]);
   const [searchResultsPreset, setSearchResultsPreset] = useState([]);
@@ -44,11 +49,15 @@ const ExerciseBrowser = ({ customExercises, presetExercises }) => {
             ? "You don't have any custom exercises yet."
             : 'No matching exercises found.'
         }
+        selectedIds={selectedIds}
+        onSelectItem={onSelectItem}
       />
       <ExerciseCardList
         exercises={searchResultsPreset}
         title='Preset exercises'
         placeholder='No matching exercises found.'
+        selectedIds={selectedIds}
+        onSelectItem={onSelectItem}
       />
     </div>
   );

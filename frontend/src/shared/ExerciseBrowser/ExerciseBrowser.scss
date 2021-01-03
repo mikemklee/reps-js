@@ -2,6 +2,7 @@
 
 .exerciseBrowser {
   flex: 1;
+  padding-bottom: 1rem;
 
   &__header {
     @include viewHeaderStyles;
