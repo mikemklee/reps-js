@@ -19,11 +19,11 @@
 
 .actionCard {
   @include cardStyles;
-  height: 10rem;
+  height: 8rem;
   cursor: pointer;
 
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: inherit;
     transition: color 0.2s;
   }
