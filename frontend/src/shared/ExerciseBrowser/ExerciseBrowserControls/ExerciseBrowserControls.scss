@@ -12,6 +12,8 @@
     @include flexCenterHorizontally;
     position: relative;
     margin-left: 0.5rem;
+    transition: all 0.1s;
+    user-select: none;
 
     .filterSelection {
       position: absolute;
@@ -34,18 +36,49 @@
         text-align: left;
         border-radius: 3px;
         padding: 0.15rem 0.4rem;
-        border: 1px solid $faded-green;
-        color: $faded-green;
+        border: 1px solid transparent;
         font-weight: 400;
         margin-bottom: 0.5rem;
         margin-right: 0.5rem;
         flex-shrink: 0;
         user-select: none;
+        transition: all 0.1s;
       }
-      &__item.selected {
+    }
+  }
+
+  &__filter--bodyPart {
+    .filterSelection__item {
+      border-color: $faded-pink;
+      color: $faded-pink;
+
+      &.selected {
+        background: $faded-pink;
+        color: rgba($off-white, 0.9);
+      }
+    }
+
+    &.active {
+      background: $faded-pink;
+      border-color: $faded-pink;
+      color: rgba($off-white, 0.9);
+    }
+  }
+
+  &__filter--category {
+    .filterSelection__item {
+      border-color: $faded-green;
+      color: $faded-green;
+
+      &.selected {
         background: $faded-green;
         color: rgba($off-white, 0.9);
       }
+    }
+    &.active {
+      background: $faded-green;
+      border-color: $faded-green;
+      color: rgba($off-white, 0.9);
     }
   }
 

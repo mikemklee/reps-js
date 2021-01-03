@@ -10,11 +10,10 @@ import { useExercises, useDropdown } from '../../../hooks';
 
 const ExerciseBrowserControls = ({
   searchTerm,
-  onSearchChange,
   filtersBodyPart,
-  onFilterBodyPartSelect,
   filtersCategory,
-  onFilterCategorySelect,
+  onSearchChange,
+  onFilterSelect,
 }) => {
   const { bodyPartNames, categoryNames } = useExercises();
   const [
@@ -41,7 +40,10 @@ const ExerciseBrowserControls = ({
       </div>
       <div className='exerciseBrowserControls__filters'>
         <div
-          className='exerciseBrowserControls__filter exerciseBrowserControls__filter--bodyPart'
+          className={classnames(
+            'exerciseBrowserControls__filter exerciseBrowserControls__filter--bodyPart',
+            { active: !_.isEmpty(filtersBodyPart) }
+          )}
           ref={bodyPartFilterRef}
           onClick={() => setIsBodyPartFilterOpen(!isBodyPartFilterOpen)}
         >
@@ -58,7 +60,7 @@ const ExerciseBrowserControls = ({
                   className={classnames('filterSelection__item', {
                     selected: filtersBodyPart.includes(bodyPartName),
                   })}
-                  onClick={() => onFilterBodyPartSelect(bodyPartName)}
+                  onClick={() => onFilterSelect(bodyPartName, 'bodyPart')}
                 >
                   {bodyPartName}
                 </div>
@@ -67,7 +69,10 @@ const ExerciseBrowserControls = ({
           ) : null}
         </div>
         <div
-          className='exerciseBrowserControls__filter exerciseBrowserControls__filter--category'
+          className={classnames(
+            'exerciseBrowserControls__filter exerciseBrowserControls__filter--category',
+            { active: !_.isEmpty(filtersCategory) }
+          )}
           ref={categoryFilterRef}
           onClick={() => setIsCategoryFilterOpen(!isCategoryFilterOpen)}
         >
@@ -84,7 +89,7 @@ const ExerciseBrowserControls = ({
                   className={classnames('filterSelection__item', {
                     selected: filtersCategory.includes(categoryName),
                   })}
-                  onClick={() => onFilterCategorySelect(categoryName)}
+                  onClick={() => onFilterSelect(categoryName, 'category')}
                 >
                   {categoryName}
                 </div>

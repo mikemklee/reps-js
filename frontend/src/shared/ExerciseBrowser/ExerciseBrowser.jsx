@@ -22,26 +22,17 @@ const ExerciseBrowser = ({
     setSearchTerm(event.target.value);
   };
 
-  const onFilterCategorySelect = (categoryName) => {
-    setFiltersCategory((prev) => {
-      if (prev.includes(categoryName)) {
-        // remove it from existing filters
-        return _.filter(prev, (item) => item !== categoryName);
-      } else {
-        // add it to existing filters
-        return [...prev, categoryName];
-      }
-    });
-  };
+  const onFilterSelect = (filter, filterBy) => {
+    const updateFn =
+      filterBy === 'category' ? setFiltersCategory : setFiltersBodyPart;
 
-  const onFilterBodyPartSelect = (bodyPartName) => {
-    setFiltersBodyPart((prev) => {
-      if (prev.includes(bodyPartName)) {
+    updateFn((prev) => {
+      if (prev.includes(filter)) {
         // remove it from existing filters
-        return _.filter(prev, (item) => item !== bodyPartName);
+        return _.filter(prev, (item) => item !== filter);
       } else {
         // add it to existing filters
-        return [...prev, bodyPartName];
+        return [...prev, filter];
       }
     });
   };
@@ -84,11 +75,10 @@ const ExerciseBrowser = ({
     <div className='exerciseBrowser'>
       <ExerciseBrowserControls
         searchTerm={searchTerm}
-        onSearchChange={onSearchChange}
         filtersBodyPart={filtersBodyPart}
-        onFilterBodyPartSelect={onFilterBodyPartSelect}
         filtersCategory={filtersCategory}
-        onFilterCategorySelect={onFilterCategorySelect}
+        onSearchChange={onSearchChange}
+        onFilterSelect={onFilterSelect}
       />
       <ExerciseCardList
         exercises={resultsCustom}
