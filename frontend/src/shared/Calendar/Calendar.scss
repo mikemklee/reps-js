@@ -30,11 +30,13 @@ $border-color: rgba($light-grey, 0.2);
 
 /* Calendar */
 .calendar {
+  @include boxShadows;
   display: block;
   position: relative;
-  border: 1px solid $border-color;
-  border-radius: 3px;
+  border: 1px solid transparent;
+  border-radius: 4px;
   height: auto;
+  background: $dark-grey;
 
   .header {
     text-transform: uppercase;
@@ -92,6 +94,16 @@ $border-color: rgba($light-grey, 0.2);
     //   border-image-slice: 1;
     // }
 
+    .marked {
+      @include primaryActionIconStyles;
+      width: 1.2rem;
+      height: 1.2rem;
+      left: 0.5rem;
+      bottom: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 1;
+    }
+
     .row {
       border-bottom: 1px solid $border-color;
 
@@ -131,6 +143,7 @@ $border-color: rgba($light-grey, 0.2);
       font-weight: 700;
       line-height: 1;
       color: #1affa0;
+      color: $light-blue;
       opacity: 0;
       font-size: 5em;
       position: absolute;

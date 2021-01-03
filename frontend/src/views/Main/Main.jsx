@@ -12,6 +12,8 @@ import { InterfaceUtils } from '../../utils';
 const Main = () => {
   const { userDisplayName } = useSelector((state) => state.auth);
 
+  // TODO: get saved workout dates for each month from DB
+
   return (
     <div className='mainView'>
       <div className='mainView__header'>
@@ -20,7 +22,7 @@ const Main = () => {
       <div className='mainView__content'>
         <div className='mainView__calendar'>
           <label className='mainView__calendar__title'>Monthly progress</label>
-          <Calendar />
+          <Calendar markedDates={['2021-01-03T01:06:46.907Z']} />
         </div>
         <div className='mainView__quickActions'>
           <QuickActions />

@@ -9,13 +9,23 @@ import endOfMonth from 'date-fns/endOfMonth';
 import addDays from 'date-fns/addDays';
 import isSameMonth from 'date-fns/isSameMonth';
 import isSameDay from 'date-fns/isSameDay';
+import parseISO from 'date-fns/parseISO';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { FiCheck } from 'react-icons/fi';
+import _ from 'lodash';
 
 import './Calendar.scss';
 
-const Calendar = () => {
+const Calendar = ({ markedDates }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const isMarkedDate = (day) => {
+    const isIncluded = _.some(markedDates, (item) =>
+      isSameDay(parseISO(item), day)
+    );
+    return isIncluded;
+  };
 
   const header = () => {
     const dateFormat = 'MMMM yyyy';
@@ -78,14 +88,18 @@ const Calendar = () => {
           >
             <span className='number'>{formattedDate}</span>
             <span className='bg'>{formattedDate}</span>
+            {isMarkedDate(day) ? (
+              <div className='marked'>
+                <FiCheck />
+              </div>
+            ) : null}
           </div>
         );
         day = addDays(day, 1);
       }
       rows.push(
         <div className='row' key={day}>
-          {' '}
-          {days}{' '}
+          {days}
         </div>
       );
       days = [];
