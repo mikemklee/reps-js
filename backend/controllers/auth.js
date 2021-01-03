@@ -172,8 +172,9 @@ const deleteUser = async (req, res) => {
   const { user } = req;
 
   const userId = req.params.id;
+
   // check if provided user id matches user stored in session
-  if (userId !== user._id) {
+  if (!user._id.equals(userId)) {
     res.status(403).json({
       message: `Provided user id "${userId}" does not match current user id`,
     });
