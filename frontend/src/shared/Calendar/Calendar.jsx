@@ -9,20 +9,19 @@ import endOfMonth from 'date-fns/endOfMonth';
 import addDays from 'date-fns/addDays';
 import isSameMonth from 'date-fns/isSameMonth';
 import isSameDay from 'date-fns/isSameDay';
-import parseISO from 'date-fns/parseISO';
+import isToday from 'date-fns/isToday';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FiCheck } from 'react-icons/fi';
+import classnames from 'classnames';
 import _ from 'lodash';
 
 import './Calendar.scss';
 
 const Calendar = ({ markedDates }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const isMarkedDate = (day) => {
     const isIncluded = _.some(markedDates, (item) =>
-      isSameDay(parseISO(item), day)
+      isSameDay(new Date(item), day)
     );
     return isIncluded;
   };
@@ -73,25 +72,17 @@ const Calendar = ({ markedDates }) => {
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         formattedDate = format(day, dateFormat);
-        const cloneDay = day;
         days.push(
           <div
-            className={`column cell ${
-              !isSameMonth(day, monthStart)
-                ? 'disabled'
-                : isSameDay(day, selectedDate)
-                ? 'selected'
-                : ''
-            }`}
+            className={classnames('column', 'cell', {
+              disabled: !isSameMonth(day, monthStart),
+              today: isToday(day),
+            })}
             key={day}
-            onClick={() => onDateClick(cloneDay)}
           >
             <span className='number'>{formattedDate}</span>
-            <span className='bg'>{formattedDate}</span>
             {isMarkedDate(day) ? (
-              <div className='marked'>
-                <FiCheck />
-              </div>
+              <div className='marked'>{formattedDate}</div>
             ) : null}
           </div>
         );
@@ -111,9 +102,6 @@ const Calendar = ({ markedDates }) => {
   };
   const prevMonth = () => {
     setCurrentDate(subMonths(currentDate, 1));
-  };
-  const onDateClick = (day) => {
-    setSelectedDate(day);
   };
   return (
     <div className='calendar'>

@@ -1,16 +1,27 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './Main.scss';
 
 import QuickActions from './QuickActions/QuickActions';
+import ActivitySummary from './ActivitySummary/ActivitySummary';
 
 import { InterfaceUtils } from '../../utils';
 
-const Main = () => {
-  const { userGivenName } = useSelector((state) => state.auth);
+import WorkoutActions from '../../redux/workout/actions';
 
-  // TODO: get saved workout dates for each month from DB
+const Main = () => {
+  const dispatch = useDispatch();
+  const { userGivenName } = useSelector((state) => state.auth);
+  const { workoutLogs, status: workoutStatus } = useSelector(
+    (state) => state.workout
+  );
+
+  useEffect(() => {
+    dispatch(WorkoutActions.getWorkoutLogsRequest());
+  }, []);
+
+  const loading = workoutStatus.getWorkoutLogsPending;
 
   return (
     <div className='mainView'>
@@ -18,6 +29,9 @@ const Main = () => {
         Good {InterfaceUtils.getTimeOfDay()}, <strong>{userGivenName}</strong>
       </div>
       <div className='mainView__content'>
+        <div className='mainView__activitySummary'>
+          <ActivitySummary logs={workoutLogs} />
+        </div>
         <div className='mainView__quickActions'>
           <QuickActions />
         </div>

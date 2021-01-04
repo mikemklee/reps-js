@@ -1,17 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 
 import './Logs.scss';
 
 import WorkoutCardList from './WorkoutCardList/WorkoutCardList';
 
-import {
-  Modal,
-  Confirmation,
-  ContentPlaceholder,
-  Calendar,
-} from '../../shared';
+import { Modal, Confirmation, ContentPlaceholder } from '../../shared';
 
 import ExerciseActions from '../../redux/exercise/actions';
 import WorkoutActions from '../../redux/workout/actions';
@@ -45,8 +39,6 @@ const Logs = () => {
   const loading =
     exerciseStatus.getPresetsPending || workoutStatus.getWorkoutLogsPending;
 
-  const completedDates = _.map(workoutLogs, (item) => item.completedAt);
-
   return (
     <div className='logsView'>
       <div className='logsView__header'>Logs</div>
@@ -61,12 +53,6 @@ const Logs = () => {
           </div>
         ) : (
           <>
-            <div className='logsView__calendar'>
-              <label className='logsView__calendar__title'>
-                Monthly progress
-              </label>
-              <Calendar markedDates={completedDates} />
-            </div>
             <WorkoutCardList
               title='Workout history'
               placeholder='You do not have any workout sessions saved yet.'
