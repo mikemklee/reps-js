@@ -10,6 +10,7 @@ import ExerciseCardList from './ExerciseCardList/ExerciseCardList';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import Login from './Login/Login';
 import Modal from './Modal/Modal';
+import NumberInput from './NumberInput/NumberInput';
 import ProgressRing from './ProgressRing/ProgressRing';
 import RestTimer from './RestTimer/RestTimer';
 import Sidebar from './Sidebar/Sidebar';
@@ -30,6 +31,7 @@ export {
   LoadingSpinner,
   Login,
   Modal,
+  NumberInput,
   ProgressRing,
   RestTimer,
   Sidebar,
