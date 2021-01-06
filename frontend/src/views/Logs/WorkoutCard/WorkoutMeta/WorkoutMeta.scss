@@ -2,8 +2,11 @@
   $self: &;
   display: flex;
 
-  &__completedAt {
+  &__dateAndTime {
     flex: 1;
+  }
+
+  &__completedAt {
     span {
       margin-left: 0.5rem;
     }
