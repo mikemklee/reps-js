@@ -16,6 +16,7 @@ const ExerciseSummary = ({ exercise }) => {
   const { categoryNames } = useExercises();
 
   const exercisePreset = presets[exercise.exerciseId];
+  if (!exercisePreset) return null;
 
   return (
     <div className='exerciseSummary'>

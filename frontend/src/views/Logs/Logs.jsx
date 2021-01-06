@@ -52,17 +52,15 @@ const Logs = () => {
               ))}
           </div>
         ) : (
-          <>
-            <WorkoutCardList
-              title='Workout history'
-              placeholder='You do not have any workout sessions saved yet.'
-              workoutLogs={workoutLogs}
-              onDeleteWorkout={(workoutId) => {
-                setDeleteId(workoutId);
-                deleteWorkoutModalRef.current.open();
-              }}
-            />
-          </>
+          <WorkoutCardList
+            title='Workout history'
+            placeholder='You do not have any workout sessions saved yet.'
+            workoutLogs={workoutLogs}
+            onDeleteWorkout={(workoutId) => {
+              setDeleteId(workoutId);
+              deleteWorkoutModalRef.current.open();
+            }}
+          />
         )}
         <Modal ref={deleteWorkoutModalRef}>
           <Confirmation
