@@ -348,8 +348,6 @@ const WorkoutTemplate = ({ useFor }) => {
           ? new Date().toISOString()
           : completedAt.toISOString();
 
-      console.log('exerciseCompletedAt', exerciseCompletedAt);
-
       // include date/time and duration
       formattedData.duration = exerciseDuration;
       formattedData.completedAt = exerciseCompletedAt;

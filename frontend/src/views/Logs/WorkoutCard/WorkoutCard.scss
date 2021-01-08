@@ -3,6 +3,7 @@
 .workoutCard {
   @include cardStyles;
   font-size: 0.9rem;
+  margin-bottom: 1rem;
 
   &__name {
     font-size: 1.1rem;
