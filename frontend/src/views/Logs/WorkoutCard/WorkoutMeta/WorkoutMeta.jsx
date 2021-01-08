@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { BiTimeFive, BiCalendarCheck } from 'react-icons/bi';
 import { FaWeightHanging } from 'react-icons/fa';
-import moment from 'moment';
+import { format, subSeconds, differenceInMinutes } from 'date-fns';
 import _ from 'lodash';
 
 import './WorkoutMeta.scss';
@@ -12,13 +12,17 @@ import { useExercises, useWeightConverter } from '../../../../hooks';
 const WorkoutMeta = ({ item }) => {
   const { currentWeightUnit, computeDisplayedWeight } = useWeightConverter();
   const { categoryNames } = useExercises();
-
   const { presets: exercisePresets } = useSelector((state) => state.exercise);
 
-  const formattedCompletedAt = moment(item.completedAt).format(
-    'h:mm A dddd, Do MMM YYYY'
+  const completedTime = new Date(item.completedAt);
+  const startedTime = subSeconds(completedTime, item.duration);
+  const minutesElapsed = differenceInMinutes(completedTime, startedTime);
+
+  const formattedCompletedAt = format(
+    new Date(item.completedAt),
+    'h:mm a EEE, d MMM yyyy'
   );
-  const formattedDuration = moment.duration(item.duration, 'seconds').minutes();
+
   const totalVolumeInKG = _.reduce(
     item.exercises,
     (exerciseVolume, exercise) => {
@@ -52,7 +56,7 @@ const WorkoutMeta = ({ item }) => {
       </div>
       <div className='workoutMeta__duration'>
         <BiTimeFive />
-        <span>{formattedDuration} minutes</span>
+        <span>{minutesElapsed} minutes</span>
       </div>
       <div className='workoutMeta__volume'>
         <FaWeightHanging />
