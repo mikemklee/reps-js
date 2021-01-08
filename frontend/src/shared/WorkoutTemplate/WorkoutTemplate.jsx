@@ -4,6 +4,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { VscAdd } from 'react-icons/vsc';
 import { FaStopwatch } from 'react-icons/fa';
 import classnames from 'classnames';
+import { subMinutes, differenceInMinutes } from 'date-fns';
+
 import _ from 'lodash';
 
 import './WorkoutTemplate.scss';
@@ -35,9 +37,10 @@ import {
 const WorkoutTemplate = ({ useFor }) => {
   const [templateName, setTemplateName] = useState('');
   const [title, setTitle] = useState('');
-  const [completedAt, setCompletedAt] = useState(new Date());
-  const [duration, setDuration] = useState(0);
   const [workout, setWorkout] = useState(null);
+  // used for EDIT_WORKOUT
+  const [completedAt, setCompletedAt] = useState(new Date());
+  const [minutes, setMinutes] = useState(0);
 
   const {
     exercises,
@@ -254,12 +257,21 @@ const WorkoutTemplate = ({ useFor }) => {
           const currentWorkout = workoutLogs[workoutId];
 
           // set workout
-          setTitle(currentWorkout.name);
-          setDuration(currentWorkout.duration);
-          setCompletedAt(currentWorkout.completedAt);
           setWorkout(currentWorkout);
+          setTitle(currentWorkout.name);
 
-          console.log(currentWorkout);
+          // set workout date/time/duration
+          const completedTime = new Date(currentWorkout.completedAt);
+          const startedTime = subMinutes(
+            completedTime,
+            currentWorkout.duration
+          );
+          const minutesElapsed = differenceInMinutes(
+            completedTime,
+            startedTime
+          );
+          setCompletedAt(completedTime);
+          setMinutes(minutesElapsed);
 
           // add exercises
           _.forEach(currentWorkout.exercises, (item) => {
@@ -318,19 +330,33 @@ const WorkoutTemplate = ({ useFor }) => {
   };
 
   const onConfirmSave = () => {
-    let filterCompleted = false;
+    const formattedData = { name: title };
+
     let exerciseDuration;
+    let exerciseCompletedAt;
+    let filterCompleted = false;
     if (useFor === 'NEW_WORKOUT' || useFor === 'EDIT_WORKOUT') {
       filterCompleted = true;
+      // exercise duration should be saved as minutes
       exerciseDuration =
-        useFor === 'NEW_WORKOUT' ? counterRef.current : duration;
+        useFor === 'NEW_WORKOUT'
+          ? Math.round(counterRef.current / 60) // round total seconds elapsed to nearest minutes
+          : minutes;
+
+      exerciseCompletedAt =
+        useFor === 'NEW_WORKOUT'
+          ? new Date().toISOString()
+          : completedAt.toISOString();
+
+      console.log('exerciseCompletedAt', exerciseCompletedAt);
+
+      // include date/time and duration
+      formattedData.duration = exerciseDuration;
+      formattedData.completedAt = exerciseCompletedAt;
     }
-    const formattedData = {
-      name: title,
-      exercises: onFormatExercisesData(filterCompleted),
-      duration: exerciseDuration,
-      completedAt: new Date().toISOString(),
-    };
+
+    // include exercises data
+    formattedData.exercises = onFormatExercisesData(filterCompleted);
 
     if (useFor === 'NEW_WORKOUT') {
       dispatch(WorkoutActions.saveWorkoutRequest(formattedData));
@@ -378,8 +404,8 @@ const WorkoutTemplate = ({ useFor }) => {
             <EditableWorkoutMeta
               completedAt={completedAt}
               setCompletedAt={setCompletedAt}
-              duration={duration}
-              setDuration={setDuration}
+              minutes={minutes}
+              setMinutes={setMinutes}
             />
           )}
           <div className='workout-controls-actions'>

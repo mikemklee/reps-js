@@ -1,6 +1,4 @@
 import { BiTimeFive, BiCalendarCheck } from 'react-icons/bi';
-import classnames from 'classnames';
-import moment from 'moment';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
@@ -9,12 +7,19 @@ import './EditableWorkoutMeta.scss';
 import { NumberInput } from '../../../../shared';
 
 const EditableWorkoutMeta = ({
-  duration,
-  setDuration,
+  minutes,
+  setMinutes,
   completedAt,
   setCompletedAt,
 }) => {
-  const formattedDuration = moment.duration(duration, 'seconds').minutes();
+  const handleMinutesChange = (e) => {
+    const regex = /^[0-9\b]+$/;
+    const value = e.target.value;
+    if (value === '' || regex.test(value)) {
+      const formatted = value ? parseInt(value, 10) : 0;
+      setMinutes(formatted);
+    }
+  };
 
   return (
     <div className='editableWorkoutMeta'>
@@ -23,7 +28,7 @@ const EditableWorkoutMeta = ({
           <BiCalendarCheck className='icon' />
           <DateTimePicker
             InputProps={{ disableUnderline: true }}
-            className={classnames('picker')}
+            className='picker'
             value={completedAt}
             format='h:mm a EEE, d MMM yyyy'
             onChange={setCompletedAt}
@@ -32,7 +37,7 @@ const EditableWorkoutMeta = ({
       </div>
       <div className='editableWorkoutMeta__duration'>
         <BiTimeFive className='icon' />
-        <NumberInput value={duration} onChange={setDuration} /> minutes
+        <NumberInput value={minutes} onChange={handleMinutesChange} /> minutes
       </div>
     </div>
   );

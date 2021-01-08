@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { BiTimeFive, BiCalendarCheck } from 'react-icons/bi';
 import { FaWeightHanging } from 'react-icons/fa';
-import { format, subSeconds, differenceInMinutes } from 'date-fns';
+import { format, subMinutes, differenceInMinutes } from 'date-fns';
 import _ from 'lodash';
 
 import './WorkoutMeta.scss';
@@ -15,7 +15,7 @@ const WorkoutMeta = ({ item }) => {
   const { presets: exercisePresets } = useSelector((state) => state.exercise);
 
   const completedTime = new Date(item.completedAt);
-  const startedTime = subSeconds(completedTime, item.duration);
+  const startedTime = subMinutes(completedTime, item.duration);
   const minutesElapsed = differenceInMinutes(completedTime, startedTime);
 
   const formattedCompletedAt = format(
