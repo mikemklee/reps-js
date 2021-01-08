@@ -73,6 +73,7 @@ const editWorkout = async (req, res) => {
   workout.name = workoutData.name;
   workout.exercises = workoutData.exercises;
   workout.duration = workoutData.duration;
+  workout.completedAt = workoutData.completedAt;
 
   const editedWorkout = await workout.save();
 
