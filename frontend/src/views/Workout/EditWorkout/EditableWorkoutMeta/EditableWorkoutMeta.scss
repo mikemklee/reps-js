@@ -1,0 +1,39 @@
+@import '../../../../styles/common';
+
+.editableWorkoutMeta {
+  display: flex;
+  flex-direction: column;
+
+  .icon {
+    margin-right: 0.5rem;
+  }
+
+  &__completedAt {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    .picker {
+      pointer-events: none;
+      height: 2rem;
+      min-width: 12rem;
+      padding: 0 0.5rem;
+      background: $dark-grey;
+      pointer-events: auto;
+    }
+  }
+
+  &__duration {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+
+    .numberInput {
+      height: 1.8rem;
+      min-width: 0;
+      width: 2.4rem;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+    }
+  }
+}

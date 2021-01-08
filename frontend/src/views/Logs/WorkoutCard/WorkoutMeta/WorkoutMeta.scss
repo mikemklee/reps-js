@@ -1,52 +1,21 @@
-@import '../../../../styles/common';
-
 .workoutMeta {
-  $self: &;
   display: flex;
-
-  .icon {
-    margin-right: 0.5rem;
-  }
 
   &__completedAt {
     flex: 1;
-    display: flex;
-    align-items: center;
-    .picker {
-      pointer-events: none;
-    }
-    .picker.editable {
-      height: 2rem;
-      padding: 0 0.5rem;
-      background: $dark-grey;
-      pointer-events: auto;
+    span {
+      margin-left: 0.5rem;
     }
   }
 
-  &__duration {
-    display: flex;
-    align-items: center;
-    margin-right: 1rem;
-
-    .numberInput {
-      height: 1.8rem;
-      min-width: 0;
-      width: 2.4rem;
-      font-size: 0.9rem;
-      margin-right: 0.5rem;
-    }
-  }
-
+  &__duration,
   &__volume {
     display: flex;
     align-items: center;
-  }
+    margin-left: 1rem;
 
-  &.vertical {
-    flex-direction: column;
-
-    #{$self}__completedAt {
-      margin-bottom: 0.5rem;
+    span {
+      margin-left: 0.5rem;
     }
   }
 }

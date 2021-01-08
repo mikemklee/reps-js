@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 import './WorkoutTemplate.scss';
 
-import WorkoutMeta from '../../views/Logs/WorkoutCard/WorkoutMeta/WorkoutMeta';
+import EditableWorkoutMeta from '../../views/Workout/EditWorkout/EditableWorkoutMeta/EditableWorkoutMeta';
 
 import {
   DurationTimer,
@@ -35,6 +35,7 @@ import {
 const WorkoutTemplate = ({ useFor }) => {
   const [templateName, setTemplateName] = useState('');
   const [title, setTitle] = useState('');
+  const [completedAt, setCompletedAt] = useState(new Date());
   const [duration, setDuration] = useState(0);
   const [workout, setWorkout] = useState(null);
 
@@ -255,7 +256,10 @@ const WorkoutTemplate = ({ useFor }) => {
           // set workout
           setTitle(currentWorkout.name);
           setDuration(currentWorkout.duration);
+          setCompletedAt(currentWorkout.completedAt);
           setWorkout(currentWorkout);
+
+          console.log(currentWorkout);
 
           // add exercises
           _.forEach(currentWorkout.exercises, (item) => {
@@ -371,7 +375,12 @@ const WorkoutTemplate = ({ useFor }) => {
             </>
           )}
           {useFor === 'EDIT_WORKOUT' && workout && (
-            <WorkoutMeta vertical item={workout} />
+            <EditableWorkoutMeta
+              completedAt={completedAt}
+              setCompletedAt={setCompletedAt}
+              duration={duration}
+              setDuration={setDuration}
+            />
           )}
           <div className='workout-controls-actions'>
             <button className='cancel-workout-btn' onClick={onClickCancel}>
