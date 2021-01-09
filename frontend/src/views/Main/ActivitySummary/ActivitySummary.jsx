@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
-import format from 'date-fns/format';
-import parseISO from 'date-fns/parseISO';
-import eachDayOfInterval from 'date-fns/eachDayOfInterval';
-import subDays from 'date-fns/subDays';
-import startOfToday from 'date-fns/startOfToday';
-import startOfDay from 'date-fns/startOfDay';
+import {
+  format,
+  parseISO,
+  eachDayOfInterval,
+  subDays,
+  startOfDay,
+  startOfToday,
+} from 'date-fns';
 import _ from 'lodash';
 
 import {
@@ -22,8 +24,15 @@ import { Calendar } from '../../../shared';
 import './ActivitySummary.scss';
 
 const ActivitySummary = ({ logs }) => {
-  const completedDates = useMemo(
-    () => _.countBy(logs, (item) => startOfDay(parseISO(item.completedAt))),
+  const durationsByDates = useMemo(
+    () =>
+      _.chain(logs)
+        .groupBy((item) => startOfDay(parseISO(item.completedAt)))
+        .reduce((acc, workoutsByDate, date) => {
+          acc[date] = _.sumBy(workoutsByDate, (item) => item.duration);
+          return acc;
+        }, {})
+        .value(),
     [logs]
   );
 
@@ -40,11 +49,11 @@ const ActivitySummary = ({ logs }) => {
     () =>
       _.map(last7Days, (date) => {
         return {
-          count: completedDates[date] || 0,
+          count: durationsByDates[date] || 0,
           date: date.toISOString(),
         };
       }),
-    [completedDates]
+    [durationsByDates]
   );
 
   return (
@@ -65,19 +74,22 @@ const ActivitySummary = ({ logs }) => {
               tickFormatter={(date) => format(parseISO(date), 'E')}
             />
             <YAxis allowDecimals={false} />
-            <Legend formatter={() => 'Total workout sessions'} />
+            <Legend
+              formatter={() => 'Total workout time per day (in minutes)'}
+            />
             <Line
               type='monotone'
               dataKey='count'
+              dot={false}
               strokeWidth={2}
-              stroke='#8884d8'
+              stroke='#BB86FC'
             />
             {/* <Line type='monotone' dataKey='uv' stroke='#82ca9d' /> */}
           </LineChart>
         </ResponsiveContainer>
       </div>
       <div className='activitySummary__calendar'>
-        <Calendar markedDates={_.keys(completedDates)} small />
+        <Calendar markedDates={_.keys(durationsByDates)} small />
       </div>
     </div>
   );
