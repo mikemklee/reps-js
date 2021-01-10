@@ -52,10 +52,6 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
-
 const clientBuildPath = path.join(__dirname, '/../frontend/build');
 const clientIndexPath = path.resolve(clientBuildPath, 'index.html');
 
