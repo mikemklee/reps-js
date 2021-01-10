@@ -26,6 +26,11 @@
     font-size: 1.8rem;
     margin: 1rem 0;
   }
+
+  @media (max-width: $small-screen-width) {
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+  }
 }
 
 @mixin buttonStyles() {

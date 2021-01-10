@@ -3,6 +3,10 @@
 .exerciseBrowserControls {
   display: flex;
 
+  @media (max-width: $small-screen-width) {
+    flex-direction: column;
+  }
+
   &__filters {
     @include flexCenterHorizontally;
   }
@@ -31,6 +35,11 @@
       z-index: 1;
       width: 20rem;
 
+      @media (max-width: $small-screen-width) {
+        flex-direction: column;
+        width: 100%;
+      }
+
       &__item {
         font-size: 0.8rem;
         text-align: left;
@@ -43,6 +52,18 @@
         flex-shrink: 0;
         user-select: none;
         transition: all 0.1s;
+
+        @media (max-width: $small-screen-width) {
+          text-align: center;
+        }
+      }
+    }
+
+    @media (max-width: $small-screen-width) {
+      flex: 1;
+
+      &:first-of-type {
+        margin-left: 0;
       }
     }
   }
@@ -104,6 +125,16 @@
       width: 1.2rem;
       height: 2.5rem;
       opacity: 0.5;
+    }
+
+    @media (max-width: $small-screen-width) {
+      align-self: stretch;
+      max-width: 100%;
+      margin-bottom: 0.5rem;
+
+      input {
+        max-width: calc(100% - 2rem);
+      }
     }
   }
 }
