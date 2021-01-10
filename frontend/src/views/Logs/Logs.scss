@@ -10,11 +10,9 @@
 
   &__content {
     flex: 1;
-    padding-bottom: 2rem;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(calc(4rem * 7), 1fr));
-    grid-gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 35rem;
   }
 
   &__calendar {
@@ -29,9 +27,13 @@
   }
 
   &__placeholders {
-    width: 35rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
     grid-gap: 2rem;
+
+    @media (max-width: $small-screen-width) {
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+      grid-gap: 0.5rem;
+    }
   }
 }
