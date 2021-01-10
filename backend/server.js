@@ -70,10 +70,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const authCheck = (req, res, next) => {
   if (!req.user) {
-    res.status(401).json({
-      authenticated: false,
-      message: 'user has not been authenticated',
-    });
+    res.redirect(process.env.CLIENT_HOME_URL);
   } else {
     next();
   }

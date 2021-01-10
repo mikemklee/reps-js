@@ -148,7 +148,7 @@ const loginFail = async (req, res) => {
 // @route   GET /api/auth/logout
 const logout = async (req, res) => {
   req.logout();
-  res.redirect(process.env.CLIENT_HOME_URL);
+  res.redirect('/');
 };
 
 // @desc    Authenticate user via google
