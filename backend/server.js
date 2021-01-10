@@ -52,14 +52,6 @@ app.use(
   })
 );
 
-const clientBuildPath = path.join(__dirname, '/../frontend/build');
-const clientIndexPath = path.resolve(clientBuildPath, 'index.html');
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(clientBuildPath));
-  app.get('*', (req, res) => res.sendFile(clientIndexPath));
-}
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -67,6 +59,14 @@ app.use('/api/auth', authRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/exercises', exerciseRoutes);
 app.use('/api/routines', routineRoutes);
+
+const clientBuildPath = path.join(__dirname, '/../frontend/build');
+const clientIndexPath = path.resolve(clientBuildPath, 'index.html');
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(clientBuildPath));
+  app.get('*', (req, res) => res.sendFile(clientIndexPath));
+}
 
 const authCheck = (req, res, next) => {
   if (!req.user) {
