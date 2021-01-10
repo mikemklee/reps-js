@@ -4,6 +4,10 @@
   @include cardStyles;
   height: 12rem;
 
+  @media (max-width: $small-screen-width) {
+    height: 10rem;
+  }
+
   &__title {
     font-size: 1.1rem;
     font-weight: 600;

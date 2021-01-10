@@ -18,6 +18,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     grid-gap: 2rem;
+
+    @media (max-width: $small-screen-width) {
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+      grid-gap: 1rem;
+    }
   }
 }
 
@@ -28,5 +33,9 @@
     @include primaryButtonStyles;
     @include flexCenterHorizontally;
     margin-left: auto;
+
+    @media (max-width: $small-screen-width) {
+      width: 100%;
+    }
   }
 }
