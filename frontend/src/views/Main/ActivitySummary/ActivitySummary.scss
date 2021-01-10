@@ -7,11 +7,22 @@
   grid-template-rows: min-content 1fr;
   grid-gap: 1rem;
 
+  @media (max-width: $medium-screen-width) {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 15rem 1fr;
+    grid-gap: 0.5rem;
+  }
+
   &__title {
     grid-column: 1 / -1;
     grid-row: 1 / span 1;
     font-size: 1.2rem;
     margin-top: 1rem;
+
+    @media (max-width: $medium-screen-width) {
+      grid-column: 1 / -1;
+      grid-row: span 1;
+    }
   }
 
   &__chart {
@@ -33,10 +44,20 @@
       font-weight: 600;
       margin-left: 0.5rem;
     }
+
+    @media (max-width: $medium-screen-width) {
+      grid-column: 1 / -1;
+      grid-row: span 1;
+    }
   }
 
   &__calendar {
     grid-column: span 1 / -1;
     grid-row: span 1 / -1;
+
+    @media (max-width: $medium-screen-width) {
+      grid-column: 1 / -1;
+      grid-row: span 1;
+    }
   }
 }

@@ -80,6 +80,10 @@ $border-color: rgba($light-grey, 0.2);
       overflow: hidden;
       cursor: pointer;
       transition: 0.25s ease-out;
+
+      @media (max-width: $medium-screen-width) {
+        height: 2.2em;
+      }
     }
 
     .marked {

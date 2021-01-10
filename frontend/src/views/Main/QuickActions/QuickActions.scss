@@ -4,6 +4,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding-bottom: 1rem;
 
   &__title {
     font-size: 1.2rem;
@@ -15,6 +16,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   grid-gap: 1rem;
+
+  @media (max-width: $medium-screen-width) {
+    grid-gap: 0.5rem;
+  }
 }
 
 .actionCard {
@@ -40,5 +45,13 @@
 
   &:hover &__button {
     opacity: 1;
+  }
+
+  @media (max-width: $small-screen-width) {
+    height: 6rem;
+
+    &__title {
+      font-size: 1rem;
+    }
   }
 }

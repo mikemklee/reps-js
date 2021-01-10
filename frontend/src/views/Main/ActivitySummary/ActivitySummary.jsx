@@ -8,6 +8,7 @@ import {
   startOfToday,
 } from 'date-fns';
 import _ from 'lodash';
+import { useMediaQuery } from 'react-responsive';
 
 import {
   ResponsiveContainer,
@@ -24,6 +25,8 @@ import { Calendar } from '../../../shared';
 import './ActivitySummary.scss';
 
 const ActivitySummary = ({ logs }) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 480px)' });
+
   const durationsByDates = useMemo(
     () =>
       _.chain(logs)
@@ -71,12 +74,13 @@ const ActivitySummary = ({ logs }) => {
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis
               dataKey='date'
-              tickFormatter={(date) => format(parseISO(date), 'E')}
+              tickFormatter={(date) => {
+                const option = isMobile ? 'EEEEE' : 'E';
+                return format(parseISO(date), option);
+              }}
             />
             <YAxis allowDecimals={false} />
-            <Legend
-              formatter={() => 'Total workout time per day (in minutes)'}
-            />
+            <Legend formatter={() => 'Total time per day (in minutes)'} />
             <Line
               type='monotone'
               dataKey='count'
