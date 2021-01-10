@@ -6,8 +6,6 @@ const {
   getDefaultPreferences,
 } = require('../utils/auth');
 
-const CLIENT_HOME_PAGE_URL = 'http://localhost:3000';
-
 const { generateToken } = require('../utils/auth');
 const User = require('../models/User');
 const Exercise = require('../models/Exercise');
@@ -150,7 +148,7 @@ const loginFail = async (req, res) => {
 // @route   GET /api/auth/logout
 const logout = async (req, res) => {
   req.logout();
-  res.redirect(CLIENT_HOME_PAGE_URL);
+  res.redirect(process.env.CLIENT_HOME_URL);
 };
 
 // @desc    Authenticate user via google
@@ -162,7 +160,7 @@ const googleLogin = passport.authenticate('google', {
 // @desc    Redirect to client after successful authentication via google
 // @route   GET /api/auth/google/redirect
 const googleLoginRedirect = passport.authenticate('google', {
-  successRedirect: CLIENT_HOME_PAGE_URL,
+  successRedirect: process.env.CLIENT_HOME_URL,
   failureRedirect: '/auth/login/failed',
 });
 
