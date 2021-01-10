@@ -19,10 +19,10 @@
 .siteLogo {
   margin: 1.5rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 
   @media (max-width: $medium-screen-width) {
-    margin: 1rem;
+    margin: 0.5rem 1rem;
   }
 
   &__name {
@@ -31,9 +31,14 @@
     font-style: italic;
     cursor: pointer;
     position: relative;
+
+    @media (max-width: $medium-screen-width) {
+      font-size: 1.2rem;
+    }
   }
 
   &__badge {
+    align-self: flex-end;
     margin-left: 0.5rem;
     margin-bottom: 0.1rem;
     font-size: 0.6rem;
@@ -42,6 +47,10 @@
     background-color: $light-blue;
     display: inline-block;
     border-radius: 4px;
+
+    @media (max-width: $medium-screen-width) {
+      font-size: 0.5rem;
+    }
   }
 }
 

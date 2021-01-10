@@ -54,6 +54,7 @@
     @media (max-width: $medium-screen-width) {
       border-bottom: 1px solid rgba($light-grey, 0.1);
       padding: 1rem;
+      padding-top: 0.5rem;
       margin-bottom: 0.5rem;
       cursor: default;
     }
@@ -105,6 +106,10 @@
   padding: 1rem;
   position: relative;
 
+  @media (max-width: $small-screen-width) {
+    padding: 0;
+  }
+
   &__loading {
     position: absolute;
     top: 1rem;
@@ -153,6 +158,7 @@
 
       button.warning {
         @include warningButtonStyles;
+        min-width: 8rem;
       }
     }
   }
