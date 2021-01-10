@@ -37,10 +37,7 @@ export default function* getUserData() {
 
     yield put(AuthActions.getUserDataSuccess(data.user));
     yield put(ExerciseActions.getNamesRequest());
-
-    // localStorage.setItem('reps_userInfo', JSON.stringify(data.user));
   } catch (e) {
-    console.log(e);
     const formattedError = new Error('An unexpected error occured.');
     if (e.response) {
       formattedError.message = e.response.data.message;
