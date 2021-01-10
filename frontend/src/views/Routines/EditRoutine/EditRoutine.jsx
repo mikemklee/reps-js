@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { WorkoutTemplate } from '../../../shared';
 
 const EditRoutine = () => {

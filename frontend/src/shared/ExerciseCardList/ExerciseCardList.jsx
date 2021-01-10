@@ -1,3 +1,4 @@
+import React from 'react';
 import classnames from 'classnames';
 import { FiCheck } from 'react-icons/fi';
 import _ from 'lodash';

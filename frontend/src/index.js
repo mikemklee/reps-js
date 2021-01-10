@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 import './index.scss';
 import AppRouter from './router/Router.jsx';
@@ -36,13 +36,11 @@ const defaultMaterialTheme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={defaultMaterialTheme}>
-        <AppRouter />
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ThemeProvider theme={defaultMaterialTheme}>
+      <AppRouter />
+    </ThemeProvider>
+  </Provider>,
   document.getElementById('root')
 );
 
