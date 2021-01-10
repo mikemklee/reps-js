@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import format from 'date-fns/format';
-import addMonths from 'date-fns/addMonths';
-import subMonths from 'date-fns/subMonths';
-import startOfWeek from 'date-fns/startOfWeek';
-import endOfWeek from 'date-fns/endOfWeek';
-import startOfMonth from 'date-fns/startOfMonth';
-import endOfMonth from 'date-fns/endOfMonth';
-import addDays from 'date-fns/addDays';
-import isSameMonth from 'date-fns/isSameMonth';
-import isSameDay from 'date-fns/isSameDay';
-import isToday from 'date-fns/isToday';
+import {
+  format,
+  addMonths,
+  subMonths,
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+  addDays,
+  isSameMonth,
+  isSameDay,
+  isToday,
+} from 'date-fns';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import classnames from 'classnames';
 import _ from 'lodash';
