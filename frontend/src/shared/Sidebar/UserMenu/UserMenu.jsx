@@ -32,7 +32,7 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
   const handleLogoutClick = () => {
     // Logout using Google passport api
     // Set authenticated state to false in the reducer
-    window.open('http://localhost:5000/api/auth/logout', '_self');
+    window.open(`${process.env.REACT_APP_API_HOST}/api/auth/logout`, '_self');
   };
 
   const handlePreferencesClick = () => {

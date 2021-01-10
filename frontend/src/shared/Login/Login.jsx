@@ -15,7 +15,7 @@ function Login() {
   const onClickSignIn = () => {
     // Authenticate using via passport api in the backend
     // Open Google login page
-    window.open('http://localhost:5000/api/auth/google', '_self');
+    window.open(`${process.env.REACT_APP_API_HOST}/api/auth/google`, '_self');
     // dispatch(AuthActions.loginRequest(email, password));
   };
 

@@ -17,7 +17,7 @@ export default function* getUserData() {
     };
     const response = yield call(
       fetch,
-      'http://localhost:5000/api/auth/login/success',
+      `${process.env.REACT_APP_API_HOST}/api/auth/login/success`,
       config
     );
 
