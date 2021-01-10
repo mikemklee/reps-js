@@ -56,11 +56,12 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
+const clientBuildPath = path.join(__dirname, '/../frontend/build');
+const clientIndexPath = path.resolve(clientBuildPath, 'index.html');
+
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  );
+  app.use(express.static(clientBuildPath));
+  app.get('*', (req, res) => res.sendFile(clientIndexPath));
 }
 
 app.use(express.urlencoded({ extended: true }));
