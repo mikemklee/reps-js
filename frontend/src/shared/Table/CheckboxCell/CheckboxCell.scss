@@ -11,13 +11,16 @@
     padding: 0.3rem 1.2rem;
     border: 1px solid rgba($light-grey, 0.2);
     border-radius: 4px;
-    cursor: pointer;
     color: rgba($light-grey, 0.2);
     transition: all 0.1s;
 
     &.checked {
-      color: white;
+      color: $off-white;
       background: $light-blue;
+    }
+
+    @media (max-width: $small-screen-width) {
+      padding: 0.3rem 0.6rem;
     }
   }
 }

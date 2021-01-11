@@ -122,7 +122,7 @@ const Exercise = ({
     // include column for set complete button, if allowed
     if (allowComplete) {
       displayedColumns.push({
-        Header: 'Completed',
+        Header: 'Done',
         accessor: 'completed',
         Cell: CheckboxCell,
       });

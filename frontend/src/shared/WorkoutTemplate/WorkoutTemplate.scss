@@ -24,6 +24,10 @@
     max-width: 30rem;
     width: 100%;
 
+    @media (max-width: $small-screen-width) {
+      font-size: 1.6rem;
+    }
+
     &--editable {
       background: $dark-grey;
       pointer-events: auto;
@@ -37,38 +41,75 @@
 
     .workout-controls {
       color: $light-grey;
-      display: flex;
-      align-items: flex-end;
+      display: grid;
+      grid-template-columns: repeat(2, min-content) 1fr;
+      grid-template-rows: repeat(2, min-content);
+      grid-gap: 0.5rem;
       margin-bottom: 1rem;
       font-size: 0.9rem;
 
       &-duration-timer {
         font-size: 1.6rem;
+        grid-column: 1 / span 1;
+        grid-row: 1 / -1;
 
         label {
           font-size: 0.8rem;
           display: block;
           margin-bottom: 0.2rem;
         }
+
+        @media (max-width: $small-screen-width) {
+          grid-column: 1 / span 1;
+          grid-row: 1 / span 1;
+          display: flex;
+
+          label {
+            margin-right: 0.5rem;
+          }
+        }
       }
 
       &-rest-timer {
         font-size: 1.6rem;
         margin-left: 1rem;
+        grid-column: 2 / span 1;
+        grid-row: 1 / -1;
+        align-self: flex-end;
+        height: 2rem;
+
+        @media (max-width: $small-screen-width) {
+          margin-left: 0;
+          grid-column: span 1 / -1;
+          grid-row: 1 / span 1;
+          justify-self: flex-end;
+        }
 
         button {
           @include secondaryButtonStyles;
-          padding: 0.6rem 1rem;
         }
       }
 
       &-actions {
         display: flex;
         margin-left: auto;
+        grid-column: span 1 / -1;
+        grid-row: 1 / -1;
+        align-self: flex-end;
+
+        @media (max-width: $small-screen-width) {
+          grid-column: 1 / -1;
+          grid-row: span 1 / -1;
+          margin-left: 0;
+        }
 
         .finish-workout-btn {
           @include primaryButtonStyles;
           margin-left: 0.5rem;
+
+          @media (max-width: $small-screen-width) {
+            flex: 1;
+          }
         }
 
         .finish-workout-btn.disabled {
@@ -78,6 +119,10 @@
 
         .cancel-workout-btn {
           @include secondaryButtonStyles;
+
+          @media (max-width: $small-screen-width) {
+            flex: 1;
+          }
         }
       }
     }

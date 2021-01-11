@@ -13,6 +13,10 @@ body {
 
   * {
     font-family: inherit;
+
+    &:focus {
+      outline: none !important;
+    }
   }
 
   div {

@@ -6,7 +6,7 @@ const NumberInput = ({ value = 0, onChange = () => {}, onBlur = () => {} }) => {
   return (
     <input
       className='numberInput'
-      type='text'
+      type='tel'
       value={value}
       onChange={onChange}
       onBlur={onBlur}

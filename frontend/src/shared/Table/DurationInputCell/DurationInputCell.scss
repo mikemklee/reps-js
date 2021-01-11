@@ -7,5 +7,9 @@
 
   .numberInput {
     min-width: 3rem;
+
+    @media (max-width: $small-screen-width) {
+      min-width: 2rem;
+    }
   }
 }

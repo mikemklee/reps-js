@@ -18,6 +18,7 @@
     margin-left: 0.5rem;
     transition: all 0.1s;
     user-select: none;
+    cursor: default;
 
     .filterSelection {
       position: absolute;
@@ -44,7 +45,7 @@
         font-size: 0.8rem;
         text-align: left;
         border-radius: 3px;
-        padding: 0.15rem 0.4rem;
+        padding: 0.2rem 0.4rem;
         border: 1px solid transparent;
         font-weight: 400;
         margin-bottom: 0.5rem;
