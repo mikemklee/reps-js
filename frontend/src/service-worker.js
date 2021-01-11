@@ -42,6 +42,10 @@ registerRoute(
       return false;
     } // Return true to signal that we want to use the handler.
 
+    if (url.pathname === '/api/auth/google') {
+      return false;
+    } // If this is a URL for google login, skip.
+
     return true;
   },
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
