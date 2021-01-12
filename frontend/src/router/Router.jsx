@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './Router.scss';
 
 // shared components
-import { Login, Sidebar } from '../shared';
+import { Login, LoadingSpinner, Sidebar } from '../shared';
 
 // views
 import Main from '../views/Main/Main';
@@ -44,7 +44,12 @@ class RouterApp extends React.Component {
     return (
       <Router>
         <div className='router'>
-          {this.props.getUserDataPending ? null : (
+          {this.props.getUserDataPending ? (
+            <div className='router__placeholder'>
+              <LoadingSpinner />
+              <label>Syncing your data...</label>
+            </div>
+          ) : (
             <>
               {this.props.isAuthenticated ? <Sidebar /> : null}
               <div className='route'>
