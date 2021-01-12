@@ -28,8 +28,8 @@ function Login() {
   return (
     <div className='login' onKeyPress={handleKeyPress}>
       <div className='login__logo'>REPS</div>
-      <div className='login__title'>All-in-one workout manager</div>
-      <div className='login__subtitle'>Stay on top of your workouts.</div>
+      <div className='login__title'>Tracking workouts made easy</div>
+      <div className='login__subtitle'>Stay on top of your workouts</div>
       <button className='login__signIn--google' onClick={onClickSignIn}>
         <IoLogoGoogle />
         <span>Sign in with Google</span>

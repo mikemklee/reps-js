@@ -47,7 +47,7 @@ class RouterApp extends React.Component {
           {this.props.getUserDataPending ? (
             <div className='router__placeholder'>
               <LoadingSpinner />
-              <label>Syncing your data...</label>
+              <label>Synchronizing data...</label>
             </div>
           ) : (
             <>

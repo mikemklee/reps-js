@@ -44,7 +44,7 @@
       display: grid;
       grid-template-columns: repeat(2, min-content) 1fr;
       grid-template-rows: repeat(2, min-content);
-      grid-gap: 0.5rem;
+      grid-row-gap: 1rem;
       margin-bottom: 1rem;
       font-size: 0.9rem;
 
