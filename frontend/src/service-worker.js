@@ -28,7 +28,6 @@ const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
   // Return false to exempt requests from being fulfilled by index.html.
   ({ request, url }) => {
-    console.log('SERVICE WORKER -- WHATS URL?', url);
     // If this isn't a navigation, skip.
     if (request.mode !== 'navigate') {
       return false;
@@ -42,10 +41,11 @@ registerRoute(
       return false;
     } // Return true to signal that we want to use the handler.
 
-    if (url.pathname === '/api/auth/google') {
+    if (url.pathname.startsWith('/api/auth')) {
       return false;
-    } // If this is a URL for google login, skip.
+    } // If this is a URL for auth requests, skip.
 
+    console.log('SERVICE WORKER -- REGISTER URL?', url);
     return true;
   },
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
