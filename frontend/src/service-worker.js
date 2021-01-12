@@ -45,7 +45,6 @@ registerRoute(
       return false;
     } // If this is a URL for auth requests, skip.
 
-    console.log('SERVICE WORKER -- REGISTER URL?', url);
     return true;
   },
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
