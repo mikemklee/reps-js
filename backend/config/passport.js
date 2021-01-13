@@ -20,19 +20,33 @@ passport.use(
         console.log('found user!');
         done(null, currentUser);
       } else {
-        let newUser;
-        console.log('profile?', profile);
         try {
           // create new user if user with given profile ID is not stored in DB
+          let givenName;
+          let familyName;
 
-          newUser = await User.create({
+          // first, try to get the first and last names from the .name property
+          if (profile._json.name) {
+            [givenName, familyName] = profile._json.name.split(' ');
+          }
+
+          // check directly on .given_name for first name, if not found yet
+          if (!givenName && profile._json.given_name) {
+            givenName = profile._json.given_name;
+          } else {
+            // first name cannot be found; default to a generic name
+            givenName = 'User';
+          }
+
+          // check directly on .family_name for last name, if not found yet
+          if (!familyName && profile._json.family_name) {
+            familyName = profile._json.family_name;
+          }
+
+          const newUser = await User.create({
             googleId: profile.id,
-            givenName:
-              profile._json.given_name ||
-              profile._json.name ||
-              profile.displayName ||
-              'Unknown',
-            familyName: profile._json.family_name,
+            givenName,
+            familyName,
             email: profile._json.email,
             profileImage: profile._json.picture,
             preferences: getDefaultPreferences(),
