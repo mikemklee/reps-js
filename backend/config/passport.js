@@ -20,17 +20,28 @@ passport.use(
         console.log('found user!');
         done(null, currentUser);
       } else {
-        // create new user if user with given profile ID is not stored in DB
-        const newUser = await User.create({
-          googleId: profile.id,
-          givenName: profile._json.given_name,
-          familyName: profile._json.family_name,
-          email: profile._json.email,
-          profileImage: profile._json.picture,
-          preferences: getDefaultPreferences(),
-        });
-        console.log('created new user!');
-        done(null, newUser);
+        let newUser;
+        console.log('profile?', profile);
+        try {
+          // create new user if user with given profile ID is not stored in DB
+
+          newUser = await User.create({
+            googleId: profile.id,
+            givenName:
+              profile._json.given_name ||
+              profile._json.name ||
+              profile.displayName ||
+              'Unknown',
+            familyName: profile._json.family_name,
+            email: profile._json.email,
+            profileImage: profile._json.picture,
+            preferences: getDefaultPreferences(),
+          });
+          console.log('created new user!');
+          done(null, newUser);
+        } catch (err) {
+          done(null, false, { message: 'GOOGLE_USER_CREATION_ERROR' });
+        }
       }
     }
   )

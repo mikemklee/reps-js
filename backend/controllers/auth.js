@@ -138,10 +138,7 @@ const updateUserPreferences = async (req, res) => {
 // @desc    Send error response when authentication fails
 // @route   GET /api/auth/login/failed
 const loginFail = async (req, res) => {
-  res.status(401).json({
-    success: false,
-    message: 'user failed to authenticate.',
-  });
+  res.redirect(`${process.env.CLIENT_HOME_URL}/login/?error=denied`);
 };
 
 // @desc    Redirect to client on logout
@@ -158,11 +155,11 @@ const googleLogin = passport.authenticate('google', {
   scope: ['profile', 'email'],
 });
 
-// @desc    Redirect to client after successful authentication via google
+// @desc    Redirect to client after authentication attempt via google
 // @route   GET /api/auth/google/redirect
 const googleLoginRedirect = passport.authenticate('google', {
   successRedirect: process.env.CLIENT_HOME_URL,
-  failureRedirect: '/auth/login/failed',
+  failureRedirect: '/api/auth/login/failed',
 });
 
 // @desc    Delete an existing user profile

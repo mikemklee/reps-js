@@ -17,6 +17,7 @@
     "ecmaVersion": 2020
   },
   "rules": {
+    "operator-linebreak":"warn",
     "comma-dangle":"off",
     "no-underscore-dangle":"off",
     "no-unused-vars": "warn",
