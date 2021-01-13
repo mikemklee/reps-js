@@ -229,6 +229,9 @@ const deleteUser = async (req, res) => {
     return;
   }
 
+  req.logout();
+  req.session = null;
+
   res.status(200).json({});
 };
 
