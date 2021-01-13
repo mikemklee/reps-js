@@ -31,11 +31,13 @@ passport.use(
           }
 
           // check directly on .given_name for first name, if not found yet
-          if (!givenName && profile._json.given_name) {
-            givenName = profile._json.given_name;
-          } else {
-            // first name cannot be found; default to a generic name
-            givenName = 'User';
+          if (!givenName) {
+            if (profile._json.given_name) {
+              givenName = profile._json.given_name;
+            } else {
+              // first name cannot be found; default to a generic name
+              givenName = 'User';
+            }
           }
 
           // check directly on .family_name for last name, if not found yet
