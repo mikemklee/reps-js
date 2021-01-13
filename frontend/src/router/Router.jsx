@@ -51,7 +51,7 @@ class RouterApp extends React.Component {
             </div>
           ) : (
             <>
-              {this.props.isAuthenticated ? <Sidebar /> : null}
+              {this.props.isAuthenticated && <Sidebar />}
               <div className='route'>
                 <Switch>
                   {this.renderProtectedRoute('/workout/:routineId', NewWorkout)}
@@ -70,6 +70,9 @@ class RouterApp extends React.Component {
                   )}
                   {this.renderProtectedRoute('/exercises', Exercises)}
                   {this.renderProtectedRoute('/logs', Logs)}
+                  {!this.props.isAuthenticated && (
+                    <Route exact path='/login' component={Login} />
+                  )}
                   {this.renderProtectedRoute('/', Main, false)}
                 </Switch>
               </div>

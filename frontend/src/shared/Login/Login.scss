@@ -25,29 +25,6 @@
     color: rgba($light-grey, 0.8);
   }
 
-  div.field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-
-    label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    input {
-      padding: 0 0.5rem;
-      font-size: 1rem;
-      min-height: 2rem;
-      color: $light-grey;
-      background: $medium-grey;
-      outline: none;
-      border: none;
-      border-radius: 4px;
-    }
-  }
-
   &__signIn--google {
     @include primaryButtonStyles;
     @include flexCenterHorizontally;

@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { IoLogoGoogle } from 'react-icons/io';
 
 import './Login.scss';
 
-import AuthActions from '../../redux/auth/actions';
-
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const location = useLocation();
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get('error')) {
+      console.log('Error signing in!');
+    }
+  }, []);
 
   const onClickSignIn = () => {
     // Authenticate using via passport api in the backend
     // Open Google login page
     window.open(`${process.env.REACT_APP_API_HOST}/api/auth/google`, '_self');
-    // dispatch(AuthActions.loginRequest(email, password));
   };
 
   const handleKeyPress = (e) => {
@@ -34,22 +35,6 @@ function Login() {
         <IoLogoGoogle />
         <span>Sign in with Google</span>
       </button>
-      {/* <div className='field'>
-        <label>Email</label>
-        <input
-          type='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className='field'>
-        <label>Password</label>
-        <input
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div> */}
     </div>
   );
 }
