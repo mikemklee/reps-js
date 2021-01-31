@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
-import moment from 'moment';
 import { VscAdd } from 'react-icons/vsc';
 
 import './RestTimer.scss';
@@ -8,6 +7,7 @@ import TimeDisplay from '../TimeDisplay/TimeDisplay';
 import ProgressRing from '../ProgressRing/ProgressRing';
 
 import { usePrevious } from '../../hooks';
+import { TimeUtils } from '../../utils';
 
 const calculateProgress = (timeRemaining, duration) => {
   const fractionRemaining = timeRemaining / duration;
@@ -51,9 +51,8 @@ const RestTimer = () => {
     return () => clearInterval(interval);
   }, [isActive, secondsRemaining]);
 
-  const duration = moment.duration(secondsRemaining, 'seconds');
-  const minutes = Math.floor(duration.minutes());
-  const seconds = duration.seconds() % 60;
+  const { minutes, seconds } = TimeUtils.parseDuration(secondsRemaining);
+
   const progress = calculateProgress(secondsRemaining, restDuration);
 
   const prevDuration = usePrevious(restDuration);

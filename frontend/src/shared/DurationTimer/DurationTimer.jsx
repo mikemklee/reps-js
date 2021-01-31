@@ -4,14 +4,16 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from 'react';
-import moment from 'moment';
 
 import './DurationTimer.scss';
 
 import TimeDisplay from '../TimeDisplay/TimeDisplay';
 
+import { TimeUtils } from '../../utils';
+
 const DurationTimer = (props, ref) => {
   const [counter, setCounter] = useState(0);
+  const { hours, minutes, seconds } = TimeUtils.parseDuration(counter);
 
   useImperativeHandle(ref, () => counter, [counter]);
 
@@ -23,13 +25,9 @@ const DurationTimer = (props, ref) => {
     return () => clearTimeout(timerFn);
   });
 
-  const duration = moment.duration(counter, 'seconds');
-  const minutes = Math.floor(duration.minutes());
-  const seconds = duration.seconds() % 60;
-
   return (
     <div className='container'>
-      <TimeDisplay minutes={minutes} seconds={seconds} />
+      <TimeDisplay hours={hours} minutes={minutes} seconds={seconds} />
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 
 import './DurationInputCell.scss';
 
 import NumberInput from '../../NumberInput/NumberInput';
+import { TimeUtils } from '../../../utils';
 
 const DurationInputCell = ({
   value: initialValue,
@@ -12,7 +12,7 @@ const DurationInputCell = ({
   onEditCell,
 }) => {
   // We need to keep and update the state of the cell normally
-  const [durationValue, setDurationValue] = useState(0);
+  const [, setDurationValue] = useState(0);
   const [hoursValue, setHoursValue] = useState(0);
   const [minutesValue, setMinutesValue] = useState(0);
   const [secondsValue, setSecondsValue] = useState(0);
@@ -40,13 +40,11 @@ const DurationInputCell = ({
     onEditCell(index, id, newDurationValue);
   };
 
-  // If the initialValue is changed external, sync it up with our state
+  // If the initialValue is changed externally, sync it up with our state
   useEffect(() => {
     const value = initialValue || 0;
-    const hours = Math.floor(value / 60 / 60);
-    const duration = moment.duration(value, 'seconds');
-    const minutes = Math.floor(duration.minutes());
-    const seconds = duration.seconds() % 60;
+    const { hours, minutes, seconds } = TimeUtils.parseDuration(value);
+
     setDurationValue(value);
     setHoursValue(hours);
     setMinutesValue(minutes);

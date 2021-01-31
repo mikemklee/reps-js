@@ -3,7 +3,7 @@ import React from 'react';
 const TimeDisplay = ({ hours = null, minutes = null, seconds = null }) => {
   return (
     <div className='time'>
-      {hours !== null ? (
+      {hours !== null && hours > 0 ? (
         <>
           <span className='hours'>
             {hours < 10 && 0}

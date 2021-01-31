@@ -1,14 +1,15 @@
 import React from 'react';
-import moment from 'moment';
+
+import { TimeUtils } from '../../../../../utils';
 
 const DurationSet = ({ set, index }) => {
-  const durationObj = moment.duration(set.duration, 'seconds');
+  const { hours, minutes } = TimeUtils.parseDuration(set.duration);
 
   return (
     <div className='exerciseSummary__set'>
       <div className='exerciseSummary__setNumber'>{index + 1}</div>
       <div className='exerciseSummary__setSummary'>
-        {durationObj.hours()} hours {durationObj.minutes()} mins
+        {hours} hours {minutes} mins
       </div>
     </div>
   );
