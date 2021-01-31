@@ -9,6 +9,7 @@
   overflow: visible;
   user-select: none;
   margin-left: auto;
+  @include pointerStyles;
 
   &__actions {
     box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,

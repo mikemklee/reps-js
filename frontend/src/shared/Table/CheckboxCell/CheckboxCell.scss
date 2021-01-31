@@ -13,6 +13,7 @@
     border-radius: 4px;
     color: rgba($light-grey, 0.2);
     transition: all 0.1s;
+    @include pointerStyles;
 
     &.checked {
       color: $off-white;

@@ -1,6 +1,7 @@
 @import '../../styles/common';
 
 @mixin optionStyles() {
+  @include pointerStyles;
   outline: none;
   padding: 0.3rem 0;
   background: transparent;

@@ -148,3 +148,8 @@
     min-width: 2.5rem;
   }
 }
+
+@mixin pointerStyles() {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
