@@ -18,13 +18,16 @@ const WorkoutCardList = ({
         {_.isEmpty(workoutLogs) ? (
           <div className='workoutCardList__placeholder'>{placeholder}</div>
         ) : (
-          _.map(workoutLogs, (workout, index) => (
-            <WorkoutCard
-              key={index}
-              workout={workout}
-              onClickDelete={onDeleteWorkout}
-            />
-          ))
+          _.map(
+            _.orderBy(workoutLogs, (log) => log.completedAt, 'desc'),
+            (workout, index) => (
+              <WorkoutCard
+                key={index}
+                workout={workout}
+                onClickDelete={onDeleteWorkout}
+              />
+            )
+          )
         )}
       </div>
     </div>
