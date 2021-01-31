@@ -5,6 +5,7 @@ import { VscAdd } from 'react-icons/vsc';
 import { FaStopwatch } from 'react-icons/fa';
 import classnames from 'classnames';
 import { subMinutes, differenceInMinutes } from 'date-fns';
+import { useBeforeunload } from 'react-beforeunload';
 
 import _ from 'lodash';
 
@@ -136,6 +137,9 @@ const WorkoutTemplate = ({ useFor }) => {
       ];
     }
   }, [useFor]);
+
+  // intercept page refresh, in case user accidentally triggered it
+  useBeforeunload((event) => event.preventDefault());
 
   useEffect(() => {
     dispatch(ExerciseActions.getPresetsRequest());
