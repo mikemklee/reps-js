@@ -11,6 +11,8 @@ import _ from 'lodash';
 
 import './WorkoutTemplate.scss';
 
+import ClockWorker from 'comlink-loader!../../workers/clock.worker';
+
 import EditableWorkoutMeta from '../../views/Workout/EditWorkout/EditableWorkoutMeta/EditableWorkoutMeta';
 
 import {
@@ -42,6 +44,25 @@ const WorkoutTemplate = ({ useFor }) => {
   // used for EDIT_WORKOUT
   const [completedAt, setCompletedAt] = useState(new Date());
   const [minutes, setMinutes] = useState(0);
+
+  const clockRef = useRef(null);
+
+  // start clock
+  useEffect(() => {
+    async function startClock() {
+      const clockWorker = new ClockWorker();
+
+      // create a new clock instanfce
+      const clock = await new clockWorker.Clock();
+
+      // start the clock
+      await clock.start();
+
+      // store clock ref
+      clockRef.current = clock;
+    }
+    startClock();
+  }, []);
 
   const {
     exercises,
@@ -390,7 +411,7 @@ const WorkoutTemplate = ({ useFor }) => {
             <>
               <div className='workout-controls-duration-timer'>
                 <label>Time elapsed: </label>
-                <DurationTimer ref={counterRef} />
+                <DurationTimer ref={clockRef} />
               </div>
               <div
                 className='workout-controls-rest-timer'
