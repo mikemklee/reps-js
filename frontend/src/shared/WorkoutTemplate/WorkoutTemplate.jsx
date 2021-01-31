@@ -49,7 +49,7 @@ const WorkoutTemplate = ({ useFor }) => {
 
   // start clock
   useEffect(() => {
-    async function startClock() {
+    const startClock = async () => {
       const clockWorker = new ClockWorker();
 
       // create a new clock instanfce
@@ -60,8 +60,14 @@ const WorkoutTemplate = ({ useFor }) => {
 
       // store clock ref
       clockRef.current = clock;
-    }
+    };
+
     startClock();
+
+    // stop the clock on component unmount
+    async () => {
+      if (clockRef.current) await clockRef.current.stop();
+    };
   }, []);
 
   const {

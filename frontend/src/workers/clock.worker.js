@@ -15,6 +15,7 @@ export class Clock {
     this.elapsedTime = 0;
 
     this.running = false;
+    this.runningInterval = null;
   }
 
   async start() {
@@ -23,18 +24,23 @@ export class Clock {
     this.oldTime = this.startTime;
     this.elapsedTime = 0;
     this.running = true;
+
+    this.runningInterval = setInterval(async () => {
+      const newTime = now();
+      this.elapsedTime = (newTime - this.oldTime) / 1000;
+    }, 1000);
   }
 
   async stop() {
-    await this.getElapsedTime();
-    this.running = false;
     this.autoStart = false;
+
+    this.running = false;
+    clearInterval(this.runningInterval);
+    this.runningInterval = null;
+    return await this.getElapsedTime();
   }
 
   async getElapsedTime() {
-    if (this.running) {
-      const newTime = now();
-      return (newTime - this.oldTime) / 1000;
-    }
+    return this.elapsedTime;
   }
 }
