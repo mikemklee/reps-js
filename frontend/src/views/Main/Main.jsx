@@ -13,15 +13,11 @@ import WorkoutActions from '../../redux/workout/actions';
 const Main = () => {
   const dispatch = useDispatch();
   const { userGivenName } = useSelector((state) => state.auth);
-  const { workoutLogs, status: workoutStatus } = useSelector(
-    (state) => state.workout
-  );
+  const { workoutLogs } = useSelector((state) => state.workout);
 
   useEffect(() => {
     dispatch(WorkoutActions.getWorkoutLogsRequest());
   }, []);
-
-  const loading = workoutStatus.getWorkoutLogsPending;
 
   return (
     <div className='mainView'>
