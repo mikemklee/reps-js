@@ -11,10 +11,11 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
+    "comlink-loader": "^2.0.0",
     "date-fns": "^2.16.1",
     "lodash": "^4.17.20",
     "node-sass": "4.14.1",
-    "react": "^16.10.0",
+    "react": "^16.13.0",
     "react-beforeunload": "^2.4.0",
     "react-dom": "^16.13.0",
     "react-icons": "^4.1.0",
@@ -57,7 +58,6 @@
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
-    "comlink-loader": "^2.0.0",
     "source-map-explorer": "^2.5.2"
   }
 }
