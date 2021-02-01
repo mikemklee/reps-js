@@ -18,20 +18,25 @@ export class Clock {
     this.runningInterval = null;
   }
 
-  async start() {
+  async start(callback) {
+    console.log('START!!!');
+
     this.startTime = now();
 
     this.oldTime = this.startTime;
     this.elapsedTime = 0;
     this.running = true;
 
-    this.runningInterval = setInterval(async () => {
+    this.runningInterval = setInterval(() => {
       const newTime = now();
       this.elapsedTime = (newTime - this.oldTime) / 1000;
+      callback({ elasped: Math.floor(this.elapsedTime) });
     }, 1000);
   }
 
   async stop() {
+    console.log('STOP!!!');
+
     this.autoStart = false;
 
     this.running = false;
@@ -41,6 +46,6 @@ export class Clock {
   }
 
   async getElapsedTime() {
-    return this.elapsedTime;
+    return Math.floor(this.elapsedTime);
   }
 }
