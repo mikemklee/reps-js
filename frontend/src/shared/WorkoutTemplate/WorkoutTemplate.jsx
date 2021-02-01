@@ -6,12 +6,9 @@ import { FaStopwatch } from 'react-icons/fa';
 import classnames from 'classnames';
 import { subMinutes, differenceInMinutes } from 'date-fns';
 import { useBeforeunload } from 'react-beforeunload';
-
 import _ from 'lodash';
 
 import './WorkoutTemplate.scss';
-
-import ClockWorker from 'comlink-loader!../../workers/clock.worker';
 
 import EditableWorkoutMeta from '../../views/Workout/EditWorkout/EditableWorkoutMeta/EditableWorkoutMeta';
 
@@ -45,31 +42,6 @@ const WorkoutTemplate = ({ useFor }) => {
   const [completedAt, setCompletedAt] = useState(new Date());
   const [minutes, setMinutes] = useState(0);
 
-  const clockRef = useRef(null);
-
-  // start clock
-  useEffect(() => {
-    const startClock = async () => {
-      const clockWorker = new ClockWorker();
-
-      // create a new clock instanfce
-      const clock = await new clockWorker.Clock();
-
-      // start the clock
-      await clock.start();
-
-      // store clock ref
-      clockRef.current = clock;
-    };
-
-    startClock();
-
-    // stop the clock on component unmount
-    async () => {
-      if (clockRef.current) await clockRef.current.stop();
-    };
-  }, []);
-
   const {
     exercises,
     setsByExercise,
@@ -90,7 +62,7 @@ const WorkoutTemplate = ({ useFor }) => {
     getDistanceConversionFactor,
   } = useDistanceConverter();
 
-  const counterRef = useRef(null);
+  const counterRef = useRef(0);
   const restTimerModalRef = useRef(null);
   const addExerciseModalRef = useRef(null);
   const cancelModalRef = useRef(null);
@@ -417,7 +389,7 @@ const WorkoutTemplate = ({ useFor }) => {
             <>
               <div className='workout-controls-duration-timer'>
                 <label>Time elapsed: </label>
-                <DurationTimer ref={clockRef} />
+                <DurationTimer ref={counterRef} />
               </div>
               <div
                 className='workout-controls-rest-timer'

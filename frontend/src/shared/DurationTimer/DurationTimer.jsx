@@ -1,4 +1,11 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
+import * as Comlink from 'comlink';
 
 import './DurationTimer.scss';
 
@@ -6,9 +13,42 @@ import TimeDisplay from '../TimeDisplay/TimeDisplay';
 
 import { TimeUtils } from '../../utils';
 
+import ClockWorker from 'comlink-loader!../../workers/clock.worker';
+
 const DurationTimer = (props, ref) => {
   const [counter, setCounter] = useState(0);
   const { hours, minutes, seconds } = TimeUtils.parseDuration(counter);
+
+  useImperativeHandle(ref, () => counter, [counter]);
+
+  const clockRef = useRef(null);
+
+  // start clock
+  useEffect(() => {
+    const startClock = async () => {
+      const clockWorker = new ClockWorker();
+
+      // create a new clock instanfce
+      const clock = await new clockWorker.Clock();
+
+      const cb = (payload) => {
+        console.log('received!', payload);
+      };
+
+      // start the clock
+      await clock.start(Comlink.proxy(cb));
+
+      // store clock ref
+      clockRef.current = clock;
+    };
+
+    startClock();
+
+    // stop the clock on component unmount
+    return async () => {
+      if (clockRef.current) await clockRef.current.stop();
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
