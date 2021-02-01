@@ -1,7 +1,6 @@
 import React, {
   useState,
   useEffect,
-  useRef,
   useImperativeHandle,
   forwardRef,
 } from 'react';
@@ -21,46 +20,31 @@ const DurationTimer = (props, ref) => {
 
   useImperativeHandle(ref, () => counter, [counter]);
 
-  const clockRef = useRef(null);
-
   // start clock
   useEffect(() => {
+    let clock;
+
     const startClock = async () => {
       const clockWorker = new ClockWorker();
 
-      // create a new clock instanfce
-      const clock = await new clockWorker.Clock();
+      // create a new clock instance
+      clock = await new clockWorker.Clock();
 
       const cb = (payload) => {
-        console.log('received!', payload);
+        setCounter(payload.elapsed);
       };
 
       // start the clock
       await clock.start(Comlink.proxy(cb));
-
-      // store clock ref
-      clockRef.current = clock;
     };
 
     startClock();
 
     // stop the clock on component unmount
     return async () => {
-      if (clockRef.current) await clockRef.current.stop();
+      if (clock) await clock.stop();
     };
   }, []);
-
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      if (!ref.current) return;
-      const clock = ref.current;
-      const elapsed = await clock.getElapsedTime();
-
-      setCounter(Math.floor(elapsed));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  });
 
   return (
     <div className='container'>

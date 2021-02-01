@@ -30,7 +30,7 @@ export class Clock {
     this.runningInterval = setInterval(() => {
       const newTime = now();
       this.elapsedTime = (newTime - this.oldTime) / 1000;
-      callback({ elasped: Math.floor(this.elapsedTime) });
+      callback({ elapsed: Math.floor(this.elapsedTime) });
     }, 1000);
   }
 
