@@ -7,39 +7,28 @@ function now() {
 }
 
 export class Clock {
-  constructor(autoStart = false) {
-    this.autoStart = autoStart;
-
+  constructor() {
     this.startTime = 0;
-    this.oldTime = 0;
     this.elapsedTime = 0;
-
-    this.running = false;
     this.runningInterval = null;
   }
 
   async start(callback) {
-    console.log('START!!!');
+    console.log('[Clock] Started');
 
     this.startTime = now();
-
-    this.oldTime = this.startTime;
     this.elapsedTime = 0;
-    this.running = true;
 
     this.runningInterval = setInterval(() => {
       const newTime = now();
-      this.elapsedTime = (newTime - this.oldTime) / 1000;
+      this.elapsedTime = (newTime - this.startTime) / 1000;
       callback({ elapsed: Math.floor(this.elapsedTime) });
     }, 1000);
   }
 
   async stop() {
-    console.log('STOP!!!');
+    console.log('[Clock] Stopped');
 
-    this.autoStart = false;
-
-    this.running = false;
     clearInterval(this.runningInterval);
     this.runningInterval = null;
     return await this.getElapsedTime();
@@ -47,5 +36,26 @@ export class Clock {
 
   async getElapsedTime() {
     return Math.floor(this.elapsedTime);
+  }
+}
+
+export class Timer {
+  constructor() {
+    this.runningInterval = null;
+  }
+
+  async start(callback) {
+    console.log('[Timer] Started');
+
+    this.runningInterval = setInterval(() => {
+      callback();
+    }, 1000);
+  }
+
+  async stop() {
+    console.log('[Timer] Stopped');
+
+    clearInterval(this.runningInterval);
+    this.runningInterval = null;
   }
 }
