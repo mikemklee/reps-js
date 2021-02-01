@@ -388,7 +388,7 @@ const WorkoutTemplate = ({ useFor }) => {
           {useFor === 'NEW_WORKOUT' && (
             <>
               <div className='workout-controls-duration-timer'>
-                <label>Time elapsed: </label>
+                <label>Time elapsedo: </label>
                 <DurationTimer ref={counterRef} />
               </div>
               <div
