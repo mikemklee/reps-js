@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 import { VscAdd } from 'react-icons/vsc';
+import * as Comlink from 'comlink';
 
 import './RestTimer.scss';
 import TimeDisplay from '../TimeDisplay/TimeDisplay';
@@ -8,6 +9,8 @@ import ProgressRing from '../ProgressRing/ProgressRing';
 
 import { usePrevious } from '../../hooks';
 import { TimeUtils } from '../../utils';
+
+import ClockWorker from 'comlink-loader!../../workers/clock.worker';
 
 const calculateProgress = (timeRemaining, duration) => {
   const fractionRemaining = timeRemaining / duration;
@@ -19,6 +22,7 @@ const RestTimer = () => {
   const [restDuration, setRestDuration] = useState(10);
   const [secondsRemaining, setSecondsRemaining] = useState(restDuration);
   const [isActive, setIsActive] = useState(false);
+  const timerRef = useRef(null);
 
   const onReset = () => {
     setSecondsRemaining(restDuration);
@@ -30,25 +34,63 @@ const RestTimer = () => {
     setSecondsRemaining(secondsRemaining + addedDuration);
   };
 
+  // start timer
   useEffect(() => {
-    let interval = null;
+    let timer;
+
+    const createTimer = async () => {
+      const clockWorker = new ClockWorker();
+
+      // create a new timer instance
+      timer = await new clockWorker.Timer();
+
+      // store a ref to it
+      timerRef.current = timer;
+    };
+
+    createTimer();
+
+    // stop the timer on component unmount
+    return async () => {
+      if (timer) await timer.stop();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!timerRef.current) return;
+    const timer = timerRef.current;
+
+    const startTimer = async () => {
+      const cb = () => {
+        setSecondsRemaining((seconds) => seconds - 1);
+      };
+
+      await timer.start(Comlink.proxy(cb));
+    };
+
+    const stopTimer = async () => {
+      await timer.stop();
+    };
+
     if (isActive) {
       // time remaining; decrement counter
       if (secondsRemaining) {
-        interval = setInterval(() => {
-          setSecondsRemaining((seconds) => seconds - 1);
-        }, 1000);
+        startTimer();
       } else {
         // time up; notify user?
-        clearInterval(interval);
+        stopTimer();
         // TODO: investigate why there is a 1s "delay" in animation
         setTimeout(onReset, 1000);
       }
     } else if (!isActive) {
       // stop counting
-      clearInterval(interval);
+      stopTimer();
     }
-    return () => clearInterval(interval);
+
+    // cleanup
+    return async () => {
+      stopTimer();
+    };
   }, [isActive, secondsRemaining]);
 
   const { minutes, seconds } = TimeUtils.parseDuration(secondsRemaining);
