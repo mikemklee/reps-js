@@ -12,7 +12,8 @@ import UserMenu from './UserMenu/UserMenu';
 import { useDropdown } from '../../hooks';
 
 const Sidebar = () => {
-  const isMobile = useMediaQuery({ query: '(max-width: 960px)' });
+  const isSmallDevice = useMediaQuery({ query: '(max-width: 480px)' });
+  const isMediumDevice = useMediaQuery({ query: '(max-width: 960px)' });
   const [userMenuRef, isUserMenuOpen, setIsUserMenuOpen] = useDropdown();
 
   const history = useHistory();
@@ -42,8 +43,10 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/')}
         >
-          {isMobile ? null : <HiOutlineHome size='1.5rem' />}
-          <span>Home</span>
+          {isMediumDevice && !isSmallDevice ? null : (
+            <HiOutlineHome size='1.5rem' />
+          )}
+          {isSmallDevice ? null : <span>Home</span>}
         </button>
         <button
           className={classnames({
@@ -52,8 +55,10 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/routines')}
         >
-          {isMobile ? null : <BiAnalyse size='1.5rem' />}
-          <span>Routines</span>
+          {isMediumDevice && !isSmallDevice ? null : (
+            <BiAnalyse size='1.5rem' />
+          )}
+          {isSmallDevice ? null : <span>Routines</span>}
         </button>
         <button
           className={classnames({
@@ -62,8 +67,10 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/exercises')}
         >
-          {isMobile ? null : <BiDumbbell size='1.5rem' />}
-          <span>Exercises</span>
+          {isMediumDevice && !isSmallDevice ? null : (
+            <BiDumbbell size='1.5rem' />
+          )}
+          {isSmallDevice ? null : <span>Exercises</span>}
         </button>
         <button
           className={classnames({
@@ -72,8 +79,10 @@ const Sidebar = () => {
           })}
           onClick={() => handleClick('/logs')}
         >
-          {isMobile ? null : <HiOutlineClipboardList size='1.5rem' />}
-          <span>Logs</span>
+          {isMediumDevice && !isSmallDevice ? null : (
+            <HiOutlineClipboardList size='1.5rem' />
+          )}
+          {isSmallDevice ? null : <span>Logs</span>}
         </button>
       </div>
     </div>

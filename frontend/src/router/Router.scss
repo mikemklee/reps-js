@@ -16,6 +16,10 @@
     overflow-x: hidden;
     overflow-y: auto;
     color: $light-grey;
+
+    @media (max-width: $small-screen-width) {
+      margin-bottom: 3rem;
+    }
   }
 
   &__placeholder {
