@@ -25,11 +25,11 @@ const Main = () => {
         Good {InterfaceUtils.getTimeOfDay()}, <strong>{userGivenName}</strong>
       </div>
       <div className='mainView__content'>
-        <div className='mainView__activitySummary'>
-          <ActivitySummary logs={workoutLogs} />
-        </div>
         <div className='mainView__quickActions'>
           <QuickActions />
+        </div>
+        <div className='mainView__activitySummary'>
+          <ActivitySummary logs={workoutLogs} />
         </div>
       </div>
       {/* <div className='weekly-progress'>TODO: Show weekly progress</div> */}

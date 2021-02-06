@@ -15,6 +15,10 @@
   @media (max-width: $medium-screen-width) {
     padding: 1rem;
   }
+
+  @media (max-width: $small-screen-width) {
+    padding: 0.5rem;
+  }
 }
 
 @mixin viewHeaderStyles() {
