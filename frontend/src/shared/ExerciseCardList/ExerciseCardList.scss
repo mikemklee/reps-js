@@ -17,6 +17,7 @@
     grid-gap: 1rem;
 
     @media (max-width: $small-screen-width) {
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
       grid-gap: 0.5rem;
     }
   }

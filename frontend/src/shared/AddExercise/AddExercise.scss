@@ -7,6 +7,10 @@
   min-height: 20rem;
   min-width: 40rem;
 
+  @media (max-width: $medium-screen-width) {
+    min-width: 100%;
+  }
+
   @media (max-width: $small-screen-width) {
     min-width: 15rem;
     min-height: 28rem;
