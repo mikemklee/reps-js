@@ -6,6 +6,27 @@ function now() {
   return (typeof performance === 'undefined' ? Date : performance).now();
 }
 
+export class HealthChecker {
+  constructor() {
+    this.runningInterval = null;
+  }
+
+  async start(callback) {
+    console.log('[HealthCheck] Started');
+
+    this.runningInterval = setInterval(() => {
+      callback({ timeNow: new Date().toTimeString() });
+    }, 10000);
+  }
+
+  async stop() {
+    console.log('[HealthCheck] Stopped');
+
+    clearInterval(this.runningInterval);
+    this.runningInterval = null;
+  }
+}
+
 export class Clock {
   constructor() {
     this.startTime = 0;

@@ -11,6 +11,11 @@ const QuickActions = () => {
 
   const cards = useMemo(() => [
     {
+      title: 'Test worker',
+      icon: <HiOutlineClipboardList />,
+      route: '/test',
+    },
+    {
       title: 'Start a blank workout',
       icon: <GiWeightLiftingUp />,
       route: '/workout/new',
