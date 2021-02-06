@@ -4,7 +4,7 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from 'react';
-import * as Comlink from 'comlink';
+import { differenceInSeconds } from 'date-fns';
 
 import './DurationTimer.scss';
 
@@ -12,39 +12,21 @@ import TimeDisplay from '../TimeDisplay/TimeDisplay';
 
 import { TimeUtils } from '../../utils';
 
-import ClockWorker from 'comlink-loader!../../workers/clock.worker';
-
 const DurationTimer = (props, ref) => {
   const [counter, setCounter] = useState(0);
-  const { hours, minutes, seconds } = TimeUtils.parseDuration(counter);
+  const [startTime] = useState(new Date());
 
   useImperativeHandle(ref, () => counter, [counter]);
 
-  // start clock
   useEffect(() => {
-    let clock;
+    const durationInterval = setInterval(() => {
+      setCounter(differenceInSeconds(new Date(), startTime));
+    }, 1000);
 
-    const startClock = async () => {
-      const clockWorker = new ClockWorker();
-
-      // create a new clock instance
-      clock = await new clockWorker.Clock();
-
-      const cb = (payload) => {
-        setCounter(payload.elapsed);
-      };
-
-      // start the clock
-      await clock.start(Comlink.proxy(cb));
-    };
-
-    startClock();
-
-    // stop the clock on component unmount
-    return async () => {
-      if (clock) await clock.stop();
-    };
+    return () => clearInterval(durationInterval);
   }, []);
+
+  const { hours, minutes, seconds } = TimeUtils.parseDuration(counter);
 
   return (
     <div className='container'>
