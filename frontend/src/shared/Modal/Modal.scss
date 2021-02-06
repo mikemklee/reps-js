@@ -38,6 +38,10 @@
     :hover {
       color: white;
     }
+
+    @media (max-width: $small-screen-width) {
+      right: 5px;
+    }
   }
 
   &-body {
@@ -57,6 +61,11 @@
     @media (max-width: $medium-screen-width) {
       max-width: 100%;
       width: calc(100% - 1rem);
+    }
+
+    @media (max-width: $small-screen-width) {
+      padding: 1rem 0.5rem;
+      max-height: 80%;
     }
   }
 }
