@@ -13,6 +13,7 @@ import Modal from './Modal/Modal';
 import NumberInput from './NumberInput/NumberInput';
 import ProgressRing from './ProgressRing/ProgressRing';
 import RestTimer from './RestTimer/RestTimer';
+import ScrollToTop from './ScrollToTop/ScrollToTop';
 import Sidebar from './Sidebar/Sidebar';
 import Table from './Table/Table';
 import TimeDisplay from './TimeDisplay/TimeDisplay';
@@ -34,6 +35,7 @@ export {
   NumberInput,
   ProgressRing,
   RestTimer,
+  ScrollToTop,
   Sidebar,
   Table,
   TimeDisplay,

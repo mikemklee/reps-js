@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './Router.scss';
 
 // shared components
-import { Login, LoadingSpinner, Sidebar } from '../shared';
+import { Login, LoadingSpinner, Sidebar, ScrollToTop } from '../shared';
 
 // views
 import Main from '../views/Main/Main';
@@ -43,6 +43,7 @@ class RouterApp extends React.Component {
   render() {
     return (
       <Router>
+        <ScrollToTop />
         <div className='router'>
           {this.props.getUserDataPending ? (
             <div className='router__placeholder'>
@@ -52,7 +53,7 @@ class RouterApp extends React.Component {
           ) : (
             <>
               {this.props.isAuthenticated && <Sidebar />}
-              <div className='route'>
+              <div id='route'>
                 <Switch>
                   {this.renderProtectedRoute('/workout/:routineId', NewWorkout)}
                   {this.renderProtectedRoute(
