@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { VscAdd } from 'react-icons/vsc';
-import { FaStopwatch } from 'react-icons/fa';
+// import { FaStopwatch } from 'react-icons/fa';
 import classnames from 'classnames';
 import { subMinutes, differenceInMinutes } from 'date-fns';
 import { useBeforeunload } from 'react-beforeunload';
@@ -14,7 +14,7 @@ import EditableWorkoutMeta from '../../views/Workout/EditWorkout/EditableWorkout
 
 import {
   DurationTimer,
-  RestTimer,
+  // RestTimer,
   Exercise,
   Modal,
   AddExercise,
@@ -63,7 +63,7 @@ const WorkoutTemplate = ({ useFor }) => {
   } = useDistanceConverter();
 
   const counterRef = useRef(0);
-  const restTimerModalRef = useRef(null);
+  // const restTimerModalRef = useRef(null);
   const addExerciseModalRef = useRef(null);
   const cancelModalRef = useRef(null);
   const saveModalRef = useRef(null);
@@ -388,17 +388,17 @@ const WorkoutTemplate = ({ useFor }) => {
           {useFor === 'NEW_WORKOUT' && (
             <>
               <div className='workout-controls-duration-timer'>
-                <label>Time elapsedo: </label>
+                <label>Time elapsed: </label>
                 <DurationTimer ref={counterRef} />
               </div>
-              <div
+              {/* <div
                 className='workout-controls-rest-timer'
                 onClick={() => restTimerModalRef.current.open()}
               >
                 <button>
                   <FaStopwatch />
                 </button>
-              </div>
+              </div> */}
             </>
           )}
           {useFor === 'EDIT_WORKOUT' && workout && (
@@ -474,11 +474,11 @@ const WorkoutTemplate = ({ useFor }) => {
           onConfirm={onConfirmSave}
         />
       </Modal>
-      {useFor === 'NEW_WORKOUT' && (
+      {/* {useFor === 'NEW_WORKOUT' && (
         <Modal ref={restTimerModalRef}>
           <RestTimer onClose={() => restTimerModalRef.current.close()} />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 };
