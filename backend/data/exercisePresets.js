@@ -130,7 +130,7 @@ const defineExercisePresets = () => [
     isPreset: true,
   },
   {
-    name: 'Romanian Deadlift Bench Press (Dumbbell)',
+    name: 'Romanian Deadlift (Dumbbell)',
     category: CATEGORY.DUMBBELL,
     bodyPart: BODY_PART.LEGS,
     isPreset: true,
