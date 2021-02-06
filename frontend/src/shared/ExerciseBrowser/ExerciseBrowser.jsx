@@ -13,13 +13,13 @@ const ExerciseBrowser = ({
   onSelectItem,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [resultsCustom, setResultsCustom] = useState([]);
+  const [, setResultsCustom] = useState([]);
   const [resultsPreset, setResultsPreset] = useState([]);
   const [filtersBodyPart, setFiltersBodyPart] = useState([]);
   const [filtersCategory, setFiltersCategory] = useState([]);
 
   const onSearchChange = (event) => {
-    setSearchTerm(event.target.value);
+    setSearchTerm(event.target.value.toLowerCase());
   };
 
   const onFilterSelect = (filter, filterBy) => {

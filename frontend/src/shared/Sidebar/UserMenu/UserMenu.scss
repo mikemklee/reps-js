@@ -113,6 +113,11 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
+
+    @media (max-width: $small-screen-width) {
+      top: 0rem;
+      right: 0.5rem;
+    }
   }
 
   &__section {

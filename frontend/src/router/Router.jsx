@@ -43,17 +43,18 @@ class RouterApp extends React.Component {
   render() {
     return (
       <Router>
-        <ScrollToTop />
         <div className='router'>
           {this.props.getUserDataPending ? (
             <div className='router__placeholder'>
               <LoadingSpinner />
               <label>Synchronizing data...</label>
+              <label>(This may take up to a minute to complete)</label>
             </div>
           ) : (
             <>
               {this.props.isAuthenticated && <Sidebar />}
               <div id='route'>
+                <ScrollToTop />
                 <Switch>
                   {this.renderProtectedRoute('/workout/:routineId', NewWorkout)}
                   {this.renderProtectedRoute(
