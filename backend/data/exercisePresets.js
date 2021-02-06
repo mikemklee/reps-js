@@ -99,6 +99,78 @@ const defineExercisePresets = () => [
     bodyPart: BODY_PART.CORE,
     isPreset: true,
   },
+  {
+    name: 'Bent Over One Arm Row (Dumbbell)',
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.BACK,
+    isPreset: true,
+  },
+  {
+    name: 'Bent Over Row (Dumbbell)',
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.BACK,
+    isPreset: true,
+  },
+  {
+    name: 'Bicep Curl (Dumbbell)',
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.ARMS,
+    isPreset: true,
+  },
+  {
+    name: 'Hammer Curl (Dumbbell)',
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.ARMS,
+    isPreset: true,
+  },
+  {
+    name: 'Incline Bench Press (Dumbbell)',
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.CHEST,
+    isPreset: true,
+  },
+  {
+    name: 'Romanian Deadlift Bench Press (Dumbbell)',
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.LEGS,
+    isPreset: true,
+  },
+  {
+    name: 'Skull Crusher (Dumbbell)',
+    category: CATEGORY.DUMBBELL,
+    bodyPart: BODY_PART.ARMS,
+    isPreset: true,
+  },
+  {
+    name: 'AB Wheel',
+    category: CATEGORY.WEIGHTED_BODYWEIGHT,
+    bodyPart: BODY_PART.CORE,
+    isPreset: true,
+  },
+  {
+    name: 'Bench Dip',
+    category: CATEGORY.WEIGHTED_BODYWEIGHT,
+    bodyPart: BODY_PART.ARMS,
+    isPreset: true,
+  },
+  {
+    name: 'Push Up',
+    category: CATEGORY.WEIGHTED_BODYWEIGHT,
+    bodyPart: BODY_PART.CHEST,
+    isPreset: true,
+  },
+  {
+    name: 'Squat (Bodyweight)',
+    category: CATEGORY.WEIGHTED_BODYWEIGHT,
+    bodyPart: BODY_PART.LEGS,
+    isPreset: true,
+  },
+  {
+    name: 'Running (Treadmill)',
+    category: CATEGORY.CARDIO,
+    bodyPart: BODY_PART.CARDIO,
+    isPreset: true,
+  },
 ];
 
 module.exports = { defineExercisePresets };
