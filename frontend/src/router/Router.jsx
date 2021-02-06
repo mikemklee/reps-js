@@ -17,8 +17,6 @@ import EditWorkout from '../views/Workout/EditWorkout/EditWorkout';
 import NewRoutine from '../views/Routines/NewRoutine/NewRoutine';
 import EditRoutine from '../views/Routines/EditRoutine/EditRoutine';
 
-import WorkerTest from '../views/WorkerTest/WorkerTest';
-
 import AuthActions from '../redux/auth/actions';
 class RouterApp extends React.Component {
   componentDidMount() {
@@ -56,7 +54,6 @@ class RouterApp extends React.Component {
               {this.props.isAuthenticated && <Sidebar />}
               <div className='route'>
                 <Switch>
-                  {this.renderProtectedRoute('/test', WorkerTest)}
                   {this.renderProtectedRoute('/workout/:routineId', NewWorkout)}
                   {this.renderProtectedRoute(
                     '/workout/:workoutId/edit',
