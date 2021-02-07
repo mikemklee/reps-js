@@ -26,5 +26,9 @@
     &:hover {
       color: white;
     }
+
+    @media (max-width: $small-screen-width) {
+      padding-left: 0;
+    }
   }
 }

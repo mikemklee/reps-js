@@ -1,13 +1,14 @@
 @import-normalize;
+@import './styles/common';
 
 body {
   position: relative;
   width: 100vw;
   height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', 'Noto Sans KR',
-    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Open Sans', 'Noto Sans KR', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -15,7 +16,7 @@ body {
     font-family: inherit;
 
     &:focus {
-      outline: none !important;
+      outline: none;
     }
   }
 
@@ -27,4 +28,5 @@ body {
 #root {
   width: 100%;
   height: 100%;
+  background: $medium-grey;
 }
