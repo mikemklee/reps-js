@@ -8,7 +8,7 @@
   color: $white;
 
   @media (max-width: $small-screen-width) {
-    height: 3rem;
+    height: 3.4rem;
   }
 }
 
@@ -60,7 +60,7 @@
   background: transparent;
 
   @media (max-width: $small-screen-width) {
-    height: 3rem;
+    height: 3.4rem;
     position: fixed;
     background: $dark-grey;
     bottom: 0;
@@ -88,6 +88,10 @@
     @media (max-width: $medium-screen-width) {
       padding: 0.5rem;
       margin: 0 0.2rem;
+    }
+
+    @media (max-width: $small-screen-width) {
+      margin: 0 1rem;
     }
 
     > span {
