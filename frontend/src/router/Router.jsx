@@ -18,6 +18,7 @@ import NewRoutine from '../views/Routines/NewRoutine/NewRoutine';
 import EditRoutine from '../views/Routines/EditRoutine/EditRoutine';
 
 import AuthActions from '../redux/auth/actions';
+import ResponsiveBox from '../shared/ResponsiveBox/ResponsiveBox';
 class RouterApp extends React.Component {
   componentDidMount() {
     this.props.getUserData();
@@ -54,29 +55,34 @@ class RouterApp extends React.Component {
             <>
               {this.props.isAuthenticated && <Sidebar />}
               <div id='route'>
-                <ScrollToTop />
-                <Switch>
-                  {this.renderProtectedRoute('/workout/:routineId', NewWorkout)}
-                  {this.renderProtectedRoute(
-                    '/workout/:workoutId/edit',
-                    EditWorkout
-                  )}
-                  {this.renderProtectedRoute('/routines', Routines)}
-                  {this.renderProtectedRoute(
-                    '/routines/:workoutId',
-                    NewRoutine
-                  )}
-                  {this.renderProtectedRoute(
-                    '/routines/:routineId/edit',
-                    EditRoutine
-                  )}
-                  {this.renderProtectedRoute('/exercises', Exercises)}
-                  {this.renderProtectedRoute('/logs', Logs)}
-                  {!this.props.isAuthenticated && (
-                    <Route exact path='/login' component={Login} />
-                  )}
-                  {this.renderProtectedRoute('/', Main, false)}
-                </Switch>
+                <ResponsiveBox>
+                  <ScrollToTop />
+                  <Switch>
+                    {this.renderProtectedRoute(
+                      '/workout/:routineId',
+                      NewWorkout
+                    )}
+                    {this.renderProtectedRoute(
+                      '/workout/:workoutId/edit',
+                      EditWorkout
+                    )}
+                    {this.renderProtectedRoute('/routines', Routines)}
+                    {this.renderProtectedRoute(
+                      '/routines/:workoutId',
+                      NewRoutine
+                    )}
+                    {this.renderProtectedRoute(
+                      '/routines/:routineId/edit',
+                      EditRoutine
+                    )}
+                    {this.renderProtectedRoute('/exercises', Exercises)}
+                    {this.renderProtectedRoute('/logs', Logs)}
+                    {!this.props.isAuthenticated && (
+                      <Route exact path='/login' component={Login} />
+                    )}
+                    {this.renderProtectedRoute('/', Main, false)}
+                  </Switch>
+                </ResponsiveBox>
               </div>
             </>
           )}
