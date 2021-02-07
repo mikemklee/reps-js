@@ -4,11 +4,8 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   background: $medium-grey;
-
-  @media (max-width: $medium-screen-width) {
-    flex-direction: column;
-  }
 
   #route {
     flex: 1;

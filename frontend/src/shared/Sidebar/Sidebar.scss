@@ -2,28 +2,21 @@
 
 .sideBar {
   background: $dark-grey;
+  width: 100%;
+  height: 4rem;
   display: flex;
-  flex-direction: column;
-  width: 14rem;
   color: $white;
 
-  @media (max-width: $medium-screen-width) {
-    background: $dark-grey;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr min-content;
-    color: $white;
+  @media (max-width: $small-screen-width) {
+    height: 3rem;
   }
 }
 
 .siteLogo {
-  margin: 1.5rem;
+  width: 6rem;
+  margin: 0 1.5rem;
   display: flex;
   align-items: center;
-
-  @media (max-width: $medium-screen-width) {
-    margin: 1rem;
-  }
 
   &__name {
     font-size: 1.5rem;
@@ -40,7 +33,7 @@
   &__badge {
     align-self: flex-end;
     margin-left: 0.5rem;
-    margin-bottom: 0.1rem;
+    margin-bottom: 1rem;
     font-size: 0.6rem;
     font-weight: 600;
     padding: 0.1rem 0.3rem;
@@ -50,6 +43,7 @@
 
     @media (max-width: $medium-screen-width) {
       font-size: 0.5rem;
+      margin-bottom: 0.8rem;
     }
   }
 }
@@ -58,18 +52,12 @@
   margin-top: 1rem;
   width: 100%;
   display: flex;
-  flex-direction: column;
   flex: 1;
-
-  @media (max-width: $medium-screen-width) {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 0;
-    padding-top: 0.2rem;
-    background: $medium-grey;
-    border-bottom: 1px solid rgba($light-grey, 0.1);
-  }
+  grid-column: 1 / -1;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 0;
+  background: transparent;
 
   @media (max-width: $small-screen-width) {
     height: 3rem;
@@ -86,7 +74,6 @@
     @include pointerStyles;
     display: flex;
     align-items: center;
-    padding: 0.5rem 1.5rem;
     outline: none;
     background: transparent;
     border: none;
@@ -95,22 +82,16 @@
     color: inherit;
     opacity: 0.5;
     position: relative;
-
-    > span {
-      margin-left: 1rem;
-    }
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
 
     @media (max-width: $medium-screen-width) {
-      padding: 0.5rem 0;
-      margin: 0 0.5rem;
-
-      > span {
-        margin: 0;
-      }
+      padding: 0.5rem;
+      margin: 0 0.2rem;
     }
 
-    @media (max-width: $small-screen-width) {
-      padding: 0.5rem 1rem;
+    > span {
+      margin: 0;
     }
 
     &:hover {
@@ -122,25 +103,15 @@
 
       &::after {
         content: '';
-        width: 4px;
-        height: 25px;
         background-color: $light-blue;
         opacity: 0.8;
+        width: 100%;
+        height: 3px;
+        bottom: 0;
         left: 0;
         position: absolute;
         border-top-right-radius: 2px;
         border-bottom-right-radius: 2px;
-
-        @media (max-width: $medium-screen-width) {
-          left: 0;
-          width: 100%;
-          height: 2px;
-          bottom: 0;
-        }
-
-        @media (max-width: $small-screen-width) {
-          height: 3px;
-        }
       }
     }
   }

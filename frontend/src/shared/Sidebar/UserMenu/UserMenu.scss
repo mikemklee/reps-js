@@ -3,18 +3,21 @@
 .userMenu {
   display: flex;
   align-items: center;
-  padding: 0.6rem 1.2rem;
-  transition: background 0.1s;
+  margin-left: auto;
+  margin-right: 1rem;
+  padding: 0 1rem;
   position: relative;
   overflow: visible;
   user-select: none;
-  margin-left: auto;
   @include pointerStyles;
+
+  @media (max-width: $small-screen-width) {
+    margin-right: 0;
+  }
 
   &__actions {
     box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
       rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
-
     width: 14rem;
     position: absolute;
     border-radius: 4px;
@@ -22,16 +25,10 @@
     background: $medium-grey;
     display: flex;
     flex-direction: column;
-    left: 1rem;
-    top: 100%;
+    right: 0.5rem;
+    top: calc(100% + 0.5rem);
     z-index: 1;
     overflow: hidden;
-
-    @media (max-width: $medium-screen-width) {
-      left: auto;
-      right: 1rem;
-      top: calc(100% + 1rem);
-    }
   }
 
   &__action {
@@ -50,13 +47,6 @@
   &__profile {
     display: flex;
     align-items: center;
-
-    @media (max-width: $medium-screen-width) {
-      border-bottom: 1px solid rgba($light-grey, 0.1);
-      padding: 1rem;
-      padding-top: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
   }
 
   &__profileImage {
@@ -64,7 +54,12 @@
     overflow: hidden;
     width: 2.4rem;
     height: 2.4rem;
-    margin-right: 0.5rem;
+
+    @media (max-width: $small-screen-width) {
+      width: 2rem;
+      height: 2rem;
+    }
+
     img {
       max-width: 100%;
     }
@@ -73,31 +68,30 @@
   &__profileMeta {
     display: flex;
     flex-direction: column;
-
-    &--email {
-      font-size: 0.7rem;
-      color: $light-grey;
-      margin-bottom: 0.2rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      width: 9rem;
-      display: inline-block;
-    }
+    padding: 1rem;
+    border-bottom: 1px solid rgba($light-grey, 0.1);
+    margin-bottom: 0.5rem;
 
     &--name {
+      margin-bottom: 0.2rem;
       font-size: 0.9rem;
       font-weight: 600;
       color: $light-grey;
     }
+    &--email {
+      font-size: 0.7rem;
+      color: $light-grey;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
   }
 
-  @media (min-width: $medium-screen-width) {
-    margin-left: 0;
+  margin-left: auto;
 
-    &:hover {
-      background: lighten($dark-grey, 5%);
-    }
+  &:hover {
+    background: lighten($dark-grey, 5%);
   }
 }
 

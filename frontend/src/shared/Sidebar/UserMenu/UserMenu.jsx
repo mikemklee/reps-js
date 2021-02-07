@@ -1,7 +1,5 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { IoIosMenu } from 'react-icons/io';
-import { useMediaQuery } from 'react-responsive';
 
 import './UserMenu.scss';
 
@@ -13,8 +11,6 @@ import { useDistanceConverter, useWeightConverter } from '../../../hooks';
 
 const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
   const dispatch = useDispatch();
-
-  const isMobile = useMediaQuery({ query: '(max-width: 960px)' });
 
   const preferencesModalRef = useRef(null);
 
@@ -44,71 +40,32 @@ const UserMenu = ({ menuRef, isOpen, onClick, onForceClose }) => {
 
   return (
     <div className='userMenu' ref={menuRef} onClick={onClick}>
-      {isMobile ? (
-        <>
-          <IoIosMenu size='1.5rem' />
-          {isOpen ? (
-            <div
-              className='userMenu__actions'
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              <div className='userMenu__profile'>
-                <div className='userMenu__profileImage'>
-                  <img src={userProfileImage} alt='profile' />
-                </div>
-                <div className='userMenu__profileMeta'>
-                  <span className='userMenu__profileMeta--name'>
-                    {userGivenName} {userFamilyName}
-                  </span>
-                </div>
-              </div>
-              <div
-                className='userMenu__action'
-                onClick={handlePreferencesClick}
-              >
-                Preferences
-              </div>
-              <div className='userMenu__action' onClick={handleLogoutClick}>
-                Logout
-              </div>
-            </div>
-          ) : null}
-        </>
-      ) : (
-        <>
-          <div className='userMenu__profile'>
-            <div className='userMenu__profileImage'>
-              <img src={userProfileImage} alt='profile' />
-            </div>
-            <div className='userMenu__profileMeta'>
-              <span className='userMenu__profileMeta--email'>{userEmail}</span>
-              <span className='userMenu__profileMeta--name'>
-                {userGivenName} {userFamilyName}
-              </span>
-            </div>
+      <div className='userMenu__profile'>
+        <div className='userMenu__profileImage'>
+          <img src={userProfileImage} alt='profile' />
+        </div>
+      </div>
+      {isOpen ? (
+        <div
+          className='userMenu__actions'
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <div className='userMenu__profileMeta'>
+            <span className='userMenu__profileMeta--name'>
+              {userGivenName} {userFamilyName}
+            </span>
+            <span className='userMenu__profileMeta--email'>{userEmail}</span>
           </div>
-          {isOpen ? (
-            <div
-              className='userMenu__actions'
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              <div
-                className='userMenu__action'
-                onClick={handlePreferencesClick}
-              >
-                Settings
-              </div>
-              <div className='userMenu__action' onClick={handleLogoutClick}>
-                Logout
-              </div>
-            </div>
-          ) : null}
-        </>
-      )}
+          <div className='userMenu__action' onClick={handlePreferencesClick}>
+            Settings
+          </div>
+          <div className='userMenu__action' onClick={handleLogoutClick}>
+            Logout
+          </div>
+        </div>
+      ) : null}
       <Modal ref={preferencesModalRef} hideCloseButton>
         <div className='preferences'>
           {upadtingPreferences ? (
