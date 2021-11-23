@@ -44,7 +44,7 @@
     "url": "https://github.com/leemun1/reps/issues"
   },
   "engines": {
-    "node": ">=10.6.0"
+    "node": "^16"
   },
   "homepage": "https://github.com/leemun1/reps#readme"
 }
