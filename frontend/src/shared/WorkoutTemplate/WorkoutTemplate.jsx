@@ -443,7 +443,7 @@ const WorkoutTemplate = ({ useFor }) => {
         <button
           className='add-exercise-btn'
           onClick={() => {
-            dispatch(ExerciseActions.getPresetsRequest());
+            dispatch(ExerciseActions.getPresetsRequest())
             addExerciseModalRef.current.open()
           }}
         >
