@@ -444,7 +444,7 @@ const WorkoutTemplate = ({ useFor }) => {
         <button
           className='add-exercise-btn'
           onClick={() => {
-            dispatch(AuthActions.pingRequest())
+            dispatch(ExerciseActions.getPresetsRequest())
             addExerciseModalRef.current.open()
           }}
         >
