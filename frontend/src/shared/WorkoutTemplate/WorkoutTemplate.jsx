@@ -442,7 +442,10 @@ const WorkoutTemplate = ({ useFor }) => {
         ))}
         <button
           className='add-exercise-btn'
-          onClick={() => addExerciseModalRef.current.open()}
+          onClick={() => {
+            dispatch(ExerciseActions.getPresetsRequest());
+            addExerciseModalRef.current.open()
+          }}
         >
           <VscAdd />
           <span>Add exercise</span>
