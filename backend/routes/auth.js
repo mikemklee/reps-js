@@ -8,11 +8,13 @@ const {
   getUserData,
   updateUserPreferences,
   deleteUser,
+  ping,
 } = require('../controllers/auth');
 const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 
+router.route('/ping').post(ping);
 router.route('/login/success').get(protect, getUserData);
 router.route('/login/failed').get(loginFail);
 router.route('/logout').get(logout);

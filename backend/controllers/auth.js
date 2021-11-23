@@ -12,6 +12,13 @@ const Exercise = require('../models/Exercise');
 const Routine = require('../models/Routine');
 const Workout = require('../models/Workout');
 
+// @desc    Handle fake ping request
+// @route   POST /api/auth/ping
+const ping = async (req, res) => {
+  const { body } = req;
+  res.status(200).json({ msg: `Pinged @ ${body.timeNow}` });
+};
+
 // TODO: implement
 // @desc    Authenticate user and get token
 // @route   POST /api/users/auth/login
@@ -245,4 +252,5 @@ module.exports = {
   getUserData,
   updateUserPreferences,
   deleteUser,
+  ping,
 };
