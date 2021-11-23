@@ -23,6 +23,7 @@ import {
 
 import { InterfaceUtils } from '../../utils';
 
+import AuthActions from '../../redux/auth/actions';
 import WorkoutActions from '../../redux/workout/actions';
 import RoutineActions from '../../redux/routine/actions';
 import ExerciseActions from '../../redux/exercise/actions';
@@ -443,7 +444,7 @@ const WorkoutTemplate = ({ useFor }) => {
         <button
           className='add-exercise-btn'
           onClick={() => {
-            dispatch(ExerciseActions.getPresetsRequest())
+            dispatch(AuthActions.pingRequest())
             addExerciseModalRef.current.open()
           }}
         >

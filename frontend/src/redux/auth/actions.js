@@ -1,6 +1,12 @@
 import types from './types';
 
 const actions = {
+  pingRequest: () => {
+    return {
+      type: types.PING_REQUEST,
+      payload: {},
+    };
+  },
   loginRequest: (email, password) => {
     return {
       type: types.LOGIN_REQUEST,
